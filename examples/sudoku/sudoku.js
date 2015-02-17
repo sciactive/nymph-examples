@@ -5,9 +5,10 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 		loading: false,
 		sort: 'cdate',
 		games: [],
-		timeDiff: ''
+		timeDiff: '',
 	};
 	$scope.curGame = null;
+	var subscription;
 
 	$scope.calcTime = function(time){
 		var hours = Math.floor(time / 3600);
@@ -19,7 +20,7 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 		return (new Date(time*1000)).toLocaleString();
 	};
 
-	Nymph.getEntities({"class": 'Game'}).then(function(games){
+	Nymph.getEntities({"class": 'Game'}).subscribe(function(games){
 		if (games && games.length) {
 			Nymph.sort(games, $scope.uiState.sort);
 			$scope.uiState.games = games;
@@ -45,10 +46,15 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 				$scope.uiState.loading = "Loading the new game...";
 				$scope.$apply();
 				game.save().then(function(game){
-					$scope.uiState.games.push(game);
+					if (subscription) {
+						subscription.unsubscribe();
+					}
+					subscription = game.subscribe(function(){
+						game.calculateErrors();
+						$scope.$apply();
+					});
 					$scope.uiState.player = '';
 					$scope.uiState.difficulty = 1;
-					$scope.uiState.games = Nymph.sort($scope.uiState.games, $scope.uiState.sort);
 					$scope.curGame = game;
 					$scope.startTimer();
 					$scope.uiState.loading = false;
@@ -88,8 +94,14 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 	};
 
 	$scope.loadGame = function(game) {
+		if (subscription) {
+			subscription.unsubscribe();
+		}
+		subscription = game.subscribe(function(){
+			game.calculateErrors();
+			$scope.$apply();
+		});
 		$scope.curGame = game;
-		$scope.curGame.calculateErrors();
 		$scope.startTimer();
 	};
 

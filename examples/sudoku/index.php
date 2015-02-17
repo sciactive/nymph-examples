@@ -28,10 +28,16 @@ if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 			NymphOptions = {
 				restURL: '../rest.php'
 			};
+			NymphOptions = {
+				restURL: '../rest.php',
+				pubsubURL: 'ws://<?php echo htmlspecialchars($_SERVER['HTTP_HOST']); ?>:8080',
+				rateLimit: 100
+			};
 			isHeroku = <?php echo json_encode(!!getenv('DATABASE_URL')); ?>; // No import/export on Heroku.
 		</script>
 		<script src="../../bower_components/nymph-client/src/Nymph.js"></script>
 		<script src="../../bower_components/nymph-client/src/Entity.js"></script>
+		<script src="../../vendor/sciactive/nymph-pubsub/src/NymphPubSub.js"></script>
 		<script src="Game.js"></script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>

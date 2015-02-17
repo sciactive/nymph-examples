@@ -9,7 +9,7 @@
 			})();
 			NymphOptions = {
 				restURL: '../rest.php',
-				pubsubURL: 'ws://localhost:8080',
+				pubsubURL: 'ws://<?php echo htmlspecialchars($_SERVER['HTTP_HOST']); ?>:8080',
 				rateLimit: 100
 			};
 		</script>
