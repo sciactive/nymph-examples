@@ -1,10 +1,8 @@
 {
-	"name": "sciactive/nymph",
-	"description": "An object relational mapper with PHP and JavaScript interfaces.",
-	"version": "1.3.0",
-	"time": "2014-11-04",
+	"name": "sciactive/nymph-examples",
+	"description": "Example apps built with Nymph.",
+	"version": "1.0.0",
 	"homepage": "http://nymph.io/",
-	"type": "library",
 	"authors": [
 		{
 			"name": "Hunter Perrin",
@@ -13,46 +11,9 @@
 			"role": "Developer"
 		}
 	],
-	"keywords": [
-		"orm",
-		"mysql",
-		"postgres",
-		"postgresql",
-		"object database",
-		"object relational mapper",
-		"object relational mapping"
-	],
 	"license": "LGPL",
-	"support": {
-		"issues": "https://github.com/sciactive/nymph/issues",
-		"wiki": "https://github.com/sciactive/nymph/wiki",
-		"source": "https://github.com/sciactive/nymph"
-	},
-	"archive": {
-		"exclude": [
-			"**/.*",
-			".travis.yml",
-			"node_modules",
-			"bower_components",
-			"examples",
-			"testing",
-			"lib",
-			"vendor",
-			"bower.json"
-		]
-	},
-	"autoload": {
-		"psr-0": {
-			"Nymph\\": "src/"
-		},
-		"psr-4": {
-			"Nymph\\": "src/"
-		}
-	},
 	"require": {
-		"sciactive/requirephp": "~1.2"
+		"sciactive/nymph": "~1.4"
 	},
-	"require-dev": {
-		"codeclimate/php-test-reporter": "dev-master"
-	}
+	"minimum-stability": "beta"
 }

@@ -9,18 +9,14 @@ if (getenv('DATABASE_URL')) {
 
 if ($_FILES) {
 	if ($_FILES['nex']['error'] === 0) {
-		require '../../lib/require.php';
-
-		require '../../src/autoload.php';
+		require dirname(__DIR__).'/../vendor/autoload.php';
 		\SciActive\R::_('NymphConfig', [], function(){
 			return include '../config.php';
 		});
 
-		\SciActive\R::_(['Nymph'], function(){
-			require '../employee/Employee.php';
-			require '../sudoku/Game.php';
-			require '../todo/Todo.php';
-		});
+		require '../employee/Employee.php';
+		require '../sudoku/Game.php';
+		require '../todo/Todo.php';
 
 		try {
 			$result = \Nymph\Nymph::import($_FILES['nex']['tmp_name']);

@@ -9,16 +9,12 @@ if (getenv('DATABASE_URL')) {
 
 if ($_FILES) {
 	if ($_FILES['games']['error'] === 0) {
-		require '../../lib/require.php';
-
-		require '../../src/autoload.php';
+		require dirname(__DIR__).'/../vendor/autoload.php';
 		\SciActive\R::_('NymphConfig', [], function(){
 			return include '../config.php';
 		});
 
-		\SciActive\R::_(['Nymph'], function(){
-			require 'Game.php';
-		});
+		require 'Game.php';
 
 		$result = \Nymph\Nymph::import($_FILES['games']['tmp_name']);
 		if ($result) {

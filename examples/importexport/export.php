@@ -7,17 +7,13 @@ if (getenv('DATABASE_URL')) {
 	exit;
 }
 
-require '../../lib/require.php';
-
-require '../../src/autoload.php';
+require dirname(__DIR__).'/../vendor/autoload.php';
 \SciActive\R::_('NymphConfig', [], function(){
 	return include '../config.php';
 });
 
-\SciActive\R::_(['Nymph'], function(){
-	require '../employee/Employee.php';
-	require '../sudoku/Game.php';
-	require '../todo/Todo.php';
-});
+require '../employee/Employee.php';
+require '../sudoku/Game.php';
+require '../todo/Todo.php';
 
 \Nymph\Nymph::exportPrint();

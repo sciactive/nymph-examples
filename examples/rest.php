@@ -2,9 +2,8 @@
 
 error_reporting(E_ALL);
 
-require '../lib/require.php';
+require dirname(__DIR__).'/vendor/autoload.php';
 
-require '../src/autoload.php';
 \SciActive\R::_('NymphConfig', [], function(){
 	return include 'config.php';
 });

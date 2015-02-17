@@ -3,16 +3,12 @@
 // This file is to test whether GUIDs get properly encoded into JSON.
 // When GUIDs had a larger range of numbers, some would be truncated.
 
-require '../../lib/require.php';
-
-require '../../src/autoload.php';
+require dirname(__DIR__).'/../vendor/autoload.php';
 \SciActive\R::_('NymphConfig', [], function(){
 	return include '../config.php';
 });
 
-\SciActive\R::_(['Nymph'], function(){
-	require 'Employee.php';
-});
+require 'Employee.php';
 
 $newEntity = new Employee();
 $newEntity->name = 'John Doe';

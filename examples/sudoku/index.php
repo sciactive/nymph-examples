@@ -2,9 +2,7 @@
 
 if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 	// No import/export on Heroku.
-	require '../../lib/require.php';
-
-	require '../../src/autoload.php';
+	require dirname(__DIR__).'/../vendor/autoload.php';
 	\SciActive\R::_('NymphConfig', [], function(){
 		return include '../config.php';
 	});
@@ -32,8 +30,8 @@ if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 			};
 			isHeroku = <?php echo json_encode(!!getenv('DATABASE_URL')); ?>; // No import/export on Heroku.
 		</script>
-		<script src="../../src/Nymph.js"></script>
-		<script src="../../src/Entity.js"></script>
+		<script src="../../bower_components/nymph-client/src/Nymph.js"></script>
+		<script src="../../bower_components/nymph-client/src/Entity.js"></script>
 		<script src="Game.js"></script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
