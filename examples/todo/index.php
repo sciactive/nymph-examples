@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="todoApp">
 	<head>
-		<title>Nymph Angular Todo App</title>
+		<title>Nymph Angular Collab Todo App</title>
 		<script type="text/javascript">
 			(function(){
 				var s = document.createElement("script"); s.setAttribute("src", "https://www.promisejs.org/polyfills/promise-5.0.0.min.js");
@@ -18,7 +18,13 @@
 				font-weight: normal;
 				cursor: pointer;
 			}
-			span.done-true {
+			.todo-input {
+				display: inline;
+				background-color: transparent;
+				border: 0;
+				width: 95%;
+			}
+			.todo-input.done-true {
 				text-decoration: line-through;
 				color: grey;
 			}
@@ -28,7 +34,7 @@
 		<script src="../../vendor/sciactive/nymph-pubsub/src/NymphPubSub.js"></script>
 		<script src="Todo.js"></script>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.1/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
 		<script src="todoApp.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	</head>
@@ -37,14 +43,14 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="page-header">
-						<h2>Todo List</h2>
+						<h2>Collaborative Todo List</h2>
 					</div>
 					<div class="row">
 						<div class="col-sm-8">
 							<div class="list-group" style="clear: both;">
 								<label ng-repeat="todo in todos" class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
 									<input ng-if="!uiState.showArchived" type="checkbox" ng-model="todo.data.done" ng-change="save(todo)">
-									<span class="done-{{todo.data.done}}">{{todo.data.name}}</span>
+									<input class="todo-input done-{{todo.data.done}}" ng-model="todo.data.name" ng-change="save(todo)" ng-model-options="{updateOn: 'blur'}" />
 								</label>
 							</div>
 						</div>

@@ -17,4 +17,5 @@ require 'employee/Employee.php';
 require 'todo/Todo.php';
 require 'sudoku/Game.php';
 
-include dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/src/run.php';
+$server = new \Nymph\PubSub\Server();
+$server->run();

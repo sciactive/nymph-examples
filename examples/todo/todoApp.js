@@ -13,8 +13,8 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 		subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe(function(todos){
 			$scope.uiState.showArchived = archived;
 			if (todos) {
-				Nymph.sort(todos, $scope.uiState.sort);
-				$scope.todos = todos;
+				Nymph.updateArray($scope.todos, todos);
+				Nymph.sort($scope.todos, $scope.uiState.sort);
 			}
 			$scope.$apply();
 		});
@@ -67,8 +67,6 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 	};
 
 	$scope.delete = function(){
-		var todos = $scope.todos;
-		$scope.todos = [];
-		Nymph.deleteEntities(todos);
+		Nymph.deleteEntities($scope.todos);
 	};
 }]);
