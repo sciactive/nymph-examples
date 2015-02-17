@@ -15,5 +15,13 @@
 	"require": {
 		"sciactive/nymph": "~1.4"
 	},
+	"scripts": {
+		"post-install-cmd": [
+			"$(npm bin -q)/bower install"
+		],
+		"post-update-cmd": [
+			"$(npm bin -q)/bower install"
+		]
+	},
 	"minimum-stability": "beta"
 }
