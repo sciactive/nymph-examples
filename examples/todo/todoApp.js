@@ -5,8 +5,12 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 		'showArchived': false
 	};
 
+	var subscription;
 	$scope.getTodos = function(archived){
-		Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).then(function(todos){
+		if (subscription) {
+			subscription.unsubscribe();
+		}
+		subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe(function(todos){
 			$scope.uiState.showArchived = archived;
 			if (todos) {
 				Nymph.sort(todos, $scope.uiState.sort);
@@ -23,9 +27,7 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 		var todo = new Todo();
 		todo.set('name', $scope.todoText);
 		todo.save().then(function(todo){
-			$scope.todos.push(todo);
 			$scope.todoText = '';
-			$scope.todos = Nymph.sort($scope.todos, $scope.uiState.sort);
 			$scope.$apply();
 		}, function(errObj){
 			alert("Error: "+errObj.textStatus);
@@ -52,7 +54,6 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 
 	$scope.archive = function(){
 		var oldTodos = $scope.todos;
-		$scope.todos = [];
 		angular.forEach(oldTodos, function(todo){
 			if (todo.get('done')) {
 				todo.archive().then(function(success){
@@ -61,8 +62,6 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 				}, function(errObj){
 					alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.get('name'));
 				});
-			} else {
-				$scope.todos.push(todo);
 			}
 		});
 	};
@@ -70,11 +69,6 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 	$scope.delete = function(){
 		var todos = $scope.todos;
 		$scope.todos = [];
-		Nymph.deleteEntities(todos).then(function(){
-			$scope.getTodos(false);
-		}, function(errObj){
-			$scope.getTodos(true);
-			alert("Error: "+errObj.textStatus+"\nCouldn't delete all todos.");
-		});
+		Nymph.deleteEntities(todos);
 	};
 }]);

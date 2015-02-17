@@ -5,7 +5,10 @@ error_reporting(E_ALL);
 require dirname(__DIR__).'/vendor/autoload.php';
 
 \SciActive\R::_('NymphConfig', [], function(){
-	return include 'config.php';
+	return include __DIR__.'/config.php';
+});
+\SciActive\R::_('NymphPubSubConfig', [], function(){
+	return include dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/conf/defaults.php';
 });
 
 $NymphREST = new \Nymph\REST();
