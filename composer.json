@@ -20,11 +20,11 @@
 	"scripts": {
 		"post-install-cmd": [
 			"$(npm bin -q)/bower install",
-			"nohup php examples/pubsub.php -d"
+			"nohup php examples/pubsub.php -d > /dev/null 2>&1"
 		],
 		"post-update-cmd": [
 			"$(npm bin -q)/bower install",
-			"nohup php examples/pubsub.php -d"
+			"nohup php examples/pubsub.php -d > /dev/null 2>&1"
 		]
 	},
 	"minimum-stability": "dev"
