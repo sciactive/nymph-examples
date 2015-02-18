@@ -7,9 +7,9 @@ require dirname(__DIR__).'/vendor/autoload.php';
 });
 \SciActive\R::_('NymphPubSubConfig', [], function(){
 	$config = include dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/conf/defaults.php';
-	// If we're on Heroku, bind to port 443.
+	// If we're on Heroku, bind to the given port.
 	if (getenv('DATABASE_URL')) {
-		$config->port['value'] = 443;
+		$config->port['value'] = (int) getenv('PORT');
 	}
 	return $config;
 });

@@ -9,7 +9,7 @@
 			})();
 			NymphOptions = {
 				restURL: '../rest.php',
-				pubsubURL: 'ws://<?php echo htmlspecialchars($_SERVER['HTTP_HOST']); ?>:<?php echo getenv('DATABASE_URL') ? '443' : '8080'; ?>',
+				pubsubURL: 'ws://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars($_SERVER['HTTP_HOST']); ?>:<?php echo getenv('DATABASE_URL') ? '80' : '8080'; ?>',
 				rateLimit: 100
 			};
 		</script>
