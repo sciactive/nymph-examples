@@ -11,7 +11,7 @@ require dirname(__DIR__).'/vendor/autoload.php';
 	$config = include dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/conf/defaults.php';
 	// If we're on Heroku, the master is the pubsub demo.
 	if (getenv('DATABASE_URL')) {
-		$config->port['master'] = 'ws://nymph-pubsub-demo.herokuapp.com:80/';
+		$config->master['value'] = 'ws://nymph-pubsub-demo.herokuapp.com:80/';
 	}
 	return $config;
 });
