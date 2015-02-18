@@ -6,7 +6,12 @@ require dirname(__DIR__).'/vendor/autoload.php';
 	return include __DIR__.'/config.php';
 });
 \SciActive\R::_('NymphPubSubConfig', [], function(){
-	return include dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/conf/defaults.php';
+	$config = include dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/conf/defaults.php';
+	// If we're on Heroku, bind to port 443.
+	if (getenv('DATABASE_URL')) {
+		$config->port['value'] = 443;
+	}
+	return $config;
 });
 
 \Nymph\Nymph::connect();
