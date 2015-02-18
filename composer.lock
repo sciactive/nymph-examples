@@ -485,12 +485,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-server.git",
-                "reference": "feddf11634437678e5b7fc4424b2dd1627fbe6be"
+                "reference": "609e1f0508f8a800f710052fc855a94dcc2732ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-server/zipball/feddf11634437678e5b7fc4424b2dd1627fbe6be",
-                "reference": "feddf11634437678e5b7fc4424b2dd1627fbe6be",
+                "url": "https://api.github.com/repos/sciactive/nymph-server/zipball/609e1f0508f8a800f710052fc855a94dcc2732ac",
+                "reference": "609e1f0508f8a800f710052fc855a94dcc2732ac",
                 "shasum": ""
             },
             "require": {
@@ -531,7 +531,7 @@
                 "postgres",
                 "postgresql"
             ],
-            "time": "2015-02-18 21:10:58"
+            "time": "2015-02-18 21:26:35"
         },
         {
             "name": "sciactive/requirephp",
