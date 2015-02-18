@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2ed7be3fb73e26a96cad08ec544f98f2",
+    "hash": "2402b74cdd46882d9b38018c02d3063e",
     "packages": [
         {
             "name": "devristo/phpws",
@@ -1018,6 +1018,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-pcntl": "*"
+    },
     "platform-dev": []
 }

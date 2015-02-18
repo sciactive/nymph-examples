@@ -14,16 +14,17 @@
 	"license": "LGPL",
 	"require": {
 		"sciactive/nymph-server": "dev-master",
-		"sciactive/nymph-pubsub": "dev-master"
+		"sciactive/nymph-pubsub": "dev-master",
+		"ext-pcntl": "*"
 	},
 	"scripts": {
 		"post-install-cmd": [
 			"$(npm bin -q)/bower install",
-			"php examples/pubsub.php -d"
+			"nohup php examples/pubsub.php -d"
 		],
 		"post-update-cmd": [
 			"$(npm bin -q)/bower install",
-			"php examples/pubsub.php -d"
+			"nohup php examples/pubsub.php -d"
 		]
 	},
 	"minimum-stability": "dev"

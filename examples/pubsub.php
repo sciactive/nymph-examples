@@ -1,14 +1,5 @@
 <?php
 
-if (in_array('-d', $argv)) {
-	// Daemonize.
-	if ($pid = pcntl_fork()) {
-		return;
-	}
-} else {
-	error_reporting(E_ALL);
-}
-
 require dirname(__DIR__).'/vendor/autoload.php';
 
 \SciActive\R::_('NymphConfig', [], function(){
@@ -23,6 +14,15 @@ require dirname(__DIR__).'/vendor/autoload.php';
 require 'employee/Employee.php';
 require 'todo/Todo.php';
 require 'sudoku/Game.php';
+
+if (in_array('-d', $argv)) {
+	// Switch over to daemon mode.
+	if ($pid = pcntl_fork()) {
+		return;
+	}
+} else {
+	error_reporting(E_ALL);
+}
 
 $server = new \Nymph\PubSub\Server();
 $server->run();
