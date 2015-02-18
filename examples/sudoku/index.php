@@ -37,7 +37,7 @@ if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 		</script>
 		<script src="../../bower_components/nymph-client/src/Nymph.js"></script>
 		<script src="../../bower_components/nymph-client/src/Entity.js"></script>
-		<script src="../../vendor/sciactive/nymph-pubsub/src/NymphPubSub.js"></script>
+		<script src="../../bower_components/nymph-client/src/NymphPubSub.js"></script>
 		<script src="Game.js"></script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
