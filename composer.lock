@@ -437,12 +437,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-pubsub.git",
-                "reference": "63be0ceebfb1e424b72e6fdc537a665722f3cf4f"
+                "reference": "d91d1ef17915a4ddfed0abbb90b4ad8985c0f299"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/63be0ceebfb1e424b72e6fdc537a665722f3cf4f",
-                "reference": "63be0ceebfb1e424b72e6fdc537a665722f3cf4f",
+                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/d91d1ef17915a4ddfed0abbb90b4ad8985c0f299",
+                "reference": "d91d1ef17915a4ddfed0abbb90b4ad8985c0f299",
                 "shasum": ""
             },
             "require": {
@@ -477,7 +477,7 @@
             "keywords": [
                 "Web Sockets"
             ],
-            "time": "2015-02-18 05:31:20"
+            "time": "2015-02-18 21:10:24"
         },
         {
             "name": "sciactive/nymph-server",
@@ -485,12 +485,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-server.git",
-                "reference": "98b8ecfe8585cb10e8956485003ef3b2f07750f3"
+                "reference": "feddf11634437678e5b7fc4424b2dd1627fbe6be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-server/zipball/98b8ecfe8585cb10e8956485003ef3b2f07750f3",
-                "reference": "98b8ecfe8585cb10e8956485003ef3b2f07750f3",
+                "url": "https://api.github.com/repos/sciactive/nymph-server/zipball/feddf11634437678e5b7fc4424b2dd1627fbe6be",
+                "reference": "feddf11634437678e5b7fc4424b2dd1627fbe6be",
                 "shasum": ""
             },
             "require": {
@@ -531,7 +531,7 @@
                 "postgres",
                 "postgresql"
             ],
-            "time": "2015-02-17 07:24:49"
+            "time": "2015-02-18 21:10:58"
         },
         {
             "name": "sciactive/requirephp",
