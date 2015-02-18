@@ -19,14 +19,12 @@
 	},
 	"scripts": {
 		"post-install-cmd": [
-			"$(npm bin -q)/bower install",
-			"./startserver.sh"
+			"$(npm bin -q)/bower install"
 		],
 		"post-update-cmd": [
-			"$(npm bin -q)/bower install",
-			"./startserver.sh"
+			"$(npm bin -q)/bower install"
 		]
 	},
-	"web": "vendor/bin/heroku-php-apache2",
+	"web": "./startserverheroku.sh",
 	"minimum-stability": "dev"
 }

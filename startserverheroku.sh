@@ -1,4 +1,5 @@
 #/bin/bash
 
 php examples/pubsub.php -d
-exit
+
+./vendor/bin/heroku-php-apache2
