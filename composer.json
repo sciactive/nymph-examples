@@ -20,12 +20,13 @@
 	"scripts": {
 		"post-install-cmd": [
 			"$(npm bin -q)/bower install",
-			"nohup php examples/pubsub.php -d > /dev/null 2>&1"
+			"./startserver.sh"
 		],
 		"post-update-cmd": [
 			"$(npm bin -q)/bower install",
-			"nohup php examples/pubsub.php -d > /dev/null 2>&1"
+			"./startserver.sh"
 		]
 	},
+	"web": "vendor/bin/heroku-php-apache2",
 	"minimum-stability": "dev"
 }

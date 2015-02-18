@@ -16,10 +16,16 @@ require 'todo/Todo.php';
 require 'sudoku/Game.php';
 
 if (in_array('-d', $argv)) {
+	function shutdown() {
+		posix_kill(posix_getpid(), SIGHUP);
+	}
+
 	// Switch over to daemon mode.
 	if ($pid = pcntl_fork()) {
 		return;
 	}
+
+	register_shutdown_function('shutdown');
 } else {
 	error_reporting(E_ALL);
 }
