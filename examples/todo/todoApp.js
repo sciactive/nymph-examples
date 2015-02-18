@@ -26,7 +26,7 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 			return;
 		var todo = new Todo();
 		todo.set('name', $scope.todoText);
-		todo.save().then(function(todo){
+		todo.save().then(function(){
 			$scope.todoText = '';
 			$scope.$apply();
 		}, function(errObj){

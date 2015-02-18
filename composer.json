@@ -18,10 +18,12 @@
 	},
 	"scripts": {
 		"post-install-cmd": [
-			"$(npm bin -q)/bower install"
+			"$(npm bin -q)/bower install",
+			"php examples/pubsub.php"
 		],
 		"post-update-cmd": [
-			"$(npm bin -q)/bower install"
+			"$(npm bin -q)/bower install",
+			"php examples/pubsub.php"
 		]
 	},
 	"minimum-stability": "dev"
