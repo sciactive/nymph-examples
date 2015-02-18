@@ -1,1 +1,1 @@
-web: php examples/pubsub.php -d
+web: php examples/pubsub.php
