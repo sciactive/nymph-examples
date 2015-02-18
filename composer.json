@@ -25,6 +25,5 @@
 			"$(npm bin -q)/bower install"
 		]
 	},
-	"web": "./startserverheroku.sh",
 	"minimum-stability": "dev"
 }
