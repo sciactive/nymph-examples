@@ -8,6 +8,6 @@
   ],
   "license": "LGPL",
   "dependencies": {
-    "nymph-client": "git@github.com:sciactive/nymph-client.git#master"
+    "nymph-client": "https://github.com/sciactive/nymph-client.git#master"
   }
 }
