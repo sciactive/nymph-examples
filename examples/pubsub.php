@@ -1,6 +1,13 @@
 <?php
 
-error_reporting(E_ALL);
+if (in_array('-d', $argv)) {
+	// Daemonize.
+	if ($pid = pcntl_fork()) {
+		return;
+	}
+} else {
+	error_reporting(E_ALL);
+}
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
