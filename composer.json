@@ -19,11 +19,11 @@
 	"scripts": {
 		"post-install-cmd": [
 			"$(npm bin -q)/bower install",
-			"php examples/pubsub.php &"
+			"./startserver.sh"
 		],
 		"post-update-cmd": [
 			"$(npm bin -q)/bower install",
-			"php examples/pubsub.php &"
+			"./startserver.sh"
 		]
 	},
 	"minimum-stability": "dev"
