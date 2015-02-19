@@ -6,9 +6,22 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 		sort: 'cdate',
 		games: [],
 		timeDiff: '',
+		'userCount': null,
+		'gameUserCount': null
 	};
 	$scope.curGame = null;
-	var subscription;
+	var subscription, subscriptionFunction = function(){
+		if (!$scope.curGame.guid) {
+			if (confirm("Someone deleted your game! Do you want to restore it?")) {
+				$scope.curGame.save();
+			} else {
+				$scope.clearGame();
+			}
+			return;
+		}
+		$scope.curGame.calculateErrors();
+		$scope.$apply();
+	};
 
 	$scope.calcTime = function(time){
 		var hours = Math.floor(time / 3600);
@@ -26,6 +39,9 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 			$scope.uiState.games = games;
 			$scope.$apply();
 		}
+	}, null, function(count){
+		$scope.uiState.userCount = count;
+		$scope.$apply();
 	});
 
 	$scope.startNewGame = function() {
@@ -49,8 +65,8 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 					if (subscription) {
 						subscription.unsubscribe();
 					}
-					subscription = game.subscribe(function(){
-						game.calculateErrors();
+					subscription = game.subscribe(subscriptionFunction, null, function(count){
+						$scope.uiState.gameUserCount = count;
 						$scope.$apply();
 					});
 					$scope.uiState.player = '';
@@ -88,8 +104,9 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 		}, function(errObj){
 			$scope.saving = false;
 			$scope.$apply();
-			if (showErr)
+			if (showErr) {
 				alert('Error: '+errObj.textStatus);
+			}
 		});
 	};
 
@@ -97,8 +114,8 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 		if (subscription) {
 			subscription.unsubscribe();
 		}
-		subscription = game.subscribe(function(){
-			game.calculateErrors();
+		subscription = game.subscribe(subscriptionFunction, null, function(count){
+			$scope.uiState.gameUserCount = count;
 			$scope.$apply();
 		});
 		$scope.curGame = game;
@@ -106,18 +123,24 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 	};
 
 	$scope.clearGame = function(){
-		$scope.saveState(true);
+		subscription.unsubscribe();
+		subscription = null;
+		if ($scope.curGame.guid) {
+			$scope.saveState(true);
+		}
 		$scope.curGame = null;
 		$scope.stopTimer();
 	};
 
 	$scope.deleteGame = function(game) {
-		if (!confirm('Are you sure?'))
+		if (!confirm('Are you sure?')) {
 			return;
+		}
 		var key = game.arraySearch($scope.uiState.games);
 		game.delete().then(function(){
-			if (key !== false)
+			if (key !== false) {
 				$scope.uiState.games.splice(key, 1);
+			}
 			$scope.$apply();
 		}, function(errObj){
 			alert('Error: '+errObj.textStatus);
@@ -127,8 +150,9 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 	var gameTimer;
 	$scope.startTimer = function(){
 		$scope.uiState.timeDiff = $scope.calcTime($scope.curGame.data.time);
-		if (angular.isDefined(gameTimer))
+		if (angular.isDefined(gameTimer)) {
 			$interval.cancel(gameTimer);
+		}
 		gameTimer = $interval(function(){
 			if ($scope.curGame.data.done) {
 				$scope.stopTimer();
@@ -137,8 +161,10 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 			$scope.curGame.data.time++;
 			$scope.uiState.timeDiff = $scope.calcTime($scope.curGame.data.time);
 			// Don't save too often.
-			if ($scope.curGame.data.time % 10 === 0)
+			if ($scope.curGame.data.time % 10 === 0) {
+				// This causes a race condition. How do I fix it??
 				$scope.curGame.save();
+			}
 		}, 1000);
 	};
 	$scope.stopTimer = function(){

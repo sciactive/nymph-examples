@@ -1,6 +1,7 @@
 angular.module('clickerApp', []).controller('ClickerController', ['$scope', function($scope) {
 	$scope.uiState = {
-		'clicks': null
+		'clicks': null,
+		'userCount': null
 	};
 
 	Nymph.getUID('clicker').subscribe(function(clicks){
@@ -11,6 +12,9 @@ angular.module('clickerApp', []).controller('ClickerController', ['$scope', func
 			$scope.uiState.clicks = 0;
 			$scope.$apply();
 		}
+	}, function(count){
+		$scope.uiState.userCount = count;
+		$scope.$apply();
 	});
 
 	$scope.click = function(){

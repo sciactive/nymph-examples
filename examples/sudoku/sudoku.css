@@ -1,12 +1,4 @@
 /* === Global Styles */
-body {
-	font-family: Helvetica, Arial, sans;
-	color: #333;
-}
-h3 {
-	border-bottom: greenyellow 1px solid;
-	padding-bottom: 4px;
-}
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
@@ -15,25 +7,8 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
-button, input[type=button] {
-	border: greenyellow 1px solid;
-	border-radius: 3px;
-	background: honeydew;
-	padding: 4px;
-}
-input[type=text] {
-	border: greenyellow 1px solid;
-	border-radius: 3px;
-	background: honeydew;
-	padding: 6px;
-}
 
 /* === Layout Styles */
-.container {
-	max-width: 1180px;
-	margin: 0 auto;
-	padding-top: 30px;
-}
 .loading {
 	text-align: center;
 	font-size: 30pt;
@@ -46,65 +21,24 @@ input[type=text] {
 .cf:after {
     clear: both;
 }
-.column {
-	float: left;
-	width: 50%;
-}
-.column > div {
-	padding: 0 20px;
-}
 .dummy {
 	display: none;
 }
 
 /* === Form Control Styles */
-.form-controls {
+.controls {
 	clear: left;
 	margin-bottom: 1em;
 }
-.form-controls span {
+.controls span {
 	float: left;
 	clear: left;
 	display: block;
 	width: 200px;
 }
-.form-controls .form-control {
+.controls .control {
 	margin-left: 20px;
 	float: left;
-}
-.form-controls button {
-	margin-bottom: 4px;
-}
-
-/* === Game Selector Styles */
-.game-selector .game {
-	border: gold 1px solid;
-	border-radius: 3px;
-	background: lightyellow;
-	width: 90%;
-	padding: 5px;
-	margin: .25em 0;
-}
-.game-selector .game.game-complete {
-	border-color: aqua;
-	background-color: azure;
-}
-.game-selector .game > span {
-	display: block;
-	float: left;
-	padding: 4px;
-}
-.game-selector .game .actions {
-	width: 100%;
-	float: left;
-	clear: both;
-}
-.game-selector .game .actions > button:last-child {
-	float: right;
-}
-.game-selector .game .actions .delete-button {
-	border-color: red;
-	background: lightpink;
 }
 
 /* === In Game Styles */
@@ -112,6 +46,9 @@ input[type=text] {
 	position: absolute;
 	right: 120px;
 	top: 20px;
+}
+.game-play .controls span {
+	width: 260px;
 }
 /* --- Game Board Styles */
 .game-board {
@@ -130,13 +67,13 @@ input[type=text] {
 	height: 16px;
 	line-height: 16px;
 	font-size: 16px;
-	border: aqua 1px dashed;
+	border: #357ebd 1px dashed;
 	font-weight: bold;
 	font-family: monospace;
 	cursor: default;
 }
 .game-board .square-preset {
-	color: mediumblue;
+	color: #428bca;
 }
 /* These make the 3x3 subgrids stand out. */
 .game-board .row:first-child .square, .game-board .row:nth-child(3n+1) .square {
@@ -163,17 +100,13 @@ input[type=text] {
 	font-family: monospace;
 }
 .game-board .square .mistake {
-	color: red;
+	color: #d9534f;
 }
 
 /* === Tablet Styles */
 @media (max-width: 970px) {
 	.loading > div {
 		font-size: 25pt;
-	}
-	.column {
-		float: none;
-		width: 100%;
 	}
 	.game-board {
 		margin-bottom: 0;
@@ -185,22 +118,13 @@ input[type=text] {
 	h1 > small {
 		display: block;
 	}
-	.container {
-		padding-top: 0;
-	}
 	.loading > div {
 		font-size: 15pt;
 	}
-	.column > div {
-		padding: 0;
-	}
-	.form-controls .form-control {
+	.controls .control {
 		margin-top: 10px;
 		margin-left: 0;
 		clear: left;
-	}
-	.game-selector .game > span {
-		float: none;
 	}
 	.game-board {
 		width: 100%;
@@ -224,4 +148,16 @@ input[type=text] {
 		position: absolute;
 		top: 0; left: 0; bottom: 0; right: 0;
 	}
+}
+
+/* === Unbootstrap things */
+label {
+	display: inline;
+	max-width: none;
+	margin-bottom: auto;
+	font-weight: normal;
+}
+.controls .control[type="text"] {
+	display: inline;
+	width: auto;
 }

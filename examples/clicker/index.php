@@ -14,6 +14,13 @@
 				rateLimit: 100
 			};
 		</script>
+		<style type="text/css">
+			#userCount {
+				position: fixed;
+				right: 5px;
+				bottom: 5px;
+			}
+		</style>
 		<script src="../../bower_components/nymph-client/src/Nymph.js"></script>
 		<script src="../../bower_components/nymph-client/src/Entity.js"></script>
 		<script src="../../bower_components/nymph-client/src/NymphPubSub.js"></script>
@@ -45,6 +52,9 @@
 						</p>
 					</div>
 				</div>
+			</div>
+			<div id="userCount" class="label label-default">
+				Active Users: {{uiState.userCount}}
 			</div>
 		</div>
 	</body>
