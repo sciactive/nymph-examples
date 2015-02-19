@@ -2,6 +2,8 @@
 <html ng-app="clickerApp">
 	<head>
 		<title>Nymph Clicker</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript">
 			(function () {
 				var s = document.createElement("script");
