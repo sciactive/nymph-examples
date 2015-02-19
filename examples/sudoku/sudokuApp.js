@@ -34,8 +34,8 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 	};
 
 	Nymph.getEntities({"class": 'Game'}).subscribe(function(games){
-		Nymph.sort(games, $scope.uiState.sort);
-		$scope.uiState.games = games;
+		Nymph.updateArray($scope.uiState.games, games);
+		Nymph.sort($scope.uiState.games, $scope.uiState.sort);
 		$scope.$apply();
 	}, null, function(count){
 		$scope.uiState.userCount = count;

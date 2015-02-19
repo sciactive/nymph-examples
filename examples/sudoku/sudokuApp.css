@@ -13,32 +13,17 @@ input[type=number] {
 	text-align: center;
 	font-size: 30pt;
 }
-.cf:before,
-.cf:after {
-    content: " ";
-    display: table;
-}
-.cf:after {
-    clear: both;
-}
 .dummy {
 	display: none;
 }
-
-/* === Form Control Styles */
-.controls {
-	clear: left;
+.row {
 	margin-bottom: 1em;
 }
-.controls span {
-	float: left;
-	clear: left;
-	display: block;
-	width: 200px;
-}
-.controls .control {
-	margin-left: 20px;
-	float: left;
+
+/* === Form Control Styles */
+input[type="text"] {
+	display: inline;
+	width: auto;
 }
 
 /* === In Game Styles */
@@ -121,11 +106,6 @@ input[type=number] {
 	.loading > div {
 		font-size: 15pt;
 	}
-	.controls .control {
-		margin-top: 10px;
-		margin-left: 0;
-		clear: left;
-	}
 	.game-board {
 		width: 100%;
 		height: auto;
@@ -151,13 +131,12 @@ input[type=number] {
 }
 
 /* === Unbootstrap things */
+[class^="col-"], [class*=" col-"] {
+	display: block;
+}
 label {
 	display: inline;
 	max-width: none;
 	margin-bottom: auto;
 	font-weight: normal;
-}
-.controls .control[type="text"] {
-	display: inline;
-	width: auto;
 }

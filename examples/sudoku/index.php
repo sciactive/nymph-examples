@@ -48,11 +48,11 @@ if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 		<script src="Game.js"></script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
-		<script src="sudoku.js"></script>
+		<script src="sudokuApp.js"></script>
 
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-		<link rel="stylesheet" href="sudoku.css">
+		<link rel="stylesheet" href="sudokuApp.css">
 	</head>
 	<body ng-app="sudokuApp">
 		<div class="container" ng-controller="SudokuController">
@@ -60,123 +60,129 @@ if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 				<h1>Nymph Sudoku <small>by Hunter Perrin</small></h1>
 			</div>
 			<div ng-if="!curGame && !uiState.loading" class="row">
-				<form class="col-sm-6" ng-submit="startNewGame($scope)">
-					<div>
-						<h3>Start a New Game</h3>
-						<div class="controls cf">
+				<form class="col-lg-6" ng-submit="startNewGame($scope)">
+					<h3>Start a New Game</h3>
+					<div class="row">
+						<label>
+							<span class="col-sm-5">Who's playing?</span>
+							<span class="col-sm-7">
+								<input class="form-control" type="text" ng-model="uiState.player" size="30" placeholder="player name" />
+							</span>
+						</label>
+					</div>
+					<div class="row">
+						<div class="col-sm-5">How tough are you?</div>
+						<div class="col-sm-7">
 							<label>
-								<span>Who's playing?</span>
-								<input class="control form-control" type="text" ng-model="uiState.player" size="30" placeholder="player name" />
+								<input type="radio" name="difficulty" ng-model="uiState.difficulty" ng-value="1" /> Like a glass horse figurine.
+							</label><br>
+							<label>
+								<input type="radio" name="difficulty" ng-model="uiState.difficulty" ng-value="2" /> I can walk on hot road with bare feet.
+							</label><br>
+							<label>
+								<input type="radio" name="difficulty" ng-model="uiState.difficulty" ng-value="3" /> I eat cactus with the spines.
 							</label>
 						</div>
-						<div class="controls cf">
-							<span>How tough are you?</span>
-							<div class="control">
-								<label>
-									<input type="radio" name="difficulty" ng-model="uiState.difficulty" ng-value="1" /> Like a glass horse figurine.
-								</label><br>
-								<label>
-									<input type="radio" name="difficulty" ng-model="uiState.difficulty" ng-value="2" /> I can walk on hot road with bare feet.
-								</label><br>
-								<label>
-									<input type="radio" name="difficulty" ng-model="uiState.difficulty" ng-value="3" /> I eat cactus with the spines.
-								</label>
-							</div>
-						</div>
-						<div ng-show="uiState.player" class="controls cf">
-							<div>{{uiState.player}} wants {{[0, 'an easy', 'a moderate', 'a hard'][uiState.difficulty]}} game.</div>
-							<button type="submit" class="btn btn-primary btn-lg">Bring it On!</button>
-						</div>
+					</div>
+					<div ng-show="uiState.player" class="row">
+						<div class="col-sm-5">{{uiState.player}} wants {{[0, 'an easy', 'a moderate', 'a hard'][uiState.difficulty]}} game.</div>
+						<div class="col-sm-7"><button type="submit" class="btn btn-primary">Bring it On!</button></div>
 					</div>
 				</form>
-				<div class="col-sm-6">
-					<div>
-						<h3>Saved Games</h3>
-						<p ng-if="!isHeroku()">
+				<div class="col-lg-6">
+					<h3>Saved Games</h3>
+					<div ng-if="!isHeroku()" class="row">
+						<div class="col-sm-12">
 							<a href="import.php">Import Saved Games</a>
 							<span ng-if="uiState.games.length">
 								| <a href="?action=export">Export Saved Games</a>
 							</span>
-						</p>
-						<p ng-if="!uiState.games.length">
-							<span>There are no saved games.</span>
-						</p>
-						<p ng-show="uiState.games.length > 1">
-							Sort: <br>
-							<label style="font-weight: normal;">
-								<input type="radio" ng-model="uiState.sort" ng-change="sortGames()" name="sort" value="cdate"> Started</label>
+						</div>
+					</div>
+					<div ng-if="!uiState.games.length" class="row">
+						<div class="col-sm-12">There are no saved games.</div>
+					</div>
+					<div ng-show="uiState.games.length > 1" class="row">
+						<div class="col-sm-2">
+							Sort
+						</div>
+						<div class="col-sm-10">
+							<label>
+								<input type="radio" ng-model="uiState.sort" ng-change="sortGames()" name="sort" value="cdate"> Started
+							</label>
 							&nbsp;&nbsp;&nbsp;
-							<label style="font-weight: normal;">
-								<input type="radio" ng-model="uiState.sort" ng-change="sortGames()" name="sort" value="name"> Alpha</label>
+							<label>
+								<input type="radio" ng-model="uiState.sort" ng-change="sortGames()" name="sort" value="name"> Alpha
+							</label>
+						</div>
+					</div>
+					<div ng-if="uiState.games.length" ng-repeat="game in uiState.games" class="alert alert-{{game.data.done ? 'success' : 'info'}} clearfix">
+						<p style="margin-bottom: 10px;">
+							<span>{{game.data.name}} at {{printDate(game.cdate)}}</span>
+							<span>({{calcTime(game.data.time)}} on {{[0, 'easy', 'medium', 'hard'][game.data.difficulty]}})</span>
 						</p>
-						<div ng-if="uiState.games.length" ng-repeat="game in uiState.games" class="alert alert-{{game.data.done ? 'success' : 'info'}} cf">
-							<p style="margin-bottom: 10px;">
-								<span>{{game.data.name}} at {{printDate(game.cdate)}}</span>
-								<span>({{calcTime(game.data.time)}} on {{[0, 'easy', 'medium', 'hard'][game.data.difficulty]}})</span>
-							</p>
-							<div class="cf">
-								<button type="button" class="btn btn-primary pull-left" ng-click="loadGame(game)">{{game.data.done ? 'See it Again' : 'Continue'}}</button>
-								<button type="button" class="btn btn-danger pull-right" ng-click="deleteGame(game)">Delete</button>
-							</div>
+						<div class="clearfix">
+							<button type="button" class="btn btn-primary pull-left" ng-click="loadGame(game)">{{game.data.done ? 'See it Again' : 'Continue'}}</button>
+							<button type="button" class="btn btn-danger pull-right" ng-click="deleteGame(game)">Delete</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div ng-if="uiState.loading" class="loading">
-				<i class="fa fa-spin fa-spinner"></i>
+				<i class="fa fa-spin fa-circle-o-notch"></i>
 				<div>{{uiState.loading}}</div>
 			</div>
 			<div ng-if="curGame" class="row game-play">
 				<div ng-show="saving" class="saving">
 					<i class="fa fa-spin fa-spinner"></i> Saving
 				</div>
-				<div class="col-sm-6">
-					<div>
-						<h3>Game Player: {{curGame.data.name}}</h3>
-						<div class="game-board">
-							<div class="row" ng-repeat="(y, row) in curGame.data.board track by $index">
-								<div class="square square-{{curGame.data.playBoard[y][x] ? 'preset' : 'open'}}" ng-repeat="(x, square) in row track by $index">
-									<div class="dummy"></div>
-									<div class="value" ng-if="curGame.data.playBoard[y][x]">
-										{{square}}
-									</div>
-									<input class="value" type="number" ng-class="{mistake: curGame.mistakes[y][x]}" ng-if="!curGame.data.playBoard[y][x]" ng-model="curGame.data.board[y][x]" ng-pattern="/^[1-9]$/" ng-change="curGame.calculateErrors(); saveState()" />
+				<div class="col-lg-6">
+					<h3>Game Player: {{curGame.data.name}}</h3>
+					<div class="game-board">
+						<div class="row" ng-repeat="(y, row) in curGame.data.board track by $index">
+							<div class="square square-{{curGame.data.playBoard[y][x] ? 'preset' : 'open'}}" ng-repeat="(x, square) in row track by $index">
+								<div class="dummy"></div>
+								<div class="value" ng-if="curGame.data.playBoard[y][x]">
+									{{square}}
 								</div>
+								<input class="value" type="number" ng-class="{mistake: curGame.mistakes[y][x]}" ng-if="!curGame.data.playBoard[y][x]" ng-model="curGame.data.board[y][x]" ng-pattern="/^[1-9]$/" ng-change="curGame.calculateErrors(); saveState()" />
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="game-options col-sm-6">
-					<div>
-						<h3>Options and Help</h3>
-						<div class="controls cf">
+				<div class="game-options col-lg-6">
+					<h3>Options and Help</h3>
+					<div class="row">
+						<div class="col-sm-12">
 							<button type="button" class="btn btn-default btn-sm" ng-click="curGame.data.board = curGame.data.playBoard; curGame.calculateErrors(); startTimer(); saveState()">Gah! Let me start over.</button>
 							<!--<button type="button" class="btn btn-default btn-sm" ng-click="curGame.hint()">I could really use a hint here.</button>-->
 							<button type="button" class="btn btn-default btn-sm" ng-click="curGame.data.board = curGame.data.solvedBoard; curGame.calculateErrors(); saveState()">Just solve the damn thing!</button>
 						</div>
-						<div class="controls cf" ng-show="!curGame.data.done">
-							<span>You want some help?</span>
-							<div class="control">
-								<label>
-									<input type="radio" name="help" ng-model="curGame.help" ng-value="1" ng-change="curGame.calculateErrors()" /> No way, I totally got this.
-								</label><br>
-								<label>
-									<input type="radio" name="help" ng-model="curGame.help" ng-value="2" ng-change="curGame.calculateErrors()" /> Sure, just tell me if I make an obvious mistake.
-								</label><br>
-								<label>
-									<input type="radio" name="help" ng-model="curGame.help" ng-value="3" ng-change="curGame.calculateErrors()" /> I'm so lost, tell me if I play anything that's wrong.
-								</label>
-							</div>
+					</div>
+					<div class="row" ng-show="!curGame.data.done">
+						<div class="col-sm-4">You want some help?</div>
+						<div class="col-sm-8">
+							<label>
+								<input type="radio" name="help" ng-model="curGame.help" ng-value="1" ng-change="curGame.calculateErrors()" /> No way, I totally got this.
+							</label><br>
+							<label>
+								<input type="radio" name="help" ng-model="curGame.help" ng-value="2" ng-change="curGame.calculateErrors()" /> Sure, just tell me if I make an obvious mistake.
+							</label><br>
+							<label>
+								<input type="radio" name="help" ng-model="curGame.help" ng-value="3" ng-change="curGame.calculateErrors()" /> I'm so lost, tell me if I play anything that's wrong.
+							</label>
 						</div>
-						<div class="controls cf">
-							<span>Time you've wasted on this:</span>
-							<div class="control">{{uiState.timeDiff}}</div>
-						</div>
-						<div class="controls cf">
-							<span>People playing this game (including you):</span>
-							<div class="control">{{uiState.gameUserCount}}</div>
-						</div>
-						<div class="controls cf">
+					</div>
+					<div class="row">
+						<div class="col-sm-6">Time you've wasted on this:</div>
+						<div class="col-sm-6">{{uiState.timeDiff}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">People playing this game (including you):</div>
+						<div class="col-sm-6">{{uiState.gameUserCount}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
 							<button type="button" class="btn btn-primary" ng-click="clearGame()">{{curGame.data.done ? 'Who\'s The Man' : 'I need a break.'}}</button>
 						</div>
 					</div>
