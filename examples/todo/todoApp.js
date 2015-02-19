@@ -2,7 +2,8 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 	$scope.todos = [];
 	$scope.uiState = {
 		'sort': 'name',
-		'showArchived': false
+		'showArchived': false,
+		'userCount': null
 	};
 
 	var subscription;
@@ -16,6 +17,9 @@ angular.module('todoApp', []).controller('TodoController', ['$scope', function($
 				Nymph.updateArray($scope.todos, todos);
 				Nymph.sort($scope.todos, $scope.uiState.sort);
 			}
+			$scope.$apply();
+		}, null, function(count){
+			$scope.uiState.userCount = count;
 			$scope.$apply();
 		});
 	};

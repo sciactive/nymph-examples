@@ -14,6 +14,11 @@
 			};
 		</script>
 		<style type="text/css">
+			#userCount {
+				position: fixed;
+				right: 5px;
+				bottom: 5px;
+			}
 			label.list-group-item {
 				font-weight: normal;
 				cursor: pointer;
@@ -94,6 +99,9 @@
 						</div>
 					</form>
 				</div>
+			</div>
+			<div id="userCount" class="label label-default">
+				Active Users: {{uiState.userCount}}
 			</div>
 		</div>
 	</body>
