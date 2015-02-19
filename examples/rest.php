@@ -4,10 +4,10 @@ error_reporting(E_ALL);
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
-\SciActive\R::_('NymphConfig', [], function(){
+\SciActive\RequirePHP::_('NymphConfig', [], function(){
 	return include __DIR__.'/config.php';
 });
-\SciActive\R::_('NymphPubSubConfig', [], function(){
+\SciActive\RequirePHP::_('NymphPubSubConfig', [], function(){
 	$config = include dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/conf/defaults.php';
 	// If we're on Heroku, the master is the pubsub demo.
 	if (getenv('DATABASE_URL')) {

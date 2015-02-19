@@ -10,7 +10,7 @@ if (getenv('DATABASE_URL')) {
 if ($_FILES) {
 	if ($_FILES['games']['error'] === 0) {
 		require dirname(__DIR__).'/../vendor/autoload.php';
-		\SciActive\R::_('NymphConfig', [], function(){
+		\SciActive\RequirePHP::_('NymphConfig', [], function(){
 			return include '../config.php';
 		});
 

@@ -8,7 +8,7 @@ if (getenv('DATABASE_URL')) {
 }
 
 require dirname(__DIR__).'/../vendor/autoload.php';
-\SciActive\R::_('NymphConfig', [], function(){
+\SciActive\RequirePHP::_('NymphConfig', [], function(){
 	return include '../config.php';
 });
 
