@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+$clientDir = file_exists('../../../client/bower.json') ? '../../../client' : '../../bower_components/nymph-client';
+?><!DOCTYPE html>
 <html>
 	<head>
 		<title>Nymph JS Test</title>
@@ -16,8 +18,8 @@
 				restURL: '../rest.php'
 			};
 		</script>
-		<script src="../../bower_components/nymph-client/src/Nymph.js"></script>
-		<script src="../../bower_components/nymph-client/src/Entity.js"></script>
+		<script src="<?php echo $clientDir; ?>/src/Nymph.js"></script>
+		<script src="<?php echo $clientDir; ?>/src/Entity.js"></script>
 		<script src="Employee.js"></script>
 		<script>
 			$(function(){

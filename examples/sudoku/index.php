@@ -1,4 +1,5 @@
 <?php
+$clientDir = file_exists('../../../client/bower.json') ? '../../../client' : '../../bower_components/nymph-client';
 
 if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 	// No import/export on Heroku.
@@ -13,8 +14,7 @@ if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 	exit;
 }
 
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 	<head>
 		<title>Nymph Sudoku</title>
@@ -42,9 +42,9 @@ if ($_REQUEST['action'] === 'export' && !getenv('DATABASE_URL')) {
 				bottom: 5px;
 			}
 		</style>
-		<script src="../../bower_components/nymph-client/src/Nymph.js"></script>
-		<script src="../../bower_components/nymph-client/src/Entity.js"></script>
-		<script src="../../bower_components/nymph-client/src/NymphPubSub.js"></script>
+		<script src="<?php echo $clientDir; ?>/src/Nymph.js"></script>
+		<script src="<?php echo $clientDir; ?>/src/Entity.js"></script>
+		<script src="<?php echo $clientDir; ?>/src/NymphPubSub.js"></script>
 		<script src="Game.js"></script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>

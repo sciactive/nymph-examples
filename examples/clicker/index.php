@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+$clientDir = file_exists('../../../client/bower.json') ? '../../../client' : '../../bower_components/nymph-client';
+?><!DOCTYPE html>
 <html ng-app="clickerApp">
 	<head>
 		<title>Nymph Clicker</title>
@@ -23,9 +25,9 @@
 				bottom: 5px;
 			}
 		</style>
-		<script src="../../bower_components/nymph-client/src/Nymph.js"></script>
-		<script src="../../bower_components/nymph-client/src/Entity.js"></script>
-		<script src="../../bower_components/nymph-client/src/NymphPubSub.js"></script>
+		<script src="<?php echo $clientDir; ?>/src/Nymph.js"></script>
+		<script src="<?php echo $clientDir; ?>/src/Entity.js"></script>
+		<script src="<?php echo $clientDir; ?>/src/NymphPubSub.js"></script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
 		<script src="clickerApp.js"></script>
