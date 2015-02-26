@@ -1,7 +1,7 @@
 <?php
 // Nymph's configuration.
 
-$nymph_config = include(dirname(__DIR__).'/vendor/sciactive/nymph-server/conf/defaults.php');
+$nymph_config = include file_exists(dirname(dirname(__DIR__)).'/server/conf/defaults.php') ? dirname(dirname(__DIR__)).'/server/conf/defaults.php' : dirname(__DIR__).'/vendor/sciactive/nymph-server/conf/defaults.php';
 
 // Check for Heroku postgres var.
 if (getenv('DATABASE_URL')) {
