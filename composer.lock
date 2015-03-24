@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "43b5155ccac89985a3bf77424304b2ac",
+    "hash": "532dec6b61dd70ee79ea9c7297847d66",
     "packages": [
         {
             "name": "devristo/phpws",
@@ -433,16 +433,16 @@
         },
         {
             "name": "sciactive/nymph-pubsub",
-            "version": "1.4.0-beta.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-pubsub.git",
-                "reference": "657ccce776bb3df0b99d3702bd229845a7c339de"
+                "reference": "e358a20f58ac30c17d4f7f9f58fd41f485879fb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/657ccce776bb3df0b99d3702bd229845a7c339de",
-                "reference": "657ccce776bb3df0b99d3702bd229845a7c339de",
+                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/e358a20f58ac30c17d4f7f9f58fd41f485879fb8",
+                "reference": "e358a20f58ac30c17d4f7f9f58fd41f485879fb8",
                 "shasum": ""
             },
             "require": {
@@ -478,7 +478,7 @@
             "keywords": [
                 "Web Sockets"
             ],
-            "time": "2015-02-18 00:00:00"
+            "time": "2015-03-24 21:10:51"
         },
         {
             "name": "sciactive/nymph-server",
@@ -1013,7 +1013,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "sciactive/nymph-pubsub": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
