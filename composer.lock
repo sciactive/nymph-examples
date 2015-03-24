@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "04a187b78571ff4082561c5341efc53f",
+    "hash": "43b5155ccac89985a3bf77424304b2ac",
     "packages": [
         {
             "name": "devristo/phpws",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Devristo/phpws.git",
-                "reference": "6f1e3905d0894f1b4c98f51c04e3949dc3559e33"
+                "reference": "36bf228c329c4c7c576394f13330696d0ad521b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Devristo/phpws/zipball/6f1e3905d0894f1b4c98f51c04e3949dc3559e33",
-                "reference": "6f1e3905d0894f1b4c98f51c04e3949dc3559e33",
+                "url": "https://api.github.com/repos/Devristo/phpws/zipball/36bf228c329c4c7c576394f13330696d0ad521b3",
+                "reference": "36bf228c329c4c7c576394f13330696d0ad521b3",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 }
             ],
             "description": "WebSocket Server and Client library for PHP",
-            "time": "2015-01-22 16:05:38"
+            "time": "2015-03-13 16:23:37"
         },
         {
             "name": "evenement/evenement",
@@ -303,12 +303,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/socket-client.git",
-                "reference": "5b4ccbb9071f81280f20971cccd2abe980d027ca"
+                "reference": "1375dac21b1881cba31c2b38f412dc039566673f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/socket-client/zipball/5b4ccbb9071f81280f20971cccd2abe980d027ca",
-                "reference": "5b4ccbb9071f81280f20971cccd2abe980d027ca",
+                "url": "https://api.github.com/repos/reactphp/socket-client/zipball/1375dac21b1881cba31c2b38f412dc039566673f",
+                "reference": "1375dac21b1881cba31c2b38f412dc039566673f",
                 "shasum": ""
             },
             "require": {
@@ -337,7 +337,7 @@
             "keywords": [
                 "Socket"
             ],
-            "time": "2014-10-16 22:23:10"
+            "time": "2015-03-20 15:24:06"
         },
         {
             "name": "react/stream",
@@ -433,22 +433,22 @@
         },
         {
             "name": "sciactive/nymph-pubsub",
-            "version": "dev-master",
+            "version": "1.4.0-beta.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-pubsub.git",
-                "reference": "89e30df68c062320f6c6f3cf1203eafbea53281e"
+                "reference": "657ccce776bb3df0b99d3702bd229845a7c339de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/89e30df68c062320f6c6f3cf1203eafbea53281e",
-                "reference": "89e30df68c062320f6c6f3cf1203eafbea53281e",
+                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/657ccce776bb3df0b99d3702bd229845a7c339de",
+                "reference": "657ccce776bb3df0b99d3702bd229845a7c339de",
                 "shasum": ""
             },
             "require": {
                 "devristo/phpws": "dev-master",
                 "sciactive/hookphp": "~1.1",
-                "sciactive/nymph-server": "dev-master",
+                "sciactive/nymph-server": "1.4.0-beta.4",
                 "sciactive/requirephp": "~1.3",
                 "videlalvaro/php-amqplib": "2.2.*"
             },
@@ -478,20 +478,20 @@
             "keywords": [
                 "Web Sockets"
             ],
-            "time": "2015-02-19 09:04:56"
+            "time": "2015-02-18 00:00:00"
         },
         {
             "name": "sciactive/nymph-server",
-            "version": "dev-master",
+            "version": "1.4.0-beta.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-server.git",
-                "reference": "516cac700068c79eb83a5fb49ddf3b3877888146"
+                "reference": "7979b62bfcb990b1a47c91af1e44cf179d4ce151"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-server/zipball/516cac700068c79eb83a5fb49ddf3b3877888146",
-                "reference": "516cac700068c79eb83a5fb49ddf3b3877888146",
+                "url": "https://api.github.com/repos/sciactive/nymph-server/zipball/7979b62bfcb990b1a47c91af1e44cf179d4ce151",
+                "reference": "7979b62bfcb990b1a47c91af1e44cf179d4ce151",
                 "shasum": ""
             },
             "require": {
@@ -532,7 +532,7 @@
                 "postgres",
                 "postgresql"
             ],
-            "time": "2015-02-19 09:00:00"
+            "time": "2015-02-18 00:00:00"
         },
         {
             "name": "sciactive/requirephp",
@@ -1013,10 +1013,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "sciactive/nymph-server": 20,
-        "sciactive/nymph-pubsub": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
