@@ -39,7 +39,7 @@ $clientDir = file_exists('../../../client/bower.json') ? '../../../client' : '..
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="page-header">
-						<h2>Nymph Clicker</h2>
+						<h2>Nymph Clicker <a href="#" target="_blank" class="pull-right">Open Another</a></h2>
 					</div>
 					<div class="jumbotron">
 						<h1>Click the Button</h1>
