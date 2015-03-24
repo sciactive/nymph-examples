@@ -437,12 +437,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-pubsub.git",
-                "reference": "e358a20f58ac30c17d4f7f9f58fd41f485879fb8"
+                "reference": "3341921ab4d5c73a0b95b82132fc677f654f73ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/e358a20f58ac30c17d4f7f9f58fd41f485879fb8",
-                "reference": "e358a20f58ac30c17d4f7f9f58fd41f485879fb8",
+                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/3341921ab4d5c73a0b95b82132fc677f654f73ae",
+                "reference": "3341921ab4d5c73a0b95b82132fc677f654f73ae",
                 "shasum": ""
             },
             "require": {
@@ -478,7 +478,7 @@
             "keywords": [
                 "Web Sockets"
             ],
-            "time": "2015-03-24 21:10:51"
+            "time": "2015-03-24 22:12:56"
         },
         {
             "name": "sciactive/nymph-server",
