@@ -17,6 +17,7 @@ define('IS_MANAGER', true);
  */
 class Employee extends \Nymph\Entity {
 	const ETYPE = 'employee';
+	public static $clientEnabledStaticMethods = ['testStatic'];
 	protected $protectedTags = ['employee'];
 	protected $whitelistTags = ['boss', 'bigcheese'];
 	protected $whitelistData = ['name', 'id', 'title', 'department', 'subordinates', 'salary', 'current', 'start_date', 'end_date', 'phone', 'manager'];
@@ -65,5 +66,9 @@ class Employee extends \Nymph\Entity {
 			$this->id = \Nymph\Nymph::newUID('employee');
 		}
 		return parent::save();
+	}
+
+	public static function testStatic($value) {
+		return $value * 2;
 	}
 }

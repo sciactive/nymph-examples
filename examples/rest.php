@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL);
 
-require file_exists(dirname(dirname(__DIR__)).'/autoload-dev.php') ? dirname(dirname(__DIR__)).'/autoload-dev.php' : dirname(__DIR__).'/vendor/autoload.php';
+require file_exists(__DIR__.'/../../autoload-dev.php') ? __DIR__.'/../../autoload-dev.php' : __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/config.php';
 
 // If we're on Heroku, the entry is the pubsub demo.

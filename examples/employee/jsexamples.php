@@ -51,6 +51,12 @@ $clientDir = file_exists('../../../client/bower.json') ? '../../../client' : '..
 		<select>
 			<option>-</option>
 		</select>
+		<h4>Call a Server Side Static Method</h4>
+		<pre>Employee.testStatic(5).then(function(data){
+	$("#result").html(data);
+}, function(errObj){
+	$("#result").html(errObj.textStatus);
+});</pre>
 		<h4>Refresh an entity</h4>
 		<pre>var promise1 = Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}),
     promise2 = Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]});
