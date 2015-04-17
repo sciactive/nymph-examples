@@ -3,10 +3,8 @@
 // This file is to test whether GUIDs get properly encoded into JSON.
 // When GUIDs had a larger range of numbers, some would be truncated.
 
-require dirname(__DIR__).'/../vendor/autoload.php';
-\SciActive\RequirePHP::_('NymphConfig', [], function(){
-	return include '../config.php';
-});
+require file_exists(__DIR__.'/../../../autoload-dev.php') ? __DIR__.'/../../../autoload-dev.php' : __DIR__.'/../../vendor/autoload.php';
+require __DIR__.'/../config.php';
 
 require 'Employee.php';
 

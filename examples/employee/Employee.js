@@ -18,7 +18,7 @@
 	Employee.prototype = new Entity();
 
 	var thisClass = {
-		// === The Name of the Class ===
+		// === The Name of the Server Class ===
 		class: 'Employee',
 
 		// === Class Variables ===
@@ -29,6 +29,9 @@
 			Employee.prototype[p] = thisClass[p];
 		}
 	}
+	Employee.testStatic = function(value){
+		return this.prototype.serverCallStatic('testStatic', arguments);
+	};
 
 	return Employee;
 }));
