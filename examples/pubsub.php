@@ -5,6 +5,8 @@ error_reporting(E_ALL);
 require file_exists(dirname(dirname(__DIR__)).'/autoload-dev.php') ? dirname(dirname(__DIR__)).'/autoload-dev.php' : dirname(__DIR__).'/vendor/autoload.php';
 require __DIR__.'/config.php';
 
+date_default_timezone_set('America/Los_Angeles');
+
 $config = [];
 // If we're on Heroku, bind to the given port.
 if (getenv('DATABASE_URL') && getenv('PORT')) {
