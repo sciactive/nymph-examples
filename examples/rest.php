@@ -3,18 +3,12 @@
 error_reporting(E_ALL);
 
 require file_exists(dirname(dirname(__DIR__)).'/autoload-dev.php') ? dirname(dirname(__DIR__)).'/autoload-dev.php' : dirname(__DIR__).'/vendor/autoload.php';
+require __DIR__.'/config.php';
 
-\SciActive\RequirePHP::_('NymphConfig', [], function(){
-	return include __DIR__.'/config.php';
-});
-\SciActive\RequirePHP::_('NymphPubSubConfig', [], function(){
-	$config = include file_exists(dirname(dirname(__DIR__)).'/pubsub/conf/defaults.php') ? dirname(dirname(__DIR__)).'/pubsub/conf/defaults.php' : dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/conf/defaults.php';
-	// If we're on Heroku, the entry is the pubsub demo.
-	if (getenv('DATABASE_URL')) {
-		$config->entries['value'] = ['ws://nymph-pubsub-demo.herokuapp.com:80/'];
-	}
-	return $config;
-});
+// If we're on Heroku, the entry is the pubsub demo.
+if (getenv('DATABASE_URL')) {
+	\Nymph\PubSub\Server::configure(['entries' => ['ws://nymph-pubsub-demo.herokuapp.com:80/']]);
+}
 
 $NymphREST = new \Nymph\REST();
 

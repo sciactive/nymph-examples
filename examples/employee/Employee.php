@@ -16,7 +16,7 @@ define('IS_MANAGER', true);
  * @property string $phone The employee's phone number.
  */
 class Employee extends \Nymph\Entity {
-	const etype = 'employee';
+	const ETYPE = 'employee';
 	protected $protectedTags = ['employee'];
 	protected $whitelistTags = ['boss', 'bigcheese'];
 	protected $whitelistData = ['name', 'id', 'title', 'department', 'subordinates', 'salary', 'current', 'start_date', 'end_date', 'phone', 'manager'];

@@ -6,7 +6,7 @@
  * @property bool $done Whether it's done.
  */
 class Todo extends \Nymph\Entity {
-	const etype = 'todo';
+	const ETYPE = 'todo';
 	protected $clientEnabledMethods = ['archive'];
 	protected $whitelistData = ['name', 'done'];
 	protected $protectedTags = ['archived'];

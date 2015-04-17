@@ -1,35 +1,34 @@
 <?php
 
-require file_exists(dirname(dirname(__DIR__)).'/autoload-dev.php') ? dirname(dirname(__DIR__)).'/autoload-dev.php' : dirname(__DIR__).'/vendor/autoload.php';
+error_reporting(E_ALL);
 
-\SciActive\RequirePHP::_('NymphConfig', [], function(){
-	return include __DIR__.'/config.php';
-});
-\SciActive\RequirePHP::_('NymphPubSubConfig', [], function(){
-	$config = include file_exists(dirname(dirname(__DIR__)).'/pubsub/conf/defaults.php') ? dirname(dirname(__DIR__)).'/pubsub/conf/defaults.php' : dirname(__DIR__).'/vendor/sciactive/nymph-pubsub/conf/defaults.php';
-	// If we're on Heroku, bind to the given port.
-	if (getenv('DATABASE_URL') && getenv('PORT')) {
-		$config->port['value'] = (int) getenv('PORT');
+require file_exists(dirname(dirname(__DIR__)).'/autoload-dev.php') ? dirname(dirname(__DIR__)).'/autoload-dev.php' : dirname(__DIR__).'/vendor/autoload.php';
+require __DIR__.'/config.php';
+
+date_default_timezone_set('America/Los_Angeles');
+
+$config = [];
+// If we're on Heroku, bind to the given port.
+if (getenv('DATABASE_URL') && getenv('PORT')) {
+	$config['port'] = (int) getenv('PORT');
+}
+$opts = getopt('p:e:r:');
+// This lets us load multiple nymph-pubsub servers.
+if (isset($opts['p'])) {
+	$config['port'] = (int) $opts['p'];
+}
+if (isset($opts['e'])) {
+	$config['entries'] = [];
+	foreach (explode(',', $opts['e']) as $port) {
+		$config['entries'][] = "ws://127.0.0.1:{$port}/";
 	}
-	$opts = getopt('p:e:r:');
-	// This lets us load multiple nymph-pubsub servers.
-	if (isset($opts['p'])) {
-		$config->port['value'] = (int) $opts['p'];
+}
+if (isset($opts['r'])) {
+	$config['relays'] = [];
+	foreach (explode(',', $opts['r']) as $port) {
+		$config['relays'][] = "ws://127.0.0.1:{$port}/";
 	}
-	if (isset($opts['e'])) {
-		$config->entries['value'] = [];
-		foreach (explode(',', $opts['e']) as $port) {
-			$config->entries['value'][] = "ws://127.0.0.1:{$port}/";
-		}
-	}
-	if (isset($opts['r'])) {
-		$config->relays['value'] = [];
-		foreach (explode(',', $opts['r']) as $port) {
-			$config->relays['value'][] = "ws://127.0.0.1:{$port}/";
-		}
-	}
-	return $config;
-});
+}
 
 \Nymph\Nymph::connect();
 
@@ -52,5 +51,5 @@ if (in_array('-d', $argv)) {
 	error_reporting(E_ALL);
 }
 
-$server = new \Nymph\PubSub\Server();
+$server = new \Nymph\PubSub\Server($config);
 $server->run();

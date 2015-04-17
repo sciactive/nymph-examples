@@ -9,7 +9,7 @@
  * @property bool $done Whether it's done.
  */
 class Game extends \Nymph\Entity {
-	const etype = 'game';
+	const ETYPE = 'game';
 	protected $whitelistTags = [];
 	protected $whitelistData = ['name', 'difficulty', 'board', 'solvedBoard', 'playBoard', 'time', 'done'];
 	protected $clientEnabledMethods = ['generateBoard', 'makeItFun'];
