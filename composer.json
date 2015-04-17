@@ -13,8 +13,8 @@
 	],
 	"license": "LGPL",
 	"require": {
-		"sciactive/nymph-server": "~1.4",
-		"sciactive/nymph-pubsub": "~1.4",
+		"sciactive/nymph-server": "~1.4.1",
+		"sciactive/nymph-pubsub": "~1.4.1",
 		"ext-pcntl": "*"
 	},
 	"scripts": {
