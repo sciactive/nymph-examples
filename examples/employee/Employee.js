@@ -22,7 +22,13 @@
 		class: 'Employee',
 
 		// === Class Variables ===
-		etype: "employee"
+		etype: "employee",
+
+		// === Class Methods ===
+
+		throwError: function(){
+			return this.serverCall('throwError', arguments);
+		}
 	};
 	for (var p in thisClass) {
 		if (thisClass.hasOwnProperty(p)) {
@@ -31,6 +37,12 @@
 	}
 	Employee.testStatic = function(value){
 		return this.prototype.serverCallStatic('testStatic', arguments);
+	};
+	Employee.throwErrorStatic = function(){
+		return this.prototype.serverCallStatic('throwErrorStatic', arguments);
+	};
+	Employee.inaccessibleMethod = function(){
+		return this.prototype.serverCallStatic('inaccessibleMethod', arguments);
 	};
 
 	return Employee;

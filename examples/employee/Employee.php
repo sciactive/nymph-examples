@@ -17,7 +17,8 @@ define('IS_MANAGER', true);
  */
 class Employee extends \Nymph\Entity {
 	const ETYPE = 'employee';
-	public static $clientEnabledStaticMethods = ['testStatic'];
+	protected $clientEnabledMethods = ['throwError'];
+	public static $clientEnabledStaticMethods = ['testStatic', 'throwErrorStatic'];
 	protected $protectedTags = ['employee'];
 	protected $whitelistTags = ['boss', 'bigcheese'];
 	protected $whitelistData = ['name', 'id', 'title', 'department', 'subordinates', 'salary', 'current', 'start_date', 'end_date', 'phone', 'manager'];
@@ -70,5 +71,17 @@ class Employee extends \Nymph\Entity {
 
 	public static function testStatic($value) {
 		return $value * 2;
+	}
+
+	public static function throwErrorStatic() {
+		throw new \BadFunctionCallException('This function only throws errors.');
+	}
+
+	public function throwError() {
+		throw new \Nymph\Exceptions\InvalidParametersException('This function only throws errors.');
+	}
+
+	public static function inaccessibleMethod() {
+		return true;
 	}
 }

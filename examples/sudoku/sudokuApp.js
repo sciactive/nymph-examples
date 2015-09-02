@@ -6,8 +6,8 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 		sort: 'cdate',
 		games: [],
 		timeDiff: '',
-		'userCount': null,
-		'gameUserCount': null
+		userCount: null,
+		gameUserCount: null
 	};
 	$scope.curGame = null;
 	var subscription, subscriptionFunction = function(){
@@ -159,8 +159,8 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 			$scope.curGame.data.time++;
 			$scope.uiState.timeDiff = $scope.calcTime($scope.curGame.data.time);
 			// Don't save too often.
-			if ($scope.curGame.data.time % 10 === 0) {
-				// This causes a race condition. How do I fix it??
+			if ($scope.curGame.data.time % 10 === 0 && $scope.uiState.gameUserCount <= 1) {
+				// This causes a race condition without the count check. How do I fix it??
 				$scope.curGame.save();
 			}
 		}, 1000);
