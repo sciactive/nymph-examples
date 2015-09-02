@@ -8,6 +8,6 @@
   ],
   "license": "LGPL",
   "dependencies": {
-    "nymph-client": "1.4.2"
+    "nymph-client": "1.4.3"
   }
 }

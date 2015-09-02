@@ -51,6 +51,26 @@ $clientDir = file_exists('../../../client/bower.json') ? '../../../client' : '..
 		<select>
 			<option>-</option>
 		</select>
+		<h4>Handle Forbidden Method</h4>
+		<pre>Employee.inaccessibleMethod().then(function(data){
+	$("#result").html(data);
+}, function(errObj){
+	$("#result").html(JSON.stringify(errObj));
+});</pre>
+		<h4>Handle Server Side Static Exception</h4>
+		<pre>Employee.throwErrorStatic().then(function(data){
+	$("#result").html(data);
+}, function(errObj){
+	$("#result").html(JSON.stringify(errObj));
+});</pre>
+		<h4>Handle Server Side Exception</h4>
+		<pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+	jane.throwError().then(function(data){
+		$("#result").html(data);
+	}, function(errObj){
+		$("#result").html(JSON.stringify(errObj));
+	});
+});</pre>
 		<h4>Call a Server Side Static Method</h4>
 		<pre>Employee.testStatic(5).then(function(data){
 	$("#result").html(data);
