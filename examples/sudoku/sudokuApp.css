@@ -1,8 +1,8 @@
 /* === Global Styles */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 input[type=number] {
     -moz-appearance: textfield;
@@ -10,133 +10,133 @@ input[type=number] {
 
 /* === Layout Styles */
 .loading {
-	text-align: center;
-	font-size: 30pt;
+  text-align: center;
+  font-size: 30pt;
 }
 .dummy {
-	display: none;
+  display: none;
 }
 .row {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 /* === Form Control Styles */
 input[type="text"] {
-	display: inline;
-	width: auto;
+  display: inline;
+  width: auto;
 }
 
 /* === In Game Styles */
 .game-play .saving {
-	position: absolute;
-	right: 120px;
-	top: 20px;
+  position: absolute;
+  right: 120px;
+  top: 20px;
 }
 .game-play .controls span {
-	width: 260px;
+  width: 260px;
 }
 /* --- Game Board Styles */
 .game-board {
-	display: table;
-	margin-bottom: 2em;
+  display: table;
+  margin-bottom: 2em;
 }
 .game-board .row {
-	display: table-row;
+  display: table-row;
 }
 .game-board .square {
-	display: table-cell;
-	text-align: center;
-	vertical-align: middle;
-	padding: 1em;
-	width: 16px;
-	height: 16px;
-	line-height: 16px;
-	font-size: 16px;
-	border: #357ebd 1px dashed;
-	font-weight: bold;
-	font-family: monospace;
-	cursor: default;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 1em;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+  border: #357ebd 1px dashed;
+  font-weight: bold;
+  font-family: monospace;
+  cursor: default;
 }
 .game-board .square-preset {
-	color: #428bca;
+  color: #428bca;
 }
 /* These make the 3x3 subgrids stand out. */
 .game-board .row:first-child .square, .game-board .row:nth-child(3n+1) .square {
-	border-top-style: solid;
+  border-top-style: solid;
 }
 .game-board .row:last-child .square, .game-board .row:nth-child(3n) .square {
-	border-bottom-style: solid;
+  border-bottom-style: solid;
 }
 .game-board .square:first-child, .game-board .square:nth-child(3n+1) {
-	border-left-style: solid;
+  border-left-style: solid;
 }
 .game-board .square:last-child, .game-board .square:nth-child(3n) {
-	border-right-style: solid;
+  border-right-style: solid;
 }
 .game-board .square input {
-	padding: 0;
-	border: 0;
-	width: 16px;
-	height: 16px;
-	line-height: 16px;
-	font-size: 16px;
-	font-weight: bold;
-	text-align: center;
-	font-family: monospace;
+  padding: 0;
+  border: 0;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  font-family: monospace;
 }
 .game-board .square .mistake {
-	color: #d9534f;
+  color: #d9534f;
 }
 
 /* === Tablet Styles */
 @media (max-width: 970px) {
-	.loading > div {
-		font-size: 25pt;
-	}
-	.game-board {
-		margin-bottom: 0;
-	}
+  .loading > div {
+    font-size: 25pt;
+  }
+  .game-board {
+    margin-bottom: 0;
+  }
 }
 
 /* === Mobile Styles */
 @media (max-width: 648px) {
-	h1 > small {
-		display: block;
-	}
-	.loading > div {
-		font-size: 15pt;
-	}
-	.game-board {
-		width: 100%;
-		height: auto;
-	}
-	/* This makes the board the same width as the screen. */
-	.game-board .square {
-		width: 11.11%;
-		height: auto;
-		position: relative;
-	}
-	/* This makes the square values centered. */
-	.game-board .square .dummy {
-		display: block;
-		margin-top: 100%;
-	}
-	.game-board .square .value {
-		width: 16px;
-		height: 16px;
-		margin: auto;
-		position: absolute;
-		top: 0; left: 0; bottom: 0; right: 0;
-	}
+  h1 > small {
+    display: block;
+  }
+  .loading > div {
+    font-size: 15pt;
+  }
+  .game-board {
+    width: 100%;
+    height: auto;
+  }
+  /* This makes the board the same width as the screen. */
+  .game-board .square {
+    width: 11.11%;
+    height: auto;
+    position: relative;
+  }
+  /* This makes the square values centered. */
+  .game-board .square .dummy {
+    display: block;
+    margin-top: 100%;
+  }
+  .game-board .square .value {
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+  }
 }
 
 /* === Unbootstrap things */
 [class^="col-"], [class*=" col-"] {
-	display: block;
+  display: block;
 }
 label {
-	display: inline;
-	max-width: none;
-	margin-bottom: auto;
-	font-weight: normal;
+  display: inline;
+  max-width: none;
+  margin-bottom: auto;
+  font-weight: normal;
 }
