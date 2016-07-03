@@ -13,7 +13,7 @@ $clientDir = file_exists('../../../client/bower.json') ? '../../../client' : '..
       })();
       NymphOptions = {
         restURL: '../rest.php',
-        pubsubURL: 'ws://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars($_SERVER['HTTP_HOST']); ?>:<?php echo getenv('DATABASE_URL') ? '80' : '8080'; ?>',
+        pubsubURL: 'ws://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars(explode(':', $_SERVER['HTTP_HOST'])[0]); ?>:<?php echo getenv('DATABASE_URL') ? '80' : '8080'; ?>',
         rateLimit: 100
       };
     </script>
