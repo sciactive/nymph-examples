@@ -13,17 +13,17 @@
 	],
 	"license": "LGPL",
 	"require": {
-		"sciactive/nymph-server": "~1.4.3",
-		"sciactive/nymph-pubsub": "~1.4.3",
+		"sciactive/nymph-server": "dev-master",
+		"sciactive/nymph-pubsub": "dev-master",
 		"ext-pcntl": "*",
-		"php": "~5.6.0"
+		"php": "~7.0"
 	},
 	"scripts": {
 		"post-install-cmd": [
-			"$(npm bin -q)/bower install"
+			"if [ -x \"$(npm bin -q)/bower\" ]; then $(npm bin -q)/bower install; else bower install; fi"
 		],
 		"post-update-cmd": [
-			"$(npm bin -q)/bower install"
+			"if [ -x \"$(npm bin -q)/bower\" ]; then $(npm bin -q)/bower install; else bower install; fi"
 		]
 	},
 	"minimum-stability": "dev"
