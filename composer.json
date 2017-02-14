@@ -13,8 +13,8 @@
 	],
 	"license": "LGPL",
 	"require": {
-		"sciactive/nymph-server": "dev-master",
-		"sciactive/nymph-pubsub": "dev-master",
+		"sciactive/nymph-server": "dev-cleanup",
+		"sciactive/nymph-pubsub": "dev-cleanup",
 		"ext-pcntl": "*",
 		"php": "~7.0"
 	},
