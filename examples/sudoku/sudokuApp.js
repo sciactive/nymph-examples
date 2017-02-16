@@ -35,7 +35,12 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
 
   Nymph.getEntities({"class": 'Game'}).subscribe(function(games){
     Nymph.updateArray($scope.uiState.games, games);
-    Nymph.sort($scope.uiState.games, $scope.uiState.sort);
+    Nymph.sort(
+        $scope.uiState.games,
+        $scope.uiState.sort,
+        /* caseSensitive */ false,
+        /* reverse */ true
+    );
     $scope.$apply();
   }, null, function(count){
     $scope.uiState.userCount = count;
@@ -167,9 +172,5 @@ angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$inte
   };
   $scope.stopTimer = function(){
     $interval.cancel(gameTimer);
-  };
-
-  $scope.isHeroku = function(){
-    return isHeroku;
   };
 }]);

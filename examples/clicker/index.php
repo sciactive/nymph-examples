@@ -29,17 +29,19 @@ $clientDir = file_exists('../../../client/bower.json') ? '../../../client' : '..
     <script src="<?php echo $clientDir; ?>/src/Entity.js"></script>
     <script src="<?php echo $clientDir; ?>/src/NymphPubSub.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="clickerApp.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="container" ng-controller="ClickerController">
       <div class="row">
         <div class="col-lg-12">
           <div class="page-header">
-            <h2>Nymph Clicker <a href="#" target="_blank" class="pull-right">Open Another</a></h2>
+            <h2>
+              Nymph Collaborative Clicker <small>try it with your friends</small>
+            </h2>
           </div>
           <div class="jumbotron">
             <h1>Click the Button</h1>
