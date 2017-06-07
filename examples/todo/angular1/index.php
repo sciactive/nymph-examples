@@ -62,15 +62,14 @@ $clientDir = file_exists('../../../../client/bower.json')
         Collaborative Todo List
         <small class="pull-right">
           <span>Angular 1</span> |
-          <a href="../angular2/" target="_self">Angular 2</a> |
-          <a href="../react/" target="_self">React</a>
+          <a href="../svelte/" target="_self">Svelte</a>
         </small>
       </h2>
     </div>
     <div class="row">
       <div class="col-sm-8">
         <div class="list-group" style="clear: both;">
-          <label ng-repeat="todo in todos" class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
+          <label ng-repeat="todo in todos track by guid" class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
             <span class="row">
               <span class="col-sm-9">
                 <input ng-if="!uiState.showArchived" type="checkbox" ng-model="todo.data.done" ng-change="save(todo)">
