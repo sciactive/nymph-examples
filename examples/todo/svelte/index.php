@@ -19,43 +19,32 @@ $clientDir = file_exists('../../../../client/bower.json')
       rateLimit: 100
     };
   </script>
-  <style type="text/css">
-    #userCount {
-      position: fixed;
-      right: 5px;
-      bottom: 5px;
-    }
-    label.list-group-item {
-      font-weight: normal;
-      cursor: pointer;
-    }
-    label.list-group-item > .row {
-      display: block;
-    }
-    .todo-input {
-      display: inline;
-      background-color: transparent;
-      border: 0;
-      width: 90%;
-    }
-    .todo-input.done-true {
-      text-decoration: line-through;
-      color: grey;
-    }
-    .date-col {
-      text-align: right;
-    }
-  </style>
   <script src="<?php echo $clientDir; ?>/src/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/src/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/src/NymphPubSub.js"></script>
   <script src="../Todo.js"></script>
 
+  <script src="build/TodoEl.js"></script>
+  <script src="build/TodoApp.js"></script>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-  <p>
-    It's not ready yet.
-  </p>
+  <div class="container">
+    <div class="page-header">
+      <h2>
+        Collaborative Todo List
+        <small class="pull-right">
+          <a href="../angular1/" target="_self">Angular 1</a> |
+          <span>Svelte</span>
+        </small>
+      </h2>
+    </div>
+    <div id="todoApp"></div>
+  </div>
+  <script type="text/javascript">
+    const todoApp = new TodoApp({
+      target: document.getElementById('todoApp')
+    });
+  </script>
 </body>
 </html>

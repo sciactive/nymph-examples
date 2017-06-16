@@ -51,7 +51,7 @@ $clientDir = file_exists('../../../../client/bower.json')
   <script src="<?php echo $clientDir; ?>/src/NymphPubSub.js"></script>
   <script src="../Todo.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="todoApp.js"></script>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
@@ -69,7 +69,7 @@ $clientDir = file_exists('../../../../client/bower.json')
     <div class="row">
       <div class="col-sm-8">
         <div class="list-group" style="clear: both;">
-          <label ng-repeat="todo in todos track by guid" class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
+          <label ng-repeat="todo in todos track by todo.guid" class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
             <span class="row">
               <span class="col-sm-9">
                 <input ng-if="!uiState.showArchived" type="checkbox" ng-model="todo.data.done" ng-change="save(todo)">
