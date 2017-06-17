@@ -18,5 +18,13 @@
 		"ext-pcntl": "*",
 		"php": "~7.0"
 	},
+	"scripts": {
+		"post-install-cmd": [
+			"npm install nymph-client"
+		],
+		"post-update-cmd": [
+			"npm install nymph-client"
+		]
+	},
 	"minimum-stability": "dev"
 }
