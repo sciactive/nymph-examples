@@ -6,6 +6,6 @@ Once checked out, you need to run the following commands in the repository's dir
 
 ```
 composer install
-bower install
+npm install
 php examples/pubsub.php
 ```

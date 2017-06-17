@@ -11,20 +11,12 @@
 			"role": "Developer"
 		}
 	],
-	"license": "LGPL",
+	"license": "Apache-2.0",
 	"require": {
-		"sciactive/nymph-server": "dev-cleanup",
-		"sciactive/nymph-pubsub": "dev-cleanup",
+		"sciactive/nymph-server": "1.5.0",
+		"sciactive/nymph-pubsub": "1.5.0",
 		"ext-pcntl": "*",
 		"php": "~7.0"
-	},
-	"scripts": {
-		"post-install-cmd": [
-			"if [ -x \"$(npm bin -q)/bower\" ]; then $(npm bin -q)/bower install; else bower install; fi"
-		],
-		"post-update-cmd": [
-			"if [ -x \"$(npm bin -q)/bower\" ]; then $(npm bin -q)/bower install; else bower install; fi"
-		]
 	},
 	"minimum-stability": "dev"
 }

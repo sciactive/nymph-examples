@@ -1,7 +1,7 @@
 <?php
-$clientDir = file_exists('../../../../client/bower.json')
+$clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
-    : '../../../bower_components/nymph-client';
+    : '../../../node_modules/nymph-client';
 ?><!DOCTYPE html>
 <html>
 <head>
