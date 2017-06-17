@@ -20,10 +20,10 @@
 	},
 	"scripts": {
 		"post-install-cmd": [
-			"npm install"
+			"npm install nymph-client"
 		],
 		"post-update-cmd": [
-			"npm install"
+			"npm install nymph-client"
 		]
 	},
 	"minimum-stability": "dev"
