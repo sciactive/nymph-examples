@@ -1,0 +1,64 @@
+<label class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
+  <span class="row">
+    <span class="col-sm-9">
+      {{#if !archived}}
+        <input type="checkbox" bind:checked="todo.data.done" on:change="save()">
+      {{/if}}
+      <input type="text" class="todo-input done-{{todo.data.done}}" bind:value="todo.data.name" on:change="save()">
+    </span>
+    <span class="date-col col-sm-3">
+      {{createdDate}}
+    </span>
+  </span>
+</label>
+
+<script>
+  export default {
+    data () {
+      return {
+        todo: new Todo(),
+        archived: false
+      }
+    },
+
+    computed: {
+      createdDate: (todo) => {
+        var date = new Date(todo.cdate * 1000);
+        return date.toISOString().replace(/T/, ' ').replace(/:[^:]*$/, '');
+      }
+    },
+
+    methods: {
+      save () {
+        this.get('todo').save().then((todo) => {
+          this.set({todo: todo});
+        }, (errObj) => {
+          alert('Error: '+errObj.textStatus);
+        });
+      }
+    }
+  };
+</script>
+
+<style>
+  label.list-group-item {
+    font-weight: normal;
+    cursor: pointer;
+  }
+  label.list-group-item > .row {
+    display: block;
+  }
+  .todo-input {
+    display: inline;
+    background-color: transparent;
+    border: 0;
+    width: 90%;
+  }
+  .todo-input.done-true {
+    text-decoration: line-through;
+    color: grey;
+  }
+  .date-col {
+    text-align: right;
+  }
+</style>
