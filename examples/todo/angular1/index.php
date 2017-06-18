@@ -20,7 +20,14 @@ $clientDir = file_exists('../../../../client/package.json')
     };
   </script>
   <style type="text/css">
-    #userCount {
+    .todo-form {
+      display: flex;
+    }
+    .todo-form .form-control {
+      flex-grow: 1;
+      margin-right: 5px;
+    }
+    .user-count {
       position: fixed;
       right: 5px;
       bottom: 5px;
@@ -29,21 +36,29 @@ $clientDir = file_exists('../../../../client/package.json')
       font-weight: normal;
       cursor: pointer;
     }
-    label.list-group-item > .row {
-      display: block;
+    label.list-group-item > .todo-row {
+      display: flex;
+      justify-content: space-between;
+    }
+    .todo-flex {
+      display: flex;
+    }
+    .todo-controls {
+      flex-grow: 1;
     }
     .todo-input {
       display: inline;
       background-color: transparent;
       border: 0;
-      width: 90%;
+      flex-grow: 1;
     }
     .todo-input.done-true {
       text-decoration: line-through;
       color: grey;
     }
-    .date-col {
-      text-align: right;
+    .todo-date {
+      margin-left: 5px;
+      flex-shrink: 1;
     }
   </style>
   <script src="<?php echo $clientDir; ?>/src/Nymph.js"></script>
@@ -58,9 +73,11 @@ $clientDir = file_exists('../../../../client/package.json')
 <body>
   <div class="container" ng-controller="TodoController">
     <div class="page-header">
-      <h2>
-        Collaborative Todo List
-        <small class="pull-right">
+      <h2 style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
+        <span>
+          Collaborative Todo List
+        </span>
+        <small>
           <span>Angular 1</span> |
           <a href="../svelte/" target="_self">Svelte</a>
         </small>
@@ -70,12 +87,12 @@ $clientDir = file_exists('../../../../client/package.json')
       <div class="col-sm-8">
         <div class="list-group" style="clear: both;">
           <label ng-repeat="todo in todos track by todo.guid" class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
-            <span class="row">
-              <span class="col-sm-9">
-                <input ng-if="!uiState.showArchived" type="checkbox" ng-model="todo.data.done" ng-change="save(todo)">
+            <span class="todo-row">
+              <span class="todo-controls todo-flex">
+                <input ng-if="!uiState.showArchived" type="checkbox" ng-model="todo.data.done" ng-change="save(todo)" style="margin-right: 5px;">
                 <input class="todo-input done-{{todo.data.done}}" ng-model="todo.data.name" ng-change="save(todo)" ng-model-options="{updateOn: 'blur'}" />
               </span>
-              <span class="date-col col-sm-3">
+              <span class="todo-date todo-flex">
                 {{todo.cdate * 1000 | date:'yyyy-MM-dd HH:MM'}}
               </span>
             </span>
@@ -109,17 +126,11 @@ $clientDir = file_exists('../../../../client/package.json')
         </div>
       </div>
     </div>
-    <form ng-show="!uiState.showArchived" ng-submit="addTodo()" style="margin-bottom: 20px;">
-      <div class="row">
-        <div class="col-xs-10">
-          <input class="form-control" type="text" ng-model="todoText" placeholder="add new todo here">
-        </div>
-        <div class="col-xs-2" style="text-align: right;">
-          <input class="btn btn-default" type="submit" value="add #{{todos.length + 1}}">
-        </div>
-      </div>
+    <form class="todo-form" ng-show="!uiState.showArchived" ng-submit="addTodo()" style="margin-bottom: 20px;">
+      <input class="form-control" type="text" ng-model="todoText" placeholder="add new todo here">
+      <input class="btn btn-default" type="submit" value="add #{{todos.length + 1}}">
     </form>
-    <div id="userCount" class="label label-default">
+    <div class="user-count label label-default">
       Active Users: {{uiState.userCount}}
     </div>
   </div>
