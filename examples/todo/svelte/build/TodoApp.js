@@ -102,8 +102,8 @@ var template = (function () {
 
 function add_css () {
 	var style = createElement( 'style' );
-	style.id = "svelte-2021015885-style";
-	style.textContent = "\n  [svelte-2021015885].userCount, [svelte-2021015885] .userCount {\n    position: fixed;\n    right: 5px;\n    bottom: 5px;\n  }\n";
+	style.id = "svelte-1646034842-style";
+	style.textContent = "\n  [svelte-1646034842].todo-form, [svelte-1646034842] .todo-form {\n    display: flex;\n  }\n  [svelte-1646034842].todo-form .form-control, [svelte-1646034842] .todo-form .form-control {\n    flex-grow: 1;\n    margin-right: 5px;\n  }\n  [svelte-1646034842].user-count, [svelte-1646034842] .user-count {\n    position: fixed;\n    right: 5px;\n    bottom: 5px;\n  }\n";
 	appendNode( style, document.head );
 }
 
@@ -111,7 +111,7 @@ function create_main_fragment ( state, component ) {
 	var text_8_value;
 
 	var div = createElement( 'div' );
-	setAttribute( div, 'svelte-2021015885', '' );
+	setAttribute( div, 'svelte-1646034842', '' );
 	var div_1 = createElement( 'div' );
 	appendNode( div_1, div );
 	div_1.className = "row";
@@ -185,7 +185,7 @@ function create_main_fragment ( state, component ) {
 	appendNode( text_6, div );
 	var div_5 = createElement( 'div' );
 	appendNode( div_5, div );
-	div_5.className = "userCount label label-default";
+	div_5.className = "user-count label label-default";
 	appendNode( createText( "Active Users: " ), div_5 );
 	var text_8 = createText( text_8_value = state.userCount );
 	appendNode( text_8, div_5 );
@@ -750,6 +750,7 @@ function create_if_block_10 ( state, component ) {
 	var input_updating = false, input_1_value_value;
 
 	var form = createElement( 'form' );
+	form.className = "todo-form";
 	form.style.cssText = "margin-bottom: 20px;";
 
 	function submit_handler ( event ) {
@@ -757,14 +758,8 @@ function create_if_block_10 ( state, component ) {
 	}
 
 	addListener( form, 'submit', submit_handler );
-	var div = createElement( 'div' );
-	appendNode( div, form );
-	div.className = "row";
-	var div_1 = createElement( 'div' );
-	appendNode( div_1, div );
-	div_1.className = "col-xs-10";
 	var input = createElement( 'input' );
-	appendNode( input, div_1 );
+	appendNode( input, form );
 	input.className = "form-control";
 	input.type = "text";
 	input.placeholder = "add new todo here";
@@ -779,13 +774,9 @@ function create_if_block_10 ( state, component ) {
 
 	input.value = state.todoText;
 
-	appendNode( createText( "\n        " ), div );
-	var div_2 = createElement( 'div' );
-	appendNode( div_2, div );
-	div_2.className = "col-xs-2";
-	div_2.style.cssText = "text-align: right;";
+	appendNode( createText( "\n      " ), form );
 	var input_1 = createElement( 'input' );
-	appendNode( input_1, div_2 );
+	appendNode( input_1, form );
 	input_1.className = "btn btn-default";
 	input_1.type = "submit";
 	input_1.value = input_1_value_value = "add #" + ( state.todos.length + 1 );
@@ -833,7 +824,7 @@ function TodoApp ( options ) {
 	this._yield = options._yield;
 
 	this._torndown = false;
-	if ( !document.getElementById( "svelte-2021015885-style" ) ) add_css();
+	if ( !document.getElementById( "svelte-1646034842-style" ) ) add_css();
 	this._renderHooks = [];
 	this._bindings = [];
 

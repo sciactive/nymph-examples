@@ -1,12 +1,12 @@
 <label class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
-  <span class="row">
-    <span class="col-sm-9">
+  <span class="todo-row">
+    <span class="todo-controls todo-flex">
       {{#if !archived}}
-        <input type="checkbox" bind:checked="todo.data.done" on:change="save()">
+        <input type="checkbox" bind:checked="todo.data.done" on:change="save()" style="margin-right: 5px;">
       {{/if}}
       <input type="text" class="todo-input done-{{todo.data.done}}" bind:value="todo.data.name" on:change="save()">
     </span>
-    <span class="date-col col-sm-3">
+    <span class="todo-date todo-flex">
       {{createdDate}}
     </span>
   </span>
@@ -45,20 +45,28 @@
     font-weight: normal;
     cursor: pointer;
   }
-  label.list-group-item > .row {
-    display: block;
+  label.list-group-item > .todo-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  .todo-flex {
+    display: flex;
+  }
+  .todo-controls {
+    flex-grow: 1;
   }
   .todo-input {
     display: inline;
     background-color: transparent;
     border: 0;
-    width: 90%;
+    flex-grow: 1;
   }
   .todo-input.done-true {
     text-decoration: line-through;
     color: grey;
   }
-  .date-col {
-    text-align: right;
+  .todo-date {
+    margin-left: 5px;
+    flex-shrink: 1;
   }
 </style>

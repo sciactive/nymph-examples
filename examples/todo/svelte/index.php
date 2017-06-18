@@ -31,9 +31,11 @@ $clientDir = file_exists('../../../../client/package.json')
 <body>
   <div class="container">
     <div class="page-header">
-      <h2>
-        Collaborative Todo List
-        <small class="pull-right">
+      <h2 style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
+        <span>
+          Collaborative Todo List
+        </span>
+        <small>
           <a href="../angular1/" target="_self">Angular 1</a> |
           <span>Svelte</span>
         </small>

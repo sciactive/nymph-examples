@@ -14,7 +14,7 @@
 	"license": "Apache-2.0",
 	"require": {
 		"sciactive/nymph-server": "^1.5.4",
-		"sciactive/nymph-pubsub": "^1.5.2",
+		"sciactive/nymph-pubsub": "^1.5.5",
 		"ext-pcntl": "*",
 		"php": "~7.0"
 	},

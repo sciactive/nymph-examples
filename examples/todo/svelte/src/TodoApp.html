@@ -51,18 +51,12 @@
     </div>
   </div>
   {{#if !uiShowArchived}}
-    <form style="margin-bottom: 20px;" on:submit="addTodo(event.preventDefault())">
-      <div class="row">
-        <div class="col-xs-10">
-          <input class="form-control" type="text" bind:value="todoText" placeholder="add new todo here">
-        </div>
-        <div class="col-xs-2" style="text-align: right;">
-          <input class="btn btn-default" type="submit" value="add #{{todos.length + 1}}">
-        </div>
-      </div>
+    <form class="todo-form" style="margin-bottom: 20px;" on:submit="addTodo(event.preventDefault())">
+      <input class="form-control" type="text" bind:value="todoText" placeholder="add new todo here">
+      <input class="btn btn-default" type="submit" value="add #{{todos.length + 1}}">
     </form>
   {{/if}}
-  <div class="userCount label label-default">
+  <div class="user-count label label-default">
     Active Users: {{userCount}}
   </div>
 </div>
@@ -166,7 +160,14 @@
 </script>
 
 <style>
-  .userCount {
+  .todo-form {
+    display: flex;
+  }
+  .todo-form .form-control {
+    flex-grow: 1;
+    margin-right: 5px;
+  }
+  .user-count {
     position: fixed;
     right: 5px;
     bottom: 5px;
