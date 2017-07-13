@@ -1,5 +1,3 @@
-// This file is a demo class that extends the Entity class.
-
 import Nymph from "Nymph";
 import Entity from "NymphEntity";
 
@@ -25,5 +23,5 @@ export default class Todo extends Entity {
   }
 }
 
-Nymph.setEntityClass("Todo", Todo);
+Nymph.setEntityClass(Todo.class, Todo);
 export {Todo};

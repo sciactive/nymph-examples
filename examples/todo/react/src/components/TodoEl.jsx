@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Todo from 'Todo';
 
 const TodoEl = ({onClick, todo}) => (
   <li
@@ -8,7 +9,7 @@ const TodoEl = ({onClick, todo}) => (
       textDecoration: todo.data.done ? 'line-through' : 'none'
     }}
   >
-    {todo.data.text}
+    {todo.data.name}
   </li>
 );
 

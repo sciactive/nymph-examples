@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {toggleTodo} form '../actions';
+import {toggleTodo} from '../actions';
 import TodoList from '../components/TodoList';
 
 const getVisibleTodos = (todos, filter) => {
@@ -15,7 +15,8 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = state => {
   return {
-    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    todos: getVisibleTodos(state.todos.todos, state.visibilityFilter),
+    archived: state.todos.archived
   };
 };
 

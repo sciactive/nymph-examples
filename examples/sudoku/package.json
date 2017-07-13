@@ -1,0 +1,22 @@
+{
+  "name": "nymph-examples-sudoku",
+  "version": "1.0.0",
+  "description": "An example Sudoku app using Nymph and various front end libraries.",
+  "main": "Todo.js",
+  "scripts": {
+    "build": "babel Game.src.js -o Game.js",
+    "watch": "babel Game.src.js --watch -o Game.js",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hunter Perrin <hperrin@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-watch": "^2.0.7"
+  }
+}

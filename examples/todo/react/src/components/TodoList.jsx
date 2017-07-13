@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TodoEl from './TodoEl';
+import Todo from 'Todo';
 
-const TodoList = ({todos, onTodoClick}) => (
+const TodoList = ({todos, archived, onTodoClick}) => (
   <ul>
     {todos.map(todo => (
       <TodoEl key={todo.guid} todo={todo} onClick={() => onTodoClick(todo)} />

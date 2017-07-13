@@ -18,12 +18,15 @@ $clientDir = file_exists('../../../client/package.json') ? '../../../client' : '
         restURL: '../rest.php'
       };
     </script>
-    <script src="<?php echo $clientDir; ?>/src/Nymph.js"></script>
-    <script src="<?php echo $clientDir; ?>/src/Entity.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
     <script src="Employee.js"></script>
     <script>
       $(function(){
         $("button").click(function(){
+          var Nymph = window.Nymph.default;
+          var Entity = window.NymphEntity.default;
+          var Employee = window.Employee.default;
           eval($("textarea").val());
         });
         $("pre").click(function(){

@@ -112,6 +112,6 @@
   exports.default = Todo;
 
 
-  _Nymph2.default.setEntityClass("Todo", Todo);
+  _Nymph2.default.setEntityClass(Todo.class, Todo);
   exports.Todo = Todo;
 });

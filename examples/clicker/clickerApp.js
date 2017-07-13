@@ -1,4 +1,8 @@
-angular.module('clickerApp', []).controller('ClickerController', ['$scope', function($scope) {
+angular.module('clickerApp', [])
+.service('Nymph', function() {
+  return Nymph.default;
+})
+.controller('ClickerController', ['$scope', 'Nymph', function($scope, Nymph) {
   $scope.uiState = {
     'clicks': null,
     'userCount': null
