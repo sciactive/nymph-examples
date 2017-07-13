@@ -1,4 +1,6 @@
-var TodoEl = (function () { 'use strict';
+var TodoEl = (function ( Todo ) { 'use strict';
+
+Todo = ( Todo && Todo.__esModule ) ? Todo['default'] : Todo;
 
 function recompute ( state, newState, oldState, isInitial ) {
 	if ( isInitial || ( 'todo' in newState && differs( state.todo, oldState.todo ) ) ) {
@@ -36,33 +38,15 @@ var template = (function () {
 
 function add_css () {
 	var style = createElement( 'style' );
-	style.id = "svelte-2880415521-style";
-	style.textContent = "\n  label[svelte-2880415521].list-group-item, [svelte-2880415521] label.list-group-item {\n    font-weight: normal;\n    cursor: pointer;\n  }\n  label[svelte-2880415521].list-group-item > .todo-row, [svelte-2880415521] label.list-group-item > .todo-row {\n    display: flex;\n    justify-content: space-between;\n  }\n  [svelte-2880415521].todo-flex, [svelte-2880415521] .todo-flex {\n    display: flex;\n  }\n  [svelte-2880415521].todo-controls, [svelte-2880415521] .todo-controls {\n    flex-grow: 1;\n  }\n  [svelte-2880415521].todo-input, [svelte-2880415521] .todo-input {\n    display: inline;\n    background-color: transparent;\n    border: 0;\n    flex-grow: 1;\n  }\n  [svelte-2880415521].todo-input.done-true, [svelte-2880415521] .todo-input.done-true {\n    text-decoration: line-through;\n    color: grey;\n  }\n  [svelte-2880415521].todo-date, [svelte-2880415521] .todo-date {\n    margin-left: 5px;\n    flex-shrink: 1;\n  }\n";
+	style.id = 'svelte-1667780311-style';
+	style.textContent = "\n  label[svelte-1667780311].list-group-item, [svelte-1667780311] label.list-group-item {\n    font-weight: normal;\n    cursor: pointer;\n  }\n  label[svelte-1667780311].list-group-item > .todo-row, [svelte-1667780311] label.list-group-item > .todo-row {\n    display: flex;\n    justify-content: space-between;\n  }\n  [svelte-1667780311].todo-flex, [svelte-1667780311] .todo-flex {\n    display: flex;\n  }\n  [svelte-1667780311].todo-controls, [svelte-1667780311] .todo-controls {\n    flex-grow: 1;\n  }\n  [svelte-1667780311].todo-input, [svelte-1667780311] .todo-input {\n    display: inline;\n    background-color: transparent;\n    border: 0;\n    flex-grow: 1;\n  }\n  [svelte-1667780311].todo-input.done-true, [svelte-1667780311] .todo-input.done-true {\n    text-decoration: line-through;\n    color: grey;\n  }\n  [svelte-1667780311].todo-date, [svelte-1667780311] .todo-date {\n    margin-left: 5px;\n    flex-shrink: 1;\n  }\n";
 	appendNode( style, document.head );
 }
 
 function create_main_fragment ( state, component ) {
-	var label_class_value, input_class_value, input_updating = false, text_2_value;
-
-	var label = createElement( 'label' );
-	setAttribute( label, 'svelte-2880415521', '' );
-	label.className = label_class_value = "list-group-item list-group-item-" + ( state.todo.data.done ? 'success' : 'warning' );
-	var span = createElement( 'span' );
-	appendNode( span, label );
-	span.className = "todo-row";
-	var span_1 = createElement( 'span' );
-	appendNode( span_1, span );
-	span_1.className = "todo-controls todo-flex";
+	var label, label_class_value, span, span_1, text, input, input_class_value, input_updating = false, text_2, span_2, text_3_value, text_3;
 
 	var if_block = (!state.archived) && create_if_block( state, component );
-
-	if ( if_block ) if_block.mount( span_1, null );
-	var text = createText( "\n      " );
-	appendNode( text, span_1 );
-	var input = createElement( 'input' );
-	appendNode( input, span_1 );
-	input.type = "text";
-	input.className = input_class_value = "todo-input done-" + ( state.todo.data.done );
 
 	function input_input_handler () {
 		input_updating = true;
@@ -72,26 +56,51 @@ function create_main_fragment ( state, component ) {
 		input_updating = false;
 	}
 
-	addListener( input, 'input', input_input_handler );
-
 	function change_handler ( event ) {
 		component.save();
 	}
 
-	addListener( input, 'change', change_handler );
-
-	input.value = state.todo.data.name;
-
-	appendNode( createText( "\n    " ), span );
-	var span_2 = createElement( 'span' );
-	appendNode( span_2, span );
-	span_2.className = "todo-date todo-flex";
-	var text_2 = createText( text_2_value = state.createdDate );
-	appendNode( text_2, span_2 );
-
 	return {
+		create: function () {
+			label = createElement( 'label' );
+			span = createElement( 'span' );
+			span_1 = createElement( 'span' );
+			if ( if_block ) if_block.create();
+			text = createText( "\n      " );
+			input = createElement( 'input' );
+			text_2 = createText( "\n    " );
+			span_2 = createElement( 'span' );
+			text_3 = createText( text_3_value = state.createdDate );
+			this.hydrate();
+		},
+
+		hydrate: function ( nodes ) {
+			setAttribute( label, 'svelte-1667780311', '' );
+			label.className = label_class_value = "list-group-item list-group-item-" + ( state.todo.data.done ? 'success' : 'warning' );
+			span.className = "todo-row";
+			span_1.className = "todo-controls todo-flex";
+			input.type = "text";
+			input.className = input_class_value = "todo-input done-" + ( state.todo.data.done );
+
+			addListener( input, 'input', input_input_handler );
+
+			addListener( input, 'change', change_handler );
+			span_2.className = "todo-date todo-flex";
+		},
+
 		mount: function ( target, anchor ) {
 			insertNode( label, target, anchor );
+			appendNode( span, label );
+			appendNode( span_1, span );
+			if ( if_block ) if_block.mount( span_1, null );
+			appendNode( text, span_1 );
+			appendNode( input, span_1 );
+
+			input.value = state.todo.data.name;
+
+			appendNode( text_2, span );
+			appendNode( span_2, span );
+			appendNode( text_3, span_2 );
 		},
 
 		update: function ( changed, state ) {
@@ -104,6 +113,7 @@ function create_main_fragment ( state, component ) {
 					if_block.update( changed, state );
 				} else {
 					if_block = create_if_block( state, component );
+					if_block.create();
 					if_block.mount( span_1, text );
 				}
 			} else if ( if_block ) {
@@ -120,8 +130,8 @@ function create_main_fragment ( state, component ) {
 				input.value = state.todo.data.name;
 			}
 
-			if ( text_2_value !== ( text_2_value = state.createdDate ) ) {
-				text_2.data = text_2_value;
+			if ( text_3_value !== ( text_3_value = state.createdDate ) ) {
+				text_3.data = text_3_value;
 			}
 		},
 
@@ -139,11 +149,7 @@ function create_main_fragment ( state, component ) {
 }
 
 function create_if_block ( state, component ) {
-	var input_updating = false;
-
-	var input = createElement( 'input' );
-	input.type = "checkbox";
-	input.style.cssText = "margin-right: 5px;";
+	var input, input_updating = false;
 
 	function input_change_handler () {
 		input_updating = true;
@@ -153,19 +159,29 @@ function create_if_block ( state, component ) {
 		input_updating = false;
 	}
 
-	addListener( input, 'change', input_change_handler );
-
 	function change_handler ( event ) {
 		component.save();
 	}
 
-	addListener( input, 'change', change_handler );
-
-	input.checked = state.todo.data.done;
-
 	return {
+		create: function () {
+			input = createElement( 'input' );
+			this.hydrate();
+		},
+
+		hydrate: function ( nodes ) {
+			input.type = "checkbox";
+			input.style.cssText = "margin-right: 5px;";
+
+			addListener( input, 'change', input_change_handler );
+
+			addListener( input, 'change', change_handler );
+		},
+
 		mount: function ( target, anchor ) {
 			insertNode( input, target, anchor );
+
+			input.checked = state.todo.data.done;
 		},
 
 		update: function ( changed, state ) {
@@ -201,10 +217,14 @@ function TodoEl ( options ) {
 	this._yield = options._yield;
 
 	this._torndown = false;
-	if ( !document.getElementById( "svelte-2880415521-style" ) ) add_css();
+	if ( !document.getElementById( 'svelte-1667780311-style' ) ) add_css();
 
 	this._fragment = create_main_fragment( this._state, this );
-	if ( options.target ) this._fragment.mount( options.target, null );
+
+	if ( options.target ) {
+		this._fragment.create();
+		this._fragment.mount( options.target, null );
+	}
 }
 
 assign( TodoEl.prototype, template.methods, {
@@ -212,8 +232,7 @@ assign( TodoEl.prototype, template.methods, {
  	fire: fire,
  	observe: observe,
  	on: on,
- 	set: set,
- 	_flush: _flush
+ 	set: set
  });
 
 TodoEl.prototype._set = function _set ( newState ) {
@@ -236,40 +255,40 @@ TodoEl.prototype.teardown = TodoEl.prototype.destroy = function destroy ( detach
 	this._torndown = true;
 };
 
+function differs(a, b) {
+	return a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+}
+
 function createElement(name) {
 	return document.createElement(name);
-}
-
-function insertNode(node, target, anchor) {
-	target.insertBefore(node, anchor);
-}
-
-function setAttribute(node, attribute, value) {
-	node.setAttribute(attribute, value);
-}
-
-function detachNode(node) {
-	node.parentNode.removeChild(node);
 }
 
 function appendNode(node, target) {
 	target.appendChild(node);
 }
 
-function addListener(node, event, handler) {
-	node.addEventListener(event, handler, false);
-}
-
-function removeListener(node, event, handler) {
-	node.removeEventListener(event, handler, false);
-}
-
 function createText(data) {
 	return document.createTextNode(data);
 }
 
-function differs(a, b) {
-	return a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+function setAttribute(node, attribute, value) {
+	node.setAttribute(attribute, value);
+}
+
+function addListener(node, event, handler) {
+	node.addEventListener(event, handler, false);
+}
+
+function insertNode(node, target, anchor) {
+	target.insertBefore(node, anchor);
+}
+
+function detachNode(node) {
+	node.parentNode.removeChild(node);
+}
+
+function removeListener(node, event, handler) {
+	node.removeEventListener(event, handler, false);
 }
 
 function assign(target) {
@@ -283,29 +302,6 @@ function assign(target) {
 	}
 
 	return target;
-}
-
-function dispatchObservers(component, group, newState, oldState) {
-	for (var key in group) {
-		if (!(key in newState)) continue;
-
-		var newValue = newState[key];
-		var oldValue = oldState[key];
-
-		if (differs(newValue, oldValue)) {
-			var callbacks = group[key];
-			if (!callbacks) continue;
-
-			for (var i = 0; i < callbacks.length; i += 1) {
-				var callback = callbacks[i];
-				if (callback.__calling) continue;
-
-				callback.__calling = true;
-				callback.call(component, newValue, oldValue);
-				callback.__calling = false;
-			}
-		}
-	}
 }
 
 function get(key) {
@@ -359,17 +355,36 @@ function on(eventName, handler) {
 
 function set(newState) {
 	this._set(assign({}, newState));
-	this._root._flush();
+	callAll(this._root._oncreate);
 }
 
-function _flush() {
-	if (!this._renderHooks) return;
+function dispatchObservers(component, group, newState, oldState) {
+	for (var key in group) {
+		if (!(key in newState)) continue;
 
-	while (this._renderHooks.length) {
-		this._renderHooks.pop()();
+		var newValue = newState[key];
+		var oldValue = oldState[key];
+
+		if (differs(newValue, oldValue)) {
+			var callbacks = group[key];
+			if (!callbacks) continue;
+
+			for (var i = 0; i < callbacks.length; i += 1) {
+				var callback = callbacks[i];
+				if (callback.__calling) continue;
+
+				callback.__calling = true;
+				callback.call(component, newValue, oldValue);
+				callback.__calling = false;
+			}
+		}
 	}
+}
+
+function callAll(fns) {
+	while (fns && fns.length) fns.pop()();
 }
 
 return TodoEl;
 
-}());
+}(Todo));
