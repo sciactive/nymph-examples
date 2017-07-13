@@ -66,7 +66,7 @@ $clientDir = file_exists('../../../../client/package.json')
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
   <script src="../Todo.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="todoApp.js"></script>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
@@ -78,6 +78,7 @@ $clientDir = file_exists('../../../../client/package.json')
           Collaborative Todo List
         </span>
         <small>
+          <a href="../React/" target="_self">React</a> |
           <span>Angular 1</span> |
           <a href="../svelte/" target="_self">Svelte</a>
         </small>

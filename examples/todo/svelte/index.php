@@ -36,6 +36,7 @@ $clientDir = file_exists('../../../../client/package.json')
           Collaborative Todo List
         </span>
         <small>
+          <a href="../React/" target="_self">React</a> |
           <a href="../angular1/" target="_self">Angular 1</a> |
           <span>Svelte</span>
         </small>
