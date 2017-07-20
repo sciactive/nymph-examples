@@ -21,7 +21,7 @@ class Employee extends \Nymph\Entity {
   public static $clientEnabledStaticMethods = ['testStatic', 'throwErrorStatic'];
   protected $protectedTags = ['employee'];
   protected $whitelistTags = ['boss', 'bigcheese'];
-  protected $whitelistData = ['name', 'id', 'title', 'department', 'subordinates', 'salary', 'current', 'start_date', 'end_date', 'phone', 'manager'];
+  protected $whitelistData = ['name', 'id', 'title', 'department', 'subordinates', 'salary', 'current', 'start_date', 'end_date', 'phone', 'manager', 'building'];
 
   public function __construct($id = 0) {
     $this->addTag('employee');
