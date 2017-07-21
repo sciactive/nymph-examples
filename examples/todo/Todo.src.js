@@ -18,8 +18,8 @@ export default class Todo extends Entity {
 
   // === Instance Methods ===
 
-  archive() {
-    return this.serverCall('archive', arguments);
+  archive(...args) {
+    return this.serverCall('archive', args);
   }
 }
 
