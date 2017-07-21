@@ -46,6 +46,9 @@ $clientDir = file_exists('../../../../client/package.json')
         </small>
       </h2>
     </div>
+    <p>
+      Just FYI, this demo isn't done yet.
+    </p>
     <div id="todoApp"></div>
   </div>
   <script src="build/TodoApp.js"></script>
