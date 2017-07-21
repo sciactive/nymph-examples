@@ -24,8 +24,12 @@ $clientDir = file_exists('../../../../client/package.json')
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
   <script src="../Todo.js"></script>
 
-  <script src="build/TodoEl.js"></script>
-  <script src="build/TodoApp.js"></script>
+  <script src="//unpkg.com/prop-types@15.5.10/prop-types.js"></script>
+  <script src="//unpkg.com/react@15.6.1/dist/react.js"></script>
+  <script src="//unpkg.com/react-dom@15.6.1/dist/react-dom.js"></script>
+  <script src="//unpkg.com/redux@3.7.1/dist/redux.js"></script>
+  <script src="//unpkg.com/react-redux@5.0.5/dist/react-redux.js"></script>
+
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
@@ -36,18 +40,17 @@ $clientDir = file_exists('../../../../client/package.json')
           Collaborative Todo List
         </span>
         <small>
-          <a href="../React/" target="_self">React</a> |
+          <span>React</span> |
           <a href="../angular1/" target="_self">Angular 1</a> |
-          <span>Svelte</span>
+          <a href="../svelte/" target="_self">Svelte</a>
         </small>
       </h2>
     </div>
+    <p>
+      Just FYI, this demo isn't done yet.
+    </p>
     <div id="todoApp"></div>
   </div>
-  <script type="text/javascript">
-    const todoApp = new TodoApp({
-      target: document.getElementById('todoApp')
-    });
-  </script>
+  <script src="build/TodoApp.js"></script>
 </body>
 </html>

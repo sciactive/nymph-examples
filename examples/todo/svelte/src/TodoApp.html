@@ -63,6 +63,8 @@
 
 <script>
   import TodoEl from './TodoEl.html';
+  import Nymph from 'Nymph';
+  import Todo from 'Todo';
 
   export default {
     oncreate () {
@@ -94,7 +96,7 @@
         if (this.get('__subscription')) {
           this.get('__subscription').unsubscribe();
         }
-        var subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe((newTodos) => {
+        let subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe((newTodos) => {
           this.set({uiShowArchived: archived});
           if (newTodos !== undefined) {
             var todos = this.get('todos');

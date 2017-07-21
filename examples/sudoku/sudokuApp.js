@@ -1,4 +1,11 @@
-angular.module('sudokuApp', []).controller('SudokuController', ['$scope', '$interval', function($scope, $interval) {
+angular.module('sudokuApp', [])
+.service('Nymph', function() {
+  return Nymph.default;
+})
+.service('Game', function() {
+  return Game.default;
+})
+.controller('SudokuController', ['$scope', '$interval', 'Nymph', 'Game', function($scope, $interval, Nymph, Game) {
   $scope.uiState = {
     player: '',
     difficulty: 1,

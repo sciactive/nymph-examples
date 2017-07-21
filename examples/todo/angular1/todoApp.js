@@ -1,4 +1,11 @@
-angular.module('todoApp', []).controller('TodoController', ['$scope', function($scope) {
+angular.module('todoApp', [])
+.service('Nymph', function() {
+  return Nymph.default;
+})
+.service('Todo', function() {
+  return Todo.default;
+})
+.controller('TodoController', ['$scope', 'Nymph', 'Todo', function($scope, Nymph, Todo) {
   $scope.todos = [];
   $scope.uiState = {
     'sort': 'name',

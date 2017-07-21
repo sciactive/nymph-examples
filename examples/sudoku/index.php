@@ -18,7 +18,7 @@ $clientDir = file_exists('../../../client/package.json')
     };
     NymphOptions = {
       restURL: '../rest.php',
-      pubsubURL: 'ws://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars($_SERVER['HTTP_HOST']); ?>:<?php echo getenv('DATABASE_URL') ? '80' : '8080'; ?>',
+      pubsubURL: 'ws://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars(explode(':', $_SERVER['HTTP_HOST'])[0]); ?>:<?php echo getenv('DATABASE_URL') ? '80' : '8080'; ?>',
       rateLimit: 100
     };
   </script>
@@ -29,9 +29,9 @@ $clientDir = file_exists('../../../client/package.json')
       bottom: 5px;
     }
   </style>
-  <script src="<?php echo $clientDir; ?>/src/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/src/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/src/NymphPubSub.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
   <script src="Game.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>

@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0da0650acf2c16b69624f053b8624626",
-    "content-hash": "9ffa10d53e9a8232c175892671ec2a01",
+    "content-hash": "5214f356be0f5bb94e30b55875510891",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -53,7 +52,7 @@
                 "server",
                 "sockets"
             ],
-            "time": "2017-01-06 14:36:36"
+            "time": "2017-01-06T14:36:36+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -84,24 +83,27 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
-            "time": "2017-02-14 19:40:03"
+            "time": "2017-02-14T19:40:03+00:00"
         },
         {
             "name": "evenement/evenement",
-            "version": "dev-master",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/igorw/evenement.git",
-                "reference": "35e87541d4b53c22201519fce3caaa5b38ac8164"
+                "reference": "6ba9a777870ab49f417e703229d53931ed40fd7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/igorw/evenement/zipball/35e87541d4b53c22201519fce3caaa5b38ac8164",
-                "reference": "35e87541d4b53c22201519fce3caaa5b38ac8164",
+                "url": "https://api.github.com/repos/igorw/evenement/zipball/6ba9a777870ab49f417e703229d53931ed40fd7a",
+                "reference": "6ba9a777870ab49f417e703229d53931ed40fd7a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0||^5.7||^4.8.35"
             },
             "type": "library",
             "extra": {
@@ -121,8 +123,7 @@
             "authors": [
                 {
                     "name": "Igor Wiedler",
-                    "email": "igor@wiedler.ch",
-                    "homepage": "http://wiedler.ch/igor/"
+                    "email": "igor@wiedler.ch"
                 }
             ],
             "description": "Événement is a very simple event dispatching library for PHP",
@@ -130,7 +131,7 @@
                 "event-dispatcher",
                 "event-emitter"
             ],
-            "time": "2014-07-09 21:08:03"
+            "time": "2017-07-17T17:39:19+00:00"
         },
         {
             "name": "guzzle/common",
@@ -175,7 +176,7 @@
                 "exception"
             ],
             "abandoned": "guzzle/guzzle",
-            "time": "2014-08-11 04:32:36"
+            "time": "2014-08-11T04:32:36+00:00"
         },
         {
             "name": "guzzle/http",
@@ -233,7 +234,7 @@
                 "http client"
             ],
             "abandoned": "guzzle/guzzle",
-            "time": "2014-08-11 04:32:36"
+            "time": "2014-08-11T04:32:36+00:00"
         },
         {
             "name": "guzzle/parser",
@@ -278,7 +279,7 @@
                 "url"
             ],
             "abandoned": "guzzle/guzzle",
-            "time": "2014-02-05 18:29:46"
+            "time": "2014-02-05T18:29:46+00:00"
         },
         {
             "name": "guzzle/stream",
@@ -332,7 +333,7 @@
                 "stream"
             ],
             "abandoned": "guzzle/guzzle",
-            "time": "2014-05-01 21:36:02"
+            "time": "2014-05-01T21:36:02+00:00"
         },
         {
             "name": "psr/container",
@@ -340,12 +341,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+                "reference": "2cc4a01788191489dc7459446ba832fa79a216a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/2cc4a01788191489dc7459446ba832fa79a216a7",
+                "reference": "2cc4a01788191489dc7459446ba832fa79a216a7",
                 "shasum": ""
             },
             "require": {
@@ -381,7 +382,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14 16:28:37"
+            "time": "2017-06-28 15:35:32"
         },
         {
             "name": "psr/log",
@@ -652,26 +653,26 @@
                 "interception",
                 "method hooking"
             ],
-            "time": "2017-06-17 00:00:00"
+            "time": "2017-06-17T00:00:00+00:00"
         },
         {
             "name": "sciactive/nymph-pubsub",
-            "version": "1.5.5",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-pubsub.git",
-                "reference": "3133d4d9e1b7a445bac521b5fbb9d838be8ef46c"
+                "reference": "03e85efc1ccce2e140ab6afd306a160b65822690"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/3133d4d9e1b7a445bac521b5fbb9d838be8ef46c",
-                "reference": "3133d4d9e1b7a445bac521b5fbb9d838be8ef46c",
+                "url": "https://api.github.com/repos/sciactive/nymph-pubsub/zipball/03e85efc1ccce2e140ab6afd306a160b65822690",
+                "reference": "03e85efc1ccce2e140ab6afd306a160b65822690",
                 "shasum": ""
             },
             "require": {
                 "cboden/ratchet": "0.3.*",
                 "sciactive/hookphp": "~2.0",
-                "sciactive/nymph-server": "~1.5.4",
+                "sciactive/nymph-server": "~1.6.0",
                 "sciactive/requirephp": "~1.3",
                 "textalk/websocket": "1.0.*",
                 "zendframework/zend-log": "2.*"
@@ -706,20 +707,20 @@
                 "pubsub",
                 "subscribe"
             ],
-            "time": "2017-06-18 00:00:00"
+            "time": "2017-07-21T00:00:00+00:00"
         },
         {
             "name": "sciactive/nymph-server",
-            "version": "1.5.4",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/nymph-server.git",
-                "reference": "14b95ed8cd86dea72bf2e5e34879df1d479a37a6"
+                "reference": "e6258395fde11b789a67478e0b418c004c54a15d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/nymph-server/zipball/14b95ed8cd86dea72bf2e5e34879df1d479a37a6",
-                "reference": "14b95ed8cd86dea72bf2e5e34879df1d479a37a6",
+                "url": "https://api.github.com/repos/sciactive/nymph-server/zipball/e6258395fde11b789a67478e0b418c004c54a15d",
+                "reference": "e6258395fde11b789a67478e0b418c004c54a15d",
                 "shasum": ""
             },
             "require": {
@@ -762,7 +763,7 @@
                 "postgres",
                 "postgresql"
             ],
-            "time": "2017-06-18 00:00:00"
+            "time": "2017-06-18T00:00:00+00:00"
         },
         {
             "name": "sciactive/requirephp",
@@ -808,34 +809,34 @@
                 "service location",
                 "service locator"
             ],
-            "time": "2015-02-19 00:00:00"
+            "time": "2015-02-19T00:00:00+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "3.4.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "db08b1b2f9adb5d59a5e838d1577e73c418e05ed"
+                "reference": "96440b5f3392aa7415ed720a290ceb7dcae3b00c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/db08b1b2f9adb5d59a5e838d1577e73c418e05ed",
-                "reference": "db08b1b2f9adb5d59a5e838d1577e73c418e05ed",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/96440b5f3392aa7415ed720a290ceb7dcae3b00c",
+                "reference": "96440b5f3392aa7415ed720a290ceb7dcae3b00c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9"
+                "php": "^7.1.3"
             },
             "conflict": {
-                "symfony/dependency-injection": "<3.3"
+                "symfony/dependency-injection": "<3.4"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.8|~3.0|~4.0",
-                "symfony/dependency-injection": "~3.3|~4.0",
-                "symfony/expression-language": "~2.8|~3.0|~4.0",
-                "symfony/stopwatch": "~2.8|~3.0|~4.0"
+                "symfony/config": "~3.4|~4.0",
+                "symfony/dependency-injection": "~3.4|~4.0",
+                "symfony/expression-language": "~3.4|~4.0",
+                "symfony/stopwatch": "~3.4|~4.0"
             },
             "suggest": {
                 "symfony/dependency-injection": "",
@@ -844,7 +845,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -871,7 +872,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-12 16:03:21"
+            "time": "2017-06-12 18:12:26"
         },
         {
             "name": "symfony/http-foundation",
@@ -879,12 +880,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "28209d9e670787ad473ef424ae00ffab442bd51d"
+                "reference": "0c4bf18214f040537c47ff8ecabdf10278bdf689"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/28209d9e670787ad473ef424ae00ffab442bd51d",
-                "reference": "28209d9e670787ad473ef424ae00ffab442bd51d",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/0c4bf18214f040537c47ff8ecabdf10278bdf689",
+                "reference": "0c4bf18214f040537c47ff8ecabdf10278bdf689",
                 "shasum": ""
             },
             "require": {
@@ -924,7 +925,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-16 21:35:59"
+            "time": "2017-07-21 11:05:08"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -991,12 +992,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "06959a6e3dd5c3cf936ffa865472753326560edd"
+                "reference": "4af7c54699852e4fbf1a12685d38ba8a215929bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/06959a6e3dd5c3cf936ffa865472753326560edd",
-                "reference": "06959a6e3dd5c3cf936ffa865472753326560edd",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/4af7c54699852e4fbf1a12685d38ba8a215929bf",
+                "reference": "4af7c54699852e4fbf1a12685d38ba8a215929bf",
                 "shasum": ""
             },
             "require": {
@@ -1061,7 +1062,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-06-14 07:34:46"
+            "time": "2017-07-11 06:35:47"
         },
         {
             "name": "textalk/websocket",
@@ -1099,7 +1100,7 @@
                 }
             ],
             "description": "WebSocket client and server",
-            "time": "2015-04-11 05:45:54"
+            "time": "2015-04-11T05:45:54+00:00"
         },
         {
             "name": "zendframework/zend-log",
@@ -1178,17 +1179,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-servicemanager.git",
-                "reference": "dd4523da51b5594bb012ef8dc0ea8013b755f58e"
+                "reference": "93b78c5ea111ddc1f98c763212b8a44686137989"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/dd4523da51b5594bb012ef8dc0ea8013b755f58e",
-                "reference": "dd4523da51b5594bb012ef8dc0ea8013b755f58e",
+                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/93b78c5ea111ddc1f98c763212b8a44686137989",
+                "reference": "93b78c5ea111ddc1f98c763212b8a44686137989",
                 "shasum": ""
             },
             "require": {
                 "container-interop/container-interop": "^1.2",
-                "php": "^5.6 || ^7.0",
+                "php": "^7.1",
                 "psr/container": "^1.0",
                 "zendframework/zend-stdlib": "^3.1"
             },
@@ -1197,15 +1198,15 @@
                 "psr/container-implementation": "^1.0"
             },
             "require-dev": {
-                "mikey179/vfsstream": "^1.6",
-                "ocramius/proxy-manager": "^1.0 || ^2.0",
-                "phpbench/phpbench": "^0.10.0",
-                "phpunit/phpunit": "^5.7 || ^6.0.6",
+                "mikey179/vfsstream": "^1.6.4",
+                "ocramius/proxy-manager": "^2.1.1",
+                "phpbench/phpbench": "^0.13.0",
+                "phpunit/phpunit": "^6.2.3",
                 "zendframework/zend-coding-standard": "~1.0.0"
             },
             "suggest": {
-                "ocramius/proxy-manager": "ProxyManager 1.* to handle lazy initialization of services",
-                "zendframework/zend-stdlib": "zend-stdlib ^2.5 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances"
+                "ocramius/proxy-manager": "ProxyManager ^2.1.1 to handle lazy initialization of services",
+                "zendframework/zend-stdlib": "zend-stdlib ^2.7.7 | ^3.1 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances"
             },
             "bin": [
                 "bin/generate-deps-for-config-factory",
@@ -1233,7 +1234,7 @@
                 "servicemanager",
                 "zf"
             ],
-            "time": "2017-04-27 21:01:21"
+            "time": "2017-07-09 22:22:18"
         },
         {
             "name": "zendframework/zend-stdlib",

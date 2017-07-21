@@ -18,12 +18,15 @@ $clientDir = file_exists('../../../client/package.json') ? '../../../client' : '
         restURL: '../rest.php'
       };
     </script>
-    <script src="<?php echo $clientDir; ?>/src/Nymph.js"></script>
-    <script src="<?php echo $clientDir; ?>/src/Entity.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
     <script src="Employee.js"></script>
     <script>
       $(function(){
         $("button").click(function(){
+          var Nymph = window.Nymph.default;
+          var Entity = window.NymphEntity.default;
+          var Employee = window.Employee.default;
           eval($("textarea").val());
         });
         $("pre").click(function(){
@@ -51,11 +54,19 @@ $clientDir = file_exists('../../../client/package.json') ? '../../../client' : '
     <select>
       <option>-</option>
     </select>
+    <h4>Try to save Entity class directly</h4>
+    <pre>var entity = new Entity();
+entity.set("something", "Anything");
+entity.save().then(function(entity){
+  $("#result").html("fail (Entity should not be usabe from the client.)");
+}, function(errObj){
+  $("#result").html("pass");
+});</pre>
     <h4>Handle Forbidden Method</h4>
     <pre>Employee.inaccessibleMethod().then(function(data){
-  $("#result").html(data);
+$("#result").html(data);
 }, function(errObj){
-  $("#result").html(JSON.stringify(errObj));
+$("#result").html(JSON.stringify(errObj));
 });</pre>
     <h4>Handle Server Side Static Exception</h4>
     <pre>Employee.throwErrorStatic().then(function(data){
@@ -156,7 +167,54 @@ Promise.all([promise1, promise2]).then(function(entities){
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-    <h4>Create two entities</h4>
+    <h4>Create an entity</h4>
+    <pre>var entity = new Employee();
+entity.set("name", "Jane Doe");
+entity.set({
+  "current": true,
+  "salary": 8000000,
+  "start_date": (new Date().getTime()) / 1000,
+  "subordinates": [],
+  "title": "Seniorer Person"
+});
+console.log(entity.get("name"));
+console.log(entity.get(["name", "current", "salary", "start_date", "subordinates", "title"]));
+entity.save().then(function(jane){
+  $("#result").html(JSON.stringify(jane));
+}, function(errObj){
+  $("#result").html(errObj.textStatus);
+});</pre>
+    <h4>Create two unrelated entities</h4>
+    <pre>var entity = new Employee();
+entity.set({
+  "name": "Jane Doe",
+  "current": true,
+  "salary": 8000000,
+  "start_date": (new Date().getTime()) / 1000,
+  "subordinates": [],
+  "title": "Seniorer Person"
+});
+var entity2 = new Employee();
+entity2.set({
+  "name": "John Doe",
+  "current": true,
+  "salary": 8000000,
+  "start_date": (new Date().getTime()) / 1000,
+  "subordinates": [],
+  "title": "Seniorer Person"
+});
+Nymph.saveEntities([entity, entity2]).then(function(entities){
+  entities[0].data.building = "J2";
+  entities[1].data.building = "B4";
+  Nymph.saveEntities(entities).then(function(entities){
+    $("#result").html(JSON.stringify(entities));
+  }, function(errObj){
+    $("#result").html(errObj.textStatus);
+  });
+}, function(errObj){
+  $("#result").html(errObj.textStatus);
+});</pre>
+    <h4>Create two related entities</h4>
     <pre>var entity = new Employee();
 entity.set({
   "name": "Jane Doe",
@@ -182,23 +240,6 @@ entity.save().then(function(jane){
   }, function(errObj){
     $("#result").html(errObj.textStatus);
   });
-}, function(errObj){
-  $("#result").html(errObj.textStatus);
-});</pre>
-    <h4>Create an entity</h4>
-    <pre>var entity = new Employee();
-entity.set("name", "Jane Doe");
-entity.set({
-  "current": true,
-  "salary": 8000000,
-  "start_date": (new Date().getTime()) / 1000,
-  "subordinates": [],
-  "title": "Seniorer Person"
-});
-console.log(entity.get("name"));
-console.log(entity.get(["name", "current", "salary", "start_date", "subordinates", "title"]));
-entity.save().then(function(jane){
-  $("#result").html(JSON.stringify(jane));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
