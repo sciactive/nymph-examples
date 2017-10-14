@@ -20,20 +20,21 @@ async function main() {
   // Make a new todo.
   const todo = new Todo();
   todo.set("name", "Foobar");
-  console.log("\n\nawait todo.save(): ", await todo.save());
+  console.log("\n\ntodo: ", todo);
+  console.log("\n\nNew Todo todo.save(): ", await todo.save());
 
   // Wait 2 seconds, set it to done.
   await new Promise((r) => setTimeout(() => r(), 2000));
   todo.set("done", true);
-  console.log("\n\nawait todo.save(): ", await todo.save());
+  console.log("\n\nSet to Done todo.save(): ", await todo.save());
 
   // Wait 2 seconds, archive it.
   await new Promise((r) => setTimeout(() => r(), 2000));
-  console.log("\n\nawait todo.archive(): ", await todo.archive());
+  console.log("\n\nArchive todo.archive(): ", await todo.archive());
 
   // Wait 2 seconds, delete it.
   await new Promise((r) => setTimeout(() => r(), 2000));
-  console.log("\n\nawait todo.delete(): ", await todo.delete());
+  console.log("\n\nDelete todo.delete(): ", await todo.delete());
 
   return;
 }
