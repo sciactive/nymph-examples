@@ -20,9 +20,7 @@
   },
   "homepage": "https://github.com/sciactive/nymph-examples",
   "dependencies": {
-    "module-alias": "^2.0.1",
-    "nymph-client": "^1.6.0",
-    "websocket": "^1.0.24",
-    "xmlhttprequest": "^1.8.0"
+    "nymph-client": "^1.6.1",
+    "nymph-client-node": "0.0.1-alpha1"
   }
 }
