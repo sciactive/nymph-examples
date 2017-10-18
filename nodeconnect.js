@@ -2,8 +2,8 @@
 const Nymph = require('nymph-client-node');
 // Set up Nymph.
 const nymphOptions = {
-  restURL: 'http://nymph-demo.herokuapp.com/examples/rest.php',
-  pubsubURL: 'ws://nymph-pubsub-demo.herokuapp.com:80',
+  restURL: 'http://localhost:8000/nymph/examples/examples/rest.php',
+  pubsubURL: 'ws://localhost:8080',
   rateLimit: 100
 };
 Nymph.init(nymphOptions);
@@ -23,18 +23,21 @@ async function main() {
   console.log("\n\ntodo: ", todo);
   console.log("\n\nNew Todo todo.save(): ", await todo.save());
 
-  // Wait 2 seconds, set it to done.
-  await new Promise((r) => setTimeout(() => r(), 2000));
+  // Wait 5 seconds, set it to done.
+  console.log("\n\nWait 5 seconds...");
+  await new Promise((r) => setTimeout(() => r(), 5000));
   todo.set("done", true);
-  console.log("\n\nSet to Done todo.save(): ", await todo.save());
+  console.log("Set to Done todo.save(): ", await todo.save());
 
-  // Wait 2 seconds, archive it.
-  await new Promise((r) => setTimeout(() => r(), 2000));
-  console.log("\n\nArchive todo.archive(): ", await todo.archive());
+  // Wait 5 seconds, archive it.
+  console.log("\n\nWait 5 seconds...");
+  await new Promise((r) => setTimeout(() => r(), 5000));
+  console.log("Archive todo.archive(): ", await todo.archive());
 
-  // Wait 2 seconds, delete it.
-  await new Promise((r) => setTimeout(() => r(), 2000));
-  console.log("\n\nDelete todo.delete(): ", await todo.delete());
+  // Wait 5 seconds, delete it.
+  console.log("\n\nWait 5 seconds...");
+  await new Promise((r) => setTimeout(() => r(), 5000));
+  console.log("Delete todo.delete(): ", await todo.delete());
 
   return;
 }
