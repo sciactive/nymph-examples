@@ -25,9 +25,9 @@ $clientDir = file_exists('../../../client/package.json') ? '../../../client' : '
         bottom: 5px;
       }
     </style>
-    <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-    <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-    <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib-umd/Nymph.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib-umd/Entity.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib-umd/PubSub.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="clickerApp.js"></script>

@@ -41,7 +41,7 @@ var template = (function () {
         if (this.get('__subscription')) {
           this.get('__subscription').unsubscribe();
         }
-        var subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe((newTodos) => {
+        let subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe((newTodos) => {
           this.set({uiShowArchived: archived});
           if (newTodos !== undefined) {
             var todos = this.get('todos');
@@ -104,8 +104,8 @@ var template = (function () {
 
 function add_css () {
 	var style = createElement( 'style' );
-	style.id = 'svelte-1726687888-style';
-	style.textContent = "\n  [svelte-1726687888].todo-form, [svelte-1726687888] .todo-form {\n    display: flex;\n  }\n  [svelte-1726687888].todo-form .form-control, [svelte-1726687888] .todo-form .form-control {\n    flex-grow: 1;\n    margin-right: 5px;\n  }\n  [svelte-1726687888].user-count, [svelte-1726687888] .user-count {\n    position: fixed;\n    right: 5px;\n    bottom: 5px;\n  }\n";
+	style.id = 'svelte-4248568516-style';
+	style.textContent = "\n  [svelte-4248568516].todo-form, [svelte-4248568516] .todo-form {\n    display: flex;\n  }\n  [svelte-4248568516].todo-form .form-control, [svelte-4248568516] .todo-form .form-control {\n    flex-grow: 1;\n    margin-right: 5px;\n  }\n  [svelte-4248568516].user-count, [svelte-4248568516] .user-count {\n    position: fixed;\n    right: 5px;\n    bottom: 5px;\n  }\n";
 	appendNode( style, document.head );
 }
 
@@ -175,7 +175,7 @@ function create_main_fragment ( state, component ) {
 		},
 
 		hydrate: function ( nodes ) {
-			setAttribute( div, 'svelte-1726687888', '' );
+			setAttribute( div, 'svelte-4248568516', '' );
 			div_1.className = "row";
 			div_2.className = "col-sm-8";
 			div_3.className = "list-group";
@@ -912,7 +912,7 @@ function TodoApp ( options ) {
 	this._yield = options._yield;
 
 	this._torndown = false;
-	if ( !document.getElementById( 'svelte-1726687888-style' ) ) add_css();
+	if ( !document.getElementById( 'svelte-4248568516-style' ) ) add_css();
 	this._oncreate = [];
 	this._bindings = [];
 

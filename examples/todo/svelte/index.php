@@ -19,9 +19,9 @@ $clientDir = file_exists('../../../../client/package.json')
       rateLimit: 100
     };
   </script>
-  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib-umd/Nymph.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib-umd/Entity.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib-umd/PubSub.js"></script>
   <script src="../Todo.js"></script>
 
   <script src="build/TodoEl.js"></script>
