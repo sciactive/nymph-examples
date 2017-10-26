@@ -100,7 +100,11 @@
     _createClass(Todo, [{
       key: "archive",
       value: function archive() {
-        return this.serverCall('archive', arguments);
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+
+        return this.serverCall('archive', args);
       }
     }]);
 
