@@ -34,17 +34,6 @@ class Game extends \Nymph\Entity {
     parent::__construct($id);
   }
 
-  public function info($type) {
-    if ($type == 'name' && isset($this->name)) {
-      return $this->name;
-    } elseif ($type == 'type') {
-      return 'game';
-    } elseif ($type == 'types') {
-      return 'games';
-    }
-    return null;
-  }
-
   public function generateBoard() {
     // Since we know there's nothing on the board, we can at least fill in
     // one row randomly.

@@ -17,17 +17,6 @@ class Todo extends \Nymph\Entity {
     parent::__construct($id);
   }
 
-  public function info($type) {
-    if ($type == 'name' && isset($this->name)) {
-      return $this->name;
-    } elseif ($type == 'type') {
-      return 'todo';
-    } elseif ($type == 'types') {
-      return 'todos';
-    }
-    return null;
-  }
-
   public function archive() {
     if ($this->hasTag('archived')) {
       return true;

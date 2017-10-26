@@ -20,7 +20,7 @@ var template = (function () {
     computed: {
       createdDate: (todo) => {
         var date = new Date(todo.cdate * 1000);
-        return date.toISOString().replace(/T/, ' ').replace(/:[^:]*$/, '');
+        return `${date.getFullYear()}-${date.getMonth+1 < 10 ? '0'+date.getMonth()+1 : date.getMonth()+1}-${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()} ${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}`;
       }
     },
 
@@ -38,8 +38,8 @@ var template = (function () {
 
 function add_css () {
 	var style = createElement( 'style' );
-	style.id = 'svelte-1667780311-style';
-	style.textContent = "\n  label[svelte-1667780311].list-group-item, [svelte-1667780311] label.list-group-item {\n    font-weight: normal;\n    cursor: pointer;\n  }\n  label[svelte-1667780311].list-group-item > .todo-row, [svelte-1667780311] label.list-group-item > .todo-row {\n    display: flex;\n    justify-content: space-between;\n  }\n  [svelte-1667780311].todo-flex, [svelte-1667780311] .todo-flex {\n    display: flex;\n  }\n  [svelte-1667780311].todo-controls, [svelte-1667780311] .todo-controls {\n    flex-grow: 1;\n  }\n  [svelte-1667780311].todo-input, [svelte-1667780311] .todo-input {\n    display: inline;\n    background-color: transparent;\n    border: 0;\n    flex-grow: 1;\n  }\n  [svelte-1667780311].todo-input.done-true, [svelte-1667780311] .todo-input.done-true {\n    text-decoration: line-through;\n    color: grey;\n  }\n  [svelte-1667780311].todo-date, [svelte-1667780311] .todo-date {\n    margin-left: 5px;\n    flex-shrink: 1;\n  }\n";
+	style.id = 'svelte-2456255383-style';
+	style.textContent = "\n  label[svelte-2456255383].list-group-item, [svelte-2456255383] label.list-group-item {\n    font-weight: normal;\n    cursor: pointer;\n  }\n  label[svelte-2456255383].list-group-item > .todo-row, [svelte-2456255383] label.list-group-item > .todo-row {\n    display: flex;\n    justify-content: space-between;\n  }\n  [svelte-2456255383].todo-flex, [svelte-2456255383] .todo-flex {\n    display: flex;\n  }\n  [svelte-2456255383].todo-controls, [svelte-2456255383] .todo-controls {\n    flex-grow: 1;\n  }\n  [svelte-2456255383].todo-input, [svelte-2456255383] .todo-input {\n    display: inline;\n    background-color: transparent;\n    border: 0;\n    flex-grow: 1;\n  }\n  [svelte-2456255383].todo-input.done-true, [svelte-2456255383] .todo-input.done-true {\n    text-decoration: line-through;\n    color: grey;\n  }\n  [svelte-2456255383].todo-date, [svelte-2456255383] .todo-date {\n    margin-left: 5px;\n    flex-shrink: 1;\n  }\n";
 	appendNode( style, document.head );
 }
 
@@ -75,7 +75,7 @@ function create_main_fragment ( state, component ) {
 		},
 
 		hydrate: function ( nodes ) {
-			setAttribute( label, 'svelte-1667780311', '' );
+			setAttribute( label, 'svelte-2456255383', '' );
 			label.className = label_class_value = "list-group-item list-group-item-" + ( state.todo.data.done ? 'success' : 'warning' );
 			span.className = "todo-row";
 			span_1.className = "todo-controls todo-flex";
@@ -217,7 +217,7 @@ function TodoEl ( options ) {
 	this._yield = options._yield;
 
 	this._torndown = false;
-	if ( !document.getElementById( 'svelte-1667780311-style' ) ) add_css();
+	if ( !document.getElementById( 'svelte-2456255383-style' ) ) add_css();
 
 	this._fragment = create_main_fragment( this._state, this );
 

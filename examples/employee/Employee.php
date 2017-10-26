@@ -34,19 +34,6 @@ class Employee extends \Nymph\Entity {
     }
   }
 
-  public function info($type) {
-    if ($type == 'name' && isset($this->name)) {
-      return $this->name;
-    }
-    elseif ($type == 'type') {
-      return 'employee';
-    }
-    elseif ($type == 'types') {
-      return 'employees';
-    }
-    return null;
-  }
-
   public function save() {
     // Validate employee data.
     $exc = new \Nymph\Exceptions\EntityInvalidDataException();
