@@ -8,7 +8,7 @@ require file_exists(__DIR__.'/../../autoload-dev.php')
 require __DIR__.'/config.php';
 
 // If we're on Heroku, the entry is the pubsub demo.
-if (getenv('DATABASE_URL')) {
+if (getenv('NYMPH_PRODUCTION')) {
   \Nymph\PubSub\Server::configure(
       ['entries' => ['wss://nymph-pubsub-demo.herokuapp.com:443/']]
   );
