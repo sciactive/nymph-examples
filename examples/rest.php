@@ -2,12 +2,16 @@
 
 error_reporting(E_ALL);
 
-require file_exists(__DIR__.'/../../autoload-dev.php') ? __DIR__.'/../../autoload-dev.php' : __DIR__.'/../vendor/autoload.php';
+require file_exists(__DIR__.'/../../autoload-dev.php')
+    ? __DIR__.'/../../autoload-dev.php'
+    : __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/config.php';
 
 // If we're on Heroku, the entry is the pubsub demo.
 if (getenv('DATABASE_URL')) {
-  \Nymph\PubSub\Server::configure(['entries' => ['ws://nymph-pubsub-demo.herokuapp.com:80/']]);
+  \Nymph\PubSub\Server::configure(
+      ['entries' => ['wss://nymph-pubsub-demo.herokuapp.com:443/']]
+  );
 }
 
 $NymphREST = new \Nymph\REST();

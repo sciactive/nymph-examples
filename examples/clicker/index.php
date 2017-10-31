@@ -1,5 +1,14 @@
 <?php
-$clientDir = file_exists('../../../client/package.json') ? '../../../client' : '../../node_modules/nymph-client';
+$clientDir = file_exists('../../../client/package.json')
+    ? '../../../client'
+    : '../../node_modules/nymph-client';
+
+function is_secure() {
+  if (isset($_SERVER['HTTPS'])) {
+    return (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1');
+  }
+  return (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443');
+}
 ?><!DOCTYPE html>
 <html ng-app="clickerApp">
   <head>
@@ -7,14 +16,13 @@ $clientDir = file_exists('../../../client/package.json') ? '../../../client' : '
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
-      (function () {
-        var s = document.createElement("script");
-        s.setAttribute("src", "https://www.promisejs.org/polyfills/promise-5.0.0.min.js");
+      (function(){
+        var s = document.createElement("script"); s.setAttribute("src", "https://www.promisejs.org/polyfills/promise-5.0.0.min.js");
         (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
       })();
       NymphOptions = {
         restURL: '../rest.php',
-        pubsubURL: 'ws://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars(explode(':', $_SERVER['HTTP_HOST'])[0]); ?>:<?php echo getenv('DATABASE_URL') ? '80' : '8080'; ?>',
+        pubsubURL: '<?php echo is_secure() ? 'wss' : 'ws'; ?>://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars(explode(':', $_SERVER['HTTP_HOST'])[0]); ?>:<?php echo getenv('DATABASE_URL') ? (is_secure() ? '443' : '80') : '8080'; ?>',
         rateLimit: 100
       };
     </script>
