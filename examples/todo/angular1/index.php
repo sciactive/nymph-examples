@@ -2,6 +2,13 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
+
+function is_secure() {
+  if (isset($_SERVER['HTTPS'])) {
+    return (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1');
+  }
+  return (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443');
+}
 ?><!DOCTYPE html>
 <html ng-app="todoApp">
 <head>
@@ -15,7 +22,7 @@ $clientDir = file_exists('../../../../client/package.json')
     })();
     NymphOptions = {
       restURL: '../../rest.php',
-      pubsubURL: 'ws://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars(explode(':', $_SERVER['HTTP_HOST'])[0]); ?>:<?php echo getenv('DATABASE_URL') ? '80' : '8080'; ?>',
+      pubsubURL: '<?php echo is_secure() ? 'wss' : 'ws'; ?>://<?php echo getenv('DATABASE_URL') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars(explode(':', $_SERVER['HTTP_HOST'])[0]); ?>:<?php echo getenv('DATABASE_URL') ? (is_secure() ? '443' : '80') : '8080'; ?>',
       rateLimit: 100
     };
   </script>

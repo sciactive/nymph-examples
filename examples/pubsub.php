@@ -22,13 +22,15 @@ if (isset($opts['p'])) {
 if (isset($opts['e'])) {
   $config['entries'] = [];
   foreach (explode(',', $opts['e']) as $port) {
-    $config['entries'][] = "ws://127.0.0.1:{$port}/";
+    $config['entries'][] =
+        ($port == '443' ? 'wss' : 'ws') . "://127.0.0.1:{$port}/";
   }
 }
 if (isset($opts['r'])) {
   $config['relays'] = [];
   foreach (explode(',', $opts['r']) as $port) {
-    $config['relays'][] = "ws://127.0.0.1:{$port}/";
+    $config['relays'][] =
+        ($port == '443' ? 'wss' : 'ws') . "://127.0.0.1:{$port}/";
   }
 }
 
