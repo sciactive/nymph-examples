@@ -4,8 +4,8 @@
 
 $nymphConfig = [];
 
-// Check for Heroku postgres var.
-if (getenv('DATABASE_URL')) {
+// Check for production postgres var.
+if (getenv('NYMPH_PRODUCTION')) {
   $dbopts = parse_url(getenv('DATABASE_URL'));
   $nymphConfig['driver'] = 'PostgreSQL';
   $nymphConfig['PostgreSQL'] = [
@@ -16,16 +16,16 @@ if (getenv('DATABASE_URL')) {
     'password' => $dbopts["pass"]
   ];
 } else {
-  if (true) {
-    $nymphConfig['MySQL'] = [
+  if (getenv('DB') === 'pgsql') {
+    $nymphConfig['driver'] = 'PostgreSQL';
+    $nymphConfig['PostgreSQL'] = [
       'host' => '127.0.0.1',
       'database' => 'nymph_example',
       'user' => 'nymph_example',
       'password' => 'omgomg'
     ];
   } else {
-    $nymphConfig['driver'] = 'PostgreSQL';
-    $nymphConfig['PostgreSQL'] = [
+    $nymphConfig['MySQL'] = [
       'host' => '127.0.0.1',
       'database' => 'nymph_example',
       'user' => 'nymph_example',

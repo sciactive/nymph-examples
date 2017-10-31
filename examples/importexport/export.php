@@ -1,7 +1,7 @@
 <?php
 
-if (getenv('DATABASE_URL')) {
-  // No import/export on Heroku.
+if (getenv('NYMPH_PRODUCTION')) {
+  // No import/export on production.
   header('HTTP/1.1 403 Forbidden', true, 403);
   echo "403 Forbidden";
   exit;

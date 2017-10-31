@@ -10,8 +10,8 @@ require __DIR__.'/config.php';
 date_default_timezone_set('America/Los_Angeles');
 
 $config = [];
-// If we're on Heroku, bind to the given port.
-if (getenv('DATABASE_URL') && getenv('PORT')) {
+// If we're on production, bind to the given port.
+if (getenv('NYMPH_PRODUCTION') && getenv('PORT')) {
   $config['port'] = (int) getenv('PORT');
 }
 $opts = getopt('p:e:r:');
