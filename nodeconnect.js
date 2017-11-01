@@ -2,7 +2,7 @@
 const Nymph = require('nymph-client-node');
 // Set up Nymph.
 const nymphOptions = {
-  restURL: 'http://localhost:8000/nymph/examples/examples/rest.php',
+  restURL: 'http://localhost/nymph-examples/examples/rest.php',
   pubsubURL: 'ws://localhost:8080',
   rateLimit: 100
 };
