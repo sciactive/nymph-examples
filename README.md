@@ -1,12 +1,14 @@
 # Nymph Examples - collaborative app data
 
-[![License](https://img.shields.io/github/license/sciactive/nymph-examples.svg?style=flat)](https://github.com/sciactive/nymph-examples/blob/master/LICENSE) [![Open Issues](https://img.shields.io/github/issues/sciactive/nymph-examples.svg?style=flat)](https://github.com/sciactive/nymph-examples/issues)
+[![Open Issues](https://img.shields.io/github/issues/sciactive/nymph-examples.svg?style=flat)](https://github.com/sciactive/nymph-examples/issues)
 
 This repository contains example apps built with the [Nymph ORM](http://nymph.io). For more information, you can see the [main Nymph repository](https://github.com/sciactive/nymph).
 
 This is also the repository that is hosted on Heroku as [the Nymph demos](http://nymph.io/#demos).
 
 # Installation
+
+> :information_source: In the [main Nymph repo](https://github.com/sciactive/nymph), there is a Docker setup that will do all of this for you with one command.
 
 Set up a PHP server with MySQL on your localhost.
 
@@ -30,7 +32,7 @@ Now start the PubSub server with:
 php examples/pubsub.php
 ```
 
-Now you can see the example apps:
+Now you can see the example apps (assuming your server is on port 80):
 
 * [Todo App with Svelte](http://localhost/nymph-examples/examples/todo/svelte/)
 * [Todo App with Angular 1](http://localhost/nymph-examples/examples/todo/angular1/)

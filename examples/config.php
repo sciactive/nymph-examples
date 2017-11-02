@@ -15,6 +15,13 @@ if (getenv('NYMPH_PRODUCTION')) {
     'user' => $dbopts["user"],
     'password' => $dbopts["pass"]
   ];
+} elseif (getenv('MYSQL_HOST')) {
+  $nymphConfig['MySQL'] = [
+    'host' => getenv('MYSQL_HOST'),
+    'database' => getenv('MYSQL_DATABASE'),
+    'user' => getenv('MYSQL_USER'),
+    'password' => getenv('MYSQL_PASSWORD')
+  ];
 } else {
   if (getenv('DB') === 'pgsql') {
     $nymphConfig['driver'] = 'PostgreSQL';
