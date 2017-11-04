@@ -2,6 +2,10 @@
 
 error_reporting(E_ALL);
 
+if (php_sapi_name() != "cli") {
+  die("You can only run pubsub.php from the command line.");
+}
+
 require file_exists(__DIR__.'/../../autoload-dev.php')
     ? __DIR__.'/../../autoload-dev.php'
     : __DIR__.'/../vendor/autoload.php';
