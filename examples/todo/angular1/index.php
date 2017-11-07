@@ -26,7 +26,7 @@ function is_secure() {
     })();
     NymphOptions = {
       restURL: '../../rest.php',
-      pubsubURL: '<?php echo is_secure() ? 'wss' : 'ws'; ?>://<?php echo getenv('NYMPH_PRODUCTION') ? htmlspecialchars('nymph-pubsub-demo.herokuapp.com') : htmlspecialchars(explode(':', $_SERVER['HTTP_HOST'])[0]); ?>:<?php echo getenv('NYMPH_PRODUCTION') ? (is_secure() ? '443' : '80') : '8080'; ?>',
+      pubsubURL: '<?php echo is_secure() ? 'wss' : 'ws'; ?>://<?php echo getenv('NYMPH_PRODUCTION') ? 'nymph-pubsub-demo.herokuapp.com' : '\'+window.location.hostname+\''; ?>:<?php echo getenv('NYMPH_PRODUCTION') ? (is_secure() ? '443' : '80') : '8081'; ?>',
       rateLimit: 100
     };
   </script>
@@ -98,6 +98,7 @@ function is_secure() {
     <div class="row">
       <div class="col-sm-8">
         <div class="list-group" style="clear: both;">
+          <div class="well" ng-if="!todos.length">You have no todos yet.</div>
           <label ng-repeat="todo in todos track by todo.guid" class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
             <span class="todo-row">
               <span class="todo-controls todo-flex">
@@ -105,7 +106,7 @@ function is_secure() {
                 <input class="todo-input done-{{todo.data.done}}" ng-model="todo.data.name" ng-change="save(todo)" ng-model-options="{updateOn: 'blur'}" />
               </span>
               <span class="todo-date todo-flex">
-                {{todo.cdate * 1000 | date:'yyyy-MM-dd HH:MM'}}
+                {{todo.cdate * 1000 | date:'yyyy-MM-dd HH:mm'}}
               </span>
             </span>
           </label>

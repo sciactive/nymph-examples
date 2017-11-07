@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col-sm-8">
       <div class="list-group" style="clear: both;">
+        {{#if !todos.length}}
+          <div class="well">You have no todos yet.</div>
+        {{/if}}
         {{#each todos as todo}}
           <TodoEl bind:todo="todo" archived="{{uiShowArchived}}"></TodoEl>
         {{/each}}
