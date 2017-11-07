@@ -104,13 +104,15 @@ var template = (function () {
 
 function add_css () {
 	var style = createElement( 'style' );
-	style.id = 'svelte-4248568516-style';
-	style.textContent = "\n  [svelte-4248568516].todo-form, [svelte-4248568516] .todo-form {\n    display: flex;\n  }\n  [svelte-4248568516].todo-form .form-control, [svelte-4248568516] .todo-form .form-control {\n    flex-grow: 1;\n    margin-right: 5px;\n  }\n  [svelte-4248568516].user-count, [svelte-4248568516] .user-count {\n    position: fixed;\n    right: 5px;\n    bottom: 5px;\n  }\n";
+	style.id = 'svelte-260321137-style';
+	style.textContent = "\n  [svelte-260321137].todo-form, [svelte-260321137] .todo-form {\n    display: flex;\n  }\n  [svelte-260321137].todo-form .form-control, [svelte-260321137] .todo-form .form-control {\n    flex-grow: 1;\n    margin-right: 5px;\n  }\n  [svelte-260321137].user-count, [svelte-260321137] .user-count {\n    position: fixed;\n    right: 5px;\n    bottom: 5px;\n  }\n";
 	appendNode( style, document.head );
 }
 
 function create_main_fragment ( state, component ) {
-	var div, div_1, div_2, div_3, text_2, div_4, small, text_3, text_4, br, text_5, text_7, text_10, text_11, div_5, text_12, text_13_value, text_13;
+	var div, div_1, div_2, div_3, text, text_3, div_4, small, text_4, text_5, br, text_6, text_8, text_11, text_12, div_5, text_13, text_14_value, text_14;
+
+	var if_block = (!state.todos.length) && create_if_block( state, component );
 
 	var each_block_value = state.todos;
 
@@ -121,26 +123,26 @@ function create_main_fragment ( state, component ) {
 	}
 
 	function get_block ( state ) {
-		if ( state.uiShowArchived ) return create_if_block;
-		return create_if_block_1;
+		if ( state.uiShowArchived ) return create_if_block_1;
+		return create_if_block_2;
 	}
 
 	var current_block = get_block( state );
-	var if_block = current_block( state, component );
+	var if_block_1 = current_block( state, component );
 
-	var if_block_2 = (state.todos.length > 0) && create_if_block_4( state, component );
+	var if_block_3 = (state.todos.length > 0) && create_if_block_5( state, component );
 
 	function get_block_1 ( state ) {
-		if ( state.uiShowArchived ) return create_if_block_7;
-		return create_if_block_8;
+		if ( state.uiShowArchived ) return create_if_block_8;
+		return create_if_block_9;
 	}
 
 	var current_block_1 = get_block_1( state );
-	var if_block_4 = current_block_1( state, component );
+	var if_block_5 = current_block_1( state, component );
 
-	var if_block_5 = (state.todos.length > 1) && create_if_block_9( state, component );
+	var if_block_6 = (state.todos.length > 1) && create_if_block_10( state, component );
 
-	var if_block_6 = (!state.uiShowArchived) && create_if_block_10( state, component );
+	var if_block_7 = (!state.uiShowArchived) && create_if_block_11( state, component );
 
 	return {
 		create: function () {
@@ -148,34 +150,36 @@ function create_main_fragment ( state, component ) {
 			div_1 = createElement( 'div' );
 			div_2 = createElement( 'div' );
 			div_3 = createElement( 'div' );
+			if ( if_block ) if_block.create();
+			text = createText( "\n        " );
 
 			for ( var i = 0; i < each_block_iterations.length; i += 1 ) {
 				each_block_iterations[i].create();
 			}
 
-			text_2 = createText( "\n    " );
+			text_3 = createText( "\n    " );
 			div_4 = createElement( 'div' );
 			small = createElement( 'small' );
-			if_block.create();
-			text_3 = createText( "\n        " );
-			if ( if_block_2 ) if_block_2.create();
+			if_block_1.create();
 			text_4 = createText( "\n        " );
-			br = createElement( 'br' );
+			if ( if_block_3 ) if_block_3.create();
 			text_5 = createText( "\n        " );
-			if_block_4.create();
-			text_7 = createText( "\n      " );
-			if ( if_block_5 ) if_block_5.create();
-			text_10 = createText( "\n  " );
+			br = createElement( 'br' );
+			text_6 = createText( "\n        " );
+			if_block_5.create();
+			text_8 = createText( "\n      " );
 			if ( if_block_6 ) if_block_6.create();
 			text_11 = createText( "\n  " );
+			if ( if_block_7 ) if_block_7.create();
+			text_12 = createText( "\n  " );
 			div_5 = createElement( 'div' );
-			text_12 = createText( "Active Users: " );
-			text_13 = createText( text_13_value = state.userCount );
+			text_13 = createText( "Active Users: " );
+			text_14 = createText( text_14_value = state.userCount );
 			this.hydrate();
 		},
 
 		hydrate: function ( nodes ) {
-			setAttribute( div, 'svelte-4248568516', '' );
+			setAttribute( div, 'svelte-260321137', '' );
 			div_1.className = "row";
 			div_2.className = "col-sm-8";
 			div_3.className = "list-group";
@@ -192,32 +196,46 @@ function create_main_fragment ( state, component ) {
 			appendNode( div_1, div );
 			appendNode( div_2, div_1 );
 			appendNode( div_3, div_2 );
+			if ( if_block ) if_block.mount( div_3, null );
+			appendNode( text, div_3 );
 
 			for ( var i = 0; i < each_block_iterations.length; i += 1 ) {
 				each_block_iterations[i].mount( div_3, null );
 			}
 
-			appendNode( text_2, div_1 );
+			appendNode( text_3, div_1 );
 			appendNode( div_4, div_1 );
 			appendNode( small, div_4 );
-			if_block.mount( small, null );
-			appendNode( text_3, small );
-			if ( if_block_2 ) if_block_2.mount( small, null );
+			if_block_1.mount( small, null );
 			appendNode( text_4, small );
-			appendNode( br, small );
+			if ( if_block_3 ) if_block_3.mount( small, null );
 			appendNode( text_5, small );
-			if_block_4.mount( small, null );
-			appendNode( text_7, div_4 );
-			if ( if_block_5 ) if_block_5.mount( div_4, null );
-			appendNode( text_10, div );
-			if ( if_block_6 ) if_block_6.mount( div, null );
+			appendNode( br, small );
+			appendNode( text_6, small );
+			if_block_5.mount( small, null );
+			appendNode( text_8, div_4 );
+			if ( if_block_6 ) if_block_6.mount( div_4, null );
 			appendNode( text_11, div );
+			if ( if_block_7 ) if_block_7.mount( div, null );
+			appendNode( text_12, div );
 			appendNode( div_5, div );
-			appendNode( text_12, div_5 );
 			appendNode( text_13, div_5 );
+			appendNode( text_14, div_5 );
 		},
 
 		update: function ( changed, state ) {
+			if ( !state.todos.length ) {
+				if ( !if_block ) {
+					if_block = create_if_block( state, component );
+					if_block.create();
+					if_block.mount( div_3, text );
+				}
+			} else if ( if_block ) {
+				if_block.unmount();
+				if_block.destroy();
+				if_block = null;
+			}
+
 			var each_block_value = state.todos;
 
 			if ( 'todos' in changed || 'uiShowArchived' in changed ) {
@@ -238,59 +256,45 @@ function create_main_fragment ( state, component ) {
 				each_block_iterations.length = each_block_value.length;
 			}
 
-			if ( current_block === ( current_block = get_block( state ) ) && if_block ) {
-				if_block.update( changed, state );
+			if ( current_block === ( current_block = get_block( state ) ) && if_block_1 ) {
+				if_block_1.update( changed, state );
 			} else {
-				if_block.unmount();
-				if_block.destroy();
-				if_block = current_block( state, component );
-				if_block.create();
-				if_block.mount( small, text_3 );
+				if_block_1.unmount();
+				if_block_1.destroy();
+				if_block_1 = current_block( state, component );
+				if_block_1.create();
+				if_block_1.mount( small, text_4 );
 			}
 
 			if ( state.todos.length > 0 ) {
-				if ( if_block_2 ) {
-					if_block_2.update( changed, state );
+				if ( if_block_3 ) {
+					if_block_3.update( changed, state );
 				} else {
-					if_block_2 = create_if_block_4( state, component );
-					if_block_2.create();
-					if_block_2.mount( small, text_4 );
+					if_block_3 = create_if_block_5( state, component );
+					if_block_3.create();
+					if_block_3.mount( small, text_5 );
 				}
-			} else if ( if_block_2 ) {
-				if_block_2.unmount();
-				if_block_2.destroy();
-				if_block_2 = null;
+			} else if ( if_block_3 ) {
+				if_block_3.unmount();
+				if_block_3.destroy();
+				if_block_3 = null;
 			}
 
 			if ( current_block_1 !== ( current_block_1 = get_block_1( state ) ) ) {
-				if_block_4.unmount();
-				if_block_4.destroy();
-				if_block_4 = current_block_1( state, component );
-				if_block_4.create();
-				if_block_4.mount( small, null );
+				if_block_5.unmount();
+				if_block_5.destroy();
+				if_block_5 = current_block_1( state, component );
+				if_block_5.create();
+				if_block_5.mount( small, null );
 			}
 
 			if ( state.todos.length > 1 ) {
-				if ( if_block_5 ) {
-					if_block_5.update( changed, state );
-				} else {
-					if_block_5 = create_if_block_9( state, component );
-					if_block_5.create();
-					if_block_5.mount( div_4, null );
-				}
-			} else if ( if_block_5 ) {
-				if_block_5.unmount();
-				if_block_5.destroy();
-				if_block_5 = null;
-			}
-
-			if ( !state.uiShowArchived ) {
 				if ( if_block_6 ) {
 					if_block_6.update( changed, state );
 				} else {
 					if_block_6 = create_if_block_10( state, component );
 					if_block_6.create();
-					if_block_6.mount( div, text_11 );
+					if_block_6.mount( div_4, null );
 				}
 			} else if ( if_block_6 ) {
 				if_block_6.unmount();
@@ -298,34 +302,78 @@ function create_main_fragment ( state, component ) {
 				if_block_6 = null;
 			}
 
-			if ( text_13_value !== ( text_13_value = state.userCount ) ) {
-				text_13.data = text_13_value;
+			if ( !state.uiShowArchived ) {
+				if ( if_block_7 ) {
+					if_block_7.update( changed, state );
+				} else {
+					if_block_7 = create_if_block_11( state, component );
+					if_block_7.create();
+					if_block_7.mount( div, text_12 );
+				}
+			} else if ( if_block_7 ) {
+				if_block_7.unmount();
+				if_block_7.destroy();
+				if_block_7 = null;
+			}
+
+			if ( text_14_value !== ( text_14_value = state.userCount ) ) {
+				text_14.data = text_14_value;
 			}
 		},
 
 		unmount: function () {
 			detachNode( div );
+			if ( if_block ) if_block.unmount();
 
 			for ( var i = 0; i < each_block_iterations.length; i += 1 ) {
 				each_block_iterations[i].unmount();
 			}
 
-			if_block.unmount();
-			if ( if_block_2 ) if_block_2.unmount();
-			if_block_4.unmount();
-			if ( if_block_5 ) if_block_5.unmount();
+			if_block_1.unmount();
+			if ( if_block_3 ) if_block_3.unmount();
+			if_block_5.unmount();
 			if ( if_block_6 ) if_block_6.unmount();
+			if ( if_block_7 ) if_block_7.unmount();
 		},
 
 		destroy: function () {
+			if ( if_block ) if_block.destroy();
+
 			destroyEach( each_block_iterations, false, 0 );
 
-			if_block.destroy();
-			if ( if_block_2 ) if_block_2.destroy();
-			if_block_4.destroy();
-			if ( if_block_5 ) if_block_5.destroy();
+			if_block_1.destroy();
+			if ( if_block_3 ) if_block_3.destroy();
+			if_block_5.destroy();
 			if ( if_block_6 ) if_block_6.destroy();
+			if ( if_block_7 ) if_block_7.destroy();
 		}
+	};
+}
+
+function create_if_block ( state, component ) {
+	var div, text;
+
+	return {
+		create: function () {
+			div = createElement( 'div' );
+			text = createText( "You have no todos yet." );
+			this.hydrate();
+		},
+
+		hydrate: function ( nodes ) {
+			div.className = "well";
+		},
+
+		mount: function ( target, anchor ) {
+			insertNode( div, target, anchor );
+			appendNode( text, div );
+		},
+
+		unmount: function () {
+			detachNode( div );
+		},
+
+		destroy: noop
 	};
 }
 
@@ -394,7 +442,7 @@ function create_each_block ( state, each_block_value, todo, todo_index, componen
 	};
 }
 
-function create_if_block_2 ( state, component ) {
+function create_if_block_3 ( state, component ) {
 	var span, text;
 
 	return {
@@ -418,7 +466,7 @@ function create_if_block_2 ( state, component ) {
 	};
 }
 
-function create_if_block_3 ( state, component ) {
+function create_if_block_4 ( state, component ) {
 	var span, text_value, text, text_1, text_2_value, text_2, text_3;
 
 	return {
@@ -456,7 +504,7 @@ function create_if_block_3 ( state, component ) {
 	};
 }
 
-function create_if_block ( state, component ) {
+function create_if_block_1 ( state, component ) {
 	var span, text_value, text, text_1;
 
 	return {
@@ -486,52 +534,52 @@ function create_if_block ( state, component ) {
 	};
 }
 
-function create_if_block_1 ( state, component ) {
+function create_if_block_2 ( state, component ) {
 	var span;
 
 	function get_block ( state ) {
-		if ( state.todos.length == 0 ) return create_if_block_2;
-		return create_if_block_3;
+		if ( state.todos.length == 0 ) return create_if_block_3;
+		return create_if_block_4;
 	}
 
 	var current_block = get_block( state );
-	var if_block_1 = current_block( state, component );
+	var if_block_2 = current_block( state, component );
 
 	return {
 		create: function () {
 			span = createElement( 'span' );
-			if_block_1.create();
+			if_block_2.create();
 		},
 
 		mount: function ( target, anchor ) {
 			insertNode( span, target, anchor );
-			if_block_1.mount( span, null );
+			if_block_2.mount( span, null );
 		},
 
 		update: function ( changed, state ) {
-			if ( current_block === ( current_block = get_block( state ) ) && if_block_1 ) {
-				if_block_1.update( changed, state );
+			if ( current_block === ( current_block = get_block( state ) ) && if_block_2 ) {
+				if_block_2.update( changed, state );
 			} else {
-				if_block_1.unmount();
-				if_block_1.destroy();
-				if_block_1 = current_block( state, component );
-				if_block_1.create();
-				if_block_1.mount( span, null );
+				if_block_2.unmount();
+				if_block_2.destroy();
+				if_block_2 = current_block( state, component );
+				if_block_2.create();
+				if_block_2.mount( span, null );
 			}
 		},
 
 		unmount: function () {
 			detachNode( span );
-			if_block_1.unmount();
+			if_block_2.unmount();
 		},
 
 		destroy: function () {
-			if_block_1.destroy();
+			if_block_2.destroy();
 		}
 	};
 }
 
-function create_if_block_5 ( state, component ) {
+function create_if_block_6 ( state, component ) {
 	var a, text;
 
 	function click_handler ( event ) {
@@ -565,7 +613,7 @@ function create_if_block_5 ( state, component ) {
 	};
 }
 
-function create_if_block_6 ( state, component ) {
+function create_if_block_7 ( state, component ) {
 	var a, text;
 
 	function click_handler ( event ) {
@@ -599,54 +647,54 @@ function create_if_block_6 ( state, component ) {
 	};
 }
 
-function create_if_block_4 ( state, component ) {
+function create_if_block_5 ( state, component ) {
 	var span, text, text_1;
 
 	function get_block ( state ) {
-		if ( state.uiShowArchived ) return create_if_block_5;
-		return create_if_block_6;
+		if ( state.uiShowArchived ) return create_if_block_6;
+		return create_if_block_7;
 	}
 
 	var current_block = get_block( state );
-	var if_block_3 = current_block( state, component );
+	var if_block_4 = current_block( state, component );
 
 	return {
 		create: function () {
 			span = createElement( 'span' );
 			text = createText( "[\n            " );
-			if_block_3.create();
+			if_block_4.create();
 			text_1 = createText( "\n            ]" );
 		},
 
 		mount: function ( target, anchor ) {
 			insertNode( span, target, anchor );
 			appendNode( text, span );
-			if_block_3.mount( span, null );
+			if_block_4.mount( span, null );
 			appendNode( text_1, span );
 		},
 
 		update: function ( changed, state ) {
 			if ( current_block !== ( current_block = get_block( state ) ) ) {
-				if_block_3.unmount();
-				if_block_3.destroy();
-				if_block_3 = current_block( state, component );
-				if_block_3.create();
-				if_block_3.mount( span, text_1 );
+				if_block_4.unmount();
+				if_block_4.destroy();
+				if_block_4 = current_block( state, component );
+				if_block_4.create();
+				if_block_4.mount( span, text_1 );
 			}
 		},
 
 		unmount: function () {
 			detachNode( span );
-			if_block_3.unmount();
+			if_block_4.unmount();
 		},
 
 		destroy: function () {
-			if_block_3.destroy();
+			if_block_4.destroy();
 		}
 	};
 }
 
-function create_if_block_7 ( state, component ) {
+function create_if_block_8 ( state, component ) {
 	var a, text;
 
 	function click_handler ( event ) {
@@ -680,7 +728,7 @@ function create_if_block_7 ( state, component ) {
 	};
 }
 
-function create_if_block_8 ( state, component ) {
+function create_if_block_9 ( state, component ) {
 	var a, text;
 
 	function click_handler ( event ) {
@@ -714,7 +762,7 @@ function create_if_block_8 ( state, component ) {
 	};
 }
 
-function create_if_block_9 ( state, component ) {
+function create_if_block_10 ( state, component ) {
 	var div, text, br, text_1, label, input, input_updating = false, text_2, text_3, label_1, input_1, input_1_updating = false, text_4;
 
 	function input_change_handler () {
@@ -827,7 +875,7 @@ function create_if_block_9 ( state, component ) {
 	};
 }
 
-function create_if_block_10 ( state, component ) {
+function create_if_block_11 ( state, component ) {
 	var form, input, input_updating = false, text, input_1, input_1_value_value;
 
 	function submit_handler ( event ) {
@@ -912,7 +960,7 @@ function TodoApp ( options ) {
 	this._yield = options._yield;
 
 	this._torndown = false;
-	if ( !document.getElementById( 'svelte-4248568516-style' ) ) add_css();
+	if ( !document.getElementById( 'svelte-260321137-style' ) ) add_css();
 	this._oncreate = [];
 	this._bindings = [];
 

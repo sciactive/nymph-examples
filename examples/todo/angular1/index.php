@@ -98,6 +98,7 @@ function is_secure() {
     <div class="row">
       <div class="col-sm-8">
         <div class="list-group" style="clear: both;">
+          <div class="well" ng-if="!todos.length">You have no todos yet.</div>
           <label ng-repeat="todo in todos track by todo.guid" class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
             <span class="todo-row">
               <span class="todo-controls todo-flex">
@@ -105,7 +106,7 @@ function is_secure() {
                 <input class="todo-input done-{{todo.data.done}}" ng-model="todo.data.name" ng-change="save(todo)" ng-model-options="{updateOn: 'blur'}" />
               </span>
               <span class="todo-date todo-flex">
-                {{todo.cdate * 1000 | date:'yyyy-MM-dd HH:MM'}}
+                {{todo.cdate * 1000 | date:'yyyy-MM-dd HH:mm'}}
               </span>
             </span>
           </label>
