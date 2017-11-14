@@ -6,12 +6,12 @@ if (php_sapi_name() != "cli") {
   die("You can only run pubsub.php from the command line.");
 }
 
+date_default_timezone_set('America/Los_Angeles');
+
 require file_exists(__DIR__.'/../../autoload-dev.php')
     ? __DIR__.'/../../autoload-dev.php'
     : __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/config.php';
-
-date_default_timezone_set('America/Los_Angeles');
 
 $config = [];
 // If we're on production, bind to the given port.
