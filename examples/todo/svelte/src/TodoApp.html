@@ -105,7 +105,7 @@
             var todos = this.get('todos');
             Nymph.updateArray(todos, newTodos);
             Nymph.sort(todos, this.get('uiSort'));
-            this.set({todos: todos});
+            this.set({todos});
           }
         }, null, (count) => {
           this.set({userCount: count});

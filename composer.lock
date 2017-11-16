@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b39d1b08100b0771ab7cb74ef39abbba",
+    "content-hash": "e51863db1addaf04729b873f48812100",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -135,16 +135,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "dev-master",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "d2537c86fa8b004c29e9b9f5e10028f0a29df101"
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/d2537c86fa8b004c29e9b9f5e10028f0a29df101",
-                "reference": "d2537c86fa8b004c29e9b9f5e10028f0a29df101",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
                 "shasum": ""
             },
             "require": {
@@ -196,7 +196,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-10-07T03:19:56+00:00"
+            "time": "2017-03-20T17:10:46+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -248,16 +248,16 @@
         },
         {
             "name": "psr/container",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "2cc4a01788191489dc7459446ba832fa79a216a7"
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/2cc4a01788191489dc7459446ba832fa79a216a7",
-                "reference": "2cc4a01788191489dc7459446ba832fa79a216a7",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
                 "shasum": ""
             },
             "require": {
@@ -293,11 +293,11 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-06-28T15:35:32+00:00"
+            "time": "2017-02-14T16:28:37+00:00"
         },
         {
             "name": "psr/http-message",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
@@ -347,7 +347,7 @@
         },
         {
             "name": "psr/log",
-            "version": "dev-master",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
@@ -523,7 +523,7 @@
         },
         {
             "name": "react/event-loop",
-            "version": "0.4.x-dev",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/event-loop.git",
@@ -565,16 +565,16 @@
         },
         {
             "name": "react/promise",
-            "version": "2.x-dev",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "179520ec0b25cf4c742d9653be9f4964d64d4a6e"
+                "reference": "62785ae604c8d69725d693eb370e1d67e94c4053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/179520ec0b25cf4c742d9653be9f4964d64d4a6e",
-                "reference": "179520ec0b25cf4c742d9653be9f4964d64d4a6e",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/62785ae604c8d69725d693eb370e1d67e94c4053",
+                "reference": "62785ae604c8d69725d693eb370e1d67e94c4053",
                 "shasum": ""
             },
             "require": {
@@ -607,7 +607,7 @@
                 "promise",
                 "promises"
             ],
-            "time": "2017-09-19T13:02:44+00:00"
+            "time": "2017-03-25T12:08:31+00:00"
         },
         {
             "name": "react/promise-timer",
@@ -965,17 +965,111 @@
             "time": "2015-02-19T00:00:00+00:00"
         },
         {
-            "name": "symfony/http-foundation",
-            "version": "3.4.x-dev",
+            "name": "sciactive/tilmeld",
+            "version": "1.0.0-beta.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "27b79f3d0a21a56a0cea79dda47e49c544acfd65"
+                "url": "https://github.com/sciactive/tilmeld.git",
+                "reference": "324909e7220b2f8f285b03f5f262434ef0f7353d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/27b79f3d0a21a56a0cea79dda47e49c544acfd65",
-                "reference": "27b79f3d0a21a56a0cea79dda47e49c544acfd65",
+                "url": "https://api.github.com/repos/sciactive/tilmeld/zipball/324909e7220b2f8f285b03f5f262434ef0f7353d",
+                "reference": "324909e7220b2f8f285b03f5f262434ef0f7353d",
+                "shasum": ""
+            },
+            "require": {
+                "sciactive/hookphp": "~2.0",
+                "sciactive/nymph-pubsub": "~2.2",
+                "sciactive/nymph-server": "~2.2",
+                "sciactive/umailphp": "~2.1"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Hunter Perrin",
+                    "email": "hperrin@gmail.com",
+                    "homepage": "https://github.com/hperrin",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Nymph user and group management with access controls.",
+            "homepage": "http://tilmeld.org/",
+            "keywords": [
+                "User management",
+                "Users",
+                "acl",
+                "group management",
+                "group manager",
+                "groups",
+                "nymph",
+                "user manager"
+            ],
+            "time": "2017-11-14T00:00:00+00:00"
+        },
+        {
+            "name": "sciactive/umailphp",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sciactive/umailphp.git",
+                "reference": "c50dc7ef04702ee8144448f06df3959d3f29e7cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sciactive/umailphp/zipball/c50dc7ef04702ee8144448f06df3959d3f29e7cb",
+                "reference": "c50dc7ef04702ee8144448f06df3959d3f29e7cb",
+                "shasum": ""
+            },
+            "require": {
+                "sciactive/nymph-server": "~2.2.0",
+                "sciactive/requirephp": "~1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "uMailPHP\\": "src/"
+                },
+                "psr-4": {
+                    "uMailPHP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Hunter Perrin",
+                    "email": "hunter@sciactive.com",
+                    "homepage": "https://github.com/hperrin",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP email templating system.",
+            "homepage": "http://umailphp.org/",
+            "keywords": [
+                "email",
+                "templating"
+            ],
+            "time": "2017-11-13T00:00:00+00:00"
+        },
+        {
+            "name": "symfony/http-foundation",
+            "version": "v3.4.0-BETA4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "ce3c40e528a2786453fa4154c85480ee6e9b8500"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/ce3c40e528a2786453fa4154c85480ee6e9b8500",
+                "reference": "ce3c40e528a2786453fa4154c85480ee6e9b8500",
                 "shasum": ""
             },
             "require": {
@@ -1016,11 +1110,11 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-31T15:19:40+00:00"
+            "time": "2017-11-10T07:36:19+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "dev-master",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -1079,7 +1173,7 @@
         },
         {
             "name": "symfony/polyfill-php70",
-            "version": "dev-master",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php70.git",
@@ -1138,16 +1232,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "3.4.x-dev",
+            "version": "v3.4.0-BETA4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "ea20b62d5586a4c83f31dffff7b206eaa65ef32f"
+                "reference": "78e46a29ea0a76f8a63b5aecde17270c36542d7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/ea20b62d5586a4c83f31dffff7b206eaa65ef32f",
-                "reference": "ea20b62d5586a4c83f31dffff7b206eaa65ef32f",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/78e46a29ea0a76f8a63b5aecde17270c36542d7b",
+                "reference": "78e46a29ea0a76f8a63b5aecde17270c36542d7b",
                 "shasum": ""
             },
             "require": {
@@ -1212,7 +1306,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-10-24T14:12:06+00:00"
+            "time": "2017-11-07T14:20:24+00:00"
         },
         {
             "name": "textalk/websocket",
@@ -1255,16 +1349,16 @@
         },
         {
             "name": "zendframework/zend-log",
-            "version": "dev-develop",
+            "version": "2.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-log.git",
-                "reference": "8b2c5c1ae474970ba6aff3d583ba7631f09c0a66"
+                "reference": "bf7489578d092d6ff7508117d1d920a4764fbd6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-log/zipball/8b2c5c1ae474970ba6aff3d583ba7631f09c0a66",
-                "reference": "8b2c5c1ae474970ba6aff3d583ba7631f09c0a66",
+                "url": "https://api.github.com/repos/zendframework/zend-log/zipball/bf7489578d092d6ff7508117d1d920a4764fbd6a",
+                "reference": "bf7489578d092d6ff7508117d1d920a4764fbd6a",
                 "shasum": ""
             },
             "require": {
@@ -1322,25 +1416,25 @@
                 "logging",
                 "zf2"
             ],
-            "time": "2017-05-17T16:05:06+00:00"
+            "time": "2017-05-17T16:03:26+00:00"
         },
         {
             "name": "zendframework/zend-servicemanager",
-            "version": "dev-develop",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-servicemanager.git",
-                "reference": "087ea0dd1eb918f531d1b4d3c1888824dceb22c6"
+                "reference": "c3036efb81f71bfa36cc9962ee5d4474f36581d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/087ea0dd1eb918f531d1b4d3c1888824dceb22c6",
-                "reference": "087ea0dd1eb918f531d1b4d3c1888824dceb22c6",
+                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/c3036efb81f71bfa36cc9962ee5d4474f36581d0",
+                "reference": "c3036efb81f71bfa36cc9962ee5d4474f36581d0",
                 "shasum": ""
             },
             "require": {
                 "container-interop/container-interop": "^1.2",
-                "php": "^7.1",
+                "php": "^5.6 || ^7.0",
                 "psr/container": "^1.0",
                 "zendframework/zend-stdlib": "^3.1"
             },
@@ -1349,15 +1443,15 @@
                 "psr/container-implementation": "^1.0"
             },
             "require-dev": {
-                "mikey179/vfsstream": "^1.6.4",
-                "ocramius/proxy-manager": "^2.1.1",
-                "phpbench/phpbench": "^0.13.0",
-                "phpunit/phpunit": "^6.2.3",
+                "mikey179/vfsstream": "^1.6",
+                "ocramius/proxy-manager": "^1.0 || ^2.0",
+                "phpbench/phpbench": "^0.10.0",
+                "phpunit/phpunit": "^5.7 || ^6.0.6",
                 "zendframework/zend-coding-standard": "~1.0.0"
             },
             "suggest": {
-                "ocramius/proxy-manager": "ProxyManager ^2.1.1 to handle lazy initialization of services",
-                "zendframework/zend-stdlib": "zend-stdlib ^2.7.7 | ^3.1 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances"
+                "ocramius/proxy-manager": "ProxyManager 1.* to handle lazy initialization of services",
+                "zendframework/zend-stdlib": "zend-stdlib ^2.5 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances"
             },
             "bin": [
                 "bin/generate-deps-for-config-factory",
@@ -1385,29 +1479,29 @@
                 "servicemanager",
                 "zf"
             ],
-            "time": "2017-08-10T13:39:58+00:00"
+            "time": "2017-03-01T22:08:02+00:00"
         },
         {
             "name": "zendframework/zend-stdlib",
-            "version": "dev-develop",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-stdlib.git",
-                "reference": "c0404b360fabc8a18a49d9bee0cdd4ba790028ef"
+                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/c0404b360fabc8a18a49d9bee0cdd4ba790028ef",
-                "reference": "c0404b360fabc8a18a49d9bee0cdd4ba790028ef",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/debedcfc373a293f9250cc9aa03cf121428c8e78",
+                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "phpbench/phpbench": "^0.13",
-                "phpunit/phpunit": "^5.7.21 || ^6.3",
-                "zendframework/zend-coding-standard": "~1.0.0"
+                "athletic/athletic": "~0.1",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "^2.6.2"
             },
             "type": "library",
             "extra": {
@@ -1430,13 +1524,15 @@
                 "stdlib",
                 "zf2"
             ],
-            "time": "2017-10-24T18:17:07+00:00"
+            "time": "2016-09-13T14:38:50+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": [],
+    "minimum-stability": "beta",
+    "stability-flags": {
+        "sciactive/tilmeld": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -22,6 +22,7 @@
   "dependencies": {
     "nymph-client": "^2.2.0",
     "nymph-client-node": "^1.0.0",
-    "pform": "^3.3.0"
+    "pform": "^3.3.0",
+    "tilmeld": "^1.0.0-beta.3"
   }
 }

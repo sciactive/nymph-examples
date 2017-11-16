@@ -2,6 +2,9 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
+$tilmeldDir = file_exists('../../../../tilmeld/package.json')
+    ? '../../../../tilmeld'
+    : '../../../node_modules/tilmeld';
 
 function is_secure() {
   // Always assume secure on production.
@@ -72,9 +75,11 @@ function is_secure() {
       flex-shrink: 1;
     }
   </style>
-  <script src="<?php echo $clientDir; ?>/lib-umd/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib-umd/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib-umd/PubSub.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/User.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/Group.js"></script>
   <script src="../Todo.js"></script>
 
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>

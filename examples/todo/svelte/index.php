@@ -2,6 +2,9 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
+$tilmeldDir = file_exists('../../../../tilmeld/package.json')
+    ? '../../../../tilmeld'
+    : '../../../node_modules/tilmeld';
 
 function is_secure() {
   // Always assume secure on production.
@@ -30,13 +33,15 @@ function is_secure() {
       rateLimit: 100
     };
   </script>
-  <script src="<?php echo $clientDir; ?>/lib-umd/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib-umd/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib-umd/PubSub.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/User.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/Group.js"></script>
   <script src="../Todo.js"></script>
 
-  <script src="build/TodoEl.js"></script>
-  <script src="build/TodoApp.js"></script>
+  <script src="lib/TodoEl.js"></script>
+  <script src="lib/TodoApp.js"></script>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
@@ -56,9 +61,12 @@ function is_secure() {
     <div id="todoApp"></div>
   </div>
   <script type="text/javascript">
-    const todoApp = new TodoApp({
-      target: document.getElementById('todoApp')
-    });
+    ((document, TodoApp) => {
+      TodoApp = (TodoApp && TodoApp.__esModule) ? TodoApp["default"] : TodoApp;
+      const todoApp = new TodoApp({
+        target: document.getElementById('todoApp')
+      });
+    })(document, TodoApp);
   </script>
 </body>
 </html>

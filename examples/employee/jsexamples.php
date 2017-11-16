@@ -1,5 +1,10 @@
 <?php
-$clientDir = file_exists('../../../client/package.json') ? '../../../client' : '../../node_modules/nymph-client';
+$clientDir = file_exists('../../../client/package.json')
+    ? '../../../client'
+    : '../../node_modules/nymph-client';
+$tilmeldDir = file_exists('../../../tilmeld/package.json')
+    ? '../../../tilmeld'
+    : '../../node_modules/tilmeld';
 ?><!DOCTYPE html>
 <html>
   <head>
@@ -18,8 +23,10 @@ $clientDir = file_exists('../../../client/package.json') ? '../../../client' : '
         restURL: '../rest.php'
       };
     </script>
-    <script src="<?php echo $clientDir; ?>/lib-umd/Nymph.js"></script>
-    <script src="<?php echo $clientDir; ?>/lib-umd/Entity.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
+    <script src="<?php echo $tilmeldDir; ?>/lib/Entities/User.js"></script>
+    <script src="<?php echo $tilmeldDir; ?>/lib/Entities/Group.js"></script>
     <script src="Employee.js"></script>
     <script>
       $(function(){

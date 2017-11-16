@@ -4,12 +4,9 @@
   "description": "An example todo app using Nymph and various front end libraries.",
   "main": "Todo.js",
   "scripts": {
-    "build": "npm run build-umd && npm run build-cjs",
-    "build-umd": "BABEL_ENV=umd babel Todo.src.js -o Todo.js",
-    "build-cjs": "BABEL_ENV=cjs babel Todo.src.js -o Todo.cjs.js",
-    "watch-umd": "BABEL_ENV=umd babel Todo.src.js --watch -o Todo.js",
-    "watch-cjs": "BABEL_ENV=cjs babel Todo.src.js --watch -o Todo.cjs.js",
-    "prepublish": "npm run build",
+    "build": "BABEL_ENV=umd babel Todo.src.js -o Todo.js",
+    "watch": "BABEL_ENV=umd babel Todo.src.js --watch -o Todo.js",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hunter Perrin <hperrin@gmail.com>",
