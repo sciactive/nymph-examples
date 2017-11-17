@@ -20,4 +20,4 @@ $sciactiveBaseURL = '../../node_modules/'; // This is the URL of the SciActive l
 $restEndpoint = '../rest-tilmeld.php'; // This is the URL of the Nymph endpoint.
 include file_exists('../../../tilmeld/package.json')
     ? '../../../tilmeld/setup/setup.php'
-    : '../../vendor/tilmeld/setup/setup.php'; // And this will load the Tilmeld setup app.
+    : '../../vendor/sciactive/tilmeld/setup/setup.php'; // And this will load the Tilmeld setup app.

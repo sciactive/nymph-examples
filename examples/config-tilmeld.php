@@ -6,7 +6,7 @@ require_once __DIR__.'/config.php';
 \uMailPHP\Mail::configure([
   'site_name' => 'Tilmeld Example Site',
   'site_link' => 'http://localhost:8080/examples/examples/tilmeld/components.php',
-  'master_address' => 'someone@example.com',
+  'master_address' => 'noreply@example.com',
   'testing_mode' => true,
   'testing_email' => 'hperrin@localhost',
 ]);
