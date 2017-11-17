@@ -15,8 +15,8 @@
   "require": {
     "php": "~7.1",
     "ext-pcntl": "*",
-    "sciactive/nymph-server": "^2.2.0",
-    "sciactive/nymph-pubsub": "^2.2.0",
+    "sciactive/nymph-server": "^3.0@beta",
+    "sciactive/nymph-pubsub": "^3.0@beta",
     "sciactive/tilmeld": "^1.0@beta"
   },
   "scripts": {
