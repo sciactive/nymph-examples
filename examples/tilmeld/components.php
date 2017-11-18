@@ -42,15 +42,18 @@ function is_secure() {
   <script src="<?php echo $tilmeldDir; ?>/lib/Components/TilmeldChangePassword.js"></script>
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
+  <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 </head>
 <body>
   <header>
     <h1>Tilmeld Component Examples</h1>
   </header>
-  <section class="container">
+  <section class="page-container">
     <div style="display: flex; flex-direction: row;">
       <div style="width: 50%; padding-right: 1em; box-sizing: border-box;">
-        Currently logged in user: <button onclick="logout()">Logout</button> <div class="currentuser"></div>
+        Currently logged in user: <button class="btn btn-secondary" onclick="logout()">Logout</button>
+        <div class="currentuser" style="margin-top: 1em;"></div>
       </div>
       <div style="width: 50%; padding-left: 1em; box-sizing: border-box;">
         <div>
@@ -119,7 +122,14 @@ function is_secure() {
             compactText: login.dataset.compactText,
             existingUser: login.dataset.existingUser === "true",
             showExistingUserCheckbox: login.dataset.showExistingUserCheckbox === "true",
-            layout: login.dataset.layout
+            layout: login.dataset.layout,
+            classCheckbox: '',
+            classInput: 'form-control',
+            classRadio: '',
+            classSelect: 'form-control',
+            classTextarea: 'form-control',
+            classSubmit: 'btn btn-primary',
+            classButton: 'btn btn-secondary'
           }
         });
 
@@ -137,7 +147,10 @@ function is_secure() {
         const component = new TilmeldChangePassword({
           target: changePassword,
           data: {
-            layout: changePassword.dataset.layout
+            layout: changePassword.dataset.layout,
+            classInput: 'form-control',
+            classSubmit: 'btn btn-primary',
+            classButton: 'btn btn-secondary'
           }
         });
       }
@@ -169,7 +182,7 @@ function is_secure() {
   </script>
 
   <style>
-    .container {
+    .page-container {
       width: 100%;
       padding: 20px;
       box-sizing: border-box;
