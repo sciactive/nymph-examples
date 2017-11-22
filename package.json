@@ -20,8 +20,9 @@
   },
   "homepage": "https://github.com/sciactive/nymph-examples",
   "dependencies": {
-    "nymph-client": "^3.0.1",
-    "nymph-client-node": "^2.0.0",
+    "nymph-client": "^3.0.2",
+    "nymph-client-node": "^2.0.1",
+    "nymph-query-editor": "^1.1.2",
     "pform": "^3.3.0",
     "tilmeld": "^1.0.0-beta.4"
   }

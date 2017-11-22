@@ -16,7 +16,10 @@ require __DIR__.'/../config-tilmeld.php';
 $tilmeldURL = file_exists('../../../tilmeld/package.json')
     ? '../../../tilmeld/'
     : '../../node_modules/tilmeld/'; // This is the URL of the Tilmeld root.
-$sciactiveBaseURL = '../../node_modules/'; // This is the URL of the SciActive libraries.
+if (file_exists('../../../client/package.json')) {
+  $sciactiveDevClientURL = '../../../client/'; // Load the dev files when in dev.
+}
+$nodeModulesURL = '../../node_modules/'; // This is the URL of the SciActive libraries.
 $restEndpoint = '../rest-tilmeld.php'; // This is the URL of the Nymph endpoint.
 include file_exists('../../../tilmeld/package.json')
     ? '../../../tilmeld/setup/setup.php'
