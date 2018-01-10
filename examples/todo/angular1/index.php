@@ -2,9 +2,9 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../../tilmeld/package.json')
-    ? '../../../../tilmeld'
-    : '../../../node_modules/tilmeld';
+$tilmeldDir = file_exists('../../../../tilmeld-client/package.json')
+    ? '../../../../tilmeld-client'
+    : '../../../node_modules/tilmeld-client';
 
 function is_secure() {
   // Always assume secure on production.

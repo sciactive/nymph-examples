@@ -17,11 +17,11 @@ const nymphOptions = {
 Nymph.init(nymphOptions);
 
 const Todo = require('./examples/todo/Todo').Todo;
-const User = fs.existsSync('../tilmeld/package.json')
-    ? require('../tilmeld/lib/Entities/User.js').User
+const User = fs.existsSync('../tilmeld-client/package.json')
+    ? require('../tilmeld-client/lib/Entities/User.js').User
     : require('tilmeld').User;
-const Group = fs.existsSync('../tilmeld/package.json')
-    ? require('../tilmeld/lib/Entities/Group.js').User
+const Group = fs.existsSync('../tilmeld-client/package.json')
+    ? require('../tilmeld-client/lib/Entities/Group.js').User
     : require('tilmeld').Group;
 
 main();
