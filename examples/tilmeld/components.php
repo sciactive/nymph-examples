@@ -21,6 +21,7 @@ function is_secure() {
 <head>
   <title>Tilmeld Component Example</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="text/javascript">
     (function(){
       var s = document.createElement("script"); s.setAttribute("src", "https://www.promisejs.org/polyfills/promise-5.0.0.min.js");
@@ -35,11 +36,11 @@ function is_secure() {
   <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/Group.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Components/TilmeldRecover.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Components/TilmeldLogin.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Components/TilmeldChangePassword.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldRecover.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldLogin.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldChangePassword.js"></script>
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
   <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
