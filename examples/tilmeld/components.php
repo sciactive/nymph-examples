@@ -36,11 +36,13 @@ function is_secure() {
   <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldRecover.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldLogin.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldChangePassword.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/tilmeld-client.js"></script>
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
   <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
@@ -111,9 +113,6 @@ function is_secure() {
       const currentUserEl = document.querySelector('.currentuser');
       const logins = document.getElementsByTagName('login');
       const changePasswords = document.getElementsByTagName('change-password');
-      User = (User && User.__esModule) ? User["default"] : User;
-      TilmeldLogin = (TilmeldLogin && TilmeldLogin.__esModule) ? TilmeldLogin["default"] : TilmeldLogin;
-      TilmeldChangePassword = (TilmeldChangePassword && TilmeldChangePassword.__esModule) ? TilmeldChangePassword["default"] : TilmeldChangePassword;
 
       for (const login of logins) {
         const component = new TilmeldLogin({
@@ -179,7 +178,7 @@ function is_secure() {
           currentUser.logout();
         }
       }
-    })(this, User, TilmeldLogin, TilmeldChangePassword);
+    })(this, tilmeldClient.User, tilmeldClient.TilmeldLogin, tilmeldClient.TilmeldChangePassword);
   </script>
 
   <style>

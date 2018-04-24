@@ -35,10 +35,12 @@
 		return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 	};
 
-	function remaining(todos) {
+	function remaining(_ref) {
+		var todos = _ref.todos;
+
 		var count = 0;
 		for (var i = 0; i < todos.length; i++) {
-			count += todos[i].get('done') ? 0 : 1;
+			count += todos[i].get().done ? 0 : 1;
 		}
 		return count;
 	}
@@ -57,26 +59,33 @@
 		getTodos: function getTodos(archived) {
 			var _this = this;
 
-			if (this.get('__subscription')) {
-				this.get('__subscription').unsubscribe();
+			var _get = this.get(),
+			    _subscription = _get._subscription;
+
+			if (_subscription) {
+				_subscription.unsubscribe();
 			}
-			var subscription = _Nymph2.default.getEntities({ "class": 'Todo' }, { "type": archived ? '&' : '!&', "tag": 'archived' }).subscribe(function (newTodos) {
+			_subscription = _Nymph2.default.getEntities({ "class": 'Todo' }, { "type": archived ? '&' : '!&', "tag": 'archived' }).subscribe(function (newTodos) {
 				_this.set({ uiShowArchived: archived });
 				if (newTodos !== undefined) {
-					var todos = _this.get('todos');
+					var _get2 = _this.get(),
+					    todos = _get2.todos;
+
 					_Nymph2.default.updateArray(todos, newTodos);
-					_Nymph2.default.sort(todos, _this.get('uiSort'));
+					_Nymph2.default.sort(todos, _this.get().uiSort);
 					_this.set({ todos: todos });
 				}
 			}, null, function (count) {
 				_this.set({ userCount: count });
 			});
-			this.set({ __subscription: subscription });
+			this.set({ _subscription: _subscription });
 		},
 		addTodo: function addTodo() {
 			var _this2 = this;
 
-			var todoText = this.get('todoText');
+			var _get3 = this.get(),
+			    todoText = _get3.todoText;
+
 			if (todoText === undefined || todoText === '') {
 				return;
 			}
@@ -89,7 +98,7 @@
 			});
 		},
 		sortTodos: function sortTodos() {
-			this.set({ todos: _Nymph2.default.sort(this.get('todos'), this.get('uiSort')) });
+			this.set({ todos: _Nymph2.default.sort(this.get().todos, this.get().uiSort) });
 		},
 		save: function save(todo) {
 			todo.save().then(null, function (errObj) {
@@ -97,64 +106,79 @@
 			});
 		},
 		archive: function archive() {
-			var oldTodos = this.get('todos');
-			for (var i = 0; i < oldTodos.length; i++) {
+			var oldTodos = this.get().todos;
+
+			var _loop = function _loop(i) {
 				var todo = oldTodos[i];
-				if (todo.get('done')) {
+				if (todo.get().done) {
 					todo.archive().then(function (success) {
 						if (!success) {
-							alert("Couldn't save changes to " + todo.get('name'));
+							alert("Couldn't save changes to " + todo.get().name);
 						}
 					}, function (errObj) {
-						alert("Error: " + errObj.textStatus + "\nCouldn't archive " + todo.get('name'));
+						alert("Error: " + errObj.textStatus + "\nCouldn't archive " + todo.get().name);
 					});
 				}
+			};
+
+			for (var i = 0; i < oldTodos.length; i++) {
+				_loop(i);
 			}
 		},
 		deleteTodos: function deleteTodos() {
-			_Nymph2.default.deleteEntities(this.get('todos'));
+			_Nymph2.default.deleteEntities(this.get().todos);
 		}
 	};
 
 	function oncreate() {
-		this.getTodos(this.get('uiShowArchived'));
+		this.getTodos(this.get().uiShowArchived);
 	};
-
-	function encapsulateStyles(node) {
-		setAttribute(node, "svelte-568332582", "");
-	}
 
 	function add_css() {
 		var style = createElement("style");
-		style.id = 'svelte-568332582-style';
-		style.textContent = "[svelte-568332582].todo-form,[svelte-568332582] .todo-form{display:flex}[svelte-568332582].todo-form .form-control,[svelte-568332582] .todo-form .form-control{flex-grow:1;margin-right:5px}[svelte-568332582].user-count,[svelte-568332582] .user-count{position:fixed;right:5px;bottom:5px}";
+		style.id = 'svelte-1ly6lyd-style';
+		style.textContent = ".todo-form.svelte-1ly6lyd{display:flex}.todo-form.svelte-1ly6lyd .form-control.svelte-1ly6lyd{flex-grow:1;margin-right:5px}.user-count.svelte-1ly6lyd{position:fixed;right:5px;bottom:5px}";
 		appendNode(style, document.head);
 	}
 
-	function create_main_fragment(state, component) {
+	function create_main_fragment(component, state) {
 		var div, div_1, div_2, div_3, text, text_3, div_4, small, text_4, text_5, br, text_6, text_8, text_11, text_12, div_5, text_13, text_14;
 
-		var if_block = !state.todos.length && create_if_block(state, component);
+		var if_block = !state.todos.length && create_if_block(component, state);
 
-		var todos = state.todos;
+		var each_value = state.todos;
 
 		var each_blocks = [];
 
-		for (var i = 0; i < todos.length; i += 1) {
-			each_blocks[i] = create_each_block(state, todos, todos[i], i, component);
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block(component, assign(assign({}, state), {
+				each_value: each_value,
+				todo: each_value[i],
+				todo_index: i
+			}));
+		}
+
+		function select_block_type_1(state) {
+			if (state.uiShowArchived) return create_if_block_1;
+			return create_if_block_2;
 		}
 
 		var current_block_type = select_block_type_1(state);
-		var if_block_1 = current_block_type(state, component);
+		var if_block_1 = current_block_type(component, state);
 
-		var if_block_2 = state.todos.length > 0 && create_if_block_5(state, component);
+		var if_block_2 = state.todos.length > 0 && create_if_block_5(component, state);
+
+		function select_block_type_3(state) {
+			if (state.uiShowArchived) return create_if_block_8;
+			return create_if_block_9;
+		}
 
 		var current_block_type_1 = select_block_type_3(state);
-		var if_block_3 = current_block_type_1(state, component);
+		var if_block_3 = current_block_type_1(component, state);
 
-		var if_block_4 = state.todos.length > 1 && create_if_block_10(state, component);
+		var if_block_4 = state.todos.length > 1 && create_if_block_10(component, state);
 
-		var if_block_5 = !state.uiShowArchived && create_if_block_11(state, component);
+		var if_block_5 = !state.uiShowArchived && create_if_block_11(component, state);
 
 		return {
 			c: function create() {
@@ -191,17 +215,16 @@
 			},
 
 			h: function hydrate() {
-				encapsulateStyles(div);
-				div_1.className = "row";
-				div_2.className = "col-sm-8";
 				div_3.className = "list-group";
 				setStyle(div_3, "clear", "both");
+				div_2.className = "col-sm-8";
+				small.className = "alert alert-info";
+				setStyle(small, "display", "block");
 				div_4.className = "col-sm-4";
 				setStyle(div_4, "text-align", "center");
 				setStyle(div_4, "margin-bottom", "1em");
-				small.className = "alert alert-info";
-				setStyle(small, "display", "block");
-				div_5.className = "user-count label label-default";
+				div_1.className = "row";
+				div_5.className = "user-count label label-default svelte-1ly6lyd";
 			},
 
 			m: function mount(target, anchor) {
@@ -239,7 +262,7 @@
 			p: function update(changed, state) {
 				if (!state.todos.length) {
 					if (!if_block) {
-						if_block = create_if_block(state, component);
+						if_block = create_if_block(component, state);
 						if_block.c();
 						if_block.m(div_3, text);
 					}
@@ -249,14 +272,20 @@
 					if_block = null;
 				}
 
-				var todos = state.todos;
+				var each_value = state.todos;
 
 				if (changed.todos || changed.uiShowArchived) {
-					for (var i = 0; i < todos.length; i += 1) {
+					for (var i = 0; i < each_value.length; i += 1) {
+						var each_context = assign(assign({}, state), {
+							each_value: each_value,
+							todo: each_value[i],
+							todo_index: i
+						});
+
 						if (each_blocks[i]) {
-							each_blocks[i].p(changed, state, todos, todos[i], i);
+							each_blocks[i].p(changed, each_context);
 						} else {
-							each_blocks[i] = create_each_block(state, todos, todos[i], i, component);
+							each_blocks[i] = create_each_block(component, each_context);
 							each_blocks[i].c();
 							each_blocks[i].m(div_3, null);
 						}
@@ -266,7 +295,7 @@
 						each_blocks[i].u();
 						each_blocks[i].d();
 					}
-					each_blocks.length = todos.length;
+					each_blocks.length = each_value.length;
 				}
 
 				if (current_block_type === (current_block_type = select_block_type_1(state)) && if_block_1) {
@@ -274,7 +303,7 @@
 				} else {
 					if_block_1.u();
 					if_block_1.d();
-					if_block_1 = current_block_type(state, component);
+					if_block_1 = current_block_type(component, state);
 					if_block_1.c();
 					if_block_1.m(small, text_4);
 				}
@@ -283,7 +312,7 @@
 					if (if_block_2) {
 						if_block_2.p(changed, state);
 					} else {
-						if_block_2 = create_if_block_5(state, component);
+						if_block_2 = create_if_block_5(component, state);
 						if_block_2.c();
 						if_block_2.m(small, text_5);
 					}
@@ -296,7 +325,7 @@
 				if (current_block_type_1 !== (current_block_type_1 = select_block_type_3(state))) {
 					if_block_3.u();
 					if_block_3.d();
-					if_block_3 = current_block_type_1(state, component);
+					if_block_3 = current_block_type_1(component, state);
 					if_block_3.c();
 					if_block_3.m(small, null);
 				}
@@ -305,7 +334,7 @@
 					if (if_block_4) {
 						if_block_4.p(changed, state);
 					} else {
-						if_block_4 = create_if_block_10(state, component);
+						if_block_4 = create_if_block_10(component, state);
 						if_block_4.c();
 						if_block_4.m(div_4, null);
 					}
@@ -319,7 +348,7 @@
 					if (if_block_5) {
 						if_block_5.p(changed, state);
 					} else {
-						if_block_5 = create_if_block_11(state, component);
+						if_block_5 = create_if_block_11(component, state);
 						if_block_5.c();
 						if_block_5.m(div, text_12);
 					}
@@ -363,8 +392,8 @@
 		};
 	}
 
-	// (5:8) {{#if !todos.length}}
-	function create_if_block(state, component) {
+	// (5:8) {#if !todos.length}
+	function create_if_block(component, state) {
 		var div;
 
 		return {
@@ -390,55 +419,37 @@
 		};
 	}
 
-	// (8:8) {{#each todos as todo}}
-	function create_each_block(state, todos, todo, todo_index, component) {
+	// (8:8) {#each todos as todo}
+	function create_each_block(component, state) {
+		var todo = state.todo,
+		    each_value = state.each_value,
+		    todo_index = state.todo_index;
 		var todoel_updating = {};
 
 		var todoel_initial_data = { archived: state.uiShowArchived };
-		if (todo_index in todos) {
+		if (todo_index in state.each_value) {
 			todoel_initial_data.todo = todo;
 			todoel_updating.todo = true;
 		}
 		var todoel = new _TodoEl2.default({
-			_root: component._root,
+			root: component.root,
 			data: todoel_initial_data,
 			_bind: function _bind(changed, childState) {
 				var state = component.get(),
 				    newState = {};
 				if (!todoel_updating.todo && changed.todo) {
-					var list = todoel_context.todos;
-					var index = todoel_context.todo_index;
-					list[index] = childState.todo;
+					each_value[todo_index] = childState.todo;
 
 					newState.todos = state.todos;
 				}
-				todoel_updating = assign({}, changed);
 				component._set(newState);
 				todoel_updating = {};
 			}
 		});
 
-		component._root._beforecreate.push(function () {
-			var state = component.get(),
-			    childState = todoel.get(),
-			    newState = {};
-			if (!childState) return;
-			if (!todoel_updating.todo) {
-				var list = todoel_context.todos;
-				var index = todoel_context.todo_index;
-				list[index] = childState.todo;
-
-				newState.todos = state.todos;
-			}
-			todoel_updating = { todo: true };
-			component._set(newState);
-			todoel_updating = {};
+		component.root._beforecreate.push(function () {
+			todoel._bind({ todo: 1 }, todoel.get());
 		});
-
-		var todoel_context = {
-			todos: todos,
-			todo_index: todo_index
-		};
 
 		return {
 			c: function create() {
@@ -449,7 +460,10 @@
 				todoel._mount(target, anchor);
 			},
 
-			p: function update(changed, state, todos, todo, todo_index) {
+			p: function update(changed, state) {
+				todo = state.todo;
+				each_value = state.each_value;
+				todo_index = state.todo_index;
 				var todoel_changes = {};
 				if (changed.uiShowArchived) todoel_changes.archived = state.uiShowArchived;
 				if (!todoel_updating.todo && changed.todos) {
@@ -458,9 +472,6 @@
 				}
 				todoel._set(todoel_changes);
 				todoel_updating = {};
-
-				todoel_context.todos = todos;
-				todoel_context.todo_index = todo_index;
 			},
 
 			u: function unmount() {
@@ -473,8 +484,8 @@
 		};
 	}
 
-	// (19:12) {{#if todos.length == 0}}
-	function create_if_block_3(state, component) {
+	// (19:12) {#if todos.length == 0}
+	function create_if_block_3(component, state) {
 		var span;
 
 		return {
@@ -497,8 +508,8 @@
 		};
 	}
 
-	// (21:12) {{else}}
-	function create_if_block_4(state, component) {
+	// (21:12) {:else}
+	function create_if_block_4(component, state) {
 		var span,
 		    text,
 		    text_1,
@@ -541,8 +552,8 @@
 		};
 	}
 
-	// (15:8) {{#if uiShowArchived}}
-	function create_if_block_1(state, component) {
+	// (15:8) {#if uiShowArchived}
+	function create_if_block_1(component, state) {
 		var span,
 		    text_value = state.todos.length,
 		    text,
@@ -575,12 +586,17 @@
 		};
 	}
 
-	// (17:8) {{else}}
-	function create_if_block_2(state, component) {
+	// (17:8) {:else}
+	function create_if_block_2(component, state) {
 		var span;
 
+		function select_block_type(state) {
+			if (state.todos.length == 0) return create_if_block_3;
+			return create_if_block_4;
+		}
+
 		var current_block_type = select_block_type(state);
-		var if_block = current_block_type(state, component);
+		var if_block = current_block_type(component, state);
 
 		return {
 			c: function create() {
@@ -599,7 +615,7 @@
 				} else {
 					if_block.u();
 					if_block.d();
-					if_block = current_block_type(state, component);
+					if_block = current_block_type(component, state);
 					if_block.c();
 					if_block.m(span, null);
 				}
@@ -616,8 +632,8 @@
 		};
 	}
 
-	// (29:12) {{#if uiShowArchived}}
-	function create_if_block_6(state, component) {
+	// (29:12) {#if uiShowArchived}
+	function create_if_block_6(component, state) {
 		var a;
 
 		function click_handler(event) {
@@ -632,8 +648,8 @@
 			},
 
 			h: function hydrate() {
-				a.href = "javascript:void(0)";
 				addListener(a, "click", click_handler);
+				a.href = "javascript:void(0)";
 			},
 
 			m: function mount(target, anchor) {
@@ -650,8 +666,8 @@
 		};
 	}
 
-	// (31:12) {{else}}
-	function create_if_block_7(state, component) {
+	// (31:12) {:else}
+	function create_if_block_7(component, state) {
 		var a;
 
 		function click_handler(event) {
@@ -666,8 +682,8 @@
 			},
 
 			h: function hydrate() {
-				a.href = "javascript:void(0)";
 				addListener(a, "click", click_handler);
+				a.href = "javascript:void(0)";
 			},
 
 			m: function mount(target, anchor) {
@@ -684,12 +700,17 @@
 		};
 	}
 
-	// (26:8) {{#if todos.length > 0}}
-	function create_if_block_5(state, component) {
+	// (26:8) {#if todos.length > 0}
+	function create_if_block_5(component, state) {
 		var span, text, text_1;
 
+		function select_block_type_2(state) {
+			if (state.uiShowArchived) return create_if_block_6;
+			return create_if_block_7;
+		}
+
 		var current_block_type = select_block_type_2(state);
-		var if_block = current_block_type(state, component);
+		var if_block = current_block_type(component, state);
 
 		return {
 			c: function create() {
@@ -710,7 +731,7 @@
 				if (current_block_type !== (current_block_type = select_block_type_2(state))) {
 					if_block.u();
 					if_block.d();
-					if_block = current_block_type(state, component);
+					if_block = current_block_type(component, state);
 					if_block.c();
 					if_block.m(span, text_1);
 				}
@@ -727,8 +748,8 @@
 		};
 	}
 
-	// (38:8) {{#if uiShowArchived}}
-	function create_if_block_8(state, component) {
+	// (38:8) {#if uiShowArchived}
+	function create_if_block_8(component, state) {
 		var a;
 
 		function click_handler(event) {
@@ -743,8 +764,8 @@
 			},
 
 			h: function hydrate() {
-				a.href = "javascript:void(0)";
 				addListener(a, "click", click_handler);
+				a.href = "javascript:void(0)";
 			},
 
 			m: function mount(target, anchor) {
@@ -761,8 +782,8 @@
 		};
 	}
 
-	// (40:8) {{else}}
-	function create_if_block_9(state, component) {
+	// (40:8) {:else}
+	function create_if_block_9(component, state) {
 		var a;
 
 		function click_handler(event) {
@@ -777,8 +798,8 @@
 			},
 
 			h: function hydrate() {
-				a.href = "javascript:void(0)";
 				addListener(a, "click", click_handler);
+				a.href = "javascript:void(0)";
 			},
 
 			m: function mount(target, anchor) {
@@ -795,12 +816,11 @@
 		};
 	}
 
-	// (44:6) {{#if todos.length > 1}}
-	function create_if_block_10(state, component) {
+	// (44:6) {#if todos.length > 1}
+	function create_if_block_10(component, state) {
 		var div, text, br, text_1, label, input, text_2, text_3, label_1, input_1, text_4;
 
 		function input_change_handler() {
-			if (!input.checked) return;
 			component.set({ uiSort: input.__value });
 		}
 
@@ -809,7 +829,6 @@
 		}
 
 		function input_1_change_handler() {
-			if (!input_1.checked) return;
 			component.set({ uiSort: input_1.__value });
 		}
 
@@ -834,23 +853,23 @@
 			},
 
 			h: function hydrate() {
-				setStyle(div, "text-align", "left");
-				setStyle(label, "font-weight", "normal");
-				input.type = "radio";
-				input.name = "sort";
-				input.__value = "name";
-				input.value = input.__value;
 				component._bindingGroups[0].push(input);
 				addListener(input, "change", input_change_handler);
 				addListener(input, "change", change_handler);
-				setStyle(label_1, "font-weight", "normal");
-				input_1.type = "radio";
-				input_1.name = "sort";
-				input_1.__value = "cdate";
-				input_1.value = input_1.__value;
+				setAttribute(input, "type", "radio");
+				input.name = "sort";
+				input.__value = "name";
+				input.value = input.__value;
+				setStyle(label, "font-weight", "normal");
 				component._bindingGroups[0].push(input_1);
 				addListener(input_1, "change", input_1_change_handler);
 				addListener(input_1, "change", change_handler_1);
+				setAttribute(input_1, "type", "radio");
+				input_1.name = "sort";
+				input_1.__value = "cdate";
+				input_1.value = input_1.__value;
+				setStyle(label_1, "font-weight", "normal");
+				setStyle(div, "text-align", "left");
 			},
 
 			m: function mount(target, anchor) {
@@ -875,7 +894,6 @@
 
 			p: function update(changed, state) {
 				input.checked = input.__value === state.uiSort;
-
 				input_1.checked = input_1.__value === state.uiSort;
 			},
 
@@ -885,20 +903,17 @@
 
 			d: function destroy() {
 				component._bindingGroups[0].splice(component._bindingGroups[0].indexOf(input), 1);
-
 				removeListener(input, "change", input_change_handler);
 				removeListener(input, "change", change_handler);
-
 				component._bindingGroups[0].splice(component._bindingGroups[0].indexOf(input_1), 1);
-
 				removeListener(input_1, "change", input_1_change_handler);
 				removeListener(input_1, "change", change_handler_1);
 			}
 		};
 	}
 
-	// (56:2) {{#if !uiShowArchived}}
-	function create_if_block_11(state, component) {
+	// (56:2) {#if !uiShowArchived}
+	function create_if_block_11(component, state) {
 		var form,
 		    input,
 		    input_updating = false,
@@ -906,14 +921,14 @@
 		    input_1,
 		    input_1_value_value;
 
-		function submit_handler(event) {
-			component.addTodo(event.preventDefault());
-		}
-
 		function input_input_handler() {
 			input_updating = true;
 			component.set({ todoText: input.value });
 			input_updating = false;
+		}
+
+		function submit_handler(event) {
+			component.addTodo(event.preventDefault());
 		}
 
 		return {
@@ -926,16 +941,16 @@
 			},
 
 			h: function hydrate() {
-				form.className = "todo-form";
-				setStyle(form, "margin-bottom", "20px");
-				addListener(form, "submit", submit_handler);
-				input.className = "form-control";
-				input.type = "text";
-				input.placeholder = "add new todo here";
 				addListener(input, "input", input_input_handler);
+				input.className = "form-control svelte-1ly6lyd";
+				setAttribute(input, "type", "text");
+				input.placeholder = "add new todo here";
 				input_1.className = "btn btn-default";
-				input_1.type = "submit";
+				setAttribute(input_1, "type", "submit");
 				input_1.value = input_1_value_value = "add #" + (state.todos.length + 1);
+				addListener(form, "submit", submit_handler);
+				form.className = "todo-form svelte-1ly6lyd";
+				setStyle(form, "margin-bottom", "20px");
 			},
 
 			m: function mount(target, anchor) {
@@ -949,10 +964,7 @@
 			},
 
 			p: function update(changed, state) {
-				if (!input_updating) {
-					input.value = state.todoText;
-				}
-
+				if (!input_updating) input.value = state.todoText;
 				if (changed.todos && input_1_value_value !== (input_1_value_value = "add #" + (state.todos.length + 1))) {
 					input_1.value = input_1_value_value;
 				}
@@ -963,55 +975,38 @@
 			},
 
 			d: function destroy() {
-				removeListener(form, "submit", submit_handler);
 				removeListener(input, "input", input_input_handler);
+				removeListener(form, "submit", submit_handler);
 			}
 		};
 	}
 
-	function select_block_type(state) {
-		if (state.todos.length == 0) return create_if_block_3;
-		return create_if_block_4;
-	}
-
-	function select_block_type_1(state) {
-		if (state.uiShowArchived) return create_if_block_1;
-		return create_if_block_2;
-	}
-
-	function select_block_type_2(state) {
-		if (state.uiShowArchived) return create_if_block_6;
-		return create_if_block_7;
-	}
-
-	function select_block_type_3(state) {
-		if (state.uiShowArchived) return create_if_block_8;
-		return create_if_block_9;
-	}
-
 	function TodoApp(options) {
+		var _this3 = this;
+
 		init(this, options);
 		this._state = assign(data(), options.data);
 		this._recompute({ todos: 1 }, this._state);
 		this._bindingGroups = [[]];
 
-		if (!document.getElementById("svelte-568332582-style")) add_css();
+		if (!document.getElementById("svelte-1ly6lyd-style")) add_css();
 
-		var _oncreate = oncreate.bind(this);
-
-		if (!options._root) {
-			this._oncreate = [_oncreate];
+		if (!options.root) {
+			this._oncreate = [];
 			this._beforecreate = [];
 			this._aftercreate = [];
-		} else {
-			this._root._oncreate.push(_oncreate);
 		}
 
-		this._fragment = create_main_fragment(this._state, this);
+		this._fragment = create_main_fragment(this, this._state);
+
+		this.root._oncreate.push(function () {
+			oncreate.call(_this3);
+			_this3.fire("update", { changed: assignTrue({}, _this3._state), current: _this3._state });
+		});
 
 		if (options.target) {
 			this._fragment.c();
-			this._fragment.m(options.target, options.anchor || null);
+			this._mount(options.target, options.anchor);
 
 			this._lock = true;
 			callAll(this._beforecreate);
@@ -1021,28 +1016,24 @@
 		}
 	}
 
-	assign(TodoApp.prototype, methods, {
+	assign(TodoApp.prototype, {
 		destroy: destroy,
 		get: get,
 		fire: fire,
-		observe: observe,
 		on: on,
 		set: set,
-		teardown: destroy,
 		_set: _set,
 		_mount: _mount,
-		_unmount: _unmount
+		_unmount: _unmount,
+		_differs: _differs
 	});
+	assign(TodoApp.prototype, methods);
 
 	TodoApp.prototype._recompute = function _recompute(changed, state) {
 		if (changed.todos) {
-			if (differs(state.remaining, state.remaining = remaining(state.todos))) changed.remaining = true;
+			if (this._differs(state.remaining, state.remaining = remaining(state))) changed.remaining = true;
 		}
 	};
-
-	function setAttribute(node, attribute, value) {
-		node.setAttribute(attribute, value);
-	}
 
 	function createElement(name) {
 		return document.createElement(name);
@@ -1050,6 +1041,12 @@
 
 	function appendNode(node, target) {
 		target.appendChild(node);
+	}
+
+	function assign(tar, src) {
+		for (var k in src) {
+			tar[k] = src[k];
+		}return tar;
 	}
 
 	function createText(data) {
@@ -1076,21 +1073,6 @@
 
 	function noop() {}
 
-	function assign(target) {
-		var k,
-		    source,
-		    i = 1,
-		    len = arguments.length;
-		for (; i < len; i++) {
-			source = arguments[i];
-			for (k in source) {
-				target[k] = source[k];
-			}
-		}
-
-		return target;
-	}
-
 	function addListener(node, event, handler) {
 		node.addEventListener(event, handler, false);
 	}
@@ -1099,33 +1081,44 @@
 		node.removeEventListener(event, handler, false);
 	}
 
-	function init(component, options) {
-		component.options = options;
+	function setAttribute(node, attribute, value) {
+		node.setAttribute(attribute, value);
+	}
 
-		component._observers = { pre: blankObject(), post: blankObject() };
+	function init(component, options) {
 		component._handlers = blankObject();
-		component._root = options._root || component;
 		component._bind = options._bind;
+
+		component.options = options;
+		component.root = options.root || component;
+		component.store = component.root.store || options.store;
+	}
+
+	function assignTrue(tar, src) {
+		for (var k in src) {
+			tar[k] = 1;
+		}return tar;
 	}
 
 	function callAll(fns) {
 		while (fns && fns.length) {
-			fns.pop()();
+			fns.shift()();
 		}
 	}
 
 	function destroy(detach) {
 		this.destroy = noop;
 		this.fire('destroy');
-		this.set = this.get = noop;
+		this.set = noop;
 
 		if (detach !== false) this._fragment.u();
 		this._fragment.d();
-		this._fragment = this._state = null;
+		this._fragment = null;
+		this._state = {};
 	}
 
-	function get(key) {
-		return key ? this._state[key] : this._state;
+	function get() {
+		return this._state;
 	}
 
 	function fire(eventName, data) {
@@ -1133,32 +1126,17 @@
 		if (!handlers) return;
 
 		for (var i = 0; i < handlers.length; i += 1) {
-			handlers[i].call(this, data);
-		}
-	}
+			var handler = handlers[i];
 
-	function observe(key, callback, options) {
-		var group = options && options.defer ? this._observers.post : this._observers.pre;
-
-		(group[key] || (group[key] = [])).push(callback);
-
-		if (!options || options.init !== false) {
-			callback.__calling = true;
-			callback.call(this, this._state[key]);
-			callback.__calling = false;
-		}
-
-		return {
-			cancel: function cancel() {
-				var index = group[key].indexOf(callback);
-				if (~index) group[key].splice(index, 1);
+			if (!handler.__calling) {
+				handler.__calling = true;
+				handler.call(this, data);
+				handler.__calling = false;
 			}
-		};
+		}
 	}
 
 	function on(eventName, handler) {
-		if (eventName === 'teardown') return this.on('destroy', handler);
-
 		var handlers = this._handlers[eventName] || (this._handlers[eventName] = []);
 		handlers.push(handler);
 
@@ -1172,12 +1150,12 @@
 
 	function set(newState) {
 		this._set(assign({}, newState));
-		if (this._root._lock) return;
-		this._root._lock = true;
-		callAll(this._root._beforecreate);
-		callAll(this._root._oncreate);
-		callAll(this._root._aftercreate);
-		this._root._lock = false;
+		if (this.root._lock) return;
+		this.root._lock = true;
+		callAll(this.root._beforecreate);
+		callAll(this.root._oncreate);
+		callAll(this.root._aftercreate);
+		this.root._lock = false;
 	}
 
 	function _set(newState) {
@@ -1186,53 +1164,35 @@
 		    dirty = false;
 
 		for (var key in newState) {
-			if (differs(newState[key], oldState[key])) changed[key] = dirty = true;
+			if (this._differs(newState[key], oldState[key])) changed[key] = dirty = true;
 		}
 		if (!dirty) return;
 
-		this._state = assign({}, oldState, newState);
+		this._state = assign(assign({}, oldState), newState);
 		this._recompute(changed, this._state);
 		if (this._bind) this._bind(changed, this._state);
-		dispatchObservers(this, this._observers.pre, changed, this._state, oldState);
-		this._fragment.p(changed, this._state);
-		dispatchObservers(this, this._observers.post, changed, this._state, oldState);
+
+		if (this._fragment) {
+			this.fire("state", { changed: changed, current: this._state, previous: oldState });
+			this._fragment.p(changed, this._state);
+			this.fire("update", { changed: changed, current: this._state, previous: oldState });
+		}
 	}
 
 	function _mount(target, anchor) {
-		this._fragment.m(target, anchor);
+		this._fragment[this._fragment.i ? 'i' : 'm'](target, anchor || null);
 	}
 
 	function _unmount() {
-		this._fragment.u();
+		if (this._fragment) this._fragment.u();
 	}
 
-	function differs(a, b) {
-		return a !== b || a && (typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object' || typeof a === 'function';
+	function _differs(a, b) {
+		return a != a ? b == b : a !== b || a && (typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object' || typeof a === 'function';
 	}
 
 	function blankObject() {
 		return Object.create(null);
-	}
-
-	function dispatchObservers(component, group, changed, newState, oldState) {
-		for (var key in group) {
-			if (!changed[key]) continue;
-
-			var newValue = newState[key];
-			var oldValue = oldState[key];
-
-			var callbacks = group[key];
-			if (!callbacks) continue;
-
-			for (var i = 0; i < callbacks.length; i += 1) {
-				var callback = callbacks[i];
-				if (callback.__calling) continue;
-
-				callback.__calling = true;
-				callback.call(component, newValue, oldValue);
-				callback.__calling = false;
-			}
-		}
 	}
 	exports.default = TodoApp;
 });

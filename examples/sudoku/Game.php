@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @property string $name The game's text.
  * @property int $difficulty Game's difficulty from 1-3, 1 being easiest.

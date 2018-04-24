@@ -36,8 +36,9 @@ function is_secure() {
   <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/Group.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
   <script src="../Todo.js"></script>
 
   <script src="lib/TodoEl.js"></script>

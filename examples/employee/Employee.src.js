@@ -1,16 +1,8 @@
 // This file is a demo class that extends the Entity class.
 
-import Nymph from "Nymph";
-import Entity from "NymphEntity";
+import {Nymph, Entity} from "nymph-client";
 
-export default class Employee extends Entity {
-
-  // === Static Properties ===
-
-  static etype = "employee";
-  // The name of the server class
-  static class = "Employee";
-
+export class Employee extends Entity {
   // === Constructor ===
 
   constructor(id) {
@@ -41,5 +33,11 @@ export default class Employee extends Entity {
   }
 }
 
+// === Static Properties ===
+
+Employee.etype = "employee";
+// The name of the server class
+Employee.class = "Employee";
+
 Nymph.setEntityClass(Employee.class, Employee);
-export {Employee};
+export default Employee;

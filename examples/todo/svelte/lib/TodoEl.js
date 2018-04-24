@@ -31,7 +31,9 @@
 		return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 	};
 
-	function createdDate(todo) {
+	function createdDate(_ref) {
+		var todo = _ref.todo;
+
 		var date = new Date(todo.cdate * 1000);
 		return date.getFullYear() + '-' + (date.getMonth + 1 < 10 ? '0' + date.getMonth() + 1 : date.getMonth() + 1) + '-' + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ' + (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
 	}
@@ -47,7 +49,7 @@
 		save: function save() {
 			var _this = this;
 
-			this.get('todo').save().then(function (todo) {
+			this.get().todo.save().then(function (todo) {
 				_this.set({ todo: todo });
 			}, function (errObj) {
 				alert('Error: ' + errObj.textStatus);
@@ -55,35 +57,31 @@
 		}
 	};
 
-	function encapsulateStyles(node) {
-		setAttribute(node, "svelte-2456255383", "");
-	}
-
 	function add_css() {
 		var style = createElement("style");
-		style.id = 'svelte-2456255383-style';
-		style.textContent = "label[svelte-2456255383].list-group-item,[svelte-2456255383] label.list-group-item{font-weight:normal;cursor:pointer}label[svelte-2456255383].list-group-item > .todo-row,[svelte-2456255383] label.list-group-item > .todo-row{display:flex;justify-content:space-between}[svelte-2456255383].todo-flex,[svelte-2456255383] .todo-flex{display:flex}[svelte-2456255383].todo-controls,[svelte-2456255383] .todo-controls{flex-grow:1}[svelte-2456255383].todo-input,[svelte-2456255383] .todo-input{display:inline;background-color:transparent;border:0;flex-grow:1}[svelte-2456255383].todo-input.done-true,[svelte-2456255383] .todo-input.done-true{text-decoration:line-through;color:grey}[svelte-2456255383].todo-date,[svelte-2456255383] .todo-date{margin-left:5px;flex-shrink:1}";
+		style.id = 'svelte-1ges84c-style';
+		style.textContent = "label.list-group-item.svelte-1ges84c{font-weight:normal;cursor:pointer}label.list-group-item.svelte-1ges84c>.todo-row.svelte-1ges84c{display:flex;justify-content:space-between}.todo-flex.svelte-1ges84c{display:flex}.todo-controls.svelte-1ges84c{flex-grow:1}.todo-input.svelte-1ges84c{display:inline;background-color:transparent;border:0;flex-grow:1}.todo-input.done-true.svelte-1ges84c{text-decoration:line-through;color:grey}.todo-date.svelte-1ges84c{margin-left:5px;flex-shrink:1}";
 		appendNode(style, document.head);
 	}
 
-	function create_main_fragment(state, component) {
+	function create_main_fragment(component, state) {
 		var label,
-		    label_class_value,
 		    span,
 		    span_1,
 		    text,
 		    input,
-		    input_class_value,
 		    input_updating = false,
+		    input_class_value,
 		    text_2,
 		    span_2,
-		    text_3;
+		    text_3,
+		    label_class_value;
 
-		var if_block = !state.archived && create_if_block(state, component);
+		var if_block = !state.archived && create_if_block(component, state);
 
 		function input_input_handler() {
-			input_updating = true;
 			var state = component.get();
+			input_updating = true;
 			state.todo.data.name = input.value;
 			component.set({ todo: state.todo });
 			input_updating = false;
@@ -108,15 +106,14 @@
 			},
 
 			h: function hydrate() {
-				encapsulateStyles(label);
-				label.className = label_class_value = "list-group-item list-group-item-" + (state.todo.data.done ? 'success' : 'warning');
-				span.className = "todo-row";
-				span_1.className = "todo-controls todo-flex";
-				input.type = "text";
-				input.className = input_class_value = "todo-input done-" + state.todo.data.done;
 				addListener(input, "input", input_input_handler);
 				addListener(input, "change", change_handler);
-				span_2.className = "todo-date todo-flex";
+				setAttribute(input, "type", "text");
+				input.className = input_class_value = "todo-input done-" + state.todo.data.done + " svelte-1ges84c";
+				span_1.className = "todo-controls todo-flex svelte-1ges84c";
+				span_2.className = "todo-date todo-flex svelte-1ges84c";
+				span.className = "todo-row svelte-1ges84c";
+				label.className = label_class_value = "list-group-item list-group-item-" + (state.todo.data.done ? 'success' : 'warning') + " svelte-1ges84c";
 			},
 
 			m: function mount(target, anchor) {
@@ -135,15 +132,11 @@
 			},
 
 			p: function update(changed, state) {
-				if (changed.todo && label_class_value !== (label_class_value = "list-group-item list-group-item-" + (state.todo.data.done ? 'success' : 'warning'))) {
-					label.className = label_class_value;
-				}
-
 				if (!state.archived) {
 					if (if_block) {
 						if_block.p(changed, state);
 					} else {
-						if_block = create_if_block(state, component);
+						if_block = create_if_block(component, state);
 						if_block.c();
 						if_block.m(span_1, text);
 					}
@@ -153,16 +146,17 @@
 					if_block = null;
 				}
 
-				if (changed.todo && input_class_value !== (input_class_value = "todo-input done-" + state.todo.data.done)) {
+				if (!input_updating) input.value = state.todo.data.name;
+				if (changed.todo && input_class_value !== (input_class_value = "todo-input done-" + state.todo.data.done + " svelte-1ges84c")) {
 					input.className = input_class_value;
-				}
-
-				if (!input_updating) {
-					input.value = state.todo.data.name;
 				}
 
 				if (changed.createdDate) {
 					text_3.data = state.createdDate;
+				}
+
+				if (changed.todo && label_class_value !== (label_class_value = "list-group-item list-group-item-" + (state.todo.data.done ? 'success' : 'warning') + " svelte-1ges84c")) {
+					label.className = label_class_value;
 				}
 			},
 
@@ -179,8 +173,8 @@
 		};
 	}
 
-	// (4:6) {{#if !archived}}
-	function create_if_block(state, component) {
+	// (4:6) {#if !archived}
+	function create_if_block(component, state) {
 		var input;
 
 		function input_change_handler() {
@@ -200,10 +194,10 @@
 			},
 
 			h: function hydrate() {
-				input.type = "checkbox";
-				setStyle(input, "margin-right", "5px");
 				addListener(input, "change", input_change_handler);
 				addListener(input, "change", change_handler);
+				setAttribute(input, "type", "checkbox");
+				setStyle(input, "margin-right", "5px");
 			},
 
 			m: function mount(target, anchor) {
@@ -232,38 +226,34 @@
 		this._state = assign(data(), options.data);
 		this._recompute({ todo: 1 }, this._state);
 
-		if (!document.getElementById("svelte-2456255383-style")) add_css();
+		if (!document.getElementById("svelte-1ges84c-style")) add_css();
 
-		this._fragment = create_main_fragment(this._state, this);
+		this._fragment = create_main_fragment(this, this._state);
 
 		if (options.target) {
 			this._fragment.c();
-			this._fragment.m(options.target, options.anchor || null);
+			this._mount(options.target, options.anchor);
 		}
 	}
 
-	assign(TodoEl.prototype, methods, {
+	assign(TodoEl.prototype, {
 		destroy: destroy,
 		get: get,
 		fire: fire,
-		observe: observe,
 		on: on,
 		set: set,
-		teardown: destroy,
 		_set: _set,
 		_mount: _mount,
-		_unmount: _unmount
+		_unmount: _unmount,
+		_differs: _differs
 	});
+	assign(TodoEl.prototype, methods);
 
 	TodoEl.prototype._recompute = function _recompute(changed, state) {
 		if (changed.todo) {
-			if (differs(state.createdDate, state.createdDate = createdDate(state.todo))) changed.createdDate = true;
+			if (this._differs(state.createdDate, state.createdDate = createdDate(state))) changed.createdDate = true;
 		}
 	};
-
-	function setAttribute(node, attribute, value) {
-		node.setAttribute(attribute, value);
-	}
 
 	function createElement(name) {
 		return document.createElement(name);
@@ -279,6 +269,10 @@
 
 	function addListener(node, event, handler) {
 		node.addEventListener(event, handler, false);
+	}
+
+	function setAttribute(node, attribute, value) {
+		node.setAttribute(attribute, value);
 	}
 
 	function insertNode(node, target, anchor) {
@@ -298,41 +292,33 @@
 	}
 
 	function init(component, options) {
-		component.options = options;
-
-		component._observers = { pre: blankObject(), post: blankObject() };
 		component._handlers = blankObject();
-		component._root = options._root || component;
 		component._bind = options._bind;
+
+		component.options = options;
+		component.root = options.root || component;
+		component.store = component.root.store || options.store;
 	}
 
-	function assign(target) {
-		var k,
-		    source,
-		    i = 1,
-		    len = arguments.length;
-		for (; i < len; i++) {
-			source = arguments[i];
-			for (k in source) {
-				target[k] = source[k];
-			}
-		}
-
-		return target;
+	function assign(tar, src) {
+		for (var k in src) {
+			tar[k] = src[k];
+		}return tar;
 	}
 
 	function destroy(detach) {
 		this.destroy = noop;
 		this.fire('destroy');
-		this.set = this.get = noop;
+		this.set = noop;
 
 		if (detach !== false) this._fragment.u();
 		this._fragment.d();
-		this._fragment = this._state = null;
+		this._fragment = null;
+		this._state = {};
 	}
 
-	function get(key) {
-		return key ? this._state[key] : this._state;
+	function get() {
+		return this._state;
 	}
 
 	function fire(eventName, data) {
@@ -340,32 +326,17 @@
 		if (!handlers) return;
 
 		for (var i = 0; i < handlers.length; i += 1) {
-			handlers[i].call(this, data);
-		}
-	}
+			var handler = handlers[i];
 
-	function observe(key, callback, options) {
-		var group = options && options.defer ? this._observers.post : this._observers.pre;
-
-		(group[key] || (group[key] = [])).push(callback);
-
-		if (!options || options.init !== false) {
-			callback.__calling = true;
-			callback.call(this, this._state[key]);
-			callback.__calling = false;
-		}
-
-		return {
-			cancel: function cancel() {
-				var index = group[key].indexOf(callback);
-				if (~index) group[key].splice(index, 1);
+			if (!handler.__calling) {
+				handler.__calling = true;
+				handler.call(this, data);
+				handler.__calling = false;
 			}
-		};
+		}
 	}
 
 	function on(eventName, handler) {
-		if (eventName === 'teardown') return this.on('destroy', handler);
-
 		var handlers = this._handlers[eventName] || (this._handlers[eventName] = []);
 		handlers.push(handler);
 
@@ -379,12 +350,12 @@
 
 	function set(newState) {
 		this._set(assign({}, newState));
-		if (this._root._lock) return;
-		this._root._lock = true;
-		callAll(this._root._beforecreate);
-		callAll(this._root._oncreate);
-		callAll(this._root._aftercreate);
-		this._root._lock = false;
+		if (this.root._lock) return;
+		this.root._lock = true;
+		callAll(this.root._beforecreate);
+		callAll(this.root._oncreate);
+		callAll(this.root._aftercreate);
+		this.root._lock = false;
 	}
 
 	function _set(newState) {
@@ -393,28 +364,31 @@
 		    dirty = false;
 
 		for (var key in newState) {
-			if (differs(newState[key], oldState[key])) changed[key] = dirty = true;
+			if (this._differs(newState[key], oldState[key])) changed[key] = dirty = true;
 		}
 		if (!dirty) return;
 
-		this._state = assign({}, oldState, newState);
+		this._state = assign(assign({}, oldState), newState);
 		this._recompute(changed, this._state);
 		if (this._bind) this._bind(changed, this._state);
-		dispatchObservers(this, this._observers.pre, changed, this._state, oldState);
-		this._fragment.p(changed, this._state);
-		dispatchObservers(this, this._observers.post, changed, this._state, oldState);
+
+		if (this._fragment) {
+			this.fire("state", { changed: changed, current: this._state, previous: oldState });
+			this._fragment.p(changed, this._state);
+			this.fire("update", { changed: changed, current: this._state, previous: oldState });
+		}
 	}
 
 	function _mount(target, anchor) {
-		this._fragment.m(target, anchor);
+		this._fragment[this._fragment.i ? 'i' : 'm'](target, anchor || null);
 	}
 
 	function _unmount() {
-		this._fragment.u();
+		if (this._fragment) this._fragment.u();
 	}
 
-	function differs(a, b) {
-		return a !== b || a && (typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object' || typeof a === 'function';
+	function _differs(a, b) {
+		return a != a ? b == b : a !== b || a && (typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object' || typeof a === 'function';
 	}
 
 	function blankObject() {
@@ -425,28 +399,7 @@
 
 	function callAll(fns) {
 		while (fns && fns.length) {
-			fns.pop()();
-		}
-	}
-
-	function dispatchObservers(component, group, changed, newState, oldState) {
-		for (var key in group) {
-			if (!changed[key]) continue;
-
-			var newValue = newState[key];
-			var oldValue = oldState[key];
-
-			var callbacks = group[key];
-			if (!callbacks) continue;
-
-			for (var i = 0; i < callbacks.length; i += 1) {
-				var callback = callbacks[i];
-				if (callback.__calling) continue;
-
-				callback.__calling = true;
-				callback.call(component, newValue, oldValue);
-				callback.__calling = false;
-			}
+			fns.shift()();
 		}
 	}
 	exports.default = TodoEl;

@@ -1,25 +1,18 @@
-import Nymph from "Nymph";
-import Entity from "NymphEntity";
+import {Nymph, Entity} from 'nymph-client';
 
-export default class Game extends Entity {
-
-  // === Static Properties ===
-
-  static etype = "game";
-  // The name of the server class
-  static class = "Game";
-
-  // === Instance Properties ===
-
-  mistakes = [
-    [], [], [], [], [], [], [], [], []
-  ];
-  help = 1;
-
+export class Game extends Entity {
   // === Constructor ===
 
-  constructor(id) {
+  constructor (id) {
     super(id);
+
+    // === Instance Properties ===
+
+    this.mistakes = [
+      [], [], [], [], [], [], [], [], []
+    ];
+    this.help = 1;
+
     this.data.difficulty = 1;
     this.data.board = [
       [], [], [], [], [], [], [], [], []
@@ -30,15 +23,15 @@ export default class Game extends Entity {
 
   // === Instance Methods ===
 
-  generateBoard(...args) {
+  generateBoard (...args) {
     return this.serverCall('generateBoard', args);
   }
 
-  makeItFun(...args) {
+  makeItFun (...args) {
     return this.serverCall('makeItFun', args);
   }
 
-  checkDone() {
+  checkDone () {
     this.data.done = false;
     for (var y in this.data.board) {
       for (var x in this.data.board[y]) {
@@ -53,7 +46,7 @@ export default class Game extends Entity {
     this.data.done = true;
   }
 
-  calculateErrors() {
+  calculateErrors () {
     this.checkDone();
     if (this.data.done) {
       this.mistakes = [
@@ -100,7 +93,7 @@ export default class Game extends Entity {
     }
   }
 
-  neighborsY(x, y) {
+  neighborsY (x, y) {
     var results = [];
     for (var y2 = 0; y2 <= 8; y2++) {
       if (y == y2)
@@ -111,7 +104,7 @@ export default class Game extends Entity {
     return results;
   }
 
-  neighborsX(x, y) {
+  neighborsX (x, y) {
     var results = [];
     for (var x2 = 0; x2 <= 8; x2++) {
       if (x == x2)
@@ -122,7 +115,7 @@ export default class Game extends Entity {
     return results;
   }
 
-  neighborsSquare(x, y) {
+  neighborsSquare (x, y) {
     var results = [];
     var minX = y - (y % 3);
     var minY = x - (x % 3);
@@ -138,5 +131,12 @@ export default class Game extends Entity {
   }
 }
 
+// === Static Properties ===
+
+Game.etype = 'game';
+// The name of the server class
+Game.class = 'Game';
+
 Nymph.setEntityClass(Game.class, Game);
-export {Game};
+
+export default Game;

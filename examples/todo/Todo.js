@@ -1,32 +1,22 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["exports", "Nymph", "NymphEntity"], factory);
+    define(['exports', 'nymph-client'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require("Nymph"), require("NymphEntity"));
+    factory(exports, require('nymph-client'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.Nymph, global.NymphEntity);
+    factory(mod.exports, global.nymphClient);
     global.Todo = mod.exports;
   }
-})(this, function (exports, _Nymph, _NymphEntity) {
-  "use strict";
+})(this, function (exports, _nymphClient) {
+  'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.Todo = undefined;
-
-  var _Nymph2 = _interopRequireDefault(_Nymph);
-
-  var _NymphEntity2 = _interopRequireDefault(_NymphEntity);
-
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-      default: obj
-    };
-  }
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -76,12 +66,10 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var Todo = function (_Entity) {
+  var Todo = exports.Todo = function (_Entity) {
     _inherits(Todo, _Entity);
 
     // === Constructor ===
-
-    // === Static Properties ===
 
     function Todo(id) {
       _classCallCheck(this, Todo);
@@ -94,11 +82,8 @@
 
     // === Instance Methods ===
 
-    // The name of the server class
-
-
     _createClass(Todo, [{
-      key: "archive",
+      key: 'archive',
       value: function archive() {
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key];
@@ -109,13 +94,15 @@
     }]);
 
     return Todo;
-  }(_NymphEntity2.default);
+  }(_nymphClient.Entity);
 
-  Todo.etype = "todo";
-  Todo.class = "Todo";
+  // === Static Properties ===
+
+  Todo.etype = 'todo';
+  // The name of the server class
+  Todo.class = 'Todo';
+
+  _nymphClient.Nymph.setEntityClass(Todo.class, Todo);
+
   exports.default = Todo;
-
-
-  _Nymph2.default.setEntityClass(Todo.class, Todo);
-  exports.Todo = Todo;
 });

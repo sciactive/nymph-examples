@@ -1,6 +1,6 @@
 angular.module('todoApp', [])
 .service('Nymph', function() {
-  return Nymph.default;
+  return nymphClient.Nymph;
 })
 .service('Todo', function() {
   return Todo.default;

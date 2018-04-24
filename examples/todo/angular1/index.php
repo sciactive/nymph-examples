@@ -78,13 +78,14 @@ function is_secure() {
   <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/Entities/Group.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
   <script src="../Todo.js"></script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="todoApp.js"></script>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
   <div class="container" ng-controller="TodoController">

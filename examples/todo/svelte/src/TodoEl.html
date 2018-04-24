@@ -1,13 +1,13 @@
-<label class="list-group-item list-group-item-{{todo.data.done ? 'success' : 'warning'}}">
+<label class="list-group-item list-group-item-{todo.data.done ? 'success' : 'warning'}">
   <span class="todo-row">
     <span class="todo-controls todo-flex">
-      {{#if !archived}}
+      {#if !archived}
         <input type="checkbox" bind:checked="todo.data.done" on:change="save()" style="margin-right: 5px;">
-      {{/if}}
-      <input type="text" class="todo-input done-{{todo.data.done}}" bind:value="todo.data.name" on:change="save()">
+      {/if}
+      <input type="text" class="todo-input done-{todo.data.done}" bind:value="todo.data.name" on:change="save()">
     </span>
     <span class="todo-date todo-flex">
-      {{createdDate}}
+      {createdDate}
     </span>
   </span>
 </label>
@@ -24,7 +24,7 @@
     },
 
     computed: {
-      createdDate: (todo) => {
+      createdDate: ({ todo }) => {
         var date = new Date(todo.cdate * 1000);
         return `${date.getFullYear()}-${date.getMonth+1 < 10 ? '0'+date.getMonth()+1 : date.getMonth()+1}-${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()} ${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}`;
       }
@@ -32,8 +32,8 @@
 
     methods: {
       save () {
-        this.get('todo').save().then((todo) => {
-          this.set({todo: todo});
+        this.get().todo.save().then((todo) => {
+          this.set({todo});
         }, (errObj) => {
           alert('Error: '+errObj.textStatus);
         });

@@ -1,14 +1,6 @@
-import Nymph from "Nymph";
-import Entity from "NymphEntity";
+import {Nymph, Entity} from 'nymph-client';
 
-export default class Todo extends Entity {
-
-  // === Static Properties ===
-
-  static etype = "todo";
-  // The name of the server class
-  static class = "Todo";
-
+export class Todo extends Entity {
   // === Constructor ===
 
   constructor(id) {
@@ -23,5 +15,12 @@ export default class Todo extends Entity {
   }
 }
 
+// === Static Properties ===
+
+Todo.etype = 'todo';
+// The name of the server class
+Todo.class = 'Todo';
+
 Nymph.setEntityClass(Todo.class, Todo);
-export {Todo};
+
+export default Todo;

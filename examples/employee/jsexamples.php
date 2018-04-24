@@ -30,10 +30,12 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
     <!-- Nymph JS -->
     <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
     <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
 
     <!-- Tilmeld JS -->
-    <script src="<?php echo $tilmeldDir; ?>/lib/Entities/User.js"></script>
-    <script src="<?php echo $tilmeldDir; ?>/lib/Entities/Group.js"></script>
+    <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
+    <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
 
     <!-- Entity JS -->
     <script src="Employee.js"></script>
@@ -65,8 +67,6 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
     <script src="<?php echo $queryEditorDir; ?>/lib/QueryEditor.js"></script>
     <script type="text/javascript">
       ((global, QueryEditor, Employee) => {
-        QueryEditor = (QueryEditor && QueryEditor.__esModule) ? QueryEditor["default"] : QueryEditor;
-        Employee = (Employee && Employee.__esModule) ? Employee["default"] : Employee;
         const app = new QueryEditor({
           target: document.querySelector('main'),
           data: {
@@ -81,17 +81,16 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
             classButton: 'btn btn-sm btn-secondary mx-1'
           }
         });
-      })(this, QueryEditor, Employee);
+      })(this, QueryEditor.default, Employee.Employee);
     </script>
 
 
     <script>
       $(function(){
         $("#go").click(function(){
-          var Nymph = window.Nymph.default;
-          var Entity = window.NymphEntity.default;
-          var Employee = window.Employee.default;
-          eval($("#current-test").val());
+          (function(Nymph, Entity, Employee){
+            eval($("#current-test").val());
+          })(nymphClient.Nymph, nymphClient.Entity, Employee.Employee);
         });
         $("#tests pre").click(function(){
           $("#current-test").val($(this).text());
