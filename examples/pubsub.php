@@ -2,16 +2,16 @@
 
 error_reporting(E_ALL);
 
-if (php_sapi_name() != "cli") {
-  die("You can only run pubsub.php from the command line.");
+if (php_sapi_name() != 'cli') {
+  die('You can only run pubsub.php from the command line.');
 }
 
-require file_exists(__DIR__.'/../../autoload-dev.php')
+date_default_timezone_set('America/Los_Angeles');
+
+require_once file_exists(__DIR__.'/../../autoload-dev.php')
     ? __DIR__.'/../../autoload-dev.php'
     : __DIR__.'/../vendor/autoload.php';
-require __DIR__.'/config.php';
-
-date_default_timezone_set('America/Los_Angeles');
+require_once __DIR__.'/config.php';
 
 $config = [];
 // If we're on production, bind to the given port.
@@ -43,11 +43,15 @@ if (isset($opts['r'])) {
 
 \Nymph\Nymph::connect();
 
-require 'employee/Employee.php';
-require 'todo/Todo.php';
-require 'sudoku/Game.php';
+require_once 'employee/Employee.php';
+require_once 'todo/Todo.php';
+require_once 'sudoku/Game.php';
 
 if (in_array('-d', $argv)) {
+  if (!is_callable('pcntl_fork')) {
+    die('PCNTL PHP extension is required to use daemon mode.');
+  }
+
   function shutdown() {
     posix_kill(posix_getpid(), SIGHUP);
   }

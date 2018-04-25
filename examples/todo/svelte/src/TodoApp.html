@@ -2,46 +2,46 @@
   <div class="row">
     <div class="col-sm-8">
       <div class="list-group" style="clear: both;">
-        {{#if !todos.length}}
+        {#if !todos.length}
           <div class="well">You have no todos yet.</div>
-        {{/if}}
-        {{#each todos as todo}}
-          <TodoEl bind:todo="todo" archived="{{uiShowArchived}}"></TodoEl>
-        {{/each}}
+        {/if}
+        {#each todos as todo}
+          <TodoEl bind:todo="todo" archived="{uiShowArchived}"></TodoEl>
+        {/each}
       </div>
     </div>
     <div class="col-sm-4" style="text-align: center; margin-bottom: 1em;">
       <small class="alert alert-info" style="display: block;">
-        {{#if uiShowArchived}}
-          <span>{{todos.length}} archived todos</span>
-        {{else}}
+        {#if uiShowArchived}
+          <span>{todos.length} archived todos</span>
+        {:else}
           <span>
-            {{#if todos.length == 0}}
+            {#if todos.length == 0}
               <span>0 todos</span>
-            {{else}}
-              <span>{{remaining}} of {{todos.length}} remaining</span>
-            {{/if}}
+            {:else}
+              <span>{remaining} of {todos.length} remaining</span>
+            {/if}
           </span>
-        {{/if}}
-        {{#if todos.length > 0}}
+        {/if}
+        {#if todos.length > 0}
           <span>
             [
-            {{#if uiShowArchived}}
+            {#if uiShowArchived}
               <a href="javascript:void(0)" on:click="deleteTodos()">delete</a>
-            {{else}}
+            {:else}
               <a href="javascript:void(0)" on:click="archive()">archive done</a>
-            {{/if}}
+            {/if}
             ]
           </span>
-        {{/if}}
+        {/if}
         <br>
-        {{#if uiShowArchived}}
+        {#if uiShowArchived}
           <a href="javascript:void(0)" on:click="getTodos(false)">show current</a>
-        {{else}}
+        {:else}
           <a href="javascript:void(0)" on:click="getTodos(true)">show archived</a>
-        {{/if}}
+        {/if}
       </small>
-      {{#if todos.length > 1}}
+      {#if todos.length > 1}
         <div style="text-align: left;">
           Sort: <br>
           <label style="font-weight: normal;">
@@ -50,17 +50,17 @@
           <label style="font-weight: normal;">
             <input type="radio" bind:group="uiSort" on:change="sortTodos()" name="sort" value="cdate"> Created</label>
         </div>
-      {{/if}}
+      {/if}
     </div>
   </div>
-  {{#if !uiShowArchived}}
+  {#if !uiShowArchived}
     <form class="todo-form" style="margin-bottom: 20px;" on:submit="addTodo(event.preventDefault())">
       <input class="form-control" type="text" bind:value="todoText" placeholder="add new todo here">
-      <input class="btn btn-default" type="submit" value="add #{{todos.length + 1}}">
+      <input class="btn btn-default" type="submit" value="add #{todos.length + 1}">
     </form>
-  {{/if}}
+  {/if}
   <div class="user-count label label-default">
-    Active Users: {{userCount}}
+    Active Users: {userCount}
   </div>
 </div>
 
@@ -71,7 +71,7 @@
 
   export default {
     oncreate () {
-      this.getTodos(this.get('uiShowArchived'));
+      this.getTodos(this.get().uiShowArchived);
     },
 
     data () {
@@ -85,10 +85,10 @@
     },
 
     computed: {
-      remaining: (todos) => {
+      remaining: ({ todos }) => {
         var count = 0;
         for (var i = 0; i < todos.length; i++) {
-          count += todos[i].get('done') ? 0 : 1;
+          count += todos[i].get().done ? 0 : 1;
         }
         return count;
       }
@@ -96,29 +96,30 @@
 
     methods: {
       getTodos (archived) {
-        if (this.get('__subscription')) {
-          this.get('__subscription').unsubscribe();
+        let {_subscription} = this.get();
+        if (_subscription) {
+          _subscription.unsubscribe();
         }
-        let subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe((newTodos) => {
+        _subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe((newTodos) => {
           this.set({uiShowArchived: archived});
           if (newTodos !== undefined) {
-            var todos = this.get('todos');
+            const {todos} = this.get();
             Nymph.updateArray(todos, newTodos);
-            Nymph.sort(todos, this.get('uiSort'));
-            this.set({todos: todos});
+            Nymph.sort(todos, this.get().uiSort);
+            this.set({todos});
           }
         }, null, (count) => {
           this.set({userCount: count});
         });
-        this.set({__subscription: subscription});
+        this.set({_subscription});
       },
 
       addTodo () {
-        var todoText = this.get('todoText');
+        const {todoText} = this.get();
         if (todoText === undefined || todoText === '') {
           return;
         }
-        var todo = new Todo();
+        const todo = new Todo();
         todo.set('name', todoText);
         todo.save().then(() => {
           this.set({todoText: ''});
@@ -128,7 +129,7 @@
       },
 
       sortTodos () {
-        this.set({todos: Nymph.sort(this.get('todos'), this.get('uiSort'))});
+        this.set({todos: Nymph.sort(this.get().todos, this.get().uiSort)});
       },
 
       save (todo) {
@@ -138,23 +139,23 @@
       },
 
       archive () {
-        var oldTodos = this.get('todos');
-        for (var i = 0; i < oldTodos.length; i++) {
-          var todo = oldTodos[i];
-          if (todo.get('done')) {
+        const oldTodos = this.get().todos;
+        for (let i = 0; i < oldTodos.length; i++) {
+          const todo = oldTodos[i];
+          if (todo.get().done) {
             todo.archive().then((success) => {
               if (!success) {
-                alert("Couldn't save changes to "+todo.get('name'));
+                alert("Couldn't save changes to "+todo.get().name);
               }
             }, (errObj) => {
-              alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.get('name'));
+              alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.get().name);
             });
           }
         }
       },
 
       deleteTodos () {
-        Nymph.deleteEntities(this.get('todos'));
+        Nymph.deleteEntities(this.get().todos);
       }
     },
 

@@ -1,32 +1,22 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["exports", "Nymph", "NymphEntity"], factory);
+    define(['exports', 'nymph-client'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require("Nymph"), require("NymphEntity"));
+    factory(exports, require('nymph-client'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.Nymph, global.NymphEntity);
+    factory(mod.exports, global.nymphClient);
     global.Game = mod.exports;
   }
-})(this, function (exports, _Nymph, _NymphEntity) {
-  "use strict";
+})(this, function (exports, _nymphClient) {
+  'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.Game = undefined;
-
-  var _Nymph2 = _interopRequireDefault(_Nymph);
-
-  var _NymphEntity2 = _interopRequireDefault(_NymphEntity);
-
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-      default: obj
-    };
-  }
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -76,17 +66,15 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var Game = function (_Entity) {
+  var Game = exports.Game = function (_Entity) {
     _inherits(Game, _Entity);
 
     // === Constructor ===
 
-    // === Instance Properties ===
-
-    // === Static Properties ===
-
     function Game(id) {
       _classCallCheck(this, Game);
+
+      // === Instance Properties ===
 
       var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, id));
 
@@ -102,11 +90,8 @@
 
     // === Instance Methods ===
 
-    // The name of the server class
-
-
     _createClass(Game, [{
-      key: "generateBoard",
+      key: 'generateBoard',
       value: function generateBoard() {
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key];
@@ -115,7 +100,7 @@
         return this.serverCall('generateBoard', args);
       }
     }, {
-      key: "makeItFun",
+      key: 'makeItFun',
       value: function makeItFun() {
         for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
           args[_key2] = arguments[_key2];
@@ -124,7 +109,7 @@
         return this.serverCall('makeItFun', args);
       }
     }, {
-      key: "checkDone",
+      key: 'checkDone',
       value: function checkDone() {
         this.data.done = false;
         for (var y in this.data.board) {
@@ -135,7 +120,7 @@
         this.data.done = true;
       }
     }, {
-      key: "calculateErrors",
+      key: 'calculateErrors',
       value: function calculateErrors() {
         this.checkDone();
         if (this.data.done) {
@@ -170,7 +155,7 @@
         }
       }
     }, {
-      key: "neighborsY",
+      key: 'neighborsY',
       value: function neighborsY(x, y) {
         var results = [];
         for (var y2 = 0; y2 <= 8; y2++) {
@@ -180,7 +165,7 @@
         return results;
       }
     }, {
-      key: "neighborsX",
+      key: 'neighborsX',
       value: function neighborsX(x, y) {
         var results = [];
         for (var x2 = 0; x2 <= 8; x2++) {
@@ -190,7 +175,7 @@
         return results;
       }
     }, {
-      key: "neighborsSquare",
+      key: 'neighborsSquare',
       value: function neighborsSquare(x, y) {
         var results = [];
         var minX = y - y % 3;
@@ -206,13 +191,15 @@
     }]);
 
     return Game;
-  }(_NymphEntity2.default);
+  }(_nymphClient.Entity);
 
-  Game.etype = "game";
-  Game.class = "Game";
+  // === Static Properties ===
+
+  Game.etype = 'game';
+  // The name of the server class
+  Game.class = 'Game';
+
+  _nymphClient.Nymph.setEntityClass(Game.class, Game);
+
   exports.default = Game;
-
-
-  _Nymph2.default.setEntityClass(Game.class, Game);
-  exports.Game = Game;
 });

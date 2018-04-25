@@ -1,6 +1,6 @@
 # Nymph Examples - collaborative app data
 
-[![Open Issues](https://img.shields.io/github/issues/sciactive/nymph-examples.svg?style=flat)](https://github.com/sciactive/nymph-examples/issues)
+[![Open Issues](https://img.shields.io/github/issues/sciactive/nymph-examples.svg)](https://github.com/sciactive/nymph-examples/issues) [![License](https://img.shields.io/github/license/sciactive/nymph-examples.svg)]()
 
 This repository contains example apps built with the [Nymph ORM](http://nymph.io). For more information, you can see the [main Nymph repository](https://github.com/sciactive/nymph).
 

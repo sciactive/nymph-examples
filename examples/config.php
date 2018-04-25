@@ -1,9 +1,7 @@
 <?php
 
 // Nymph's configuration.
-
 $nymphConfig = [];
-
 // Check for production postgres var.
 if (getenv('NYMPH_PRODUCTION')) {
   $dbopts = parse_url(getenv('DATABASE_URL'));
@@ -21,6 +19,15 @@ if (getenv('NYMPH_PRODUCTION')) {
     'database' => getenv('MYSQL_DATABASE'),
     'user' => getenv('MYSQL_USER'),
     'password' => getenv('MYSQL_PASSWORD')
+  ];
+} elseif (getenv('PGSQL_HOST')) {
+  $nymphConfig['driver'] = 'PostgreSQL';
+  $nymphConfig['PostgreSQL'] = [
+    'host' => getenv('PGSQL_HOST'),
+    'port' => getenv('PGSQL_PORT'),
+    'database' => getenv('PGSQL_DATABASE'),
+    'user' => getenv('PGSQL_USER'),
+    'password' => getenv('PGSQL_PASSWORD')
   ];
 } else {
   if (getenv('DB') === 'pgsql') {
@@ -40,5 +47,17 @@ if (getenv('NYMPH_PRODUCTION')) {
     ];
   }
 }
-
 \Nymph\Nymph::configure($nymphConfig);
+
+// Nymph PubSub's configuration.
+if (getenv('NYMPH_PRODUCTION')) {
+  // If we're on Heroku, the entry is the pubsub demo.
+  $entry = 'wss://nymph-pubsub-demo.herokuapp.com:443/';
+} elseif (getenv('PUBSUB_HOST')) {
+  // If we're in Docker, the entry is provided by Docker.
+  $entry = 'ws://'.getenv('PUBSUB_HOST').'/';
+} else {
+  // If we're not in either, it's probaby on the same host.
+  $entry = 'ws://localhost:8081/';
+}
+\Nymph\PubSub\Server::configure(['entries' => [$entry]]);

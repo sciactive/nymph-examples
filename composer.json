@@ -1,30 +1,30 @@
 {
-	"name": "sciactive/nymph-examples",
-	"description": "Example apps built with Nymph.",
-	"version": "1.0.0",
-	"homepage": "http://nymph.io/",
-	"authors": [
-		{
-			"name": "Hunter Perrin",
-			"email": "hperrin@gmail.com",
-			"homepage": "https://github.com/hperrin",
-			"role": "Developer"
-		}
-	],
-	"license": "Apache-2.0",
-	"require": {
-		"sciactive/nymph-server": "^2.2.0",
-		"sciactive/nymph-pubsub": "^2.2.0",
-		"ext-pcntl": "*",
-		"php": "~7.1"
-	},
-	"scripts": {
-		"post-install-cmd": [
-			"npm install"
-		],
-		"post-update-cmd": [
-			"npm install"
-		]
-	},
-	"minimum-stability": "dev"
+  "name": "sciactive/nymph-examples",
+  "description": "Example apps built with Nymph.",
+  "version": "1.0.0",
+  "homepage": "http://nymph.io/",
+  "authors": [
+    {
+      "name": "Hunter Perrin",
+      "email": "hperrin@gmail.com",
+      "homepage": "https://github.com/hperrin",
+      "role": "Developer"
+    }
+  ],
+  "license": "Apache-2.0",
+  "require": {
+    "php": "~7.1",
+    "sciactive/nymph-server": "^3.0@beta",
+    "sciactive/nymph-pubsub": "^3.0@beta",
+    "sciactive/tilmeld-server": "^1.0@beta"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "npm install"
+    ],
+    "post-update-cmd": [
+      "npm install"
+    ]
+  },
+  "minimum-stability": "beta"
 }
