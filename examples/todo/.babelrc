@@ -4,7 +4,8 @@
       "plugins": [
         ["transform-es2015-modules-umd", {
           "globals": {
-            "Todo.src": "Todo"
+            "Todo.src": "Todo",
+            "nymph-client": "NymphClient"
           },
           "exactGlobals": true
         }]

@@ -20,7 +20,7 @@ include('../../get_pubsub_url.php');
       (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
     })();
     NymphOptions = {
-      restURL: '../../rest.php',
+      restURL: '../../rest-tilmeld.php',
       pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
       rateLimit: 100
     };
@@ -70,7 +70,7 @@ include('../../get_pubsub_url.php');
   <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
   <script src="../Todo.js"></script>

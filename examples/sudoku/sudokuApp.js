@@ -1,6 +1,6 @@
 angular.module('sudokuApp', [])
 .service('Nymph', function() {
-  return nymphClient.Nymph;
+  return NymphClient.Nymph;
 })
 .service('Game', function() {
   return Game.default;

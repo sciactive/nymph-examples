@@ -7,7 +7,7 @@
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.nymphClient);
+    factory(mod.exports, global.NymphClient);
     global.Todo = mod.exports;
   }
 })(this, function (exports, _nymphClient) {

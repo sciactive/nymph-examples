@@ -28,13 +28,13 @@ include('../get_pubsub_url.php');
   <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldRecover.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldLogin.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldChangePassword.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/tilmeld-client.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/TilmeldClient.js"></script>
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
   <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
@@ -170,7 +170,7 @@ include('../get_pubsub_url.php');
           currentUser.logout();
         }
       }
-    })(this, tilmeldClient.User, tilmeldClient.TilmeldLogin, tilmeldClient.TilmeldChangePassword);
+    })(this, TilmeldClient.User, TilmeldClient.TilmeldLogin, TilmeldClient.TilmeldChangePassword);
   </script>
 
   <style>

@@ -35,7 +35,7 @@ include('../get_pubsub_url.php');
     <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
     <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
     <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-    <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
     <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
     <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
 
