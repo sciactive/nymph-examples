@@ -11,7 +11,7 @@ include('../../get_pubsub_url.php');
 ?><!DOCTYPE html>
 <html>
 <head>
-  <title>Nymph Svelte Collab Todo App</title>
+  <title>Nymph React Collab Todo App</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="text/javascript">
@@ -20,7 +20,7 @@ include('../../get_pubsub_url.php');
       (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
     })();
     NymphOptions = {
-      restURL: '../../rest.php',
+      restURL: '../../rest-tilmeld.php',
       pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
       rateLimit: 100
     };
@@ -28,16 +28,16 @@ include('../../get_pubsub_url.php');
   <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
   <script src="../Todo.js"></script>
 
-  <script src="//unpkg.com/prop-types@15.5.10/prop-types.js"></script>
-  <script src="//unpkg.com/react@15.6.1/dist/react.js"></script>
-  <script src="//unpkg.com/react-dom@15.6.1/dist/react-dom.js"></script>
-  <script src="//unpkg.com/redux@3.7.1/dist/redux.js"></script>
-  <script src="//unpkg.com/react-redux@5.0.5/dist/react-redux.js"></script>
+  <script src="//unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+  <script src="//unpkg.com/react@16.3.2/umd/react.development.js"></script>
+  <script src="//unpkg.com/react-dom@16.3.2/umd/react-dom.development.js"></script>
+  <script src="//unpkg.com/redux@4.0.0/dist/redux.js"></script>
+  <script src="//unpkg.com/react-redux@5.0.7/dist/react-redux.js"></script>
 
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
@@ -55,9 +55,6 @@ include('../../get_pubsub_url.php');
         </small>
       </h2>
     </div>
-    <p>
-      Just FYI, this demo isn't done yet.
-    </p>
     <div id="todoApp"></div>
   </div>
   <script src="build/TodoApp.js"></script>

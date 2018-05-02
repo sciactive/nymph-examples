@@ -1,22 +1,14 @@
 import React from 'react';
-import FilterLink from '../containers/FilterLink';
+import PropTypes from 'prop-types';
 
-const Footer = () => (
-  <p>
-    Show:
-    {' '}
-    <FilterLink filter="SHOW_ALL">
-      All
-    </FilterLink>
-    {', '}
-    <FilterLink filter="SHOW_OPEN">
-      Open
-    </FilterLink>
-    {', '}
-    <FilterLink filter="SHOW_DONE">
-      Done
-    </FilterLink>
-  </p>
+const Footer = ({userCount}) => (
+  <div className="label label-default" style={{position: 'fixed', right: '5px', bottom: '5px'}}>
+    Active Users: {userCount}
+  </div>
 );
+
+Footer.propTypes = {
+  userCount: PropTypes.number.isRequired
+};
 
 export default Footer;

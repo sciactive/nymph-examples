@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import TodoEl from './TodoEl';
 import Todo from 'Todo';
 
-const TodoList = ({todos, archived, onTodoClick}) => (
-  <ul>
+const TodoList = ({todos, archived, onTodoClick, onTodoChange}) => (
+  <div className="list-group" style={{clear: 'both'}}>
+    {!todos.length &&
+      <div className="well">You have no todos yet.</div>
+    }
     {todos.map(todo => (
-      <TodoEl key={todo.guid} todo={todo} onClick={() => onTodoClick(todo)} />
+      <TodoEl key={todo.guid} todo={todo} archived={archived} onClick={() => onTodoClick(todo)} onChange={(name) => onTodoChange(todo, name)} />
     ))}
-  </ul>
+  </div>
 );
 
 TodoList.propTypes = {
