@@ -6,16 +6,8 @@ $tilmeldDir = file_exists('../../../../tilmeld-client/package.json')
     ? '../../../../tilmeld-client'
     : '../../../node_modules/tilmeld-client';
 
-function is_secure() {
-  // Always assume secure on production.
-  if (getenv('NYMPH_PRODUCTION')) {
-    return true;
-  }
-  if (isset($_SERVER['HTTPS'])) {
-    return (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1');
-  }
-  return (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443');
-}
+include('../../get_pubsub_url.php');
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +20,8 @@ function is_secure() {
       (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
     })();
     NymphOptions = {
-      restURL: '../../rest.php',
-      pubsubURL: '<?php echo is_secure() ? 'wss' : 'ws'; ?>://<?php echo getenv('NYMPH_PRODUCTION') ? 'nymph-pubsub-demo.herokuapp.com' : '\'+window.location.hostname+\''; ?>:<?php echo getenv('NYMPH_PRODUCTION') ? (is_secure() ? '443' : '80') : '8081'; ?>',
+      restURL: '../../rest-tilmeld.php',
+      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
       rateLimit: 100
     };
   </script>

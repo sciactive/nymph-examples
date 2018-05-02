@@ -14,6 +14,7 @@ require_once __DIR__.'/config.php';
 
 // Tilmeld's configuration.
 $tilmeldConfig = [
+  'app_url' => 'http://localhost:8080/',
   'setup_url' => 'http://localhost:8080/examples/examples/tilmeld/setup.php',
   'email_usernames' => true,
   'verify_redirect' => 'http://localhost:8080/examples/examples/tilmeld/components.php',
