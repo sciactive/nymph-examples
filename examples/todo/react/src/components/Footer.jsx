@@ -8,7 +8,7 @@ const Footer = ({userCount}) => (
 );
 
 Footer.propTypes = {
-  userCount: PropTypes.number.isRequired
+  userCount: PropTypes.number
 };
 
 export default Footer;

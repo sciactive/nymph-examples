@@ -5,11 +5,16 @@ import {addTodo} from '../actions';
 
 const mapStateToProps = (state) => {
   return {
+    archived: state.todos.archived,
     nextNumber: state.todos.todos.length + 1
   };
 };
 
-const AddTodo = ({nextNumber, dispatch}) => {
+const AddTodo = ({archived, nextNumber, dispatch}) => {
+  if (archived) {
+    return null;
+  }
+
   let input;
 
   return (
@@ -47,6 +52,7 @@ const AddTodo = ({nextNumber, dispatch}) => {
 };
 
 AddTodo.propTypes = {
+  archived: PropTypes.bool.isRequired,
   nextNumber: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired
 };
