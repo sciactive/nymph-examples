@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {toggleTodo, changeTodo} from '../actions';
+import {toggleTodo, changeTodo, saveTodo} from '../actions';
 import TodoList from '../components/TodoList';
 
 const mapStateToProps = state => {
@@ -16,6 +16,9 @@ const mapDispatchToProps = dispatch => {
     },
     onTodoChange: (todo, name) => {
       dispatch(changeTodo(todo, name));
+    },
+    onTodoSave: (todo, name) => {
+      dispatch(saveTodo(todo, name));
     }
   };
 };

@@ -2,10 +2,13 @@ angular.module('sudokuApp', [])
 .service('Nymph', function() {
   return NymphClient.Nymph;
 })
+.service('PubSub', function() {
+  return NymphClient.PubSub;
+})
 .service('Game', function() {
   return Game.default;
 })
-.controller('SudokuController', ['$scope', '$interval', 'Nymph', 'Game', function($scope, $interval, Nymph, Game) {
+.controller('SudokuController', ['$scope', '$interval', 'Nymph', 'PubSub', 'Game', function($scope, $interval, Nymph, PubSub, Game) {
   $scope.uiState = {
     player: '',
     difficulty: 1,
@@ -41,7 +44,7 @@ angular.module('sudokuApp', [])
   };
 
   Nymph.getEntities({"class": 'Game'}).subscribe(function(games){
-    Nymph.updateArray($scope.uiState.games, games);
+    PubSub.updateArray($scope.uiState.games, games);
     Nymph.sort(
         $scope.uiState.games,
         $scope.uiState.sort,

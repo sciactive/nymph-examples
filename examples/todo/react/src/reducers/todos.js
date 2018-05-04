@@ -1,4 +1,4 @@
-import {Nymph} from 'nymph-client';
+import {Nymph, PubSub} from 'nymph-client';
 import Todo from 'Todo';
 
 const todos = (state = {todos: [], archived: false, sort: 'name'}, action) => {
@@ -10,7 +10,7 @@ const todos = (state = {todos: [], archived: false, sort: 'name'}, action) => {
         }
         let todos = state.todos.slice();
         let archived = action.archived;
-        Nymph.updateArray(todos, action.todos);
+        PubSub.updateArray(todos, action.todos);
         Nymph.sort(todos, state.sort);
         return {...state, todos, archived};
       }
@@ -40,11 +40,15 @@ const todos = (state = {todos: [], archived: false, sort: 'name'}, action) => {
     case 'CHANGE_TODO':
       {
         action.todo.set('name', action.name);
-        action.todo.save();
 
         let todos = state.todos.slice();
         todos.splice(action.todo.arraySearch(todos), 1, action.todo);
         return {...state, todos};
+      }
+    case 'SAVE_TODO':
+      {
+        action.todo.save();
+        return state;
       }
     case 'ARCHIVE_DONE_TODOS':
       {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Todo from 'Todo';
 
-const TodoEl = ({onClick, onChange, todo, archived}) => {
+const TodoEl = ({todo, archived, onClick, onChange, onSave}) => {
 
   const todoStyle = {
     display: 'inline',
@@ -23,7 +23,14 @@ const TodoEl = ({onClick, onChange, todo, archived}) => {
           {!archived &&
             <input type="checkbox" checked={todo.data.done} onChange={onClick} style={{marginRight: '5px'}} />
           }
-          <input type="text" style={todo.data.done ? todoStyleDone : todoStyle} defaultValue={todo.data.name} onKeyDown={e => e.keyCode === 13 && onChange(e.target.value)} onBlur={e => onChange(e.target.value)} />
+          <input
+            type="text"
+            style={todo.data.done ? todoStyleDone : todoStyle}
+            value={todo.data.name}
+            onChange={e => onChange(e.target.value)}
+            onKeyDown={e => e.keyCode === 13 && onSave()}
+            onBlur={e => onSave()}
+          />
         </span>
         <span style={{display: 'flex', marginLeft: '5px', flexShrink: 1}}>
           {(() => {
@@ -37,10 +44,11 @@ const TodoEl = ({onClick, onChange, todo, archived}) => {
 };
 
 TodoEl.propTypes = {
+  todo: PropTypes.instanceOf(Todo).isRequired,
+  archived: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  todo: PropTypes.instanceOf(Todo).isRequired,
-  archived: PropTypes.bool.isRequired
+  onSave: PropTypes.func.isRequired
 };
 
 export default TodoEl;

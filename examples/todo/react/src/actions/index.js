@@ -27,6 +27,13 @@ export const changeTodo = (todo, name) => {
   };
 };
 
+export const saveTodo = (todo) => {
+  return {
+    type: 'SAVE_TODO',
+    todo
+  };
+};
+
 export const archiveDoneTodos = () => {
   return {
     type: 'ARCHIVE_DONE_TODOS'
