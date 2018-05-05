@@ -1,1 +1,1 @@
-web: php examples/pubsub.php
+web: php examples/pubsub-tilmeld.php
