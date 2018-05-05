@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel Employee.src.js -o Employee.js",
     "watch": "babel Employee.src.js --watch -o Employee.js",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hunter Perrin <hperrin@gmail.com>",

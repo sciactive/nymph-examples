@@ -20,10 +20,10 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "npm install"
+      "./install-and-build.sh"
     ],
     "post-update-cmd": [
-      "npm install"
+      "./install-and-build.sh"
     ]
   },
   "minimum-stability": "beta"

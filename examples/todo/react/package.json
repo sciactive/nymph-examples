@@ -7,6 +7,7 @@
     "build": "webpack --display-error-details",
     "watch": "webpack --progress --colors --watch",
     "watch-notify": "webpack --watch | /usr/bin/env bash -c 'while read -r line; do if [[ $line =~ built ]]; then /usr/bin/notify-send -t 400 \"Ready\"; fi ; echo $line; done'",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hunter Perrin <hperrin@gmail.com>",
