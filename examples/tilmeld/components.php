@@ -6,16 +6,8 @@ $tilmeldDir = file_exists('../../../tilmeld-client/package.json')
     ? '../../../tilmeld-client'
     : '../../node_modules/tilmeld-client';
 
-function is_secure() {
-  // Always assume secure on production.
-  if (getenv('NYMPH_PRODUCTION')) {
-    return true;
-  }
-  if (isset($_SERVER['HTTPS'])) {
-    return (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1');
-  }
-  return (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443');
-}
+include('../get_pubsub_url.php');
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -29,20 +21,20 @@ function is_secure() {
     })();
     NymphOptions = {
       restURL: '../rest-tilmeld.php',
-      pubsubURL: '<?php echo is_secure() ? 'wss' : 'ws'; ?>://<?php echo getenv('NYMPH_PRODUCTION') ? 'nymph-pubsub-demo.herokuapp.com' : '\'+window.location.hostname+\''; ?>:<?php echo getenv('NYMPH_PRODUCTION') ? (is_secure() ? '443' : '80') : '8081'; ?>',
+      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
       rateLimit: 100
     };
   </script>
   <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
   <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldRecover.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldLogin.js"></script>
   <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldChangePassword.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/tilmeld-client.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/TilmeldClient.js"></script>
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
   <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
@@ -178,7 +170,7 @@ function is_secure() {
           currentUser.logout();
         }
       }
-    })(this, tilmeldClient.User, tilmeldClient.TilmeldLogin, tilmeldClient.TilmeldChangePassword);
+    })(this, TilmeldClient.User, TilmeldClient.TilmeldLogin, TilmeldClient.TilmeldChangePassword);
   </script>
 
   <style>

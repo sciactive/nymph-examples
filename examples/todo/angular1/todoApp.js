@@ -1,11 +1,14 @@
 angular.module('todoApp', [])
 .service('Nymph', function() {
-  return nymphClient.Nymph;
+  return NymphClient.Nymph;
+})
+.service('PubSub', function() {
+  return NymphClient.PubSub;
 })
 .service('Todo', function() {
   return Todo.default;
 })
-.controller('TodoController', ['$scope', 'Nymph', 'Todo', function($scope, Nymph, Todo) {
+.controller('TodoController', ['$scope', 'Nymph', 'PubSub', 'Todo', function($scope, Nymph, PubSub, Todo) {
   $scope.todos = [];
   $scope.uiState = {
     'sort': 'name',
@@ -21,7 +24,7 @@ angular.module('todoApp', [])
     subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe(function(todos){
       $scope.uiState.showArchived = archived;
       if (todos) {
-        Nymph.updateArray($scope.todos, todos);
+        PubSub.updateArray($scope.todos, todos);
         Nymph.sort($scope.todos, $scope.uiState.sort);
       }
       $scope.$apply();

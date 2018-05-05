@@ -14,6 +14,9 @@ class Todo extends \Nymph\Entity {
 
   public function __construct($id = 0) {
     $this->done = false;
+    $this->acUser = \Tilmeld\Tilmeld::DELETE_ACCESS;
+    $this->acGroup = \Tilmeld\Tilmeld::DELETE_ACCESS;
+    $this->acOther = \Tilmeld\Tilmeld::DELETE_ACCESS;
     parent::__construct($id);
   }
 

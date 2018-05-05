@@ -6,7 +6,8 @@
   "plugins": [
     ["transform-es2015-modules-umd", {
       "globals": {
-        "Game.src": "Game"
+        "Game.src": "Game",
+        "nymph-client": "NymphClient"
       },
       "exactGlobals": true
     }]

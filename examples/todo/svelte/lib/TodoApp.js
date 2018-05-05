@@ -1,16 +1,16 @@
 (function (global, factory) {
 	if (typeof define === "function" && define.amd) {
-		define(['exports', './TodoEl.html', 'Nymph', 'Todo'], factory);
+		define(['exports', './TodoEl.html', 'nymph-client', 'Todo'], factory);
 	} else if (typeof exports !== "undefined") {
-		factory(exports, require('./TodoEl.html'), require('Nymph'), require('Todo'));
+		factory(exports, require('./TodoEl.html'), require('nymph-client'), require('Todo'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, global.TodoEl, global.Nymph, global.Todo);
+		factory(mod.exports, global.TodoEl, global.NymphClient, global.Todo);
 		global.TodoApp = mod.exports;
 	}
-})(this, function (exports, _TodoEl, _Nymph, _Todo) {
+})(this, function (exports, _TodoEl, _nymphClient, _Todo) {
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -18,8 +18,6 @@
 	});
 
 	var _TodoEl2 = _interopRequireDefault(_TodoEl);
-
-	var _Nymph2 = _interopRequireDefault(_Nymph);
 
 	var _Todo2 = _interopRequireDefault(_Todo);
 
@@ -65,14 +63,14 @@
 			if (_subscription) {
 				_subscription.unsubscribe();
 			}
-			_subscription = _Nymph2.default.getEntities({ "class": 'Todo' }, { "type": archived ? '&' : '!&', "tag": 'archived' }).subscribe(function (newTodos) {
+			_subscription = _nymphClient.Nymph.getEntities({ "class": 'Todo' }, { "type": archived ? '&' : '!&', "tag": 'archived' }).subscribe(function (newTodos) {
 				_this.set({ uiShowArchived: archived });
 				if (newTodos !== undefined) {
 					var _get2 = _this.get(),
 					    todos = _get2.todos;
 
-					_Nymph2.default.updateArray(todos, newTodos);
-					_Nymph2.default.sort(todos, _this.get().uiSort);
+					_nymphClient.PubSub.updateArray(todos, newTodos);
+					_nymphClient.Nymph.sort(todos, _this.get().uiSort);
 					_this.set({ todos: todos });
 				}
 			}, null, function (count) {
@@ -98,7 +96,7 @@
 			});
 		},
 		sortTodos: function sortTodos() {
-			this.set({ todos: _Nymph2.default.sort(this.get().todos, this.get().uiSort) });
+			this.set({ todos: _nymphClient.Nymph.sort(this.get().todos, this.get().uiSort) });
 		},
 		save: function save(todo) {
 			todo.save().then(null, function (errObj) {
@@ -126,7 +124,7 @@
 			}
 		},
 		deleteTodos: function deleteTodos() {
-			_Nymph2.default.deleteEntities(this.get().todos);
+			_nymphClient.Nymph.deleteEntities(this.get().todos);
 		}
 	};
 

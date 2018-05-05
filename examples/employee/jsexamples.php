@@ -31,7 +31,7 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
     <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
     <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
     <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-    <script src="<?php echo $clientDir; ?>/lib/nymph-client.js"></script>
+    <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
 
     <!-- Tilmeld JS -->
     <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
@@ -90,7 +90,7 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
         $("#go").click(function(){
           (function(Nymph, Entity, Employee){
             eval($("#current-test").val());
-          })(nymphClient.Nymph, nymphClient.Entity, Employee.Employee);
+          })(NymphClient.Nymph, NymphClient.Entity, Employee.Employee);
         });
         $("#tests pre").click(function(){
           $("#current-test").val($(this).text());

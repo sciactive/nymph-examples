@@ -6,7 +6,8 @@
   "plugins": [
     ["transform-es2015-modules-umd", {
       "globals": {
-        "Employee.src": "Employee"
+        "Employee.src": "Employee",
+        "nymph-client": "NymphClient"
       },
       "exactGlobals": true
     }]

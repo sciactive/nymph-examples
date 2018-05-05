@@ -5,10 +5,10 @@ export const addTodo = name => {
   };
 };
 
-export const setVisibilityFilter = filter => {
+export const setSort = sort => {
   return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
+    type: 'SET_SORT',
+    sort
   };
 };
 
@@ -17,6 +17,33 @@ export const toggleTodo = todo => {
     type: 'TOGGLE_TODO',
     todo
   };
+};
+
+export const changeTodo = (todo, name) => {
+  return {
+    type: 'CHANGE_TODO',
+    todo,
+    name
+  };
+};
+
+export const saveTodo = (todo) => {
+  return {
+    type: 'SAVE_TODO',
+    todo
+  };
+};
+
+export const archiveDoneTodos = () => {
+  return {
+    type: 'ARCHIVE_DONE_TODOS'
+  }
+};
+
+export const deleteTodos = () => {
+  return {
+    type: 'DELETE_TODOS'
+  }
 };
 
 export const subscribe = archived => {

@@ -66,7 +66,7 @@
 
 <script>
   import TodoEl from './TodoEl.html';
-  import Nymph from 'Nymph';
+  import {Nymph, PubSub} from 'nymph-client';
   import Todo from 'Todo';
 
   export default {
@@ -104,7 +104,7 @@
           this.set({uiShowArchived: archived});
           if (newTodos !== undefined) {
             const {todos} = this.get();
-            Nymph.updateArray(todos, newTodos);
+            PubSub.updateArray(todos, newTodos);
             Nymph.sort(todos, this.get().uiSort);
             this.set({todos});
           }
