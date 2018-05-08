@@ -133,7 +133,6 @@ export class Game extends Entity {
 
 // === Static Properties ===
 
-Game.etype = 'game';
 // The name of the server class
 Game.class = 'Game';
 

@@ -195,7 +195,6 @@
 
   // === Static Properties ===
 
-  Game.etype = 'game';
   // The name of the server class
   Game.class = 'Game';
 

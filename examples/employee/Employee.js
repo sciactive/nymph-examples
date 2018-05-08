@@ -131,9 +131,8 @@
 
   // === Static Properties ===
 
-  Employee.etype = "employee";
   // The name of the server class
-  Employee.class = "Employee";
+  Employee.class = 'Employee';
 
   _nymphClient.Nymph.setEntityClass(Employee.class, Employee);
   exports.default = Employee;
