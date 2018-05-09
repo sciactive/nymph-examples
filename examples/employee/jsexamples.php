@@ -10,148 +10,158 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
     : '../../node_modules/nymph-query-editor';
 ?><!DOCTYPE html>
 <html>
-  <head>
-    <title>Nymph JS Test</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<head>
+  <title>Nymph JS Test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Nymph Config -->
-    <script type="text/javascript">
-      (function(){
-        var s = document.createElement("script"); s.setAttribute("src", "https://www.promisejs.org/polyfills/promise-5.0.0.min.js");
-        (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
-      })();
-      NymphOptions = {
-        restURL: '../rest.php'
-      };
-    </script>
+  <!-- Nymph Config -->
+  <script type="text/javascript">
+    (function(){
+      var s = document.createElement("script"); s.setAttribute("src", "https://www.promisejs.org/polyfills/promise-5.0.0.min.js");
+      (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+    NymphOptions = {
+      restURL: '../rest.php'
+    };
+  </script>
 
-    <!-- Nymph JS -->
-    <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-    <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-    <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-    <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
+  <!-- Nymph JS -->
+  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
+  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
 
-    <!-- Tilmeld JS -->
-    <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
-    <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
+  <!-- Tilmeld JS -->
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
 
-    <!-- Entity JS -->
-    <script src="Employee.js"></script>
+  <!-- Entity JS -->
+  <script src="Employee.js"></script>
 
-    <!-- Locutus strtotime (have to load it manually) -->
-    <script type="text/javascript">
-      if (typeof module !== "undefined") _module = module;
-      module = {};
-    </script>
-    <script src="../../node_modules/locutus/php/datetime/strtotime.js"></script>
-    <script type="text/javascript">
-      strtotime = module.exports;
-      delete module;
-      if (typeof _module !== "undefined") module = _module;
-    </script>
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"> -->
-  </head>
-  <body>
-    <style>
-      .w-auto {
-        width: auto;
-      }
-    </style>
+  <!-- Locutus strtotime (have to load it manually) -->
+  <script type="text/javascript">
+    if (typeof module !== "undefined") _module = module;
+    module = {};
+  </script>
+  <script src="../../node_modules/locutus/php/datetime/strtotime.js"></script>
+  <script type="text/javascript">
+    strtotime = module.exports;
+    delete module;
+    if (typeof _module !== "undefined") module = _module;
+  </script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+</head>
+<body>
+  <style>
+    body {
+      padding: 1em;
+    }
+    .w-auto {
+      width: auto;
+    }
+    .nymph-query-editor {
+      margin: 1em 0;
+    }
+  </style>
+  <div class="nymph-query-editor">
+    <h1>Query Editor</h1>
     <main></main>
-    <!-- App JS -->
-    <script src="<?php echo $queryEditorDir; ?>/lib/ValueEditor.js"></script>
-    <script src="<?php echo $queryEditorDir; ?>/lib/SelectorEditor.js"></script>
-    <script src="<?php echo $queryEditorDir; ?>/lib/QueryEditor.js"></script>
-    <script type="text/javascript">
-      ((global, QueryEditor, Employee) => {
-        const app = new QueryEditor({
-          target: document.querySelector('main'),
-          data: {
-            supportedClasses: [Employee],
-            options: {},
-            selectors: [],
-            classCheckbox: 'mr-1',
-            classInput: 'form-control form-control-sm d-inline w-auto',
-            classSelect: 'form-control form-control-sm d-inline w-auto',
-            classAddButton: 'btn btn-sm btn-primary mx-1',
-            classRemoveButton: 'btn btn-sm btn-danger mx-1',
-            classButton: 'btn btn-sm btn-secondary mx-1'
-          }
-        });
-      })(this, QueryEditor.default, Employee.Employee);
-    </script>
+  </div>
+  <!-- App JS -->
+  <script src="<?php echo $queryEditorDir; ?>/lib/umd/ValueEditor.js"></script>
+  <script src="<?php echo $queryEditorDir; ?>/lib/umd/SelectorEditor.js"></script>
+  <script src="<?php echo $queryEditorDir; ?>/lib/umd/QueryEditor.js"></script>
+  <script type="text/javascript">
+    ((global, QueryEditor, Employee) => {
+      const app = new QueryEditor({
+        target: document.querySelector('main'),
+        data: {
+          supportedClasses: [Employee],
+          options: {},
+          selectors: [],
+          classCheckbox: 'mr-1',
+          classInput: 'form-control form-control-sm d-inline w-auto',
+          classSelect: 'form-control form-control-sm d-inline w-auto',
+          classAddButton: 'btn btn-sm btn-primary mx-1',
+          classRemoveButton: 'btn btn-sm btn-danger mx-1',
+          classButton: 'btn btn-sm btn-secondary mx-1'
+        }
+      });
+    })(this, QueryEditor.default, Employee.Employee);
+  </script>
 
-
-    <script>
-      $(function(){
-        $("#go").click(function(){
-          (function(Nymph, Entity, Employee){
-            eval($("#current-test").val());
-          })(NymphClient.Nymph, NymphClient.Entity, Employee.Employee);
-        });
-        $("#tests pre").click(function(){
-          $("#current-test").val($(this).text());
-        });
-        $("#tests h4").each(function(){
-          var that = $(this), option = $("<option>"+$(this).text()+"</option>");
-          $("#test-selector").append(option).change(function(){
-            if ($(this).find("option:selected").is(option))
-              that.next("pre").click();
-          });
+  <h1>Client Tests</h1>
+  <script>
+    $(function(){
+      $("#go").click(function(){
+        (function(Nymph, Entity, Employee){
+          eval($("#current-test").val());
+        })(NymphClient.Nymph, NymphClient.Entity, Employee.Employee);
+      });
+      $("#tests pre").click(function(){
+        $("#current-test").val($(this).text());
+      });
+      $("#tests h4").each(function(){
+        var that = $(this), option = $("<option>"+$(this).text()+"</option>");
+        $("#test-selector").append(option).change(function(){
+          if ($(this).find("option:selected").is(option))
+            that.next("pre").click();
         });
       });
-    </script>
-    <div style="width: 49%; float: left;">
-      <textarea id="current-test" rows="20" style="width: 95%; font-family: monospace; border: 1px solid #000; padding: 10px;"></textarea>
-      <br>Choose a snippet below and <button id="go">Go</button>
-    </div>
-    <div style="width: 47%; height: 300px; float: left; overflow: auto; border: 1px solid #000;">
-      <div style="padding: 10px;" id="result">result here</div>
-    </div>
-    <br style="clear: both;">
-    <select id="test-selector">
-      <option>-</option>
-    </select>
-    <div id="tests">
-      <h4>Try to save Entity class directly</h4>
-      <pre>var entity = new Entity();
+    });
+  </script>
+  <div style="width: 49%; float: left;">
+    <textarea id="current-test" rows="20" style="width: 95%; font-family: monospace; border: 1px solid #000; padding: 10px;"></textarea>
+    <br>Choose a snippet below and <button id="go" class="btn btn-sm btn-primary">Go</button>
+  </div>
+  <div style="width: 47%; height: 300px; float: left; overflow: auto; border: 1px solid #000;">
+    <div style="padding: 10px;" id="result">result here</div>
+  </div>
+  <br style="clear: both;">
+  <select id="test-selector">
+    <option>-</option>
+  </select>
+  <hr />
+  <div id="tests">
+    <h4>Try to save Entity class directly</h4>
+    <pre>var entity = new Entity();
 entity.set("something", "Anything");
 entity.save().then(function(entity){
   $("#result").html("fail (Entity should not be usabe from the client.)");
 }, function(errObj){
   $("#result").html("pass");
 });</pre>
-      <h4>Handle Forbidden Method</h4>
-      <pre>Employee.inaccessibleMethod().then(function(data){
+    <h4>Handle Forbidden Method</h4>
+    <pre>Employee.inaccessibleMethod().then(function(data){
 $("#result").html(data);
 }, function(errObj){
 $("#result").html(JSON.stringify(errObj));
 });</pre>
-      <h4>Handle Server Side Static Exception</h4>
-      <pre>Employee.throwErrorStatic().then(function(data){
+    <h4>Handle Server Side Static Exception</h4>
+    <pre>Employee.throwErrorStatic().then(function(data){
   $("#result").html(data);
 }, function(errObj){
   $("#result").html(JSON.stringify(errObj));
 });</pre>
-      <h4>Handle Server Side Exception</h4>
-      <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+    <h4>Handle Server Side Exception</h4>
+    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   jane.throwError().then(function(data){
     $("#result").html(data);
   }, function(errObj){
     $("#result").html(JSON.stringify(errObj));
   });
 });</pre>
-      <h4>Call a Server Side Static Method</h4>
-      <pre>Employee.testStatic(5).then(function(data){
+    <h4>Call a Server Side Static Method</h4>
+    <pre>Employee.testStatic(5).then(function(data){
   $("#result").html(data);
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Refresh an entity</h4>
-      <pre>var promise1 = Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}),
+    <h4>Refresh an entity</h4>
+    <pre>var promise1 = Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}),
     promise2 = Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]});
 
 Promise.all([promise1, promise2]).then(function(entities){
@@ -175,8 +185,8 @@ Promise.all([promise1, promise2]).then(function(entities){
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Check two entities are equal</h4>
-      <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(first){
+    <h4>Check two entities are equal</h4>
+    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(first){
   Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","guid":first.guid}).then(function(second){
     first.data.thing = 'this';
     first.data.other = 'this';
@@ -189,8 +199,8 @@ Promise.all([promise1, promise2]).then(function(entities){
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Check two objects are the same entity</h4>
-      <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(first){
+    <h4>Check two objects are the same entity</h4>
+    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(first){
   Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","guid":first.guid}).then(function(second){
     $("#result").html(JSON.stringify(first.is(second)));
   }, function(errObj){
@@ -199,20 +209,20 @@ Promise.all([promise1, promise2]).then(function(entities){
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Get a new UID</h4>
-      <pre>Nymph.newUID('employee').then(function(uidValue){
+    <h4>Get a new UID</h4>
+    <pre>Nymph.newUID('employee').then(function(uidValue){
   $("#result").html(uidValue);
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-    <h4>Get UID value</h4>
+  <h4>Get UID value</h4>
+  <pre>Nymph.getUID('employee').then(function(uidValue){
+  $("#result").html(uidValue);
+}, function(errObj){
+  $("#result").html(errObj.textStatus);
+});</pre>
+    <h4>Set UID value</h4>
     <pre>Nymph.getUID('employee').then(function(uidValue){
-  $("#result").html(uidValue);
-}, function(errObj){
-  $("#result").html(errObj.textStatus);
-});</pre>
-      <h4>Set UID value</h4>
-      <pre>Nymph.getUID('employee').then(function(uidValue){
   if (confirm("Decrement UID employee to "+(uidValue-1))) {
     Nymph.setUID('employee', uidValue-1).then(function(success){
       $("#result").html(success);
@@ -223,14 +233,14 @@ Promise.all([promise1, promise2]).then(function(entities){
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Delete UID</h4>
-      <pre>Nymph.deleteUID('employee').then(function(data){
+    <h4>Delete UID</h4>
+    <pre>Nymph.deleteUID('employee').then(function(data){
   $("#result").html(data);
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Create an entity</h4>
-      <pre>var entity = new Employee();
+    <h4>Create an entity</h4>
+    <pre>var entity = new Employee();
 entity.set("name", "Jane Doe");
 entity.set({
   "current": true,
@@ -246,8 +256,8 @@ entity.save().then(function(jane){
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Create two unrelated entities</h4>
-      <pre>var entity = new Employee();
+    <h4>Create two unrelated entities</h4>
+    <pre>var entity = new Employee();
 entity.set({
   "name": "Jane Doe",
   "current": true,
@@ -276,8 +286,8 @@ Nymph.saveEntities([entity, entity2]).then(function(entities){
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Create two related entities</h4>
-      <pre>var entity = new Employee();
+    <h4>Create two related entities</h4>
+    <pre>var entity = new Employee();
 entity.set({
   "name": "Jane Doe",
   "current": true,
@@ -305,8 +315,8 @@ entity.save().then(function(jane){
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Add, check, and remove tags</h4>
-      <pre>$("#result").html("");
+    <h4>Add, check, and remove tags</h4>
+    <pre>$("#result").html("");
 var entity = new Entity;
 entity.addTag('test');
 console.log(entity.tags);
@@ -356,8 +366,8 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
   $("#result").append("fail&lt;br&gt;");
 }
 </pre>
-      <h4>Wake a sleeping reference</h4>
-      <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+    <h4>Wake a sleeping reference</h4>
+    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   var entity = new Employee();
   entity.referenceSleep(['nymph_entity_reference', jane.guid, 'Employee']);
   entity.ready(function(entity){
@@ -368,8 +378,8 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-    <h4>Change an entity</h4>
-    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["current",true]}).then(function(employee){
+  <h4>Change an entity</h4>
+  <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["current",true]}).then(function(employee){
   $("#result").html(JSON.stringify(employee)+'&lt;br&gt;&lt;br&gt;');
   delete employee.data.salary;
   employee.set("current", false);
@@ -382,44 +392,44 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Get an entity</h4>
-      <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+    <h4>Get an entity</h4>
+    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   $("#result").html(JSON.stringify(jane));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Get entities</h4>
-      <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"]}).then(function(entities){
+    <h4>Get entities</h4>
+    <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"]}).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Use deep selector 1</h4>
-      <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"],"1":{"type":"|","like":["name","%Jane%"]}}).then(function(entities){
+    <h4>Use deep selector 1</h4>
+    <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"],"1":{"type":"|","like":["name","%Jane%"]}}).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Use deep selector 2</h4>
-      <pre>Nymph.getEntities({"class":"Employee","limit":4},["&amp;",{"tag":["employee"]},{"type":"|","like":["name","%Jane%"]}]).then(function(entities){
+    <h4>Use deep selector 2</h4>
+    <pre>Nymph.getEntities({"class":"Employee","limit":4},["&amp;",{"tag":["employee"]},{"type":"|","like":["name","%Jane%"]}]).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Use deep selector 3</h4>
-      <pre>Nymph.getEntities({"class":"Employee","limit":4},["&amp;",{"tag":["employee"]},["|",{"like":["name","%Jane%"]}]]).then(function(entities){
+    <h4>Use deep selector 3</h4>
+    <pre>Nymph.getEntities({"class":"Employee","limit":4},["&amp;",{"tag":["employee"]},["|",{"like":["name","%Jane%"]}]]).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Use really deep selector</h4>
-      <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"],"1":{"type":"|","1":{"type":"&amp;","like":["name","%Jane%"]}}}).then(function(entities){
+    <h4>Use really deep selector</h4>
+    <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"],"1":{"type":"|","1":{"type":"&amp;","like":["name","%Jane%"]}}}).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Delete an entity</h4>
-      <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+    <h4>Delete an entity</h4>
+    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   $("#result").html(JSON.stringify(jane)+'&lt;br&gt;&lt;br&gt;');
   jane.delete().then(function(deleted){
     $("#result").append(JSON.stringify(deleted));
@@ -429,8 +439,8 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Delete entities</h4>
-      <pre>Nymph.getEntities({"class":"Employee","limit":2},{"type":"&amp;","strict":["name","Jane Doe"]}).then(function(janes){
+    <h4>Delete entities</h4>
+    <pre>Nymph.getEntities({"class":"Employee","limit":2},{"type":"&amp;","strict":["name","Jane Doe"]}).then(function(janes){
   $("#result").html(JSON.stringify(janes)+'&lt;br&gt;&lt;br&gt;');
   Nymph.deleteEntities(janes).then(function(deleted){
     $("#result").append(JSON.stringify(deleted));
@@ -440,8 +450,8 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
-      <h4>Hierarchical Sort</h4>
-      <pre>var array = [], promises = [], promises2 = [], promises3 = [];
+    <h4>Hierarchical Sort</h4>
+    <pre>var array = [], promises = [], promises2 = [], promises3 = [];
 for (var i = 0; i < 10; i++) {
   var emp = new Employee();
   emp.set({
@@ -531,6 +541,6 @@ Promise.all(promises).then(function(){
     });
   });
 });</pre>
-    </div>
-  </body>
+  </div>
+</body>
 </html>
