@@ -147,7 +147,7 @@ $("#result").html(JSON.stringify(errObj));
   $("#result").html(JSON.stringify(errObj));
 });</pre>
     <h4>Handle Server Side Exception</h4>
-    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+    <pre>Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   jane.throwError().then(function(data){
     $("#result").html(data);
   }, function(errObj){
@@ -161,8 +161,8 @@ $("#result").html(JSON.stringify(errObj));
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Refresh an entity</h4>
-    <pre>var promise1 = Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}),
-    promise2 = Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]});
+    <pre>var promise1 = Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]}),
+    promise2 = Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]});
 
 Promise.all([promise1, promise2]).then(function(entities){
   entities[0].data.name = "Janet Doe";
@@ -186,8 +186,8 @@ Promise.all([promise1, promise2]).then(function(entities){
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Check two entities are equal</h4>
-    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(first){
-  Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","guid":first.guid}).then(function(second){
+    <pre>Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(first){
+  Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","guid":first.guid}).then(function(second){
     first.data.thing = 'this';
     first.data.other = 'this';
     second.data.other = 'this';
@@ -200,8 +200,8 @@ Promise.all([promise1, promise2]).then(function(entities){
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Check two objects are the same entity</h4>
-    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(first){
-  Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","guid":first.guid}).then(function(second){
+    <pre>Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(first){
+  Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","guid":first.guid}).then(function(second){
     $("#result").html(JSON.stringify(first.is(second)));
   }, function(errObj){
     $("#result").html(errObj.textStatus);
@@ -367,7 +367,7 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
 }
 </pre>
     <h4>Wake a sleeping reference</h4>
-    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+    <pre>Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   var entity = new Employee();
   entity.referenceSleep(['nymph_entity_reference', jane.guid, 'Employee']);
   entity.ready(function(entity){
@@ -379,7 +379,7 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
   $("#result").html(errObj.textStatus);
 });</pre>
   <h4>Change an entity</h4>
-  <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["current",true]}).then(function(employee){
+  <pre>Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["current",true]}).then(function(employee){
   $("#result").html(JSON.stringify(employee)+'&lt;br&gt;&lt;br&gt;');
   delete employee.data.salary;
   employee.set("current", false);
@@ -393,43 +393,49 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Get an entity</h4>
-    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+    <pre>Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   $("#result").html(JSON.stringify(jane));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Get entities</h4>
-    <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"]}).then(function(entities){
+    <pre>Nymph.getEntities({"class":Employee.class,"limit":4},{"type":"&amp;","tag":["employee"]}).then(function(entities){
+  $("#result").html(JSON.stringify(entities));
+}, function(errObj){
+  $("#result").html(errObj.textStatus);
+});</pre>
+    <h4>Get entity GUIDs</h4>
+    <pre>Nymph.getEntities({"class":Employee.class,"return":"guid"},{"type":"&amp;","tag":["employee"]}).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Use deep selector 1</h4>
-    <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"],"1":{"type":"|","like":["name","%Jane%"]}}).then(function(entities){
+    <pre>Nymph.getEntities({"class":Employee.class,"limit":4},{"type":"&amp;","tag":["employee"],"1":{"type":"|","like":["name","%Jane%"]}}).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Use deep selector 2</h4>
-    <pre>Nymph.getEntities({"class":"Employee","limit":4},["&amp;",{"tag":["employee"]},{"type":"|","like":["name","%Jane%"]}]).then(function(entities){
+    <pre>Nymph.getEntities({"class":Employee.class,"limit":4},["&amp;",{"tag":["employee"]},{"type":"|","like":["name","%Jane%"]}]).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Use deep selector 3</h4>
-    <pre>Nymph.getEntities({"class":"Employee","limit":4},["&amp;",{"tag":["employee"]},["|",{"like":["name","%Jane%"]}]]).then(function(entities){
+    <pre>Nymph.getEntities({"class":Employee.class,"limit":4},["&amp;",{"tag":["employee"]},["|",{"like":["name","%Jane%"]}]]).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Use really deep selector</h4>
-    <pre>Nymph.getEntities({"class":"Employee","limit":4},{"type":"&amp;","tag":["employee"],"1":{"type":"|","1":{"type":"&amp;","like":["name","%Jane%"]}}}).then(function(entities){
+    <pre>Nymph.getEntities({"class":Employee.class,"limit":4},{"type":"&amp;","tag":["employee"],"1":{"type":"|","1":{"type":"&amp;","like":["name","%Jane%"]}}}).then(function(entities){
   $("#result").html(JSON.stringify(entities));
 }, function(errObj){
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Delete an entity</h4>
-    <pre>Nymph.getEntity({"class":"Employee"}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
+    <pre>Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   $("#result").html(JSON.stringify(jane)+'&lt;br&gt;&lt;br&gt;');
   jane.delete().then(function(deleted){
     $("#result").append(JSON.stringify(deleted));
@@ -440,7 +446,7 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
   $("#result").html(errObj.textStatus);
 });</pre>
     <h4>Delete entities</h4>
-    <pre>Nymph.getEntities({"class":"Employee","limit":2},{"type":"&amp;","strict":["name","Jane Doe"]}).then(function(janes){
+    <pre>Nymph.getEntities({"class":Employee.class,"limit":2},{"type":"&amp;","strict":["name","Jane Doe"]}).then(function(janes){
   $("#result").html(JSON.stringify(janes)+'&lt;br&gt;&lt;br&gt;');
   Nymph.deleteEntities(janes).then(function(deleted){
     $("#result").append(JSON.stringify(deleted));
