@@ -38,7 +38,7 @@ include('../get_pubsub_url.php');
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
   <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
   <header>
@@ -62,25 +62,25 @@ include('../get_pubsub_url.php');
     <div class="login-row">
       <div class="login-container">
         <h2>Login (Normal Layout)</h2>
-        <login data-layout="normal" data-show-existing-user-checkbox="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
+        <login data-layout="normal" data-show-existing-user-toggle="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
       </div>
       <div class="login-container">
         <h2>Login (Small Layout)</h2>
-        <login data-layout="small" data-show-existing-user-checkbox="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
+        <login data-layout="small" data-show-existing-user-toggle="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
       </div>
     </div>
     <div class="login-row">
       <div class="login-container">
         <h2>Login (Compact Layout)</h2>
-        <login data-layout="compact" data-show-existing-user-checkbox="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
+        <login data-layout="compact" data-show-existing-user-toggle="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
       </div>
       <div class="login-container">
         <h2>Login (Compact Layout, Only Login)</h2>
-        <login data-layout="compact" data-show-existing-user-checkbox="false" data-existing-user="true" data-compact-text="Log in"></login>
+        <login data-layout="compact" data-show-existing-user-toggle="false" data-existing-user="true" data-compact-text="Log in"></login>
       </div>
       <div class="login-container">
         <h2>Login (Compact Layout, Only Register)</h2>
-        <login data-layout="compact" data-show-existing-user-checkbox="false" data-existing-user="false" data-compact-text="Sign up"></login>
+        <login data-layout="compact" data-show-existing-user-toggle="false" data-existing-user="false" data-compact-text="Sign up"></login>
       </div>
     </div>
     <div class="change-password-row">
@@ -113,15 +113,18 @@ include('../get_pubsub_url.php');
             autofocus: false,
             compactText: login.dataset.compactText,
             existingUser: login.dataset.existingUser === "true",
-            showExistingUserCheckbox: login.dataset.showExistingUserCheckbox === "true",
+            showExistingUserToggle: login.dataset.showExistingUserToggle === "true",
             layout: login.dataset.layout,
-            classCheckbox: '',
             classInput: 'form-control',
             classRadio: '',
             classSelect: 'form-control',
             classTextarea: 'form-control',
             classSubmit: 'btn btn-primary',
-            classButton: 'btn btn-secondary'
+            classButtonGroup: 'btn-group d-flex',
+            classButton: 'btn btn-secondary',
+            classButtonToggle: 'flex-grow-1',
+            classButtonActive: 'active',
+            disableActiveButton: false
           }
         });
 
