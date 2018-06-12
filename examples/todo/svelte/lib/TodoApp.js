@@ -45,6 +45,7 @@
 
 	function data() {
 		return {
+			_disconnected: false,
 			todos: [],
 			uiSort: 'name',
 			uiShowArchived: false,
@@ -129,7 +130,29 @@
 	};
 
 	function oncreate() {
+		var _this3 = this;
+
 		this.getTodos(this.get().uiShowArchived);
+
+		_nymphClient.PubSub.on('disconnect', function () {
+			_this3.set({ _disconnected: true });
+		});
+
+		_nymphClient.PubSub.on('connect', function () {
+			if (_this3.get()._disconnected) {
+				_this3.getTodos(_this3.get().uiShowArchived);
+
+				var _get4 = _this3.get(),
+				    todos = _get4.todos;
+
+				todos.map(function (todo) {
+					return todo.refresh().then(function () {
+						return _this3.set({ todos: todos });
+					});
+				});
+			}
+			_this3.set({ _disconnected: false });
+		});
 	};
 
 	function add_css() {
@@ -140,9 +163,11 @@
 	}
 
 	function create_main_fragment(component, state) {
-		var div, div_1, div_2, div_3, text, text_3, div_4, small, text_4, text_5, br, text_6, text_8, text_11, text_12, div_5, text_13, text_14;
+		var div, text, div_1, div_2, div_3, text_1, text_4, div_4, small, text_5, text_6, br, text_7, text_9, text_12, text_13, div_5, text_14, text_15;
 
-		var if_block = !state.todos.length && create_if_block(component, state);
+		var if_block = state._disconnected && create_if_block(component, state);
+
+		var if_block_1 = !state.todos.length && create_if_block_1(component, state);
 
 		var each_value = state.todos;
 
@@ -157,58 +182,60 @@
 		}
 
 		function select_block_type_1(state) {
-			if (state.uiShowArchived) return create_if_block_1;
-			return create_if_block_2;
+			if (state.uiShowArchived) return create_if_block_2;
+			return create_if_block_3;
 		}
 
 		var current_block_type = select_block_type_1(state);
-		var if_block_1 = current_block_type(component, state);
+		var if_block_2 = current_block_type(component, state);
 
-		var if_block_2 = state.todos.length > 0 && create_if_block_5(component, state);
+		var if_block_3 = state.todos.length > 0 && create_if_block_6(component, state);
 
 		function select_block_type_3(state) {
-			if (state.uiShowArchived) return create_if_block_8;
-			return create_if_block_9;
+			if (state.uiShowArchived) return create_if_block_9;
+			return create_if_block_10;
 		}
 
 		var current_block_type_1 = select_block_type_3(state);
-		var if_block_3 = current_block_type_1(component, state);
+		var if_block_4 = current_block_type_1(component, state);
 
-		var if_block_4 = state.todos.length > 1 && create_if_block_10(component, state);
+		var if_block_5 = state.todos.length > 1 && create_if_block_11(component, state);
 
-		var if_block_5 = !state.uiShowArchived && create_if_block_11(component, state);
+		var if_block_6 = !state.uiShowArchived && create_if_block_12(component, state);
 
 		return {
 			c: function create() {
 				div = createElement("div");
+				if (if_block) if_block.c();
+				text = createText("\n  ");
 				div_1 = createElement("div");
 				div_2 = createElement("div");
 				div_3 = createElement("div");
-				if (if_block) if_block.c();
-				text = createText("\n        ");
+				if (if_block_1) if_block_1.c();
+				text_1 = createText("\n        ");
 
 				for (var i = 0; i < each_blocks.length; i += 1) {
 					each_blocks[i].c();
 				}
 
-				text_3 = createText("\n    ");
+				text_4 = createText("\n    ");
 				div_4 = createElement("div");
 				small = createElement("small");
-				if_block_1.c();
-				text_4 = createText("\n        ");
-				if (if_block_2) if_block_2.c();
+				if_block_2.c();
 				text_5 = createText("\n        ");
-				br = createElement("br");
+				if (if_block_3) if_block_3.c();
 				text_6 = createText("\n        ");
-				if_block_3.c();
-				text_8 = createText("\n      ");
-				if (if_block_4) if_block_4.c();
-				text_11 = createText("\n  ");
+				br = createElement("br");
+				text_7 = createText("\n        ");
+				if_block_4.c();
+				text_9 = createText("\n      ");
 				if (if_block_5) if_block_5.c();
 				text_12 = createText("\n  ");
+				if (if_block_6) if_block_6.c();
+				text_13 = createText("\n  ");
 				div_5 = createElement("div");
-				text_13 = createText("Active Users: ");
-				text_14 = createText(state.userCount);
+				text_14 = createText("Active Users: ");
+				text_15 = createText(state.userCount);
 				this.h();
 			},
 
@@ -227,47 +254,61 @@
 
 			m: function mount(target, anchor) {
 				insertNode(div, target, anchor);
+				if (if_block) if_block.m(div, null);
+				appendNode(text, div);
 				appendNode(div_1, div);
 				appendNode(div_2, div_1);
 				appendNode(div_3, div_2);
-				if (if_block) if_block.m(div_3, null);
-				appendNode(text, div_3);
+				if (if_block_1) if_block_1.m(div_3, null);
+				appendNode(text_1, div_3);
 
 				for (var i = 0; i < each_blocks.length; i += 1) {
 					each_blocks[i].m(div_3, null);
 				}
 
-				appendNode(text_3, div_1);
+				appendNode(text_4, div_1);
 				appendNode(div_4, div_1);
 				appendNode(small, div_4);
-				if_block_1.m(small, null);
-				appendNode(text_4, small);
-				if (if_block_2) if_block_2.m(small, null);
+				if_block_2.m(small, null);
 				appendNode(text_5, small);
-				appendNode(br, small);
+				if (if_block_3) if_block_3.m(small, null);
 				appendNode(text_6, small);
-				if_block_3.m(small, null);
-				appendNode(text_8, div_4);
-				if (if_block_4) if_block_4.m(div_4, null);
-				appendNode(text_11, div);
-				if (if_block_5) if_block_5.m(div, null);
+				appendNode(br, small);
+				appendNode(text_7, small);
+				if_block_4.m(small, null);
+				appendNode(text_9, div_4);
+				if (if_block_5) if_block_5.m(div_4, null);
 				appendNode(text_12, div);
+				if (if_block_6) if_block_6.m(div, null);
+				appendNode(text_13, div);
 				appendNode(div_5, div);
-				appendNode(text_13, div_5);
 				appendNode(text_14, div_5);
+				appendNode(text_15, div_5);
 			},
 
 			p: function update(changed, state) {
-				if (!state.todos.length) {
+				if (state._disconnected) {
 					if (!if_block) {
 						if_block = create_if_block(component, state);
 						if_block.c();
-						if_block.m(div_3, text);
+						if_block.m(div, text);
 					}
 				} else if (if_block) {
 					if_block.u();
 					if_block.d();
 					if_block = null;
+				}
+
+				if (!state.todos.length) {
+					if (!if_block_1) {
+						if_block_1 = create_if_block_1(component, state);
+						if_block_1.c();
+						if_block_1.m(div_3, text_1);
+					}
+				} else if (if_block_1) {
+					if_block_1.u();
+					if_block_1.d();
+					if_block_1 = null;
 				}
 
 				var each_value = state.todos;
@@ -296,59 +337,45 @@
 					each_blocks.length = each_value.length;
 				}
 
-				if (current_block_type === (current_block_type = select_block_type_1(state)) && if_block_1) {
-					if_block_1.p(changed, state);
+				if (current_block_type === (current_block_type = select_block_type_1(state)) && if_block_2) {
+					if_block_2.p(changed, state);
 				} else {
-					if_block_1.u();
-					if_block_1.d();
-					if_block_1 = current_block_type(component, state);
-					if_block_1.c();
-					if_block_1.m(small, text_4);
+					if_block_2.u();
+					if_block_2.d();
+					if_block_2 = current_block_type(component, state);
+					if_block_2.c();
+					if_block_2.m(small, text_5);
 				}
 
 				if (state.todos.length > 0) {
-					if (if_block_2) {
-						if_block_2.p(changed, state);
+					if (if_block_3) {
+						if_block_3.p(changed, state);
 					} else {
-						if_block_2 = create_if_block_5(component, state);
-						if_block_2.c();
-						if_block_2.m(small, text_5);
+						if_block_3 = create_if_block_6(component, state);
+						if_block_3.c();
+						if_block_3.m(small, text_6);
 					}
-				} else if (if_block_2) {
-					if_block_2.u();
-					if_block_2.d();
-					if_block_2 = null;
+				} else if (if_block_3) {
+					if_block_3.u();
+					if_block_3.d();
+					if_block_3 = null;
 				}
 
 				if (current_block_type_1 !== (current_block_type_1 = select_block_type_3(state))) {
-					if_block_3.u();
-					if_block_3.d();
-					if_block_3 = current_block_type_1(component, state);
-					if_block_3.c();
-					if_block_3.m(small, null);
+					if_block_4.u();
+					if_block_4.d();
+					if_block_4 = current_block_type_1(component, state);
+					if_block_4.c();
+					if_block_4.m(small, null);
 				}
 
 				if (state.todos.length > 1) {
-					if (if_block_4) {
-						if_block_4.p(changed, state);
-					} else {
-						if_block_4 = create_if_block_10(component, state);
-						if_block_4.c();
-						if_block_4.m(div_4, null);
-					}
-				} else if (if_block_4) {
-					if_block_4.u();
-					if_block_4.d();
-					if_block_4 = null;
-				}
-
-				if (!state.uiShowArchived) {
 					if (if_block_5) {
 						if_block_5.p(changed, state);
 					} else {
 						if_block_5 = create_if_block_11(component, state);
 						if_block_5.c();
-						if_block_5.m(div, text_12);
+						if_block_5.m(div_4, null);
 					}
 				} else if (if_block_5) {
 					if_block_5.u();
@@ -356,42 +383,85 @@
 					if_block_5 = null;
 				}
 
+				if (!state.uiShowArchived) {
+					if (if_block_6) {
+						if_block_6.p(changed, state);
+					} else {
+						if_block_6 = create_if_block_12(component, state);
+						if_block_6.c();
+						if_block_6.m(div, text_13);
+					}
+				} else if (if_block_6) {
+					if_block_6.u();
+					if_block_6.d();
+					if_block_6 = null;
+				}
+
 				if (changed.userCount) {
-					text_14.data = state.userCount;
+					text_15.data = state.userCount;
 				}
 			},
 
 			u: function unmount() {
 				detachNode(div);
 				if (if_block) if_block.u();
+				if (if_block_1) if_block_1.u();
 
 				for (var i = 0; i < each_blocks.length; i += 1) {
 					each_blocks[i].u();
 				}
 
-				if_block_1.u();
-				if (if_block_2) if_block_2.u();
-				if_block_3.u();
-				if (if_block_4) if_block_4.u();
+				if_block_2.u();
+				if (if_block_3) if_block_3.u();
+				if_block_4.u();
 				if (if_block_5) if_block_5.u();
+				if (if_block_6) if_block_6.u();
 			},
 
 			d: function destroy() {
 				if (if_block) if_block.d();
+				if (if_block_1) if_block_1.d();
 
 				destroyEach(each_blocks);
 
-				if_block_1.d();
-				if (if_block_2) if_block_2.d();
-				if_block_3.d();
-				if (if_block_4) if_block_4.d();
+				if_block_2.d();
+				if (if_block_3) if_block_3.d();
+				if_block_4.d();
 				if (if_block_5) if_block_5.d();
+				if (if_block_6) if_block_6.d();
 			}
 		};
 	}
 
-	// (5:8) {#if !todos.length}
+	// (2:2) {#if _disconnected}
 	function create_if_block(component, state) {
+		var div;
+
+		return {
+			c: function create() {
+				div = createElement("div");
+				div.textContent = "You are disconnected. Check to make sure you're online.";
+				this.h();
+			},
+
+			h: function hydrate() {
+				div.className = "alert alert-danger";
+			},
+
+			m: function mount(target, anchor) {
+				insertNode(div, target, anchor);
+			},
+
+			u: function unmount() {
+				detachNode(div);
+			},
+
+			d: noop
+		};
+	}
+
+	// (10:8) {#if !todos.length}
+	function create_if_block_1(component, state) {
 		var div;
 
 		return {
@@ -417,7 +487,7 @@
 		};
 	}
 
-	// (8:8) {#each todos as todo}
+	// (13:8) {#each todos as todo}
 	function create_each_block(component, state) {
 		var todo = state.todo,
 		    each_value = state.each_value,
@@ -482,8 +552,8 @@
 		};
 	}
 
-	// (19:12) {#if todos.length == 0}
-	function create_if_block_3(component, state) {
+	// (24:12) {#if todos.length == 0}
+	function create_if_block_4(component, state) {
 		var span;
 
 		return {
@@ -506,8 +576,8 @@
 		};
 	}
 
-	// (21:12) {:else}
-	function create_if_block_4(component, state) {
+	// (26:12) {:else}
+	function create_if_block_5(component, state) {
 		var span,
 		    text,
 		    text_1,
@@ -550,8 +620,8 @@
 		};
 	}
 
-	// (15:8) {#if uiShowArchived}
-	function create_if_block_1(component, state) {
+	// (20:8) {#if uiShowArchived}
+	function create_if_block_2(component, state) {
 		var span,
 		    text_value = state.todos.length,
 		    text,
@@ -584,13 +654,13 @@
 		};
 	}
 
-	// (17:8) {:else}
-	function create_if_block_2(component, state) {
+	// (22:8) {:else}
+	function create_if_block_3(component, state) {
 		var span;
 
 		function select_block_type(state) {
-			if (state.todos.length == 0) return create_if_block_3;
-			return create_if_block_4;
+			if (state.todos.length == 0) return create_if_block_4;
+			return create_if_block_5;
 		}
 
 		var current_block_type = select_block_type(state);
@@ -630,8 +700,8 @@
 		};
 	}
 
-	// (29:12) {#if uiShowArchived}
-	function create_if_block_6(component, state) {
+	// (34:12) {#if uiShowArchived}
+	function create_if_block_7(component, state) {
 		var a;
 
 		function click_handler(event) {
@@ -664,8 +734,8 @@
 		};
 	}
 
-	// (31:12) {:else}
-	function create_if_block_7(component, state) {
+	// (36:12) {:else}
+	function create_if_block_8(component, state) {
 		var a;
 
 		function click_handler(event) {
@@ -698,13 +768,13 @@
 		};
 	}
 
-	// (26:8) {#if todos.length > 0}
-	function create_if_block_5(component, state) {
+	// (31:8) {#if todos.length > 0}
+	function create_if_block_6(component, state) {
 		var span, text, text_1;
 
 		function select_block_type_2(state) {
-			if (state.uiShowArchived) return create_if_block_6;
-			return create_if_block_7;
+			if (state.uiShowArchived) return create_if_block_7;
+			return create_if_block_8;
 		}
 
 		var current_block_type = select_block_type_2(state);
@@ -746,8 +816,8 @@
 		};
 	}
 
-	// (38:8) {#if uiShowArchived}
-	function create_if_block_8(component, state) {
+	// (43:8) {#if uiShowArchived}
+	function create_if_block_9(component, state) {
 		var a;
 
 		function click_handler(event) {
@@ -780,8 +850,8 @@
 		};
 	}
 
-	// (40:8) {:else}
-	function create_if_block_9(component, state) {
+	// (45:8) {:else}
+	function create_if_block_10(component, state) {
 		var a;
 
 		function click_handler(event) {
@@ -814,8 +884,8 @@
 		};
 	}
 
-	// (44:6) {#if todos.length > 1}
-	function create_if_block_10(component, state) {
+	// (49:6) {#if todos.length > 1}
+	function create_if_block_11(component, state) {
 		var div, text, br, text_1, label, input, text_2, text_3, label_1, input_1, text_4;
 
 		function input_change_handler() {
@@ -910,8 +980,8 @@
 		};
 	}
 
-	// (56:2) {#if !uiShowArchived}
-	function create_if_block_11(component, state) {
+	// (61:2) {#if !uiShowArchived}
+	function create_if_block_12(component, state) {
 		var form,
 		    input,
 		    input_updating = false,
@@ -980,7 +1050,7 @@
 	}
 
 	function TodoApp(options) {
-		var _this3 = this;
+		var _this4 = this;
 
 		init(this, options);
 		this._state = assign(data(), options.data);
@@ -998,8 +1068,8 @@
 		this._fragment = create_main_fragment(this, this._state);
 
 		this.root._oncreate.push(function () {
-			oncreate.call(_this3);
-			_this3.fire("update", { changed: assignTrue({}, _this3._state), current: _this3._state });
+			oncreate.call(_this4);
+			_this4.fire("update", { changed: assignTrue({}, _this4._state), current: _this4._state });
 		});
 
 		if (options.target) {

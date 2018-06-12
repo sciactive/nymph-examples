@@ -94,6 +94,9 @@ include('../../get_pubsub_url.php');
       </h2>
     </div>
     <div class="row">
+      <div class="alert alert-danger" ng-if="uiState.disconnected">
+        You are disconnected. Check to make sure you're online.
+      </div>
       <div class="col-sm-8">
         <div class="list-group" style="clear: both;">
           <div class="well" ng-if="!todos.length">You have no todos yet.</div>

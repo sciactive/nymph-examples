@@ -13,7 +13,8 @@ angular.module('todoApp', [])
   $scope.uiState = {
     'sort': 'name',
     'showArchived': false,
-    'userCount': null
+    'userCount': null,
+    'disconnected': false
   };
 
   var subscription;
@@ -34,6 +35,25 @@ angular.module('todoApp', [])
     });
   };
   $scope.getTodos(false);
+
+  PubSub.on('connect', function(){
+    if ($scope.uiState.disconnected) {
+      var todo;
+      $scope.getTodos($scope.uiState.showArchived);
+      for (var i = 0; i < $scope.todos.length; i++) {
+        todo = $scope.todos[i];
+        todo.refresh().then(function(){
+          $scope.$apply();
+        });
+      }
+    }
+    $scope.uiState.disconnected = false;
+    $scope.$apply();
+  });
+  PubSub.on('disconnect', function(){
+    $scope.uiState.disconnected = true;
+    $scope.$apply();
+  });
 
   $scope.addTodo = function(){
     if (typeof $scope.todoText === 'undefined' || $scope.todoText === '')

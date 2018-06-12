@@ -35,7 +35,7 @@ const TodoEl = ({todo, archived, onClick, onChange, onSave}) => {
         <span style={{display: 'flex', marginLeft: '5px', flexShrink: 1}}>
           {(() => {
             const date = new Date(todo.cdate * 1000);
-            return `${date.getFullYear()}-${date.getMonth+1 < 10 ? '0'+date.getMonth()+1 : date.getMonth()+1}-${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()} ${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}`;
+            return `${date.getFullYear()}-${date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1}-${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()} ${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}`;
           })()}
         </span>
       </span>

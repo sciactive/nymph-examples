@@ -1,4 +1,9 @@
 <div>
+  {#if _disconnected}
+    <div class="alert alert-danger">
+      You are disconnected. Check to make sure you're online.
+    </div>
+  {/if}
   <div class="row">
     <div class="col-sm-8">
       <div class="list-group" style="clear: both;">
@@ -72,10 +77,32 @@
   export default {
     oncreate () {
       this.getTodos(this.get().uiShowArchived);
+
+      this.onPubSubConnect = () => {
+        if (this.get()._disconnected) {
+          this.getTodos(this.get().uiShowArchived);
+          const {todos} = this.get();
+          todos.map(todo => todo.refresh().then(() => this.set({todos})));
+        }
+        this.set({_disconnected: false});
+      };
+
+      this.onPubSubDisconnect = () => {
+        this.set({_disconnected: true});
+      };
+
+      PubSub.on('connect', this.onPubSubConnect);
+      PubSub.on('disconnect', this.onPubSubDisconnect);
+    },
+
+    ondestroy () {
+      PubSub.off('connect', this.onPubSubConnect);
+      PubSub.off('disconnect', this.onPubSubDisconnect);
     },
 
     data () {
       return {
+        _disconnected: false,
         todos: [],
         uiSort: 'name',
         uiShowArchived: false,
