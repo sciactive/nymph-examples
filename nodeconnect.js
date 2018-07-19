@@ -1,12 +1,20 @@
 const fs = require('fs');
 
+// Set up module aliases for development.
+const alias = require('module-alias');
+if (fs.existsSync('../client-node/package.json')) {
+  alias.addAliases({
+    'nymph-client-node': __dirname + '/../client-node/index.js',
+    'nymph-client': __dirname + '/../client/lib/NymphClient.js',
+    'tilmeld-client': __dirname + '/../tilmeld-client/lib/umd/TilmeldClient.js'
+  });
+}
+
 // Nymph Node client for the win.
-const NymphNode = fs.existsSync('../client-node/package.json')
-    ? require('../client-node/index.js')
-    : require('nymph-client-node');
+const NymphClient = require('nymph-client-node');
 // Tilmeld requires cookies.
-NymphNode.enableCookies();
-const Nymph = NymphNode.Nymph;
+NymphClient.enableCookies();
+const {Nymph} = NymphClient;
 
 // Set up Nymph.
 const nymphOptions = {
@@ -17,12 +25,8 @@ const nymphOptions = {
 Nymph.init(nymphOptions);
 
 const Todo = require('./examples/todo/Todo').Todo;
-const User = fs.existsSync('../tilmeld-client/package.json')
-    ? require('../tilmeld-client/lib/Entities/User.js').User
-    : require('tilmeld').User;
-const Group = fs.existsSync('../tilmeld-client/package.json')
-    ? require('../tilmeld-client/lib/Entities/Group.js').User
-    : require('tilmeld').Group;
+const User = require('tilmeld-client').User;
+const Group = require('tilmeld-client').Group;
 
 main();
 async function main() {
