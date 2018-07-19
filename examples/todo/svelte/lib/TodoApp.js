@@ -134,11 +134,7 @@
 
 		this.getTodos(this.get().uiShowArchived);
 
-		_nymphClient.PubSub.on('disconnect', function () {
-			_this3.set({ _disconnected: true });
-		});
-
-		_nymphClient.PubSub.on('connect', function () {
+		this.onPubSubConnect = function () {
 			if (_this3.get()._disconnected) {
 				_this3.getTodos(_this3.get().uiShowArchived);
 
@@ -152,7 +148,19 @@
 				});
 			}
 			_this3.set({ _disconnected: false });
-		});
+		};
+
+		this.onPubSubDisconnect = function () {
+			_this3.set({ _disconnected: true });
+		};
+
+		_nymphClient.PubSub.on('connect', this.onPubSubConnect);
+		_nymphClient.PubSub.on('disconnect', this.onPubSubDisconnect);
+	};
+
+	function ondestroy() {
+		_nymphClient.PubSub.off('connect', this.onPubSubConnect);
+		_nymphClient.PubSub.off('disconnect', this.onPubSubDisconnect);
 	};
 
 	function add_css() {
@@ -1056,6 +1064,8 @@
 		this._state = assign(data(), options.data);
 		this._recompute({ todos: 1 }, this._state);
 		this._bindingGroups = [[]];
+
+		this._handlers.destroy = [ondestroy];
 
 		if (!document.getElementById("svelte-1ly6lyd-style")) add_css();
 
