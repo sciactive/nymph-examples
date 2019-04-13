@@ -3,8 +3,6 @@
 import {Nymph, Entity} from 'nymph-client';
 
 export class Employee extends Entity {
-  // === Constructor ===
-
   constructor(id) {
     super(id);
     this.addTag('employee');
@@ -12,7 +10,9 @@ export class Employee extends Entity {
     this.data.subordinates = [];
   }
 
-  // === Static Methods ===
+  throwError(...args) {
+    return this.serverCall('throwError', args);
+  }
 
   static testStatic(value, ...args) {
     return Employee.serverCallStatic('testStatic', [value, ...args]);
@@ -25,15 +25,7 @@ export class Employee extends Entity {
   static inaccessibleMethod(...args) {
     return Employee.serverCallStatic('inaccessibleMethod', args);
   }
-
-  // === Instance Methods ===
-
-  throwError(...args) {
-    return this.serverCall('throwError', args);
-  }
 }
-
-// === Static Properties ===
 
 // The name of the server class
 Employee.class = 'Employee';

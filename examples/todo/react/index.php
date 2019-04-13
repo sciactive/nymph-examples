@@ -21,16 +21,11 @@ include('../../get_pubsub_url.php');
     })();
     NymphOptions = {
       restURL: '../../rest-tilmeld.php',
-      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
-      rateLimit: 100
+      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
     };
   </script>
-  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
+  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
   <script src="../Todo.js"></script>
 
   <script src="//unpkg.com/prop-types@15.6.1/prop-types.js"></script>

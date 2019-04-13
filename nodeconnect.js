@@ -19,8 +19,7 @@ const {Nymph} = NymphClient;
 // Set up Nymph.
 const nymphOptions = {
   restURL: 'http://localhost:8080/examples/examples/rest-tilmeld.php',
-  pubsubURL: 'ws://localhost:8081',
-  rateLimit: 100
+  pubsubURL: 'ws://localhost:8081'
 };
 Nymph.init(nymphOptions);
 

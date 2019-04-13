@@ -21,8 +21,7 @@ include('../../get_pubsub_url.php');
     })();
     NymphOptions = {
       restURL: '../../rest-tilmeld.php',
-      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
-      rateLimit: 100
+      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
     };
   </script>
   <style type="text/css">
@@ -67,12 +66,8 @@ include('../../get_pubsub_url.php');
       flex-shrink: 1;
     }
   </style>
-  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
+  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
   <script src="../Todo.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>

@@ -21,20 +21,12 @@ include('../get_pubsub_url.php');
     })();
     NymphOptions = {
       restURL: '../rest-tilmeld.php',
-      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
-      rateLimit: 100
+      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
     };
   </script>
-  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldRecover.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldLogin.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Components/TilmeldChangePassword.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/TilmeldClient.js"></script>
+  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/dist/Components.js"></script>
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
   <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
@@ -100,14 +92,14 @@ include('../get_pubsub_url.php');
   </div>
 
   <script>
-    ((global, User, TilmeldLogin, TilmeldChangePassword) => {
+    ((global, User, Login, ChangePassword) => {
       let currentUser = null;
       const currentUserEl = document.querySelector('.currentuser');
       const logins = document.getElementsByTagName('login');
       const changePasswords = document.getElementsByTagName('change-password');
 
       for (const login of logins) {
-        const component = new TilmeldLogin({
+        const component = new Login({
           target: login,
           data: {
             autofocus: false,
@@ -139,7 +131,7 @@ include('../get_pubsub_url.php');
         });
       }
       for (const changePassword of changePasswords) {
-        const component = new TilmeldChangePassword({
+        const component = new ChangePassword({
           target: changePassword,
           data: {
             layout: changePassword.dataset.layout,
@@ -173,7 +165,7 @@ include('../get_pubsub_url.php');
           currentUser.logout();
         }
       }
-    })(this, TilmeldClient.User, TilmeldClient.TilmeldLogin, TilmeldClient.TilmeldChangePassword);
+    })(this, TilmeldClient.Entities.User, TilmeldClient.Components.Login, TilmeldClient.Components.ChangePassword);
   </script>
 
   <style>

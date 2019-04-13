@@ -1,12 +1,8 @@
 import {Nymph, Entity} from 'nymph-client';
 
 export class Game extends Entity {
-  // === Constructor ===
-
   constructor (id) {
     super(id);
-
-    // === Instance Properties ===
 
     this.mistakes = [
       [], [], [], [], [], [], [], [], []
@@ -20,8 +16,6 @@ export class Game extends Entity {
     this.data.time = 0;
     this.data.done = false;
   }
-
-  // === Instance Methods ===
 
   generateBoard (...args) {
     return this.serverCall('generateBoard', args);
@@ -130,8 +124,6 @@ export class Game extends Entity {
     return results;
   }
 }
-
-// === Static Properties ===
 
 // The name of the server class
 Game.class = 'Game';

@@ -28,14 +28,10 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
   </script>
 
   <!-- Nymph JS -->
-  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
+  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
 
   <!-- Tilmeld JS -->
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
+  <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
 
   <!-- Entity JS -->
   <script src="Employee.js"></script>
@@ -370,7 +366,7 @@ if (!(entity.tags&lt;["test"]||entity.tags&gt;["test"])) {
     <pre>Nymph.getEntity({"class":Employee.class}, {"type":"&amp;","strict":["name","Jane Doe"]}).then(function(jane){
   var entity = new Employee();
   entity.referenceSleep(['nymph_entity_reference', jane.guid, 'Employee']);
-  entity.ready(function(entity){
+  entity.ready().then(function(entity){
     $("#result").html(JSON.stringify(entity));
   }, function(errObj){
     $("#result").html(errObj.textStatus);
@@ -530,8 +526,8 @@ Promise.all(promises).then(function(){
           $("#result").append(i+": "+dashes.join("")+array[i].data.name+"&lt;br&gt;");
         }
         $("#result").append("&lt;br&gt;&lt;br&gt;");
-        array = Nymph.hsort(array, "name", "manager");
-        for (var i in array) {
+        Nymph.hsort(array, "name", "manager");
+        for (var i = 0; i < array.length; i++) {
           dashes = [];
           var parent = array[i].data.manager;
           while (parent) {
