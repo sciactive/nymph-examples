@@ -21,10 +21,10 @@
   "homepage": "https://github.com/sciactive/nymph-examples",
   "dependencies": {
     "module-alias": "^2.1.0",
-    "nymph-client": "^4.0.0-beta.11",
+    "nymph-client": "^4.0.0-beta.17",
     "nymph-client-node": "^3.0.0-beta.1",
     "nymph-query-editor": "^2.0.0-beta.2",
-    "tilmeld-client": "^1.0.0-beta.21",
-    "tilmeld-components": "^1.0.0-beta.1"
+    "tilmeld-client": "^1.0.0-beta.24",
+    "tilmeld-components": "^1.0.0-beta.2"
   }
 }
