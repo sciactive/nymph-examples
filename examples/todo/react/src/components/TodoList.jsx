@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TodoEl from './TodoEl';
-import Todo from 'Todo';
+import Todo from '../../../Todo.src';
 
 const TodoList = ({todos, archived, onTodoClick, onTodoChange, onTodoSave}) => (
   <div className="list-group" style={{clear: 'both'}}>

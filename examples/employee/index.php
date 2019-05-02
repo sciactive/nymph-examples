@@ -2,9 +2,6 @@
 $clientDir = file_exists('../../../client/package.json')
     ? '../../../client'
     : '../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../tilmeld-client/package.json')
-    ? '../../../tilmeld-client'
-    : '../../node_modules/tilmeld-client';
 $queryEditorDir = file_exists('../../../query-editor/package.json')
     ? '../../../query-editor'
     : '../../node_modules/nymph-query-editor';
@@ -29,9 +26,6 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
 
   <!-- Nymph JS -->
   <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
-
-  <!-- Tilmeld JS -->
-  <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
 
   <!-- Entity JS -->
   <script src="Employee.js"></script>
@@ -62,15 +56,15 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
       margin: 1em 0;
     }
   </style>
-  <div class="nymph-query-editor">
+  <!-- <div class="nymph-query-editor">
     <h1>Query Editor</h1>
     <main></main>
-  </div>
+  </div> -->
   <!-- App JS -->
-  <script src="<?php echo $queryEditorDir; ?>/lib/umd/ValueEditor.js"></script>
-  <script src="<?php echo $queryEditorDir; ?>/lib/umd/SelectorEditor.js"></script>
-  <script src="<?php echo $queryEditorDir; ?>/lib/umd/QueryEditor.js"></script>
-  <script type="text/javascript">
+  <!-- <script src="<?php echo $queryEditorDir; ?>/lib/umd/ValueEditor.js"></script> -->
+  <!-- <script src="<?php echo $queryEditorDir; ?>/lib/umd/SelectorEditor.js"></script> -->
+  <!-- <script src="<?php echo $queryEditorDir; ?>/lib/umd/QueryEditor.js"></script> -->
+  <!-- <script type="text/javascript">
     ((global, QueryEditor, Employee) => {
       const app = new QueryEditor({
         target: document.querySelector('main'),
@@ -87,7 +81,7 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
         }
       });
     })(this, QueryEditor.default, Employee.Employee);
-  </script>
+  </script> -->
 
   <h1>Client Tests</h1>
   <script>
@@ -95,7 +89,7 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
       $("#go").click(function(){
         (function(Nymph, Entity, Employee){
           eval($("#current-test").val());
-        })(NymphClient.Nymph, NymphClient.Entity, Employee.Employee);
+        })(window['nymph-client'].Nymph, window['nymph-client'].Entity, Employee.Employee);
       });
       $("#tests pre").click(function(){
         $("#current-test").val($(this).text());
@@ -126,7 +120,7 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
     <pre>var entity = new Entity();
 entity.set("something", "Anything");
 entity.save().then(function(entity){
-  $("#result").html("fail (Entity should not be usabe from the client.)");
+  $("#result").html("fail (Entity should not be usable from the client!)");
 }, function(errObj){
   $("#result").html("pass");
 });</pre>
@@ -508,12 +502,13 @@ Promise.all(promises).then(function(){
       });
       var promises4 = [];
       for (var i in array) {
-        promises4.push(array[i].readyAll());
+        promises4.push(array[i].readyAll(1));
       }
       Promise.all(promises4).then(function(){
         $("#result").empty();
+        $("#result").append("Before:&lt;br&gt;");
         var dashes;
-        for (var i in array) {
+        for (var i = 0; i < array.length; i++) {
           dashes = [];
           var parent = array[i].data.manager;
           while (parent) {
@@ -527,6 +522,7 @@ Promise.all(promises).then(function(){
         }
         $("#result").append("&lt;br&gt;&lt;br&gt;");
         Nymph.hsort(array, "name", "manager");
+        $("#result").append("After:&lt;br&gt;");
         for (var i = 0; i < array.length; i++) {
           dashes = [];
           var parent = array[i].data.manager;

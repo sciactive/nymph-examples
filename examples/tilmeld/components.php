@@ -2,9 +2,12 @@
 $clientDir = file_exists('../../../client/package.json')
     ? '../../../client'
     : '../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../tilmeld-client/package.json')
+$tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
     ? '../../../tilmeld-client'
     : '../../node_modules/tilmeld-client';
+$tilmeldComponentsDir = file_exists('../../../tilmeld-components/package.json')
+    ? '../../../tilmeld-components'
+    : '../../node_modules/tilmeld-components';
 
 include('../get_pubsub_url.php');
 
@@ -20,13 +23,13 @@ include('../get_pubsub_url.php');
       (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
     })();
     NymphOptions = {
-      restURL: '../rest-tilmeld.php',
+      restURL: '../rest.php',
       pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
     };
   </script>
   <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/dist/Components.js"></script>
+  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
+  <script src="<?php echo $tilmeldComponentsDir; ?>/dist/TilmeldComponents.js"></script>
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
   <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
@@ -101,7 +104,7 @@ include('../get_pubsub_url.php');
       for (const login of logins) {
         const component = new Login({
           target: login,
-          data: {
+          props: {
             autofocus: false,
             compactText: login.dataset.compactText,
             existingUser: login.dataset.existingUser === "true",
@@ -120,20 +123,20 @@ include('../get_pubsub_url.php');
           }
         });
 
-        component.on('register', e => {
+        component.$on('register', e => {
           const el = document.querySelector('.registerevent');
-          el.innerText = 'Fired: '+JSON.stringify(e);
+          el.innerText = 'Fired: '+JSON.stringify(e.detail);
         });
 
-        component.on('login', e => {
+        component.$on('login', e => {
           const el = document.querySelector('.loginevent');
-          el.innerText = 'Fired: '+JSON.stringify(e);
+          el.innerText = 'Fired: '+JSON.stringify(e.detail);
         });
       }
       for (const changePassword of changePasswords) {
         const component = new ChangePassword({
           target: changePassword,
-          data: {
+          props: {
             layout: changePassword.dataset.layout,
             classInput: 'form-control',
             classSubmit: 'btn btn-primary',
@@ -165,7 +168,7 @@ include('../get_pubsub_url.php');
           currentUser.logout();
         }
       }
-    })(this, TilmeldClient.Entities.User, TilmeldClient.Components.Login, TilmeldClient.Components.ChangePassword);
+    })(this, window['tilmeld-client'].User, window['tilmeld-components'].Login, window['tilmeld-components'].ChangePassword);
   </script>
 
   <style>

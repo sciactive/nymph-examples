@@ -1,5 +1,5 @@
 <div>
-  {#if _disconnected}
+  {#if disconnected}
     <div class="alert alert-danger">
       You are disconnected. Check to make sure you're online.
     </div>
@@ -11,7 +11,7 @@
           <div class="well">You have no todos yet.</div>
         {/if}
         {#each todos as todo}
-          <TodoEl bind:todo="todo" archived="{uiShowArchived}"></TodoEl>
+          <TodoEl bind:todo={todo} archived={uiShowArchived}></TodoEl>
         {/each}
       </div>
     </div>
@@ -32,35 +32,35 @@
           <span>
             [
             {#if uiShowArchived}
-              <a href="javascript:void(0)" on:click="deleteTodos()">delete</a>
+              <a href="javascript:void(0)" on:click={deleteTodos}>delete</a>
             {:else}
-              <a href="javascript:void(0)" on:click="archive()">archive done</a>
+              <a href="javascript:void(0)" on:click={archive}>archive done</a>
             {/if}
             ]
           </span>
         {/if}
         <br>
         {#if uiShowArchived}
-          <a href="javascript:void(0)" on:click="getTodos(false)">show current</a>
+          <a href="javascript:void(0)" on:click={() => getTodos(false)}>show current</a>
         {:else}
-          <a href="javascript:void(0)" on:click="getTodos(true)">show archived</a>
+          <a href="javascript:void(0)" on:click={() => getTodos(true)}>show archived</a>
         {/if}
       </small>
       {#if todos.length > 1}
         <div style="text-align: left;">
           Sort: <br>
           <label style="font-weight: normal;">
-            <input type="radio" bind:group="uiSort" on:change="sortTodos()" name="sort" value="name"> Alpha</label>
+            <input type="radio" bind:group={uiSort} on:change={sortTodos} name="sort" value="name"> Alpha</label>
           &nbsp;&nbsp;&nbsp;
           <label style="font-weight: normal;">
-            <input type="radio" bind:group="uiSort" on:change="sortTodos()" name="sort" value="cdate"> Created</label>
+            <input type="radio" bind:group={uiSort} on:change={sortTodos} name="sort" value="cdate"> Created</label>
         </div>
       {/if}
     </div>
   </div>
   {#if !uiShowArchived}
-    <form class="todo-form" style="margin-bottom: 20px;" on:submit="addTodo(event.preventDefault())">
-      <input class="form-control" type="text" bind:value="todoText" placeholder="add new todo here">
+    <form class="todo-form" style="margin-bottom: 20px;" on:submi|preventDefault={addTodo}>
+      <input class="form-control" type="text" bind:value={todoText} placeholder="add new todo here">
       <input class="btn btn-default" type="submit" value="add #{todos.length + 1}">
     </form>
   {/if}
@@ -70,126 +70,109 @@
 </div>
 
 <script>
-  import TodoEl from './TodoEl.html';
+  import { onMount, onDestroy } from 'svelte';
+  import TodoEl from './TodoEl';
   import {Nymph, PubSub} from 'nymph-client';
-  import Todo from 'Todo';
+  import Todo from '../../Todo.src';
 
-  export default {
-    oncreate () {
-      this.getTodos(this.get().uiShowArchived);
+  let todos = [];
+  let uiSort = 'name';
+  let uiShowArchived = false;
+  let userCount = null;
+  let todoText = '';
+  let disconnected = false;
+  let subscription;
 
-      this.onPubSubConnect = () => {
-        if (this.get()._disconnected) {
-          this.getTodos(this.get().uiShowArchived);
-          const {todos} = this.get();
-          todos.map(todo => todo.refresh().then(() => this.set({todos})));
-        }
-        this.set({_disconnected: false});
-      };
+  $: remaining = todos.filter(todo => !todo.get().done).length;
 
-      this.onPubSubDisconnect = () => {
-        this.set({_disconnected: true});
-      };
+  onMount(() => {
+    getTodos(uiShowArchived);
 
-      PubSub.on('connect', this.onPubSubConnect);
-      PubSub.on('disconnect', this.onPubSubDisconnect);
-    },
+    PubSub.on('connect', onPubSubConnect);
+    PubSub.on('disconnect', onPubSubDisconnect);
+  });
 
-    ondestroy () {
-      PubSub.off('connect', this.onPubSubConnect);
-      PubSub.off('disconnect', this.onPubSubDisconnect);
-    },
+  onDestroy(() => {
+    PubSub.off('connect', onPubSubConnect);
+    PubSub.off('disconnect', onPubSubDisconnect);
+  });
 
-    data () {
-      return {
-        _disconnected: false,
-        todos: [],
-        uiSort: 'name',
-        uiShowArchived: false,
-        userCount: null,
-        todoText: ''
-      }
-    },
 
-    computed: {
-      remaining: ({ todos }) => {
-        var count = 0;
-        for (var i = 0; i < todos.length; i++) {
-          count += todos[i].get().done ? 0 : 1;
-        }
-        return count;
-      }
-    },
-
-    methods: {
-      getTodos (archived) {
-        let {_subscription} = this.get();
-        if (_subscription) {
-          _subscription.unsubscribe();
-        }
-        _subscription = Nymph.getEntities({"class": 'Todo'}, {"type": archived ? '&' : '!&', "tag": 'archived'}).subscribe((newTodos) => {
-          this.set({uiShowArchived: archived});
-          if (newTodos !== undefined) {
-            const {todos} = this.get();
-            PubSub.updateArray(todos, newTodos);
-            Nymph.sort(todos, this.get().uiSort);
-            this.set({todos});
-          }
-        }, null, (count) => {
-          this.set({userCount: count});
-        });
-        this.set({_subscription});
-      },
-
-      addTodo () {
-        const {todoText} = this.get();
-        if (todoText === undefined || todoText === '') {
-          return;
-        }
-        const todo = new Todo();
-        todo.set('name', todoText);
-        todo.save().then(() => {
-          this.set({todoText: ''});
-        }, (errObj) => {
-          alert("Error: "+errObj.textStatus);
-        });
-      },
-
-      sortTodos () {
-        this.set({todos: Nymph.sort(this.get().todos, this.get().uiSort)});
-      },
-
-      save (todo) {
-        todo.save().then(null, (errObj) => {
-          alert('Error: '+errObj.textStatus);
-        });
-      },
-
-      archive () {
-        const oldTodos = this.get().todos;
-        for (let i = 0; i < oldTodos.length; i++) {
-          const todo = oldTodos[i];
-          if (todo.get().done) {
-            todo.archive().then((success) => {
-              if (!success) {
-                alert("Couldn't save changes to "+todo.get().name);
-              }
-            }, (errObj) => {
-              alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.get().name);
-            });
-          }
-        }
-      },
-
-      deleteTodos () {
-        Nymph.deleteEntities(this.get().todos);
-      }
-    },
-
-    components: {
-      TodoEl
+  function onPubSubConnect () {
+    if (disconnected) {
+      getTodos(uiShowArchived);
+      todos.map(todo => todo.refresh().then(() => todos = todos));
     }
-  };
+    disconnected = false;
+  }
+
+  function onPubSubDisconnect () {
+    disconnected = true;
+  }
+
+  function getTodos (archived) {
+    if (subscription) {
+      subscription.unsubscribe();
+    }
+    subscription = Nymph.getEntities({
+      "class": 'Todo'
+    }, {
+      "type": archived ? '&' : '!&',
+      "tag": 'archived'
+    }).subscribe(newTodos => {
+      uiShowArchived = archived;
+      if (newTodos !== undefined) {
+        PubSub.updateArray(todos, newTodos);
+        Nymph.sort(todos, uiSort);
+        todos = todos;
+      }
+    }, null, count => {
+      userCount = count;
+    });
+  }
+
+  function addTodo () {
+    if (todoText === undefined || todoText === '') {
+      return;
+    }
+    const todo = new Todo();
+    todo.set({name: todoText});
+    todo.save().then(() => {
+      todoText = '';
+    }, errObj => {
+      alert("Error: "+errObj.textStatus);
+    });
+  }
+
+  function sortTodos () {
+    todos = Nymph.sort(todos, uiSort);
+  }
+
+  function save (todo) {
+    todo.save().then(null, errObj => {
+      alert('Error: '+errObj.textStatus);
+    });
+  }
+
+  function archive () {
+    const oldTodos = todos;
+    for (let i = 0; i < oldTodos.length; i++) {
+      const todo = oldTodos[i];
+      if (todo.get().done) {
+        todo.archive().then(success => {
+          if (!success) {
+            alert("Couldn't save changes to "+todo.get().name);
+          }
+        }, errObj => {
+          alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.get().name);
+        });
+      }
+    }
+  }
+
+  function deleteTodos () {
+    Nymph.deleteEntities(todos);
+  }
 </script>
 
 <style>

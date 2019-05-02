@@ -2,7 +2,7 @@
 $clientDir = file_exists('../../../client/package.json')
     ? '../../../client'
     : '../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../tilmeld-client/package.json')
+$tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
     ? '../../../tilmeld-client'
     : '../../node_modules/tilmeld-client';
 
@@ -20,7 +20,7 @@ include('../get_pubsub_url.php');
         (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
       })();
       NymphOptions = {
-        restURL: '../rest-tilmeld.php',
+        restURL: '../rest.php',
         pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
       };
     </script>
@@ -32,7 +32,7 @@ include('../get_pubsub_url.php');
       }
     </style>
     <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
-    <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
+    <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="clickerApp.js"></script>

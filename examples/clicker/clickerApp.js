@@ -1,6 +1,6 @@
 angular.module('clickerApp', [])
 .service('Nymph', function() {
-  return NymphClient.Nymph;
+  return window['nymph-client'].Nymph;
 })
 .controller('ClickerController', ['$scope', 'Nymph', function($scope, Nymph) {
   $scope.uiState = {

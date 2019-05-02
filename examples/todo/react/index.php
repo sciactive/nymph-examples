@@ -2,9 +2,6 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../../tilmeld-client/package.json')
-    ? '../../../../tilmeld-client'
-    : '../../../node_modules/tilmeld-client';
 
 include('../../get_pubsub_url.php');
 
@@ -20,13 +17,11 @@ include('../../get_pubsub_url.php');
       (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
     })();
     NymphOptions = {
-      restURL: '../../rest-tilmeld.php',
+      restURL: '../../rest.php',
       pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
     };
   </script>
   <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
-  <script src="../Todo.js"></script>
 
   <script src="//unpkg.com/prop-types@15.6.1/prop-types.js"></script>
   <script src="//unpkg.com/react@16.3.2/umd/react.development.js"></script>
@@ -52,6 +47,6 @@ include('../../get_pubsub_url.php');
     </div>
     <div id="todoApp"></div>
   </div>
-  <script src="build/TodoApp.js"></script>
+  <script src="dist/TodoApp.js"></script>
 </body>
 </html>

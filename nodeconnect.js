@@ -5,8 +5,8 @@ const alias = require('module-alias');
 if (fs.existsSync('../client-node/package.json')) {
   alias.addAliases({
     'nymph-client-node': __dirname + '/../client-node/index.js',
-    'nymph-client': __dirname + '/../client/lib/NymphClient.js',
-    'tilmeld-client': __dirname + '/../tilmeld-client/lib/umd/TilmeldClient.js'
+    'nymph-client': __dirname + '/../client/dist/NymphClient.js',
+    'tilmeld-client': __dirname + '/../tilmeld-client/dist/TilmeldClient.js'
   });
 }
 
@@ -18,7 +18,7 @@ const {Nymph} = NymphClient;
 
 // Set up Nymph.
 const nymphOptions = {
-  restURL: 'http://localhost:8080/examples/examples/rest-tilmeld.php',
+  restURL: 'http://localhost:8080/examples/examples/rest.php',
   pubsubURL: 'ws://localhost:8081'
 };
 Nymph.init(nymphOptions);
@@ -48,6 +48,7 @@ async function main() {
       if (data.result) {
         if (!data.loggedin) {
           console.log("\n\nThe Node user in Tilmeld, 'User McUserface', needs to be enabled.");
+          return;
         }
       } else {
         console.log("\n\nI can't register the Node user in Tilmeld, 'User McUserface': ", data.message);

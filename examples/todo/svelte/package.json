@@ -4,20 +4,23 @@
   "description": "An example todo app using Nymph and Svelte.",
   "main": "index.php",
   "scripts": {
-    "build": "npm run build-TodoApp && npm run build-TodoEl",
-    "build-TodoApp": "svelte compile --format es src/TodoApp.html > lib/TodoApp.js && babel lib/TodoApp.js -o lib/TodoApp.js",
-    "build-TodoEl": "svelte compile --format es src/TodoEl.html > lib/TodoEl.js && babel lib/TodoEl.js -o lib/TodoEl.js",
+    "build": "webpack",
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hunter Perrin <hperrin@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "svelte-cli": "^3.0.0",
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1"
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-classes": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "style-loader": "^0.23.1",
+    "svelte": "^3.1.0",
+    "svelte-loader": "^2.13.3",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   }
 }

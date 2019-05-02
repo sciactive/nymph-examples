@@ -1,5 +1,5 @@
 import {Nymph, PubSub} from 'nymph-client';
-import Todo from 'Todo';
+import Todo from '../../../Todo.src';
 import {updateTodos, updateUserCount, updateDisconnected, subscribe, refreshTodos} from '../actions';
 
 let currentDisconnected = false;

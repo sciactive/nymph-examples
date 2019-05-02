@@ -24,6 +24,7 @@
     "nymph-client": "^4.0.0-beta.11",
     "nymph-client-node": "^3.0.0-beta.1",
     "nymph-query-editor": "^2.0.0-beta.2",
-    "tilmeld-client": "^1.0.0-beta.21"
+    "tilmeld-client": "^1.0.0-beta.21",
+    "tilmeld-components": "^1.0.0-beta.1"
   }
 }

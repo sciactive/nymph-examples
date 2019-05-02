@@ -1,9 +1,9 @@
 angular.module('todoApp', [])
 .service('Nymph', function() {
-  return NymphClient.Nymph;
+  return window['nymph-client'].Nymph;
 })
 .service('PubSub', function() {
-  return NymphClient.PubSub;
+  return window['nymph-client'].PubSub;
 })
 .service('Todo', function() {
   return Todo.default;

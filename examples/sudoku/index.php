@@ -2,7 +2,7 @@
 $clientDir = file_exists('../../../client/package.json')
     ? '../../../client'
     : '../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../tilmeld-client/package.json')
+$tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
     ? '../../../tilmeld-client'
     : '../../node_modules/tilmeld-client';
 
@@ -32,7 +32,6 @@ include('../get_pubsub_url.php');
     }
   </style>
   <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/dist/Entities.js"></script>
   <script src="Game.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>

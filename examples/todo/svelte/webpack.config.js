@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    TodoApp: path.resolve(__dirname, 'src', 'index.jsx')
+    TodoApp: path.resolve(__dirname, 'src', 'TodoApp.html')
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -13,25 +13,38 @@ module.exports = {
     globalObject: 'this'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css']
+    extensions: ['.wasm', '.mjs', '.js', '.json', '.html', '.css']
   },
   externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-    'prop-types': 'PropTypes',
-    'react-redux': 'ReactRedux',
-    'redux': 'Redux',
     'nymph-client': 'nymph-client'
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(html|svelte)$/,
+        exclude: /\/node_modules\//,
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            dev: true,
+            emitCss: true
+          }
+        }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: ['@babel/preset-env'],
             plugins: [
               [
                 '@babel/transform-classes',

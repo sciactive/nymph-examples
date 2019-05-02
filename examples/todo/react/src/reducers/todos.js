@@ -1,5 +1,5 @@
 import {Nymph, PubSub} from 'nymph-client';
-import Todo from 'Todo';
+import Todo from '../../../Todo.src';
 import {updateTodo} from '../actions';
 
 const todos = (state = {todos: [], archived: false, sort: 'name'}, action) => {

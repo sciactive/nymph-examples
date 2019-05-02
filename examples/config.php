@@ -49,6 +49,7 @@ if (getenv('NYMPH_PRODUCTION')) {
 }
 \Nymph\Nymph::configure($nymphConfig);
 
+
 // Nymph PubSub's configuration.
 if (getenv('NYMPH_PRODUCTION')) {
   // If we're on Heroku, the entry is the pubsub demo.
@@ -61,3 +62,36 @@ if (getenv('NYMPH_PRODUCTION')) {
   $entry = 'ws://localhost:8081/';
 }
 \Nymph\PubSub\Server::configure(['entries' => [$entry]]);
+
+$appUrl = 'http://localhost:8080';
+if (getenv('NYMPH_PRODUCTION')) {
+  $appUrl = 'https://nymph-demo.herokuapp.com';
+}
+
+// uMailPHP's configuration.
+\uMailPHP\Mail::configure([
+  'site_name' => 'Tilmeld Example Site',
+  'site_link' => "$appUrl/examples/examples/tilmeld/components.php",
+  'master_address' => 'noreply@example.com',
+  'testing_mode' => true,
+  'testing_email' => 'hperrin@localhost',
+]);
+
+
+// Tilmeld's configuration.
+$tilmeldConfig = [
+  'app_url' => "$appUrl/",
+  'setup_url' => "$appUrl/examples/examples/tilmeld/setup.php",
+  'email_usernames' => true,
+  'verify_redirect' => "$appUrl/examples/examples/tilmeld/components.php",
+];
+if (getenv('TILMELD_SECRET')) {
+  $tilmeldConfig['jwt_secret'] = base64_decode(getenv('TILMELD_SECRET'));
+} elseif (getenv('TILMELD_SECRET_FILE')) {
+  $tilmeldConfig['jwt_secret'] = base64_decode(
+      file_get_contents(getenv('TILMELD_SECRET_FILE'))
+  );
+} else {
+  $tilmeldConfig['jwt_secret'] = str_repeat('a', 256);
+}
+\Tilmeld\Tilmeld::configure($tilmeldConfig);
