@@ -32,6 +32,7 @@ include('../get_pubsub_url.php');
     }
   </style>
   <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
   <script src="Game.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>

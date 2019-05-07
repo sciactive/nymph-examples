@@ -2,6 +2,9 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
+$tilmeldClientDir = file_exists('../../../../tilmeld-client/package.json')
+    ? '../../../../tilmeld-client'
+    : '../../../node_modules/tilmeld-client';
 
 include('../../get_pubsub_url.php');
 
@@ -22,6 +25,7 @@ include('../../get_pubsub_url.php');
     };
   </script>
   <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
 
   <script src="//unpkg.com/prop-types@15.6.1/prop-types.js"></script>
   <script src="//unpkg.com/react@16.3.2/umd/react.development.js"></script>

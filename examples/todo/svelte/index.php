@@ -2,6 +2,9 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
+$tilmeldClientDir = file_exists('../../../../tilmeld-client/package.json')
+    ? '../../../../tilmeld-client'
+    : '../../../node_modules/tilmeld-client';
 
 include('../../get_pubsub_url.php');
 
@@ -22,6 +25,7 @@ include('../../get_pubsub_url.php');
     };
   </script>
   <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
 
   <script src="dist/TodoApp.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
