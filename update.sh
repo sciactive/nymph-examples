@@ -3,23 +3,23 @@
 cd examples
 
   cd test
-    npm install
+    ncu -u
   cd ..
 
   cd sudoku
-    npm install
+    ncu -u
   cd ..
 
   cd todo
-    npm install
+    ncu -u
     cd react
-      npm install
+      ncu -u
     cd ..
     cd svelte
-      npm install
+      ncu -u
     cd ..
   cd ..
 
 cd ..
 
-npm install
+ncu -u

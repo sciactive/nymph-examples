@@ -11,16 +11,16 @@
   "author": "Hunter Perrin <hperrin@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-transform-classes": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-classes": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.0.6",
     "css-loader": "^2.1.1",
     "style-loader": "^0.23.1",
-    "svelte": "^3.1.0",
-    "svelte-loader": "^2.13.3",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "svelte": "^3.4.4",
+    "svelte-loader": "^2.13.4",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
   }
 }
