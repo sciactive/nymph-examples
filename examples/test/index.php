@@ -465,6 +465,25 @@ try {
   printResult(errObj.textStatus);
 }
     </pre>
+    <h4>Patch an entity</h4>
+    <pre>
+try {
+  const employee = await Nymph.getEntity({
+    "class": Employee.class
+  }, {
+    "type": "&amp;",
+    "strict": ["current", true]
+  });
+  printResult(JSON.stringify(employee, null, 2)+'\n\n');
+  employee.unset("salary");
+  employee.set("current", false);
+  employee.set("end_date", (new Date().getTime()) / 1000);
+  await employee.patch();
+  appendResult(JSON.stringify(employee, null, 2));
+} catch (errObj) {
+  printResult(errObj.textStatus);
+}
+    </pre>
     <h4>Get an entity</h4>
     <pre>
 try {
