@@ -12,7 +12,7 @@ if (!\Tilmeld\Tilmeld::gatekeeper('system/admin')) {
   exit;
 }
 
-require '../employee/Employee.php';
+require '../test/Employee.php';
 require '../sudoku/Game.php';
 require '../todo/Todo.php';
 

@@ -16,7 +16,7 @@ if ($_FILES) {
   if ($_FILES['nex']['error'] === 0) {
     error_reporting(E_ALL);
 
-    require '../employee/Employee.php';
+    require '../test/Employee.php';
     require '../sudoku/Game.php';
     require '../todo/Todo.php';
 

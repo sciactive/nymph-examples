@@ -11,7 +11,7 @@ require_once __DIR__.'/config.php';
 
 $NymphREST = new \Nymph\REST();
 
-require_once 'employee/Employee.php';
+require_once 'test/Employee.php';
 require_once 'todo/Todo.php';
 require_once 'sudoku/Game.php';
 
