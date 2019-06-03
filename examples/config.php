@@ -64,6 +64,9 @@ if (getenv('NYMPH_PRODUCTION')) {
 \Nymph\PubSub\Server::configure(['entries' => [$entry]]);
 
 $appUrl = 'http://localhost:8080';
+if (file_exists(__DIR__.'/../../autoload-dev.php')) {
+  $appUrl = 'http://localhost:8080/examples';
+}
 if (getenv('NYMPH_PRODUCTION')) {
   $appUrl = 'https://nymph-demo.herokuapp.com';
 }
