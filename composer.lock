@@ -1083,16 +1083,16 @@
         },
         {
             "name": "sciactive/tilmeld-server",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sciactive/tilmeld-server.git",
-                "reference": "6467a37f61da2634ad23e8622bc14f693524da20"
+                "reference": "340a7645cfecf4ec41a8c9a63c89294ad8029b9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sciactive/tilmeld-server/zipball/6467a37f61da2634ad23e8622bc14f693524da20",
-                "reference": "6467a37f61da2634ad23e8622bc14f693524da20",
+                "url": "https://api.github.com/repos/sciactive/tilmeld-server/zipball/340a7645cfecf4ec41a8c9a63c89294ad8029b9b",
+                "reference": "340a7645cfecf4ec41a8c9a63c89294ad8029b9b",
                 "shasum": ""
             },
             "require": {
