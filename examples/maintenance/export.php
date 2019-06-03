@@ -5,6 +5,8 @@ require file_exists(__DIR__.'/../../../autoload-dev.php')
     : __DIR__.'/../../vendor/autoload.php';
 require __DIR__.'/../config.php';
 
+\Tilmeld\Tilmeld::authenticate(true);
+
 if (!\Tilmeld\Tilmeld::gatekeeper('system/admin')) {
   // Only admins.
   header('HTTP/1.1 403 Forbidden', true, 403);
