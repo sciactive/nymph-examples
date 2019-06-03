@@ -71,7 +71,7 @@ if (getenv('NYMPH_PRODUCTION')) {
 // uMailPHP's configuration.
 \uMailPHP\Mail::configure([
   'site_name' => 'Tilmeld Example Site',
-  'site_link' => "$appUrl/examples/examples/tilmeld/components.php",
+  'site_link' => "$appUrl/examples/tilmeld/components.php",
   'master_address' => 'noreply@example.com',
   'testing_mode' => true,
   'testing_email' => 'hperrin@localhost',
@@ -81,9 +81,9 @@ if (getenv('NYMPH_PRODUCTION')) {
 // Tilmeld's configuration.
 $tilmeldConfig = [
   'app_url' => "$appUrl/",
-  'setup_url' => "$appUrl/examples/examples/tilmeld/setup.php",
+  'setup_url' => "$appUrl/examples/tilmeld/setup.php",
   'email_usernames' => true,
-  'verify_redirect' => "$appUrl/examples/examples/tilmeld/components.php",
+  'verify_redirect' => "$appUrl/examples/tilmeld/components.php",
 ];
 if (getenv('TILMELD_SECRET')) {
   $tilmeldConfig['jwt_secret'] = base64_decode(getenv('TILMELD_SECRET'));
