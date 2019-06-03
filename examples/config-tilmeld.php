@@ -2,10 +2,15 @@
 
 require_once __DIR__.'/config.php';
 
+$site = 'http://localhost:8080';
+if (getenv('NYMPH_PRODUCTION')) {
+  $site = 'https://nymph-demo.herokuapp.com';
+}
+
 // uMailPHP's configuration.
 \uMailPHP\Mail::configure([
   'site_name' => 'Tilmeld Example Site',
-  'site_link' => 'http://localhost:8080/examples/examples/tilmeld/components.php',
+  'site_link' => "$site/examples/examples/tilmeld/components.php",
   'master_address' => 'noreply@example.com',
   'testing_mode' => true,
   'testing_email' => 'hperrin@localhost',
@@ -14,10 +19,10 @@ require_once __DIR__.'/config.php';
 
 // Tilmeld's configuration.
 $tilmeldConfig = [
-  'app_url' => 'http://localhost:8080/',
-  'setup_url' => 'http://localhost:8080/examples/examples/tilmeld/setup.php',
+  'app_url' => "$site/",
+  'setup_url' => "$site/examples/examples/tilmeld/setup.php",
   'email_usernames' => true,
-  'verify_redirect' => 'http://localhost:8080/examples/examples/tilmeld/components.php',
+  'verify_redirect' => "$site/examples/examples/tilmeld/components.php",
 ];
 if (getenv('TILMELD_SECRET_FILE')) {
   $tilmeldConfig['jwt_secret'] = base64_decode(
