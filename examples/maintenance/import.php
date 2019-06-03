@@ -3,12 +3,12 @@
 require file_exists(__DIR__.'/../../../autoload-dev.php')
     ? __DIR__.'/../../../autoload-dev.php'
     : __DIR__.'/../../vendor/autoload.php';
-require __DIR__.'/../config-tilmeld.php';
+require __DIR__.'/../config.php';
 
-var_dump($_SERVER);
+\Tilmeld\Tilmeld::authenticate(true);
 
 if (!\Tilmeld\Tilmeld::gatekeeper('system/admin')) {
-  // No import/export on production.
+  // Only admins.
   header('HTTP/1.1 403 Forbidden', true, 403);
   echo "403 Forbidden";
   exit;
@@ -18,7 +18,7 @@ if ($_FILES) {
   if ($_FILES['nex']['error'] === 0) {
     error_reporting(E_ALL);
 
-    require '../employee/Employee.php';
+    require '../test/Employee.php';
     require '../sudoku/Game.php';
     require '../todo/Todo.php';
 

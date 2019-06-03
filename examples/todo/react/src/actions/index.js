@@ -67,3 +67,23 @@ export const updateTodos = (todos, archived) => {
     archived
   };
 };
+
+export const updateTodo = (todo) => {
+  return {
+    type: 'UPDATE_TODO',
+    todo
+  };
+};
+
+export const refreshTodos = () => {
+  return {
+    type: 'REFRESH_TODOS'
+  };
+};
+
+export const updateDisconnected = (disconnected) => {
+  return {
+    type: 'UPDATE_DISCONNECTED',
+    disconnected
+  };
+};

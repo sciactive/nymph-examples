@@ -1,11 +1,23 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import AddTodoContainer from '../containers/AddTodoContainer';
 import TodoListContainer from '../containers/TodoListContainer';
 import TodoActionsContainer from '../containers/TodoActionsContainer';
 import FooterContainer from '../containers/FooterContainer';
 
-const App = () => (
+const mapStateToProps = state => {
+  return {
+    disconnected: state.subscription.disconnected
+  };
+};
+
+const App = ({disconnected}) => (
   <div>
+    {disconnected && (
+      <div className="alert alert-danger">
+        You are disconnected. Check to make sure you're online.
+      </div>
+    )}
     <div className="row">
       <div className="col-sm-8">
         <TodoListContainer />
@@ -19,4 +31,8 @@ const App = () => (
   </div>
 );
 
-export default App;
+const AppContainer = connect(
+  mapStateToProps
+)(App);
+
+export default AppContainer;

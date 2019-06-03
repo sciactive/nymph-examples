@@ -14,9 +14,9 @@
   "license": "Apache-2.0",
   "require": {
     "php": "~7.1",
-    "sciactive/nymph-server": "^3.0@beta",
-    "sciactive/nymph-pubsub": "^3.0@beta",
-    "sciactive/tilmeld-server": "^1.0@beta"
+    "sciactive/nymph-server": "3.0.*",
+    "sciactive/nymph-pubsub": "3.0.*",
+    "sciactive/tilmeld-server": "1.0.*"
   },
   "scripts": {
     "post-install-cmd": [
@@ -25,6 +25,5 @@
     "post-update-cmd": [
       "./install-and-build.sh"
     ]
-  },
-  "minimum-stability": "beta"
+  }
 }

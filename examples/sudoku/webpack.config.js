@@ -3,30 +3,22 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    TodoApp: path.resolve(__dirname, 'src', 'index.jsx')
+    Game: path.resolve(__dirname, 'Game.src.js')
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname),
     filename: '[name].js',
     library: ['[name]'],
     libraryTarget: 'umd',
     globalObject: 'this'
   },
-  resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css']
-  },
   externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-    'prop-types': 'PropTypes',
-    'react-redux': 'ReactRedux',
-    'redux': 'Redux',
     'nymph-client': 'nymph-client'
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',

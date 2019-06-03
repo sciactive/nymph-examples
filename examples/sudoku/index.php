@@ -2,7 +2,7 @@
 $clientDir = file_exists('../../../client/package.json')
     ? '../../../client'
     : '../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../tilmeld-client/package.json')
+$tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
     ? '../../../tilmeld-client'
     : '../../node_modules/tilmeld-client';
 
@@ -21,8 +21,7 @@ include('../get_pubsub_url.php');
     })();
     NymphOptions = {
       restURL: '../rest.php',
-      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
-      rateLimit: 100
+      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
     };
   </script>
   <style type="text/css">
@@ -32,12 +31,8 @@ include('../get_pubsub_url.php');
       bottom: 5px;
     }
   </style>
-  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
+  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
   <script src="Game.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>

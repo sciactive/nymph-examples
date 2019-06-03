@@ -4,18 +4,21 @@
   "description": "An example employee app using Nymph.",
   "main": "Todo.js",
   "scripts": {
-    "build": "babel Employee.src.js -o Employee.js",
-    "watch": "babel Employee.src.js --watch -o Employee.js",
+    "build": "webpack",
+    "watch": "webpack --watch",
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hunter Perrin <hperrin@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-3": "^6.24.1",
-    "babel-watch": "^2.0.7"
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-classes": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
   }
 }

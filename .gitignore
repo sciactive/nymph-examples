@@ -1,3 +1,4 @@
 vendor
 node_modules
 nohup.out
+dist

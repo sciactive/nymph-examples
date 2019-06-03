@@ -2,7 +2,7 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../../tilmeld-client/package.json')
+$tilmeldClientDir = file_exists('../../../../tilmeld-client/package.json')
     ? '../../../../tilmeld-client'
     : '../../../node_modules/tilmeld-client';
 
@@ -20,9 +20,8 @@ include('../../get_pubsub_url.php');
       (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
     })();
     NymphOptions = {
-      restURL: '../../rest-tilmeld.php',
-      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
-      rateLimit: 100
+      restURL: '../../rest.php',
+      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
     };
   </script>
   <style type="text/css">
@@ -67,12 +66,8 @@ include('../../get_pubsub_url.php');
       flex-shrink: 1;
     }
   </style>
-  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
+  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
   <script src="../Todo.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -94,6 +89,9 @@ include('../../get_pubsub_url.php');
       </h2>
     </div>
     <div class="row">
+      <div class="alert alert-danger" ng-if="uiState.disconnected">
+        You are disconnected. Check to make sure you're online.
+      </div>
       <div class="col-sm-8">
         <div class="list-group" style="clear: both;">
           <div class="well" ng-if="!todos.length">You have no todos yet.</div>

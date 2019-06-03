@@ -2,7 +2,7 @@
 $clientDir = file_exists('../../../../client/package.json')
     ? '../../../../client'
     : '../../../node_modules/nymph-client';
-$tilmeldDir = file_exists('../../../../tilmeld-client/package.json')
+$tilmeldClientDir = file_exists('../../../../tilmeld-client/package.json')
     ? '../../../../tilmeld-client'
     : '../../../node_modules/tilmeld-client';
 
@@ -20,21 +20,14 @@ include('../../get_pubsub_url.php');
       (typeof Promise !== "undefined" && typeof Promise.all === "function") || document.getElementsByTagName('head')[0].appendChild(s);
     })();
     NymphOptions = {
-      restURL: '../../rest-tilmeld.php',
-      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>,
-      rateLimit: 100
+      restURL: '../../rest.php',
+      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
     };
   </script>
-  <script src="<?php echo $clientDir; ?>/lib/Nymph.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/Entity.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/PubSub.js"></script>
-  <script src="<?php echo $clientDir; ?>/lib/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/User.js"></script>
-  <script src="<?php echo $tilmeldDir; ?>/lib/umd/Entities/Group.js"></script>
-  <script src="../Todo.js"></script>
+  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
+  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
 
-  <script src="lib/TodoEl.js"></script>
-  <script src="lib/TodoApp.js"></script>
+  <script src="dist/TodoApp.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>

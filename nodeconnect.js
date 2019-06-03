@@ -1,28 +1,31 @@
 const fs = require('fs');
 
+// Set up module aliases for development.
+const alias = require('module-alias');
+if (fs.existsSync('../client-node/package.json')) {
+  alias.addAliases({
+    'nymph-client-node': __dirname + '/../client-node/index.js',
+    'nymph-client': __dirname + '/../client/dist/NymphClient.js',
+    'tilmeld-client': __dirname + '/../tilmeld-client/dist/TilmeldClient.js'
+  });
+}
+
 // Nymph Node client for the win.
-const NymphNode = fs.existsSync('../client-node/package.json')
-    ? require('../client-node/index.js')
-    : require('nymph-client-node');
+const NymphClient = require('nymph-client-node');
 // Tilmeld requires cookies.
-NymphNode.enableCookies();
-const Nymph = NymphNode.Nymph;
+NymphClient.enableCookies();
+const {Nymph} = NymphClient;
 
 // Set up Nymph.
 const nymphOptions = {
-  restURL: 'http://localhost:8080/examples/examples/rest-tilmeld.php',
-  pubsubURL: 'ws://localhost:8081',
-  rateLimit: 100
+  restURL: 'http://localhost:8080/examples/examples/rest.php',
+  pubsubURL: 'ws://localhost:8081'
 };
 Nymph.init(nymphOptions);
 
 const Todo = require('./examples/todo/Todo').Todo;
-const User = fs.existsSync('../tilmeld-client/package.json')
-    ? require('../tilmeld-client/lib/Entities/User.js').User
-    : require('tilmeld').User;
-const Group = fs.existsSync('../tilmeld-client/package.json')
-    ? require('../tilmeld-client/lib/Entities/Group.js').User
-    : require('tilmeld').Group;
+const User = require('tilmeld-client').User;
+const Group = require('tilmeld-client').Group;
 
 main();
 async function main() {
@@ -45,6 +48,7 @@ async function main() {
       if (data.result) {
         if (!data.loggedin) {
           console.log("\n\nThe Node user in Tilmeld, 'User McUserface', needs to be enabled.");
+          return;
         }
       } else {
         console.log("\n\nI can't register the Node user in Tilmeld, 'User McUserface': ", data.message);

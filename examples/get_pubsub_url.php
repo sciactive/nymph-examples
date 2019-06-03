@@ -12,9 +12,9 @@ function is_secure() {
 }
 
 function get_pubsub_url () {
-  return (is_secure() ? 'wss' : 'ws') .
-          '://' .
-          (getenv('NYMPH_PRODUCTION') ? 'nymph-pubsub-demo.herokuapp.com' : '127.0.0.1') .
-          ':' .
+  return (is_secure() ? 'wss' : 'ws').
+          '://'.
+          (getenv('NYMPH_PRODUCTION') ? 'nymph-pubsub-demo.herokuapp.com' : '127.0.0.1').
+          ':'.
           (getenv('NYMPH_PRODUCTION') ? (is_secure() ? '443' : '80') : '8081');
 }
