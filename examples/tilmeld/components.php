@@ -165,10 +165,15 @@ include('../get_pubsub_url.php');
 
       global.logout = () => {
         if (currentUser) {
-          currentUser.logout();
+          currentUser.$logout();
         }
       }
-    })(this, window['tilmeld-client'].User, window['tilmeld-components'].Login, window['tilmeld-components'].ChangePassword);
+    })(
+      this,
+      window['tilmeld-client'].User,
+      window['tilmeld-components'].Login,
+      window['tilmeld-components'].ChangePassword
+    );
   </script>
 
   <style>
