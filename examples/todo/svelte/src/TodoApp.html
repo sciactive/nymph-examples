@@ -83,7 +83,7 @@
   let disconnected = false;
   let subscription;
 
-  $: remaining = todos.filter(todo => !todo.get().done).length;
+  $: remaining = todos.filter(todo => !todo.done).length;
 
   onMount(() => {
     getTodos(uiShowArchived);
@@ -101,7 +101,7 @@
   function onPubSubConnect () {
     if (disconnected) {
       getTodos(uiShowArchived);
-      todos.map(todo => todo.refresh().then(() => todos = todos));
+      todos.map(todo => todo.$refresh().then(() => todos = todos));
     }
     disconnected = false;
   }
@@ -115,10 +115,10 @@
       subscription.unsubscribe();
     }
     subscription = Nymph.getEntities({
-      "class": 'Todo'
+      class: 'Todo'
     }, {
-      "type": archived ? '&' : '!&',
-      "tag": 'archived'
+      type: archived ? '&' : '!&',
+      tag: 'archived'
     }).subscribe(newTodos => {
       uiShowArchived = archived;
       if (newTodos !== undefined) {
@@ -136,8 +136,8 @@
       return;
     }
     const todo = new Todo();
-    todo.set({name: todoText});
-    todo.save().then(() => {
+    todo.name = todoText;
+    todo.$save().then(() => {
       todoText = '';
     }, errObj => {
       alert("Error: "+errObj.textStatus);
@@ -149,7 +149,7 @@
   }
 
   function save (todo) {
-    todo.save().then(null, errObj => {
+    todo.$save().then(null, errObj => {
       alert('Error: '+errObj.textStatus);
     });
   }
@@ -158,13 +158,13 @@
     const oldTodos = todos;
     for (let i = 0; i < oldTodos.length; i++) {
       const todo = oldTodos[i];
-      if (todo.get().done) {
-        todo.archive().then(success => {
+      if (todo.done) {
+        todo.$archive().then(success => {
           if (!success) {
-            alert("Couldn't save changes to "+todo.get().name);
+            alert("Couldn't save changes to "+todo.name);
           }
         }, errObj => {
-          alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.get().name);
+          alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.name);
         });
       }
     }

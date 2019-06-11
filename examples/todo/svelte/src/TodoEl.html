@@ -1,10 +1,10 @@
-<label class="list-group-item list-group-item-{todo.data.done ? 'success' : 'warning'}">
+<label class="list-group-item list-group-item-{todo.done ? 'success' : 'warning'}">
   <span class="todo-row">
     <span class="todo-controls todo-flex">
       {#if !archived}
-        <input type="checkbox" bind:checked={todo.data.done} on:change={save} style="margin-right: 5px;">
+        <input type="checkbox" bind:checked={todo.done} on:change={save} style="margin-right: 5px;">
       {/if}
-      <input type="text" class="todo-input done-{todo.data.done}" bind:value={todo.data.name} on:change={save}>
+      <input type="text" class="todo-input done-{todo.done}" bind:value={todo.name} on:change={save}>
     </span>
     <span class="todo-date todo-flex">
       {createdDate}
@@ -24,7 +24,7 @@
   })();
 
   function save () {
-    todo.save().then(todo => {
+    todo.$patch().then(todo => {
       todo = todo;
     }, errObj => {
       alert('Error: '+errObj.textStatus);
