@@ -19,7 +19,7 @@ const todos = (state = {subscription: null, onPubSubConnect: null, onPubSubDisco
         }
 
         let archived = action.archived;
-        let subscription = Nymph.getEntities({'class': Todo.class}, {'type': archived ? '&' : '!&', 'tag': 'archived'}).subscribe((newTodos) => {
+        let subscription = Nymph.getEntities({'class': Todo.class}, {'type': archived ? '&' : '!&', 'tag': 'archived'}).subscribe(newTodos => {
           action.asyncDispatch(updateTodos(newTodos, archived));
         }, null, (count) => {
           action.asyncDispatch(updateUserCount(count));

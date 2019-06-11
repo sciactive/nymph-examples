@@ -17,16 +17,16 @@ const TodoEl = ({todo, archived, onClick, onChange, onSave}) => {
   });
 
   return (
-    <label className={'list-group-item list-group-item-'+(todo.data.done ? 'success' : 'warning')} style={{fontWeight: 'normal', cursor: 'pointer'}}>
+    <label className={'list-group-item list-group-item-'+(todo.done ? 'success' : 'warning')} style={{fontWeight: 'normal', cursor: 'pointer'}}>
       <span style={{display: 'flex', justifyContent: 'space-between'}}>
         <span style={{display: 'flex', flexGrow: 1}}>
           {!archived &&
-            <input type="checkbox" checked={todo.data.done} onChange={onClick} style={{marginRight: '5px'}} />
+            <input type="checkbox" checked={todo.done} onChange={onClick} style={{marginRight: '5px'}} />
           }
           <input
             type="text"
-            style={todo.data.done ? todoStyleDone : todoStyle}
-            value={todo.data.name}
+            style={todo.done ? todoStyleDone : todoStyle}
+            value={todo.name}
             onChange={e => onChange(e.target.value)}
             onKeyDown={e => e.keyCode === 13 && onSave()}
             onBlur={e => onSave()}

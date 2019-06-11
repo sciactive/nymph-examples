@@ -3,7 +3,7 @@ import {archiveDoneTodos, deleteTodos, subscribe, setSort} from '../actions';
 import TodoActions from '../components/TodoActions';
 
 const getRemainingTodos = (todos) => {
-  return todos.filter(todo => !todo.data.done);
+  return todos.filter(todo => !todo.done);
 };
 
 const mapStateToProps = state => {

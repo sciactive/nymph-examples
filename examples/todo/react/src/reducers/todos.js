@@ -31,7 +31,7 @@ const todos = (state = {todos: [], archived: false, sort: 'name'}, action) => {
     case 'REFRESH_TODOS':
       {
         let todos = state.todos.slice();
-        todos.map(todo => todo.refresh().then(todo => {
+        todos.map(todo => todo.$refresh().then(todo => {
           action.asyncDispatch(updateTodo(todo));
         }));
         return state;
@@ -46,43 +46,43 @@ const todos = (state = {todos: [], archived: false, sort: 'name'}, action) => {
     case 'ADD_TODO':
       {
         let todo = new Todo();
-        todo.set('name', action.name);
-        todo.save();
+        todo.name = action.name;
+        todo.$save();
         return state;
       }
     case 'TOGGLE_TODO':
       {
-        action.todo.set('done', !action.todo.get().done);
-        action.todo.save();
+        action.todo.done = !action.todo.done;
+        action.$patch();
 
         let todos = state.todos.slice();
-        todos.splice(action.todo.arraySearch(todos), 1, action.todo);
+        todos.splice(action.todo.$arraySearch(todos), 1, action.todo);
         return {...state, todos};
       }
     case 'CHANGE_TODO':
       {
-        action.todo.set('name', action.name);
+        action.todo.name = action.name;
 
         let todos = state.todos.slice();
-        todos.splice(action.todo.arraySearch(todos), 1, action.todo);
+        todos.splice(action.todo.$arraySearch(todos), 1, action.todo);
         return {...state, todos};
       }
     case 'SAVE_TODO':
       {
-        action.todo.save();
+        action.$patch();
         return state;
       }
     case 'ARCHIVE_DONE_TODOS':
       {
         for (let i = 0; i < state.todos.length; i++) {
           const todo = state.todos[i];
-          if (todo.get().done) {
-            todo.archive().then((success) => {
+          if (todo.done) {
+            todo.$archive().then(success => {
               if (!success) {
-                alert("Couldn't save changes to "+todo.get().name);
+                alert("Couldn't save changes to "+todo.name);
               }
-            }, (errObj) => {
-              alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.get().name);
+            }, errObj => {
+              alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.name);
             });
           }
         }
