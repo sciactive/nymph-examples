@@ -35,7 +35,7 @@ php examples/pubsub.php
 Now you can see the example apps (assuming your server is on port 80):
 
 * [Todo App with Svelte](http://localhost/nymph-examples/examples/todo/svelte/)
-* [Todo App with Angular 1](http://localhost/nymph-examples/examples/todo/angular1/)
+* [Todo App with React](http://localhost/nymph-examples/examples/todo/react/)
 * [Sudoku App](http://localhost/nymph-examples/examples/sudoku/)
 * [Simple Clicker App](http://localhost/nymph-examples/examples/clicker/)
 

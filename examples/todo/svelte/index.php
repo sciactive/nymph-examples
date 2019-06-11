@@ -39,7 +39,6 @@ include('../../get_pubsub_url.php');
         </span>
         <small>
           <a href="../react/" target="_self">React</a> |
-          <a href="../angular1/" target="_self">Angular 1</a> |
           <span>Svelte</span>
         </small>
       </h2>
