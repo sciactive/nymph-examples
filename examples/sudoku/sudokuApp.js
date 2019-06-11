@@ -23,13 +23,13 @@ angular.module('sudokuApp', [])
   var subscription, subscriptionFunction = function(){
     if (!$scope.curGame.guid) {
       if (confirm("Someone deleted your game! Do you want to restore it?")) {
-        $scope.curGame.save();
+        $scope.curGame.$save();
       } else {
         $scope.clearGame();
       }
       return;
     }
-    $scope.curGame.calculateErrors();
+    $scope.curGame.$calculateErrors();
     $scope.$apply();
   };
 
@@ -63,22 +63,20 @@ angular.module('sudokuApp', [])
     if ([1, 2, 3].indexOf($scope.uiState.difficulty) === -1)
       return;
     var game = new Game();
-    game.set({
-      'name': $scope.uiState.player,
-      'difficulty': $scope.uiState.difficulty
-    });
+    game.name = $scope.uiState.player;
+    game.difficulty = $scope.uiState.difficulty;
     $scope.uiState.loading = "Generating a new game board...";
-    game.generateBoard().then(function(){
+    game.$generateBoard().then(function(){
       $scope.uiState.loading = "Applying the difficulty level...";
       $scope.$apply();
-      game.makeItFun().then(function(){
+      game.$makeItFun().then(function(){
         $scope.uiState.loading = "Loading the new game...";
         $scope.$apply();
-        game.save().then(function(game){
+        game.$save().then(function(game){
           if (subscription) {
             subscription.unsubscribe();
           }
-          subscription = game.subscribe(subscriptionFunction, null, function(count){
+          subscription = game.$subscribe(subscriptionFunction, null, function(count){
             $scope.uiState.gameUserCount = count;
             $scope.$apply();
           });
@@ -111,7 +109,7 @@ angular.module('sudokuApp', [])
 
   $scope.saveState = function(showErr) {
     $scope.saving = true;
-    $scope.curGame.save().then(function(){
+    $scope.curGame.$patch().then(function(){
       $scope.saving = false;
       $scope.$apply();
     }, function(errObj){
@@ -127,7 +125,7 @@ angular.module('sudokuApp', [])
     if (subscription) {
       subscription.unsubscribe();
     }
-    subscription = game.subscribe(subscriptionFunction, null, function(count){
+    subscription = game.$subscribe(subscriptionFunction, null, function(count){
       $scope.uiState.gameUserCount = count;
       $scope.$apply();
     });
@@ -149,8 +147,8 @@ angular.module('sudokuApp', [])
     if (!confirm('Are you sure?')) {
       return;
     }
-    var key = game.arraySearch($scope.uiState.games);
-    game.delete().then(function(){
+    var key = game.$arraySearch($scope.uiState.games);
+    game.$delete().then(function(){
       if (key !== false) {
         $scope.uiState.games.splice(key, 1);
       }
@@ -162,21 +160,21 @@ angular.module('sudokuApp', [])
 
   var gameTimer;
   $scope.startTimer = function(){
-    $scope.uiState.timeDiff = $scope.calcTime($scope.curGame.data.time);
+    $scope.uiState.timeDiff = $scope.calcTime($scope.curGame.time);
     if (angular.isDefined(gameTimer)) {
       $interval.cancel(gameTimer);
     }
     gameTimer = $interval(function(){
-      if ($scope.curGame.data.done) {
+      if ($scope.curGame.done) {
         $scope.stopTimer();
         return;
       }
-      $scope.curGame.data.time++;
-      $scope.uiState.timeDiff = $scope.calcTime($scope.curGame.data.time);
+      $scope.curGame.time = $scope.curGame.time + 1;
+      $scope.uiState.timeDiff = $scope.calcTime($scope.curGame.time);
       // Don't save too often.
-      if ($scope.curGame.data.time % 10 === 0 && $scope.uiState.gameUserCount <= 1) {
+      if ($scope.curGame.time % 10 === 0) {
         // This causes a race condition without the count check. How do I fix it??
-        $scope.curGame.save();
+        $scope.curGame.$patch();
       }
     }, 1000);
   };
