@@ -1,13 +1,13 @@
 <?php
 $clientDir = file_exists('../../../client/package.json')
-    ? '../../../client'
-    : '../../node_modules/nymph-client';
+? '../../../client'
+: '../../node_modules/nymph-client';
 $tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
-    ? '../../../tilmeld-client'
-    : '../../node_modules/tilmeld-client';
+? '../../../tilmeld-client'
+: '../../node_modules/tilmeld-client';
 $tilmeldComponentsDir = file_exists('../../../tilmeld-components/package.json')
-    ? '../../../tilmeld-components'
-    : '../../node_modules/tilmeld-components';
+? '../../../tilmeld-components'
+: '../../node_modules/tilmeld-components';
 
 include('../get_pubsub_url.php');
 
@@ -165,10 +165,15 @@ include('../get_pubsub_url.php');
 
       global.logout = () => {
         if (currentUser) {
-          currentUser.logout();
+          currentUser.$logout();
         }
       }
-    })(this, window['tilmeld-client'].User, window['tilmeld-components'].Login, window['tilmeld-components'].ChangePassword);
+    })(
+      this,
+      window['tilmeld-client'].User,
+      window['tilmeld-components'].Login,
+      window['tilmeld-components'].ChangePassword
+    );
   </script>
 
   <style>

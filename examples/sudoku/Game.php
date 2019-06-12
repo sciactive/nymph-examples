@@ -150,7 +150,7 @@ class Game extends \Nymph\Entity {
         case 2:
           rsort($counts);
           $middle = round(count($counts) / 2);
-          $key = $counts[$middle-1];
+          $key = $counts[$middle - 1];
           break;
         case 3:
           $key = max($counts);
@@ -233,8 +233,8 @@ class Game extends \Nymph\Entity {
     $results = [];
     $minX = $y - ($y % 3);
     $minY = $x - ($x % 3);
-    for ($y2 = $minX; $y2 <= $minX+2; $y2++) {
-      for ($x2 = $minY; $x2 <= $minY+2; $x2++) {
+    for ($y2 = $minX; $y2 <= $minX + 2; $y2++) {
+      for ($x2 = $minY; $x2 <= $minY + 2; $x2++) {
         if ($y2 === $y && $x2 === $x) {
           continue;
         }

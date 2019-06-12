@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import AddTodoContainer from '../containers/AddTodoContainer';
 import TodoListContainer from '../containers/TodoListContainer';
 import TodoActionsContainer from '../containers/TodoActionsContainer';
@@ -7,11 +7,11 @@ import FooterContainer from '../containers/FooterContainer';
 
 const mapStateToProps = state => {
   return {
-    disconnected: state.subscription.disconnected
+    disconnected: state.subscription.disconnected,
   };
 };
 
-const App = ({disconnected}) => (
+const App = ({ disconnected }) => (
   <div>
     {disconnected && (
       <div className="alert alert-danger">
@@ -22,7 +22,10 @@ const App = ({disconnected}) => (
       <div className="col-sm-8">
         <TodoListContainer />
       </div>
-      <div className="col-sm-4" style={{textAlign: 'center', marginBottom: '1em'}}>
+      <div
+        className="col-sm-4"
+        style={{ textAlign: 'center', marginBottom: '1em' }}
+      >
         <TodoActionsContainer />
       </div>
     </div>
@@ -31,8 +34,6 @@ const App = ({disconnected}) => (
   </div>
 );
 
-const AppContainer = connect(
-  mapStateToProps
-)(App);
+const AppContainer = connect(mapStateToProps)(App);
 
 export default AppContainer;

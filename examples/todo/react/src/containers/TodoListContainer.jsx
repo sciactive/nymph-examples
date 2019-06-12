@@ -1,11 +1,11 @@
-import {connect} from 'react-redux';
-import {toggleTodo, changeTodo, saveTodo} from '../actions';
+import { connect } from 'react-redux';
+import { toggleTodo, changeTodo, saveTodo } from '../actions';
 import TodoList from '../components/TodoList';
 
 const mapStateToProps = state => {
   return {
     todos: state.todos.todos,
-    archived: state.todos.archived
+    archived: state.todos.archived,
   };
 };
 
@@ -19,13 +19,13 @@ const mapDispatchToProps = dispatch => {
     },
     onTodoSave: (todo, name) => {
       dispatch(saveTodo(todo, name));
-    }
+    },
   };
 };
 
 const TodoListContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TodoList);
 
 export default TodoListContainer;

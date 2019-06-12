@@ -72,13 +72,15 @@ if (getenv('NYMPH_PRODUCTION')) {
 }
 
 // uMailPHP's configuration.
-\uMailPHP\Mail::configure([
-  'site_name' => 'Tilmeld Example Site',
-  'site_link' => "$appUrl/examples/tilmeld/components.php",
-  'master_address' => 'noreply@example.com',
-  'testing_mode' => true,
-  'testing_email' => 'hperrin@localhost',
-]);
+\uMailPHP\Mail::configure(
+  [
+    'site_name' => 'Tilmeld Example Site',
+    'site_link' => "$appUrl/examples/tilmeld/components.php",
+    'master_address' => 'noreply@example.com',
+    'testing_mode' => true,
+    'testing_email' => 'hperrin@localhost',
+  ]
+);
 
 
 // Tilmeld's configuration.
@@ -92,7 +94,7 @@ if (getenv('TILMELD_SECRET')) {
   $tilmeldConfig['jwt_secret'] = base64_decode(getenv('TILMELD_SECRET'));
 } elseif (getenv('TILMELD_SECRET_FILE')) {
   $tilmeldConfig['jwt_secret'] = base64_decode(
-      file_get_contents(getenv('TILMELD_SECRET_FILE'))
+    file_get_contents(getenv('TILMELD_SECRET_FILE'))
   );
 } else {
   $tilmeldConfig['jwt_secret'] = str_repeat('a', 256);

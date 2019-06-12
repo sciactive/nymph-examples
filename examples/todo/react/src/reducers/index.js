@@ -1,10 +1,10 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import todos from './todos';
 import subscription from './subscription';
 
 const todoApp = combineReducers({
   todos,
-  subscription
+  subscription,
 });
 
 export default todoApp;

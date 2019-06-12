@@ -1,10 +1,10 @@
 <?php
 $clientDir = file_exists('../../../client/package.json')
-    ? '../../../client'
-    : '../../node_modules/nymph-client';
+? '../../../client'
+: '../../node_modules/nymph-client';
 $tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
-    ? '../../../tilmeld-client'
-    : '../../node_modules/tilmeld-client';
+? '../../../tilmeld-client'
+: '../../node_modules/tilmeld-client';
 
 include('../get_pubsub_url.php');
 
@@ -38,8 +38,8 @@ include('../get_pubsub_url.php');
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
   <script src="sudokuApp.js"></script>
 
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="sudokuApp.css">
 </head>
 <body ng-app="sudokuApp">
@@ -96,13 +96,13 @@ include('../get_pubsub_url.php');
             </label>
           </div>
         </div>
-        <div ng-if="uiState.games.length" ng-repeat="game in uiState.games" class="alert alert-{{game.data.done ? 'success' : 'info'}} clearfix">
+        <div ng-if="uiState.games.length" ng-repeat="game in uiState.games" class="alert alert-{{game.done ? 'success' : 'info'}} clearfix">
           <p style="margin-bottom: 10px;">
-            <span>{{game.data.name}} at {{printDate(game.cdate)}}</span>
-            <span>({{calcTime(game.data.time)}} on {{[0, 'easy', 'medium', 'hard'][game.data.difficulty]}})</span>
+            <span>{{game.name}} at {{printDate(game.cdate)}}</span>
+            <span>({{calcTime(game.time)}} on {{[0, 'easy', 'medium', 'hard'][game.difficulty]}})</span>
           </p>
           <div class="clearfix">
-            <button type="button" class="btn btn-primary pull-left" ng-click="loadGame(game)">{{game.data.done ? 'See it Again' : 'Continue'}}</button>
+            <button type="button" class="btn btn-primary pull-left" ng-click="loadGame(game)">{{game.done ? 'See it Again' : 'Continue'}}</button>
             <button type="button" class="btn btn-danger pull-right" ng-click="deleteGame(game)">Delete</button>
           </div>
         </div>
@@ -117,15 +117,15 @@ include('../get_pubsub_url.php');
         <i class="fa fa-spin fa-spinner"></i> Saving
       </div>
       <div class="col-lg-6">
-        <h3>Game Player: {{curGame.data.name}}</h3>
+        <h3>Game Player: {{curGame.name}}</h3>
         <div class="game-board">
-          <div class="row" ng-repeat="(y, row) in curGame.data.board track by $index">
-            <div class="square square-{{curGame.data.playBoard[y][x] ? 'preset' : 'open'}}" ng-repeat="(x, square) in row track by $index">
+          <div class="row" ng-repeat="(y, row) in curGame.board track by $index">
+            <div class="square square-{{curGame.playBoard[y][x] ? 'preset' : 'open'}}" ng-repeat="(x, square) in row track by $index">
               <div class="dummy"></div>
-              <div class="value" ng-if="curGame.data.playBoard[y][x]">
+              <div class="value" ng-if="curGame.playBoard[y][x]">
                 {{square}}
               </div>
-              <input class="value" type="number" ng-class="{mistake: curGame.mistakes[y][x]}" ng-if="!curGame.data.playBoard[y][x]" ng-model="curGame.data.board[y][x]" ng-pattern="/^[1-9]$/" ng-change="curGame.calculateErrors(); saveState()" />
+              <input class="value" type="number" ng-class="{mistake: curGame.mistakes[y][x]}" ng-if="!curGame.playBoard[y][x]" ng-model="curGame.board[y][x]" ng-pattern="/^[1-9]$/" ng-change="curGame.$calculateErrors(); curGame.board = curGame.board; saveState()" />
             </div>
           </div>
         </div>
@@ -134,22 +134,22 @@ include('../get_pubsub_url.php');
         <h3>Options and Help</h3>
         <div class="row">
           <div class="col-sm-12">
-            <button type="button" class="btn btn-default btn-sm" ng-click="curGame.data.board = curGame.data.playBoard; curGame.calculateErrors(); startTimer(); saveState()">Gah! Let me start over.</button>
+            <button type="button" class="btn btn-default btn-sm" ng-click="curGame.board = curGame.playBoard; curGame.$calculateErrors(); startTimer(); saveState()">Gah! Let me start over.</button>
             <!--<button type="button" class="btn btn-default btn-sm" ng-click="curGame.hint()">I could really use a hint here.</button>-->
-            <button type="button" class="btn btn-default btn-sm" ng-click="curGame.data.board = curGame.data.solvedBoard; curGame.calculateErrors(); saveState()">Just solve the damn thing!</button>
+            <button type="button" class="btn btn-default btn-sm" ng-click="curGame.board = curGame.solvedBoard; curGame.$calculateErrors(); saveState()">Just solve the damn thing!</button>
           </div>
         </div>
-        <div class="row" ng-show="!curGame.data.done">
+        <div class="row" ng-show="!curGame.done">
           <div class="col-sm-4">You want some help?</div>
           <div class="col-sm-8">
             <label>
-              <input type="radio" name="help" ng-model="curGame.help" ng-value="1" ng-change="curGame.calculateErrors()" /> No way, I totally got this.
+              <input type="radio" name="help" ng-model="curGame.help" ng-value="1" ng-change="curGame.$calculateErrors()" /> No way, I totally got this.
             </label><br>
             <label>
-              <input type="radio" name="help" ng-model="curGame.help" ng-value="2" ng-change="curGame.calculateErrors()" /> Sure, just tell me if I make an obvious mistake.
+              <input type="radio" name="help" ng-model="curGame.help" ng-value="2" ng-change="curGame.$calculateErrors()" /> Sure, just tell me if I make an obvious mistake.
             </label><br>
             <label>
-              <input type="radio" name="help" ng-model="curGame.help" ng-value="3" ng-change="curGame.calculateErrors()" /> I'm so lost, tell me if I play anything that's wrong.
+              <input type="radio" name="help" ng-model="curGame.help" ng-value="3" ng-change="curGame.$calculateErrors()" /> I'm so lost, tell me if I play anything that's wrong.
             </label>
           </div>
         </div>
@@ -163,7 +163,7 @@ include('../get_pubsub_url.php');
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <button type="button" class="btn btn-primary" ng-click="clearGame()">{{curGame.data.done ? 'Who\'s The Man' : 'I need a break.'}}</button>
+            <button type="button" class="btn btn-primary" ng-click="clearGame()">{{curGame.done ? 'Who\'s The Man' : 'I need a break.'}}</button>
           </div>
         </div>
       </div>

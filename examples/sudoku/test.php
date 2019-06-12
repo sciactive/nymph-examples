@@ -7,8 +7,8 @@ require 'Game.php';
 
 $newGame = new Game();
 
-if (is_numeric($_REQUEST['difficulty']) && (int)$_REQUEST['difficulty'] >= 1 && (int)$_REQUEST['difficulty'] <= 3) {
-  $newGame->difficulty = (int)$_REQUEST['difficulty'];
+if (is_numeric($_REQUEST['difficulty']) && (int) $_REQUEST['difficulty'] >= 1 && (int) $_REQUEST['difficulty'] <= 3) {
+  $newGame->difficulty = (int) $_REQUEST['difficulty'];
 }
 
 $time = microtime(true);

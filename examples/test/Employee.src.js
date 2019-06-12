@@ -1,17 +1,17 @@
 // This file is a demo class that extends the Entity class.
 
-import {Nymph, Entity} from 'nymph-client';
+import { Nymph, Entity } from 'nymph-client';
 
 export class Employee extends Entity {
   constructor(id) {
     super(id);
-    this.addTag('employee');
-    this.data.current = true;
-    this.data.subordinates = [];
+    this.$addTag('employee');
+    this.current = true;
+    this.subordinates = [];
   }
 
-  throwError(...args) {
-    return this.serverCall('throwError', args);
+  $throwError(...args) {
+    return this.$serverCall('throwError', args);
   }
 
   static testStatic(value, ...args) {

@@ -9,8 +9,8 @@ if (php_sapi_name() != 'cli') {
 date_default_timezone_set('America/Los_Angeles');
 
 require_once file_exists(__DIR__.'/../../autoload-dev.php')
-    ? __DIR__.'/../../autoload-dev.php'
-    : __DIR__.'/../vendor/autoload.php';
+? __DIR__.'/../../autoload-dev.php'
+: __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/config.php';
 
 $config = [];
@@ -30,14 +30,14 @@ if (isset($opts['e'])) {
   $config['entries'] = [];
   foreach (explode(',', $opts['e']) as $port) {
     $config['entries'][] =
-        ($port == '443' ? 'wss' : 'ws')."://127.0.0.1:{$port}/";
+    ($port == '443' ? 'wss' : 'ws')."://127.0.0.1:{$port}/";
   }
 }
 if (isset($opts['r'])) {
   $config['relays'] = [];
   foreach (explode(',', $opts['r']) as $port) {
     $config['relays'][] =
-        ($port == '443' ? 'wss' : 'ws')."://127.0.0.1:{$port}/";
+    ($port == '443' ? 'wss' : 'ws')."://127.0.0.1:{$port}/";
   }
 }
 

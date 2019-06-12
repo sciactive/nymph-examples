@@ -9,11 +9,11 @@ const TodoActions = ({
   onArchiveClick,
   onDeleteClick,
   onToggleArchivedClick,
-  onSortClick
+  onSortClick,
 }) => {
   return (
     <div>
-      <small className="alert alert-info" style={{display: 'block'}}>
+      <small className="alert alert-info" style={{ display: 'block' }}>
         {archived ? (
           <span>{todosLength} archived todos</span>
         ) : (
@@ -21,37 +21,63 @@ const TodoActions = ({
             {todosLength === 0 ? (
               <span>0 todos</span>
             ) : (
-              <span>{remaining} of {todosLength} remaining</span>
+              <span>
+                {remaining} of {todosLength} remaining
+              </span>
             )}
           </span>
         )}
-        {todosLength > 0 &&
+        {todosLength > 0 && (
           <span>
-            &nbsp;
-            [
+            &nbsp; [
             {archived ? (
-              <a href="javascript:void(0)" onClick={onDeleteClick}>delete</a>
+              <a href="javascript:void(0)" onClick={onDeleteClick}>
+                delete
+              </a>
             ) : (
-              <a href="javascript:void(0)" onClick={onArchiveClick}>archive done</a>
+              <a href="javascript:void(0)" onClick={onArchiveClick}>
+                archive done
+              </a>
             )}
             ]
           </span>
-        }
+        )}
         <br />
-        <a href="javascript:void(0)" onClick={e => onToggleArchivedClick(!archived)}>show {archived ? 'current' : 'archived'}</a>
+        <a
+          href="javascript:void(0)"
+          onClick={e => onToggleArchivedClick(!archived)}
+        >
+          show {archived ? 'current' : 'archived'}
+        </a>
       </small>
-      {todosLength > 1 &&
-        <div style={{textAlign: 'left'}}>
+      {todosLength > 1 && (
+        <div style={{ textAlign: 'left' }}>
           Sort: <br />
-          <label style={{fontWeight: 'normal'}}>
-            <input type="radio" checked={sort === 'name'} onChange={e => onSortClick(e.target.value)} name="sort" value="name" /> Alpha</label>
+          <label style={{ fontWeight: 'normal' }}>
+            <input
+              type="radio"
+              checked={sort === 'name'}
+              onChange={e => onSortClick(e.target.value)}
+              name="sort"
+              value="name"
+            />{' '}
+            Alpha
+          </label>
           &nbsp;&nbsp;&nbsp;
-          <label style={{fontWeight: 'normal'}}>
-            <input type="radio" checked={sort === 'cdate'} onChange={e => onSortClick(e.target.value)} name="sort" value="cdate" /> Created</label>
+          <label style={{ fontWeight: 'normal' }}>
+            <input
+              type="radio"
+              checked={sort === 'cdate'}
+              onChange={e => onSortClick(e.target.value)}
+              name="sort"
+              value="cdate"
+            />{' '}
+            Created
+          </label>
         </div>
-      }
+      )}
     </div>
-  )
+  );
 };
 
 TodoActions.propTypes = {
@@ -62,7 +88,7 @@ TodoActions.propTypes = {
   onArchiveClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
   onToggleArchivedClick: PropTypes.func.isRequired,
-  onSortClick: PropTypes.func.isRequired
+  onSortClick: PropTypes.func.isRequired,
 };
 
 export default TodoActions;
