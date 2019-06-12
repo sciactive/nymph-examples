@@ -1,21 +1,21 @@
 export const addTodo = name => {
   return {
     type: 'ADD_TODO',
-    name
+    name,
   };
 };
 
 export const setSort = sort => {
   return {
     type: 'SET_SORT',
-    sort
+    sort,
   };
 };
 
 export const toggleTodo = todo => {
   return {
     type: 'TOGGLE_TODO',
-    todo
+    todo,
   };
 };
 
@@ -23,40 +23,40 @@ export const changeTodo = (todo, name) => {
   return {
     type: 'CHANGE_TODO',
     todo,
-    name
+    name,
   };
 };
 
-export const saveTodo = (todo) => {
+export const saveTodo = todo => {
   return {
     type: 'SAVE_TODO',
-    todo
+    todo,
   };
 };
 
 export const archiveDoneTodos = () => {
   return {
-    type: 'ARCHIVE_DONE_TODOS'
-  }
+    type: 'ARCHIVE_DONE_TODOS',
+  };
 };
 
 export const deleteTodos = () => {
   return {
-    type: 'DELETE_TODOS'
-  }
+    type: 'DELETE_TODOS',
+  };
 };
 
 export const subscribe = archived => {
   return {
     type: 'SUBSCRIBE',
-    archived
+    archived,
   };
 };
 
 export const updateUserCount = userCount => {
   return {
     type: 'UPDATE_USER_COUNT',
-    userCount
+    userCount,
   };
 };
 
@@ -64,26 +64,26 @@ export const updateTodos = (todos, archived) => {
   return {
     type: 'UPDATE_TODOS',
     todos,
-    archived
+    archived,
   };
 };
 
-export const updateTodo = (todo) => {
+export const updateTodo = todo => {
   return {
     type: 'UPDATE_TODO',
-    todo
+    todo,
   };
 };
 
 export const refreshTodos = () => {
   return {
-    type: 'REFRESH_TODOS'
+    type: 'REFRESH_TODOS',
   };
 };
 
-export const updateDisconnected = (disconnected) => {
+export const updateDisconnected = disconnected => {
   return {
     type: 'UPDATE_DISCONNECTED',
-    disconnected
+    disconnected,
   };
 };

@@ -1,8 +1,8 @@
-import {connect} from 'react-redux';
-import {archiveDoneTodos, deleteTodos, subscribe, setSort} from '../actions';
+import { connect } from 'react-redux';
+import { archiveDoneTodos, deleteTodos, subscribe, setSort } from '../actions';
 import TodoActions from '../components/TodoActions';
 
-const getRemainingTodos = (todos) => {
+const getRemainingTodos = todos => {
   return todos.filter(todo => !todo.done);
 };
 
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
     archived: state.todos.archived,
     todosLength: state.todos.todos.length,
     remaining: getRemainingTodos(state.todos.todos).length,
-    sort: state.todos.sort
+    sort: state.todos.sort,
   };
 };
 
@@ -28,13 +28,13 @@ const mapDispatchToProps = dispatch => {
     },
     onSortClick: sort => {
       dispatch(setSort(sort));
-    }
+    },
   };
 };
 
 const TodoActionsContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TodoActions);
 
 export default TodoActionsContainer;

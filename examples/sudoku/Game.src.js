@@ -1,4 +1,4 @@
-import { Nymph, Entity } from "nymph-client";
+import { Nymph, Entity } from 'nymph-client';
 
 export class Game extends Entity {
   constructor(id) {
@@ -14,11 +14,11 @@ export class Game extends Entity {
   }
 
   $generateBoard(...args) {
-    return this.$serverCall("generateBoard", args);
+    return this.$serverCall('generateBoard', args);
   }
 
   $makeItFun(...args) {
-    return this.$serverCall("makeItFun", args);
+    return this.$serverCall('makeItFun', args);
   }
 
   $checkDone() {
@@ -140,7 +140,7 @@ export class Game extends Entity {
 }
 
 // The name of the server class
-Game.class = "Game";
+Game.class = 'Game';
 
 Nymph.setEntityClass(Game.class, Game);
 

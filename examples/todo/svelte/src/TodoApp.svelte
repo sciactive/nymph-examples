@@ -11,7 +11,7 @@
           <div class="well">You have no todos yet.</div>
         {/if}
         {#each todos as todo}
-          <TodoEl bind:todo={todo} archived={uiShowArchived}></TodoEl>
+          <TodoEl bind:todo archived={uiShowArchived} />
         {/each}
       </div>
     </div>
@@ -39,40 +39,72 @@
             ]
           </span>
         {/if}
-        <br>
+        <br />
         {#if uiShowArchived}
-          <a href="javascript:void(0)" on:click={() => getTodos(false)}>show current</a>
+          <a href="javascript:void(0)" on:click={() => getTodos(false)}>
+            show current
+          </a>
         {:else}
-          <a href="javascript:void(0)" on:click={() => getTodos(true)}>show archived</a>
+          <a href="javascript:void(0)" on:click={() => getTodos(true)}>
+            show archived
+          </a>
         {/if}
       </small>
       {#if todos.length > 1}
         <div style="text-align: left;">
-          Sort: <br>
+          Sort:
+          <br />
           <label style="font-weight: normal;">
-            <input type="radio" bind:group={uiSort} on:change={sortTodos} name="sort" value="name"> Alpha</label>
-          &nbsp;&nbsp;&nbsp;
+            <input
+              type="radio"
+              bind:group={uiSort}
+              on:change={sortTodos}
+              name="sort"
+              value="name"
+            />
+            Alpha
+          </label>
+          {@html '&nbsp;'}
           <label style="font-weight: normal;">
-            <input type="radio" bind:group={uiSort} on:change={sortTodos} name="sort" value="cdate"> Created</label>
+            <input
+              type="radio"
+              bind:group={uiSort}
+              on:change={sortTodos}
+              name="sort"
+              value="cdate"
+            />
+            Created
+          </label>
         </div>
       {/if}
     </div>
   </div>
   {#if !uiShowArchived}
-    <form class="todo-form" style="margin-bottom: 20px;" on:submit|preventDefault={addTodo}>
-      <input class="form-control" type="text" bind:value={todoText} placeholder="add new todo here">
-      <input class="btn btn-default" type="submit" value="add #{todos.length + 1}">
+    <form
+      class="todo-form"
+      style="margin-bottom: 20px;"
+      on:submit|preventDefault={addTodo}
+    >
+      <input
+        class="form-control"
+        type="text"
+        bind:value={todoText}
+        placeholder="add new todo here"
+      />
+      <input
+        class="btn btn-default"
+        type="submit"
+        value="add #{todos.length + 1}"
+      />
     </form>
   {/if}
-  <div class="user-count label label-default">
-    Active Users: {userCount}
-  </div>
+  <div class="user-count label label-default">Active Users: {userCount}</div>
 </div>
 
 <script>
   import { onMount, onDestroy } from 'svelte';
   import TodoEl from './TodoEl';
-  import {Nymph, PubSub} from 'nymph-client';
+  import { Nymph, PubSub } from 'nymph-client';
   import Todo from '../../Todo.src';
 
   let todos = [];
@@ -97,80 +129,94 @@
     PubSub.off('disconnect', onPubSubDisconnect);
   });
 
-
-  function onPubSubConnect () {
+  function onPubSubConnect() {
     if (disconnected) {
       getTodos(uiShowArchived);
-      todos.map(todo => todo.$refresh().then(() => todos = todos));
+      todos.map(todo => todo.$refresh().then(() => (todos = todos)));
     }
     disconnected = false;
   }
 
-  function onPubSubDisconnect () {
+  function onPubSubDisconnect() {
     disconnected = true;
   }
 
-  function getTodos (archived) {
+  function getTodos(archived) {
     if (subscription) {
       subscription.unsubscribe();
     }
-    subscription = Nymph.getEntities({
-      class: 'Todo'
-    }, {
-      type: archived ? '&' : '!&',
-      tag: 'archived'
-    }).subscribe(newTodos => {
-      uiShowArchived = archived;
-      if (newTodos !== undefined) {
-        PubSub.updateArray(todos, newTodos);
-        Nymph.sort(todos, uiSort);
-        todos = todos;
-      }
-    }, null, count => {
-      userCount = count;
-    });
+    subscription = Nymph.getEntities(
+      {
+        class: 'Todo',
+      },
+      {
+        type: archived ? '&' : '!&',
+        tag: 'archived',
+      },
+    ).subscribe(
+      newTodos => {
+        uiShowArchived = archived;
+        if (newTodos !== undefined) {
+          PubSub.updateArray(todos, newTodos);
+          Nymph.sort(todos, uiSort);
+          todos = todos;
+        }
+      },
+      null,
+      count => {
+        userCount = count;
+      },
+    );
   }
 
-  function addTodo () {
+  function addTodo() {
     if (todoText === undefined || todoText === '') {
       return;
     }
     const todo = new Todo();
     todo.name = todoText;
-    todo.$save().then(() => {
-      todoText = '';
-    }, errObj => {
-      alert("Error: "+errObj.textStatus);
-    });
+    todo.$save().then(
+      () => {
+        todoText = '';
+      },
+      errObj => {
+        alert('Error: ' + errObj.textStatus);
+      },
+    );
   }
 
-  function sortTodos () {
+  function sortTodos() {
     todos = Nymph.sort(todos, uiSort);
   }
 
-  function save (todo) {
+  function save(todo) {
     todo.$save().then(null, errObj => {
-      alert('Error: '+errObj.textStatus);
+      alert('Error: ' + errObj.textStatus);
     });
   }
 
-  function archive () {
+  function archive() {
     const oldTodos = todos;
     for (let i = 0; i < oldTodos.length; i++) {
       const todo = oldTodos[i];
       if (todo.done) {
-        todo.$archive().then(success => {
-          if (!success) {
-            alert("Couldn't save changes to "+todo.name);
-          }
-        }, errObj => {
-          alert("Error: "+errObj.textStatus+"\nCouldn't archive "+todo.name);
-        });
+        todo.$archive().then(
+          success => {
+            if (!success) {
+              alert("Couldn't save changes to " + todo.name);
+            }
+          },
+          errObj => {
+            alert(
+              'Error: ' + errObj.textStatus + "\nCouldn't archive " + todo.name,
+            );
+          },
+        );
       }
     }
   }
 
-  function deleteTodos () {
+  function deleteTodos() {
     Nymph.deleteEntities(todos);
   }
 </script>

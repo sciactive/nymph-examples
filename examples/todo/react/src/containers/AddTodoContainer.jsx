@@ -1,16 +1,16 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {addTodo} from '../actions';
+import { addTodo } from '../actions';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     archived: state.todos.archived,
-    nextNumber: state.todos.todos.length + 1
+    nextNumber: state.todos.todos.length + 1,
   };
 };
 
-const AddTodo = ({archived, nextNumber, dispatch}) => {
+const AddTodo = ({ archived, nextNumber, dispatch }) => {
   if (archived) {
     return null;
   }
@@ -20,7 +20,7 @@ const AddTodo = ({archived, nextNumber, dispatch}) => {
   return (
     <div>
       <form
-        style={{display: 'flex', marginBottom: '20px'}}
+        style={{ display: 'flex', marginBottom: '20px' }}
         onSubmit={e => {
           e.preventDefault();
           const trimmedInput = input.value.trim();
@@ -33,17 +33,14 @@ const AddTodo = ({archived, nextNumber, dispatch}) => {
       >
         <input
           className="form-control"
-          style={{flexGrow: 1, marginRight: '5px'}}
+          style={{ flexGrow: 1, marginRight: '5px' }}
           type="text"
           placeholder="add new todo here"
           ref={node => {
             input = node;
           }}
         />
-        <button
-          className="btn btn-default"
-          type="submit"
-        >
+        <button className="btn btn-default" type="submit">
           add #{nextNumber}
         </button>
       </form>
@@ -54,7 +51,7 @@ const AddTodo = ({archived, nextNumber, dispatch}) => {
 AddTodo.propTypes = {
   archived: PropTypes.bool.isRequired,
   nextNumber: PropTypes.number.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 const AddTodoContainer = connect(mapStateToProps)(AddTodo);

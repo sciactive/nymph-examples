@@ -7,6 +7,7 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "watch-notify": "webpack --watch | /usr/bin/env bash -c 'while read -r line; do if [[ $line =~ built ]]; then /usr/bin/notify-send -t 400 \"Ready\"; fi ; echo $line; done'",
+    "format": "prettier --write src/**/*",
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,12 +20,13 @@
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
+    "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-redux": "^7.0.3",
+    "react-redux": "^7.1.0",
     "redux": "^4.0.1",
     "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.3"
+    "webpack-cli": "^3.3.4"
   }
 }

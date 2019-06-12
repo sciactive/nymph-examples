@@ -1,4 +1,4 @@
-import { Nymph, Entity } from "nymph-client";
+import { Nymph, Entity } from 'nymph-client';
 
 export class Todo extends Entity {
   constructor(id) {
@@ -7,12 +7,12 @@ export class Todo extends Entity {
   }
 
   $archive(...args) {
-    return this.$serverCall("archive", args);
+    return this.$serverCall('archive', args);
   }
 }
 
 // The name of the server class
-Todo.class = "Todo";
+Todo.class = 'Todo';
 
 Nymph.setEntityClass(Todo.class, Todo);
 

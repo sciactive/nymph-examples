@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    TodoApp: path.resolve(__dirname, 'src', 'TodoApp.html')
+    TodoApp: path.resolve(__dirname, 'src', 'TodoApp.svelte')
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -13,7 +13,7 @@ module.exports = {
     globalObject: 'this'
   },
   resolve: {
-    extensions: ['.wasm', '.mjs', '.js', '.json', '.html', '.css']
+    extensions: ['.wasm', '.mjs', '.js', '.json', '.html', '.svelte', '.css'],
   },
   externals: {
     'nymph-client': 'nymph-client'
