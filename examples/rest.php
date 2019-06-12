@@ -5,8 +5,8 @@ error_reporting(E_ALL);
 date_default_timezone_set('America/Los_Angeles');
 
 require_once file_exists(__DIR__.'/../../autoload-dev.php')
-    ? __DIR__.'/../../autoload-dev.php'
-    : __DIR__.'/../vendor/autoload.php';
+? __DIR__.'/../../autoload-dev.php'
+: __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/config.php';
 
 $NymphREST = new \Nymph\REST();

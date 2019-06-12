@@ -1,13 +1,13 @@
 <?php
 $clientDir = file_exists('../../../client/package.json')
-    ? '../../../client'
-    : '../../node_modules/nymph-client';
+? '../../../client'
+: '../../node_modules/nymph-client';
 $tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
-    ? '../../../tilmeld-client'
-    : '../../node_modules/tilmeld-client';
+? '../../../tilmeld-client'
+: '../../node_modules/tilmeld-client';
 $queryEditorDir = file_exists('../../../query-editor/package.json')
-    ? '../../../query-editor'
-    : '../../node_modules/nymph-query-editor';
+? '../../../query-editor'
+: '../../node_modules/nymph-query-editor';
 
 ?><!DOCTYPE html>
 <html>
