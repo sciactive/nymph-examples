@@ -95,7 +95,7 @@ include('../get_pubsub_url.php');
   </div>
 
   <script>
-    ((global, User, Login, ChangePassword) => {
+    ((root, User, Login, ChangePassword) => {
       let currentUser = null;
       const currentUserEl = document.querySelector('.currentuser');
       const logins = document.getElementsByTagName('login');
@@ -163,7 +163,7 @@ include('../get_pubsub_url.php');
         currentUserEl.innerText = 'none';
       });
 
-      global.logout = () => {
+      root.logout = () => {
         if (currentUser) {
           currentUser.$logout();
         }
