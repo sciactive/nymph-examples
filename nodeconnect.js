@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-// Set up module aliases for development.
+// Set up module aliases for development environment.
 const alias = require('module-alias');
 if (fs.existsSync('../client-node/package.json')) {
   alias.addAliases({
@@ -11,10 +11,7 @@ if (fs.existsSync('../client-node/package.json')) {
 }
 
 // Nymph Node client for the win.
-const NymphClient = require('nymph-client-node');
-// Tilmeld requires cookies.
-NymphClient.enableCookies();
-const { Nymph } = NymphClient;
+const { Nymph, PubSub } = require('nymph-client-node');
 
 // Set up Nymph.
 const nymphOptions = {
@@ -23,9 +20,8 @@ const nymphOptions = {
 };
 Nymph.init(nymphOptions);
 
-const Todo = require('./examples/todo/Todo').Todo;
-const User = require('tilmeld-client').User;
-const Group = require('tilmeld-client').Group;
+const { Todo } = require('./examples/todo/Todo');
+const { User } = require('tilmeld-client');
 
 main();
 async function main() {
@@ -78,23 +74,31 @@ async function main() {
     const todo = new Todo();
     todo.name = 'Foobar';
     console.log('\n\ntodo: ', todo.toJSON());
-    console.log('\n\nNew Todo todo.save(): ', (await todo.$save()).toJSON());
+    console.log('\n\nNew Todo todo.$save(): ', (await todo.$save()).toJSON());
 
     // Wait 5 seconds, set it to done.
     console.log('\n\nWait 5 seconds...');
     await new Promise(r => setTimeout(() => r(), 5000));
     todo.done = true;
-    console.log('Set to Done todo.save(): ', (await todo.$save()).toJSON());
+    console.log('Set to Done todo.$save(): ', (await todo.$save()).toJSON());
 
     // Wait 5 seconds, archive it.
     console.log('\n\nWait 5 seconds...');
     await new Promise(r => setTimeout(() => r(), 5000));
-    console.log('Archive todo.archive(): ', await todo.$archive());
+    console.log('Archive todo.$archive(): ', await todo.$archive());
 
     // Wait 5 seconds, delete it.
     console.log('\n\nWait 5 seconds...');
     await new Promise(r => setTimeout(() => r(), 5000));
-    console.log('Delete todo.delete(): ', await todo.$delete());
+    console.log('Delete todo.$delete(): ', await todo.$delete());
+
+    // Logout.
+    console.log('\n\nWait 5 seconds...');
+    await new Promise(r => setTimeout(() => r(), 5000));
+    console.log('Logout user.$logout(): ', await user.$logout());
+
+    // Close the PubSub connection.
+    PubSub.close();
   } catch (err) {
     console.log('err: ', err);
   }
