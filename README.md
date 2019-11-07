@@ -18,6 +18,7 @@ Clone this repository into your web server.
 
 ```sh
 git clone https://github.com/sciactive/nymph-examples.git
+cd nymph-examples
 ```
 
 Run the following command in the repository's directory:
@@ -32,12 +33,12 @@ Now start the PubSub server with:
 php examples/pubsub.php
 ```
 
-Now you can see the example apps (assuming your server is on port 80):
+Now you can see the example apps (assuming your server is on port 8080):
 
-* [Todo App with Svelte](http://localhost/nymph-examples/examples/todo/svelte/)
-* [Todo App with React](http://localhost/nymph-examples/examples/todo/react/)
-* [Sudoku App](http://localhost/nymph-examples/examples/sudoku/)
-* [Simple Clicker App](http://localhost/nymph-examples/examples/clicker/)
+* [Todo App with Svelte](http://localhost:8080/nymph-examples/examples/todo/svelte/)
+* [Todo App with React](http://localhost:8080/nymph-examples/examples/todo/react/)
+* [Sudoku App](http://localhost:8080/nymph-examples/examples/sudoku/)
+* [Simple Clicker App](http://localhost:8080/nymph-examples/examples/clicker/)
 
 And you can run the Node example with:
 

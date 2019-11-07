@@ -1,15 +1,4 @@
-<?php
-$clientDir = file_exists('../../../client/package.json')
-? '../../../client'
-: '../../node_modules/nymph-client';
-$tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
-? '../../../tilmeld-client'
-: '../../node_modules/tilmeld-client';
-$queryEditorDir = file_exists('../../../query-editor/package.json')
-? '../../../query-editor'
-: '../../node_modules/nymph-query-editor';
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Nymph JS Test</title>
@@ -25,8 +14,19 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
   </script>
 
   <!-- Nymph JS -->
-  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
+  <script type="text/javascript">
+    let scripts = window.location.hostname === 'localhost' ? [
+      '../../../client/dist/NymphClient.js',
+      '../../../tilmeld-client/dist/TilmeldClient.js'
+    ] : [
+      '../../node_modules/nymph-client/dist/NymphClient.js',
+      '../../node_modules/tilmeld-client/dist/TilmeldClient.js'
+    ];
+    scripts.forEach(src => {
+      document.write('<script src="'+src+'"><'+'/script>');
+    });
+    document.close();
+  </script>
 
   <!-- Entity JS -->
   <script src="Employee.js"></script>
@@ -62,9 +62,16 @@ $queryEditorDir = file_exists('../../../query-editor/package.json')
     <main></main>
   </div> -->
   <!-- App JS -->
-  <!-- <script src="<?php echo $queryEditorDir; ?>/lib/umd/ValueEditor.js"></script> -->
-  <!-- <script src="<?php echo $queryEditorDir; ?>/lib/umd/SelectorEditor.js"></script> -->
-  <!-- <script src="<?php echo $queryEditorDir; ?>/lib/umd/QueryEditor.js"></script> -->
+  <!-- <script id="value-editor-script" src="../../node_modules/nymph-query-editor/lib/umd/ValueEditor.js"></script> -->
+  <!-- <script id="selector-editor-script" src="../../node_modules/nymph-query-editor/lib/umd/SelectorEditor.js"></script> -->
+  <!-- <script id="query-editor-script" src="../../node_modules/nymph-query-editor/lib/umd/QueryEditor.js"></script> -->
+  <!-- <script type="text/javascript">
+    if (window.location.hostname === 'localhost') {
+      document.getElementById('value-editor-script').src = '../../../query-editor/lib/umd/ValueEditor.js';
+      document.getElementById('selector-editor-script').src = '../../../query-editor/lib/umd/SelectorEditor.js';
+      document.getElementById('query-editor-script').src = '../../../query-editor/lib/umd/QueryEditor.js';
+    }
+  </script> -->
   <!-- <script type="text/javascript">
     ((global, QueryEditor, Employee) => {
       const app = new QueryEditor({

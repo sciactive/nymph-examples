@@ -1,14 +1,4 @@
-<?php
-$clientDir = file_exists('../../../../client/package.json')
-? '../../../../client'
-: '../../../node_modules/nymph-client';
-$tilmeldClientDir = file_exists('../../../../tilmeld-client/package.json')
-? '../../../../tilmeld-client'
-: '../../../node_modules/tilmeld-client';
-
-include('../../get_pubsub_url.php');
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Nymph React Collab Todo App</title>
@@ -21,11 +11,22 @@ include('../../get_pubsub_url.php');
     })();
     NymphOptions = {
       restURL: '../../rest.php',
-      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
+      pubsubURL: window.location.hostname === 'localhost' ? 'ws://localhost:8081' : 'wss://nymph-pubsub-demo.herokuapp.com:443',
     };
   </script>
-  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
+  <script type="text/javascript">
+    let scripts = window.location.hostname === 'localhost' ? [
+      '../../../../client/dist/NymphClient.js',
+      '../../../../tilmeld-client/dist/TilmeldClient.js'
+    ] : [
+      '../../../node_modules/nymph-client/dist/NymphClient.js',
+      '../../../node_modules/tilmeld-client/dist/TilmeldClient.js'
+    ];
+    scripts.forEach(src => {
+      document.write('<script src="'+src+'"><'+'/script>');
+    });
+    document.close();
+  </script>
 
   <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
   <script src="https://unpkg.com/react@16.3.2/umd/react.development.js"></script>

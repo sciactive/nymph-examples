@@ -1,17 +1,4 @@
-<?php
-$clientDir = file_exists('../../../client/package.json')
-? '../../../client'
-: '../../node_modules/nymph-client';
-$tilmeldClientDir = file_exists('../../../tilmeld-client/package.json')
-? '../../../tilmeld-client'
-: '../../node_modules/tilmeld-client';
-$tilmeldComponentsDir = file_exists('../../../tilmeld-components/package.json')
-? '../../../tilmeld-components'
-: '../../node_modules/tilmeld-components';
-
-include('../get_pubsub_url.php');
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Tilmeld Component Example</title>
@@ -24,12 +11,24 @@ include('../get_pubsub_url.php');
     })();
     NymphOptions = {
       restURL: '../rest.php',
-      pubsubURL: <?php echo json_encode(get_pubsub_url()); ?>
+      pubsubURL: window.location.hostname === 'localhost' ? 'ws://localhost:8081' : 'wss://nymph-pubsub-demo.herokuapp.com:443',
     };
   </script>
-  <script src="<?php echo $clientDir; ?>/dist/NymphClient.js"></script>
-  <script src="<?php echo $tilmeldClientDir; ?>/dist/TilmeldClient.js"></script>
-  <script src="<?php echo $tilmeldComponentsDir; ?>/dist/TilmeldComponents.js"></script>
+  <script type="text/javascript">
+    let scripts = window.location.hostname === 'localhost' ? [
+      '../../../client/dist/NymphClient.js',
+      '../../../tilmeld-client/dist/TilmeldClient.js',
+      '../../../tilmeld-components/dist/TilmeldComponents.js'
+    ] : [
+      '../../node_modules/nymph-client/dist/NymphClient.js',
+      '../../node_modules/tilmeld-client/dist/TilmeldClient.js',
+      '../../node_modules/tilmeld-components/dist/TilmeldClient.js'
+    ];
+    scripts.forEach(src => {
+      document.write('<script src="'+src+'"><'+'/script>');
+    });
+    document.close();
+  </script>
 
   <link rel="stylesheet" href="../../node_modules/pform/css/pform.css">
   <link rel="stylesheet" href="../../node_modules/pform/css/pform-bootstrap.css">
@@ -57,25 +56,21 @@ include('../get_pubsub_url.php');
     <div class="login-row">
       <div class="login-container">
         <h2>Login (Normal Layout)</h2>
-        <login data-layout="normal" data-show-existing-user-toggle="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
+        <login data-layout="normal" data-show-existing-user-toggle="true" data-existing-user="true"></login>
       </div>
       <div class="login-container">
         <h2>Login (Small Layout)</h2>
-        <login data-layout="small" data-show-existing-user-toggle="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
+        <login data-layout="small" data-show-existing-user-toggle="true" data-existing-user="true"></login>
       </div>
     </div>
     <div class="login-row">
       <div class="login-container">
-        <h2>Login (Compact Layout)</h2>
-        <login data-layout="compact" data-show-existing-user-toggle="true" data-existing-user="true" data-compact-text="Log in/Sign up"></login>
+        <h2>Login (Small Layout, Only Login)</h2>
+        <login data-layout="small" data-show-existing-user-toggle="false" data-existing-user="true"></login>
       </div>
       <div class="login-container">
-        <h2>Login (Compact Layout, Only Login)</h2>
-        <login data-layout="compact" data-show-existing-user-toggle="false" data-existing-user="true" data-compact-text="Log in"></login>
-      </div>
-      <div class="login-container">
-        <h2>Login (Compact Layout, Only Register)</h2>
-        <login data-layout="compact" data-show-existing-user-toggle="false" data-existing-user="false" data-compact-text="Sign up"></login>
+        <h2>Login (Small Layout, Only Register)</h2>
+        <login data-layout="small" data-show-existing-user-toggle="false" data-existing-user="false"></login>
       </div>
     </div>
     <div class="change-password-row">
@@ -106,7 +101,6 @@ include('../get_pubsub_url.php');
           target: login,
           props: {
             autofocus: false,
-            compactText: login.dataset.compactText,
             existingUser: login.dataset.existingUser === "true",
             showExistingUserToggle: login.dataset.showExistingUserToggle === "true",
             layout: login.dataset.layout,
