@@ -97,6 +97,6 @@ if (getenv('TILMELD_SECRET')) {
     file_get_contents(getenv('TILMELD_SECRET_FILE'))
   );
 } else {
-  $tilmeldConfig['jwt_secret'] = str_repeat('a', 256);
+  $tilmeldConfig['jwt_secret'] = str_repeat('a', 32);
 }
 \Tilmeld\Tilmeld::configure($tilmeldConfig);
