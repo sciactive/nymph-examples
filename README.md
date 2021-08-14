@@ -6,6 +6,10 @@ This repository contains example apps built with the [Nymph ORM](http://nymph.io
 
 This is also the repository that is hosted on Heroku as [the Nymph demos](http://nymph.io/#demos).
 
+## Deprecation Notice
+
+The PHP implementation of Nymph/Tilmeld has been deprecated. It will no longer have any new features added. Instead, a new version of Nymph running on Node.js, written entirely in TypeScript will replace the PHP implementation. You can find it over at the [Nymph.js repo](https://github.com/sciactive/nymphjs).
+
 # Installation
 
 > :information_source: In the [main Nymph repo](https://github.com/sciactive/nymph), there is a Docker setup that will do all of this for you with one command.
